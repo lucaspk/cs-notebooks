@@ -2,6 +2,8 @@
 
 Abra `index.html` no navegador para acessar o sumário do livro interativo. Cada capítulo tem sua própria página. Não precisa instalar dependências ou iniciar um servidor.
 
+Parte do monorepo [cs-notebooks](../README.md) · [catálogo de livros e fundamentos](../LIVROS.md) · sumário geral: [../index.html](../index.html).
+
 ## Organização do livro
 
 - `index.html`: sumário com os **29 capítulos** (regenerar com `node capitulos/_tools/build-index.mjs`).

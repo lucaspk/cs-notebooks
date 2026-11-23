@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <title>Pontos extremos e serviço · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <!-- Mix: pré-teste, teaser URL, exemplo, previsão, lab, comparação, MC, contexto, design, checkpoint | Bloom: Compreender–Avaliar -->
+  <main data-chapter-id="01-pontos-extremos-servico" data-practice-mc="mc-ch01">
+    <header class="page-header">
+      <a class="brand" href="../../index.html" aria-label="Playground, sumário"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> redes de computadores</a>
+      <span class="lesson-tag">CAPÍTULO 01</span>
+    </header>
+
+    <nav class="chapter-navigation" aria-label="Navegação do livro">
+      <a href="../../index.html">← Sumário</a>
+      <span>01 · Pontos extremos e serviço</span>
+      <a href="../02-atraso-quatro-fontes/index.html">02 Atraso →</a>
+    </nav>
+
+    <section class="intro chapter-intro" aria-labelledby="page-title">
+      <p class="eyebrow">CAPÍTULO 01</p>
+      <h1 id="page-title">Pontos extremos<br><span>e serviço</span></h1>
+    </section>
+
+    <p class="chapter-objective"><strong>Objetivo deste capítulo:</strong> distinguir o que as <em>aplicações</em> nos pontos extremos fazem com os dados do que a <em>rede</em> faz ao transportar bytes — sem achar que o enlace “entende” HTTP, JSON ou texto.</p>
+
+    <section class="practice" aria-labelledby="pretest-title">
+      <div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES DO EXPERIMENTO</span></div>
+      <p class="practice-lead">Sem abrir a teoria. Você compara no checkpoint.</p>
+      <div class="practice-stack">
+        <div>
+          <p class="practice-prompt">1. A rede “sabe” o idioma da mensagem que você envia?</p>
+          <textarea class="practice-field" data-practice-field="pretest-meaning" rows="2" placeholder="Sim ou não — uma frase."></textarea>
+        </div>
+        <div>
+          <p class="practice-prompt">2. Se os bytes chegarem intactos em B, a aplicação em B sempre “entendeu” corretamente?</p>
+          <textarea class="practice-field" data-practice-field="pretest-intact" rows="2"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section class="practice" aria-labelledby="teaser-title">
+      <div class="practice-heading"><h2 id="teaser-title">Teaser: abrir um site</h2><span class="practice-tag">SÓ PREVISÃO</span></div>
+      <p class="practice-lead">Você vai <strong>remontar</strong> isso com ferramentas no capítulo <strong>19</strong>. Agora, só ordene e preveja.</p>
+      <p class="url-preview">https://exemplo.org/pagina</p>
+      <p class="practice-prompt">Numa frase: o que acontece entre o clique e o HTML aparecer? (Pode estar incompleto ou errado.)</p>
+      <textarea class="practice-field" data-practice-field="teaser-url-story" rows="4" placeholder="Ex.: pede o nome, abre conexão, baixa bytes…"></textarea>
+      <p class="practice-prompt">Marque o que você acha que entra no caminho (pode faltar ou sobrar):</p>
+      <div class="net-teaser-order">
+        <label><input type="checkbox" name="teaser-opt" value="dns"> Resolver nome (DNS)</label>
+        <label><input type="checkbox" name="teaser-opt" value="tcp"> Abrir conexão (TCP)</label>
+        <label><input type="checkbox" name="teaser-opt" value="tls"> Proteger canal (TLS)</label>
+        <label><input type="checkbox" name="teaser-opt" value="http"> Pedido e resposta (HTTP)</label>
+        <label><input type="checkbox" name="teaser-opt" value="json"> O roteador valida se o JSON é válido</label>
+      </div>
+      <textarea class="practice-field" data-practice-field="teaser-why-not-router" rows="2" placeholder="Se desmarcou ‘roteador e JSON’, por quê?"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="worked-title">
+      <div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2><span class="practice-tag">NO PAPEL</span></div>
+      <section class="practice-worked" aria-label="Passos do exemplo">
+        <p><strong>Host A</strong> (app de chat) envia <code>Olá</code> para <strong>Host B</strong> (outro app de chat):</p>
+        <ol>
+          <li>A monta o texto na aplicação.</li>
+          <li>A entrega <strong>3 bytes</strong> (UTF-8) ao serviço de rede — a rede não vê aspas nem palavras, só bytes.</li>
+          <li>O enlace carrega o datagrama sem interpretar.</li>
+          <li>B recebe os mesmos 3 bytes; o app de chat monta de novo <code>Olá</code>.</li>
+        </ol>
+        <p>Se B fosse um parser JSON, os <em>mesmos</em> bytes gerariam erro — culpa da <strong>app</strong>, não do fio.</p>
+      </section>
+    </section>
+
+    <section class="practice" aria-labelledby="predict-title">
+      <div class="practice-heading"><h2 id="predict-title">Previsão no experimento</h2><span class="practice-tag">ANTES DO PASSO 1</span></div>
+      <p class="practice-prompt">No passo do <strong>enlace</strong>, o lab vai mostrar texto legível ou só “N bytes opacos”?</p>
+      <textarea class="practice-field" data-practice-field="predict-wire" rows="2"></textarea>
+    </section>
+
+    <section class="lab" aria-label="Entrega entre pontos extremos">
+      <div class="toolbar">
+        <div class="playback">
+          <button class="primary" id="play" type="button"><span id="play-icon" aria-hidden="true">▶</span><span id="play-label">Executar</span></button>
+          <button id="step" type="button">Um passo <span aria-hidden="true">→</span></button>
+          <button class="reset" id="reset" type="button" aria-label="Reiniciar" title="Reiniciar"><span aria-hidden="true">↺</span></button>
+        </div>
+        <div class="toolbar-meta">
+          <label class="speed-label" for="speed">Velocidade <select id="speed"><option value="1200">0,5×</option><option value="700" selected>1×</option><option value="350">2×</option></select></label>
+          <span class="clock"><span class="clock-dot" aria-hidden="true"></span> passo <strong id="time">0</strong></span>
+        </div>
+      </div>
+
+      <div class="lab-metrics" aria-label="Parâmetros">
+        <span class="lab-metric">Payload <strong id="byte-count">0</strong> bytes</span>
+        <span class="lab-metric">B interpreta como <strong id="interpret-label">texto</strong></span>
+      </div>
+
+      <div class="net-topology" aria-hidden="false">
+        <div class="net-host" id="host-a"><span class="net-host-id">Host A</span><span class="net-host-role">Aplicação</span></div>
+        <div class="net-link" id="host-link"><span>Rede / enlace</span><div class="net-link-bar" aria-hidden="true"></div><span class="net-link-payload" id="link-payload" hidden>—</span></div>
+        <div class="net-host" id="host-b"><span class="net-host-id">Host B</span><span class="net-host-role">Aplicação</span></div>
+      </div>
+      <p class="experiment-note" id="topology-caption" style="padding:0 22px 12px;border:0">Dois pontos extremos; a rede no meio não interpreta o conteúdo.</p>
+
+      <ol class="net-step-list" id="step-list" aria-live="polite"></ol>
+
+      <div class="experiment-controls">
+        <label class="work-control" for="message"><span>Mensagem de A <strong id="message-preview">Olá</strong></span><input id="message" type="text" value="Olá" maxlength="80"></label>
+        <label class="quantum-control" for="interpret"><span>Em B, interpretar como</span>
+          <select id="interpret" data-prediction-watch data-prediction-hint="prediction-interpret-hint">
+            <option value="text">Texto (chat)</option>
+            <option value="json">JSON</option>
+            <option value="http">Linha HTTP</option>
+          </select>
+        </label>
+      </div>
+      <p id="message-error" class="experiment-note" hidden style="color:#8a3b3b">Mensagem vazia — digite algo para enviar.</p>
+      <p class="experiment-note">Mudar mensagem ou interpretação reinicia o experimento.</p>
+    </section>
+
+    <aside class="observation" aria-label="Dica do experimento"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow" id="observation-label">EXPERIMENTE</p><p id="observation-text">Clique em <strong>Um passo</strong>. Em qual etapa os bytes viram “opacos” para a rede?</p></div></aside>
+
+    <section class="practice" aria-labelledby="predict-interpret-title">
+      <div class="practice-heading"><h2 id="predict-interpret-title">Previsão da interpretação</h2><span class="practice-tag">ANTES DE MUDAR B</span></div>
+      <p id="prediction-interpret-hint" class="practice-hint" hidden>Registre a previsão, mude o seletor “Em B”, execute de novo com a mesma mensagem.</p>
+      <p class="practice-prompt">Mensagem <code>Olá</code>, B em modo <strong>JSON</strong>: no último passo, sucesso ou erro?</p>
+      <textarea class="practice-field" data-practice-field="predict-json" rows="2"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="compare-title">
+      <div class="practice-heading"><h2 id="compare-title">Comparar</h2><span class="practice-tag">ANALISAR</span></div>
+      <div class="compare-grid">
+        <div>
+          <p class="practice-prompt">O que é <strong>igual</strong> nos modos texto, JSON e HTTP (mesma mensagem)?</p>
+          <textarea class="practice-field" data-practice-field="compare-same" rows="3" placeholder="Bytes no enlace, passos da rede…"></textarea>
+        </div>
+        <div>
+          <p class="practice-prompt">O que <strong>muda</strong> só na aplicação B?</p>
+          <textarea class="practice-field" data-practice-field="compare-diff" rows="3"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section class="practice" aria-labelledby="mc-title">
+      <div class="practice-heading"><h2 id="mc-title">Múltipla escolha + justificativa</h2><span class="practice-tag">CHECKPOINT</span></div>
+      <p class="practice-prompt">Chat em A envia <code>Olá</code>. A rede entrega os bytes corretamente. B é um validador JSON. Qual afirmação é a mais precisa?</p>
+      <ul class="choice-list" role="radiogroup" aria-labelledby="mc-title">
+        <li><label><input type="radio" name="mc-ch01" value="a"> A rede corrompeu o JSON no caminho.</label></li>
+        <li><label><input type="radio" name="mc-ch01" value="b"> A entrega da rede pode ter sucesso e ainda assim a aplicação B falhar.</label></li>
+        <li><label><input type="radio" name="mc-ch01" value="c"> Se os bytes chegaram, o protocolo de aplicação em B sempre aceita.</label></li>
+        <li><label><input type="radio" name="mc-ch01" value="d"> O roteador deveria rejeitar mensagens que não são JSON.</label></li>
+      </ul>
+      <p class="practice-prompt">Por que escolhi essa opção?</p>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="3"></textarea>
+      <p class="practice-prompt">Por que <strong>não</strong> cada uma das outras?</p>
+      <textarea class="practice-field" data-practice-field="mc-why-not" rows="4"></textarea>
+      <details class="model-answer">
+        <summary>Ver resposta sugerida <span aria-hidden="true">+</span></summary>
+        <div class="theory-content">
+          <p><strong>B.</strong> Serviço de rede = entrega de dados; significado = camada de aplicação.</p>
+          <p><strong>Não A:</strong> entrega ok não implica parse ok. <strong>Não C:</strong> protocolos diferentes, mesmos bytes. <strong>Não D:</strong> roteadores encaminham por endereço, não validam JSON.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="practice" aria-labelledby="context-title">
+      <div class="practice-heading"><h2 id="context-title">Melhor opção por contexto</h2><span class="practice-tag">AVALIAR</span></div>
+      <p class="practice-prompt">API espera JSON; cliente manda texto puro. Onde você investiga <strong>primeiro</strong> — enlace Wi‑Fi, certificado TLS, ou corpo/Content-Type na aplicação?</p>
+      <textarea class="practice-field" data-practice-field="context-debug" rows="3"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="design-title">
+      <div class="practice-heading"><h2 id="design-title">Design mínimo</h2><span class="practice-tag">APLICAR</span></div>
+      <p class="practice-prompt">Você projeta um app P2P de chat. Em uma frase: o que a rede deve garantir? O que a <em>sua</em> app deve garantir?</p>
+      <textarea class="practice-field" data-practice-field="design-guarantees" rows="3"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="checkpoint-title">
+      <div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2><span class="practice-tag">DEPOIS</span></div>
+      <div class="practice-stack">
+        <div>
+          <p class="practice-prompt">1. A rede interpreta o conteúdo da mensagem?</p>
+          <textarea class="practice-field" data-practice-field="checkpoint-meaning" rows="2"></textarea>
+        </div>
+        <div>
+          <p class="practice-prompt">2. Religa ao teaser: o roteador valida JSON?</p>
+          <textarea class="practice-field" data-practice-field="checkpoint-router" rows="2"></textarea>
+        </div>
+        <div>
+          <p class="practice-prompt">3. Em uma frase: ponto extremo vs serviço de rede <em>neste lab</em>.</p>
+          <textarea class="practice-field" data-practice-field="checkpoint-def" rows="2"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <details class="theory">
+      <summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary>
+      <div class="theory-content">
+        <p>Modelo Internet: aplicações nos <strong>pontos extremos</strong>; a rede oferece um serviço limitado de entrega de datagramas entre hosts.</p>
+        <p>Camadas superiores serão fatiadas nos próximos capítulos; aqui, a rede é <strong>opaca</strong> ao significado.</p>
+      </div>
+    </details>
+
+    <nav class="chapter-bottom-navigation" aria-label="Fim do capítulo">
+      <a href="../../index.html">← Voltar ao sumário</a>
+      <a href="../02-atraso-quatro-fontes/index.html">Capítulo 02 →</a>
+    </nav>
+  </main>
+</body>
+</html>
