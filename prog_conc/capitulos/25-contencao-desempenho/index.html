@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <title>Contenção e desempenho · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <!-- Mix: pré-teste, exemplo, previsão, lab, comparar, MC, prós/contras, contexto, design, checkpoint | Bloom: Analisar–Avaliar -->
+  <main data-chapter-id="25-contencao-desempenho" data-practice-mc="mc-ch25">
+    <header class="page-header">
+      <a class="brand" href="../../index.html" aria-label="Playground, sumário"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> programação concorrente</a>
+      <span class="lesson-tag">CAPÍTULO 25</span>
+    </header>
+    <nav class="chapter-navigation" aria-label="Navegação do livro">
+      <a href="../24-isolamento-niveis/index.html">← 24 · Níveis de isolamento</a>
+      <span>25 · Contenção e desempenho</span>
+      <a href="../26-amdahl-false-sharing/index.html">26 · Amdahl e false sharing →</a>
+    </nav>
+    <section class="intro chapter-intro" aria-labelledby="page-title">
+      <p class="eyebrow">CAPÍTULO 25</p>
+      <h1 id="page-title">Contenção<br><span>e desempenho</span></h1>
+    </section>
+    <p class="chapter-objective"><strong>Objetivo deste capítulo:</strong> medir quando coordenação (um lock compartilhado, muitas threads) consome o ganho de paralelismo — e quando fragmentar locks ou reduzir threads ajuda.</p>
+
+    <section class="practice" aria-labelledby="pretest-title">
+      <div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES DO EXPERIMENTO</span></div>
+      <p class="practice-prompt">Dobrar o número de workers em um lock global <strong>sempre</strong> dobra o throughput?</p>
+      <textarea class="practice-field" data-practice-field="pretest-oversub" rows="2"></textarea>
+      <p class="practice-prompt">Contenção é só “estar em paralelo”?</p>
+      <textarea class="practice-field" data-practice-field="pretest-definition" rows="2"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="worked-title">
+      <div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2><span class="practice-tag">4 WORKERS · LOCK ÚNICO</span></div>
+      <p class="practice-lead">Cada worker: 2 ticks locais (sem lock), depois 2 ticks na seção crítica.</p>
+      <ol>
+        <li>Local pode usar até <strong>2 núcleos</strong> ao mesmo tempo → termina rápido.</li>
+        <li>Quatro workers entram na fila do <strong>mesmo lock</strong> → crítico serializado.</li>
+        <li>Tempo útil soma; tempo de <strong>espera</strong> cresce quando todos disputam o mesmo recurso.</li>
+      </ol>
+    </section>
+
+    <section class="practice" aria-labelledby="predict-title">
+      <div class="practice-heading"><h2 id="predict-title">Previsão</h2><span class="practice-tag">ANTES DE EXECUTAR</span></div>
+      <p class="practice-prompt">Com <strong>6 workers</strong>, lock único e <strong>2 núcleos</strong>, o tempo total será maior que com <strong>2 workers</strong>? A espera acumulada?</p>
+      <textarea class="practice-field" data-practice-field="predict-workers" rows="2"></textarea>
+    </section>
+
+    <section class="lab" aria-label="Simulação de contenção">
+      <div class="toolbar">
+        <div class="playback">
+          <button class="primary" id="play" type="button"><span id="play-icon" aria-hidden="true">▶</span><span id="play-label">Executar</span></button>
+          <button id="step" type="button">Um passo <span aria-hidden="true">→</span></button>
+          <button class="reset" id="reset" type="button" aria-label="Reiniciar"><span aria-hidden="true">↺</span></button>
+        </div>
+        <div class="toolbar-meta">
+          <label class="speed-label" for="speed">Velocidade <select id="speed"><option value="1200">0,5×</option><option value="600" selected>1×</option><option value="300">2×</option></select></label>
+          <span class="clock"><span class="clock-dot" aria-hidden="true"></span> tempo <strong id="time">0</strong></span>
+        </div>
+      </div>
+      <p id="mode-label" class="experiment-note"></p>
+      <div class="lab-metrics">
+        <span class="lab-metric">espera acum. <strong id="metric-wait">0</strong></span>
+        <span class="lab-metric">trabalho útil <strong id="metric-useful">0</strong></span>
+        <span class="lab-metric">duração <strong id="metric-duration">0</strong></span>
+      </div>
+      <div class="experiment-controls">
+        <label for="workers">Workers <strong id="workers-value">4</strong></label>
+        <input id="workers" type="range" min="2" max="8" value="4">
+        <label for="cores">Núcleos <select id="cores"><option value="1">1</option><option value="2" selected>2</option><option value="4">4</option></select></label>
+        <label for="local">Ticks locais <select id="local"><option value="1">1</option><option value="2" selected>2</option><option value="4">4</option></select></label>
+        <label for="critical">Ticks críticos <select id="critical"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option></select></label>
+        <label><input id="sharded" type="checkbox"> Locks fragmentados (1 por núcleo)</label>
+      </div>
+      <div class="tasks" id="worker-grid"></div>
+      <p id="status" class="scenario-footer"></p>
+    </section>
+
+    <aside class="observation" aria-label="Dica"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow">EXPERIMENTE</p><p>Marque <strong>locks fragmentados</strong> com 4 workers e 4 núcleos. A espera cai em relação ao lock único?</p></div></aside>
+
+    <section class="practice" aria-labelledby="compare-title">
+      <div class="practice-heading"><h2 id="compare-title">Comparar cenários</h2><span class="practice-tag">ANALISAR</span></div>
+      <textarea class="practice-field" data-practice-field="compare-sharded" rows="3" placeholder="Lock único vs fragmentado: o que muda na fila e na duração?"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="mc-title">
+      <div class="practice-heading"><h2 id="mc-title">Múltipla escolha + justificativa</h2></div>
+      <p class="practice-prompt">App com lock global em caminho quente, CPU ociosa em espera. Ação <strong>mais direta</strong> para testar primeiro?</p>
+      <ul class="choice-list" role="radiogroup">
+        <li><label><input type="radio" name="mc-ch25" value="a"> Comprar mais núcleos sem mudar o código.</label></li>
+        <li><label><input type="radio" name="mc-ch25" value="b"> Medir espera no lock; tentar granularidade menor ou menos threads no lock.</label></li>
+        <li><label><input type="radio" name="mc-ch25" value="c"> Remover o lock e confiar na ordem natural das threads.</label></li>
+        <li><label><input type="radio" name="mc-ch25" value="d"> Aumentar só o número de threads para reduzir fila.</label></li>
+      </ul>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2" placeholder="Por que essa opção?"></textarea>
+      <textarea class="practice-field" data-practice-field="mc-why-not" rows="3" placeholder="Por que não as outras?"></textarea>
+      <details class="model-answer"><summary>Ver resposta sugerida <span aria-hidden="true">+</span></summary>
+        <div class="theory-content"><p><strong>B.</strong> Mais threads atrás de um lock raramente resolve; núcleos extras não eliminam serialização no lock quente.</p></div>
+      </details>
+    </section>
+
+    <section class="practice" aria-labelledby="tradeoff-title">
+      <div class="practice-heading"><h2 id="tradeoff-title">Prós, contras e limites</h2></div>
+      <textarea class="practice-field" data-practice-field="tradeoff-threads" rows="3" placeholder="Mais threads: ajuda quando? não ajuda quando?"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="context-title">
+      <div class="practice-heading"><h2 id="context-title">Melhor opção por contexto</h2></div>
+      <p class="practice-prompt">Fila HTTP: 200 workers, 8 núcleos, lock global em sessão. O que priorizar?</p>
+      <textarea class="practice-field" data-practice-field="context-http" rows="3"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="design-title">
+      <div class="practice-heading"><h2 id="design-title">Design mínimo</h2></div>
+      <p class="practice-prompt">Proponha um lock por partição de usuário vs lock global — trade-off em uma frase cada.</p>
+      <textarea class="practice-field" data-practice-field="design-shard" rows="3"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="checkpoint-title">
+      <div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2></div>
+      <textarea class="practice-field" data-practice-field="checkpoint-contention" rows="2" placeholder="Contenção em uma frase neste experimento."></textarea>
+    </section>
+
+    <details class="theory"><summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary>
+      <div class="theory-content"><p><strong>Contenção:</strong> disputa pelo mesmo recurso; trabalho útil cai e espera cresce.</p><p><strong>Oversubscription:</strong> mais threads executáveis do que capacidade útil aumenta disputa e context switches.</p></div>
+    </details>
+    <nav class="chapter-bottom-navigation" aria-label="Fim do capítulo">
+      <a href="../24-isolamento-niveis/index.html">← Capítulo anterior</a>
+      <a href="../26-amdahl-false-sharing/index.html">Próximo capítulo →</a>
+    </nav>
+  </main>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <title>Execução sequencial · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <!-- Mix: pré-teste, exemplo, previsão(2), lab, comparar, MC, tradeoff, contexto, design, checkpoint | Bloom: Compreender–Aplicar -->
+  <main data-chapter-id="02-execucao-sequencial" data-practice-mc="mc-ch02">
+    <header class="page-header">
+      <a class="brand" href="../../index.html" aria-label="Playground, sumário"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> programação concorrente</a>
+      <span class="lesson-tag">CAPÍTULO 02</span>
+    </header>
+    <nav class="chapter-navigation" aria-label="Navegação do livro">
+      <a href="../01-concorrente-paralelo/index.html">← 01 Concorrente e paralelo</a>
+      <span>02 · Execução sequencial</span>
+      <a href="../03-threads-nucleos/index.html">03 Threads e núcleos →</a>
+    </nav>
+    <section class="intro chapter-intro" aria-labelledby="page-title">
+      <p class="eyebrow">CAPÍTULO 02</p>
+      <h1 id="page-title">Execução<br><span>sequencial</span></h1>
+    </section>
+    <p class="chapter-objective"><strong>Objetivo deste capítulo:</strong> ver o modo mais simples — uma tarefa vai até o fim antes da próxima começar — e prever tempos de término sem alternância.</p>
+
+    <section class="practice" aria-labelledby="pretest-title">
+      <div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES DO EXPERIMENTO</span></div>
+      <p class="practice-prompt">Com A=4 e B=4 blocos, em que instante B <em>começa</em> a executar?</p>
+      <textarea class="practice-field" data-practice-field="pretest-start-b" rows="2"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="worked-title">
+      <div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2></div>
+      <section class="practice-worked" aria-label="Fila sequencial">
+        <p>A (2 blocos) depois B (2 blocos), 1 núcleo:</p>
+        <ol><li>t=1,2: só A</li><li>t=3,4: só B</li><li>B começa em t=3; fim em t=4</li></ol>
+      </section>
+    </section>
+
+    <section class="practice" aria-labelledby="predict-title">
+      <div class="practice-heading"><h2 id="predict-title">Previsão</h2></div>
+      <p class="practice-prompt">Com os padrões do laboratório (A=6, B=4), qual o tempo total?</p>
+      <textarea class="practice-field" data-practice-field="predict-duration" rows="2"></textarea>
+    </section>
+
+    <section class="lab" aria-label="Fila sequencial">
+      <div class="toolbar">
+        <div class="playback">
+          <button class="primary" id="play" type="button"><span id="play-icon" aria-hidden="true">▶</span><span id="play-label">Executar</span></button>
+          <button id="step" type="button">Um passo →</button>
+          <button class="reset" id="reset" type="button" aria-label="Reiniciar">↺</button>
+        </div>
+        <div class="toolbar-meta"><label for="speed">Velocidade <select id="speed"><option value="800" selected>1×</option><option value="400">2×</option></select></label>
+          <span class="clock">tempo <strong id="time">0</strong></span>
+        </div>
+      </div>
+      <article class="scenario" id="panel">
+        <div class="scenario-heading"><span class="hardware">1 NÚCLEO · FILA</span><span class="badge" id="badge">Pronto</span></div>
+        <h2>Sequencial</h2>
+        <p class="scenario-copy">Sem alternância: A completa, então B.</p>
+        <div class="processors" id="processors"></div>
+        <div class="tasks" id="tasks"></div>
+        <hr style="margin:12px 0;border:0;border-top:1px solid var(--line)">
+        <div class="timeline" id="timeline"></div>
+        <div class="scenario-footer"><span id="status"></span><span class="finish-time" id="finish"></span></div>
+        <p class="experiment-note">A termina em <strong id="finish-a"></strong> · B termina em <strong id="finish-b"></strong></p>
+      </article>
+      <div class="experiment-controls">
+        <label for="work-a">Trabalho A <strong id="work-a-value">6 blocos</strong><input id="work-a" type="range" min="2" max="8" value="6"></label>
+        <label for="work-b">Trabalho B <strong id="work-b-value">4 blocos</strong><input id="work-b" type="range" min="2" max="8" value="4"></label>
+      </div>
+    </section>
+
+    <aside class="observation"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow">EXPERIMENTE</p><p>Avance até B começar: B ainda está em <strong>Aguardando</strong>?</p></div></aside>
+
+    <section class="practice" aria-labelledby="compare-title">
+      <div class="practice-heading"><h2 id="compare-title">Comparar com o capítulo 01</h2></div>
+      <textarea class="practice-field" data-practice-field="compare-ch01" rows="3" placeholder="Alternância vs fila: quem espera mais?"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="mc-title">
+      <div class="practice-heading"><h2 id="mc-title">Múltipla escolha</h2></div>
+      <ul class="choice-list" role="radiogroup">
+        <li><label><input type="radio" name="mc-ch02" value="a"> Sequencial é o mesmo que concorrente com alternância 1.</label></li>
+        <li><label><input type="radio" name="mc-ch02" value="b"> B só executa depois que A atinge 100% do trabalho.</label></li>
+        <li><label><input type="radio" name="mc-ch02" value="c"> O tempo total é sempre menor que no capítulo 01.</label></li>
+      </ul>
+      <textarea class="practice-field" data-practice-field="mc-why" rows="3"></textarea>
+      <details class="model-answer"><summary>Ver resposta sugerida +</summary><div class="theory-content"><p><strong>B.</strong> Fila estrita. A não é alternância; D é falso — costuma ser igual ou maior em CPU-bound puro.</p></div></details>
+    </section>
+
+    <section class="practice" aria-labelledby="checkpoint-title">
+      <div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2></div>
+      <textarea class="practice-field" data-practice-field="checkpoint-1" rows="2" placeholder="Quando B começa, em uma frase?"></textarea>
+    </section>
+
+    <details class="theory"><summary>Só um tiquinho de teoria +</summary><div class="theory-content"><p><strong>Sequencial:</strong> uma ordem fixa sem fatiar o trabalho entre tarefas no mesmo período ativo.</p></div></details>
+    <nav class="chapter-bottom-navigation"><a href="../01-concorrente-paralelo/index.html">← Capítulo 01</a><a href="../03-threads-nucleos/index.html">Capítulo 03 →</a></nav>
+  </main>
+</body>
+</html>

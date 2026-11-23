@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Starvation · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="13-starvation" data-practice-mc="mc-ch13">
+    <header class="page-header"><a class="brand" href="../../index.html"><span class="brand-mark">p.</span> playground <span class="brand-divider">/</span> programação concorrente</a><span class="lesson-tag">CAPÍTULO 13</span></header>
+    <nav class="chapter-navigation"><a href="../12-livelock/index.html">← Livelock</a><span>13 · Starvation</span><a href="../14-inversao-prioridade/index.html">Inversão de prioridade →</a></nav>
+    <section class="intro chapter-intro"><p class="eyebrow">CAPÍTULO 13</p><h1>Starvation<br><span>inanição</span></h1></section>
+    <p class="chapter-objective"><strong>Objetivo:</strong> ver uma tarefa de baixa prioridade nunca receber CPU sob escalonamento enviesado e comparar com justiça mínima.</p>
+    <section class="practice"><h2>Pré-teste</h2><textarea class="practice-field" data-practice-field="pretest" rows="2"></textarea></section>
+    <section class="practice"><h2>Previsão</h2><textarea class="practice-field" data-practice-field="predict" rows="2"></textarea></section>
+    <section class="lab">
+      <div class="toolbar"><div class="playback"><button class="primary" id="play" type="button"><span id="play-icon">▶</span><span id="play-label">Executar</span></button><button id="step" type="button">Um passo →</button><button class="reset" id="reset" type="button">↺</button></div><div class="toolbar-meta"><select id="speed"><option value="800" selected>1×</option></select><span class="clock">t <strong id="time">0</strong></span></div></div>
+      <div class="comparison">
+        <article class="scenario" id="unfair-panel"><span class="badge" id="unfair-badge">Pronto</span><h2>Sempre prioridade H</h2><div id="unfair-tasks"></div><p>Último no núcleo: <strong id="unfair-last">—</strong></p><div class="scenario-footer"><span id="unfair-status"></span><span id="unfair-finish" class="finish-time"></span></div></article>
+        <article class="scenario" id="fair-panel"><span class="badge" id="fair-badge">Pronto</span><h2>Rodízio mínimo</h2><div id="fair-tasks"></div><p>Último no núcleo: <strong id="fair-last">—</strong></p><div class="scenario-footer"><span id="fair-status"></span><span id="fair-finish" class="finish-time"></span></div></article>
+      </div>
+    </section>
+    <aside class="observation"><p id="observation-text"></p></aside>
+    <section class="practice"><h2>MC</h2>
+      <ul class="choice-list"><li><label><input type="radio" name="mc-ch13" value="a"> Starvation = deadlock.</label></li><li><label><input type="radio" name="mc-ch13" value="b"> Starvation = tarefa pronta que nunca é escalonada.</label></li><li><label><input type="radio" name="mc-ch13" value="c"> Lock-free garante ausência de starvation.</label></li><li><label><input type="radio" name="mc-ch13" value="d"> Só com prioridades explícitas no código.</label></li></ul>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2"></textarea><textarea class="practice-field" data-practice-field="mc-why-not" rows="2"></textarea>
+      <details class="model-answer"><summary>Resposta</summary><div class="theory-content"><p><strong>B.</strong> Progresso individual falha apesar do sistema seguir.</p></div></details>
+    </section>
+    <section class="practice"><h2>Checkpoint</h2><textarea class="practice-field" data-practice-field="checkpoint" rows="2"></textarea></section>
+    <details class="theory"><summary>Teoria</summary><div class="theory-content"><p>Inanição: falta de fairness no escalonamento ou na sincronização.</p></div></details>
+    <nav class="chapter-bottom-navigation"><a href="../12-livelock/index.html">← 12</a><a href="../14-inversao-prioridade/index.html">14 →</a></nav>
+  </main>
+</body>
+</html>

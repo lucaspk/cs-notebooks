@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mensagens entre serviços · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="29-servicos-mensagens" data-practice-mc="mc-ch29">
+    <header class="page-header">
+      <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> programação concorrente</a>
+      <span class="lesson-tag">CAPÍTULO 29</span>
+    </header>
+    <nav class="chapter-navigation">
+      <a href="../28-aba-linearizabilidade/index.html">← 28</a>
+      <span>29 · Mensagens entre serviços</span>
+      <a href="../../index.html">Sumário →</a>
+    </nav>
+    <section class="intro chapter-intro"><p class="eyebrow">CAPÍTULO 29 · OPCIONAL</p><h1>Mensagens<br><span>entre serviços</span></h1></section>
+    <p class="chapter-objective"><strong>Objetivo:</strong> lidar com mensagens atrasadas, duplicadas e fora de ordem — idempotência, ordem por sequência e last-write-wins.</p>
+    <section class="practice"><textarea class="practice-field" data-practice-field="pretest-msg" rows="2" placeholder="Retry sempre duplica efeito?"></textarea></section>
+    <section class="lab">
+      <label for="mode">Estratégia <select id="mode"><option value="naive">Ingênuo</option><option value="ordered">Por seq</option><option value="idempotent" selected>Idempotente</option><option value="lww">Last write wins</option></select></label>
+      <p class="experiment-note">Modo: <strong id="mode-label"></strong></p>
+      <div class="toolbar"><button id="step" type="button">Entregar próxima</button><button id="reset" type="button">Reiniciar</button></div>
+      <div id="effects-table"></div>
+      <p>Estado final: <code id="final-state">—</code></p>
+    </section>
+    <section class="practice">
+      <ul class="choice-list" role="radiogroup">
+        <li><label><input type="radio" name="mc-ch29" value="a"> At-least-once + retry sem idempotência é seguro para débitos.</label></li>
+        <li><label><input type="radio" name="mc-ch29" value="b"> Idempotência por chave+efeito absorve duplicata de rede.</label></li>
+        <li><label><input type="radio" name="mc-ch29" value="c"> Ordem de chegada sempre é ordem causal.</label></li>
+        <li><label><input type="radio" name="mc-ch29" value="d"> LWW nunca desfaz evento novo com resposta antiga.</label></li>
+      </ul>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2"></textarea>
+      <textarea class="practice-field" data-practice-field="mc-why-not" rows="2"></textarea>
+    </section>
+    <section class="practice"><textarea class="practice-field" data-practice-field="design-idempotency" rows="2" placeholder="Chave de idempotência para transferência."></textarea></section>
+    <section class="practice"><textarea class="practice-field" data-practice-field="checkpoint-msg" rows="2"></textarea></section>
+    <nav class="chapter-bottom-navigation"><a href="../28-aba-linearizabilidade/index.html">← Capítulo 28</a><a href="../../index.html">Sumário</a></nav>
+  </main>
+</body>
+</html>

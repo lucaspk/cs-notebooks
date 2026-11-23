@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amdahl e false sharing · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="26-amdahl-false-sharing" data-practice-mc="mc-ch26">
+    <header class="page-header">
+      <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> programação concorrente</a>
+      <span class="lesson-tag">CAPÍTULO 26</span>
+    </header>
+    <nav class="chapter-navigation" aria-label="Navegação do livro">
+      <a href="../25-contencao-desempenho/index.html">← 25 · Contenção e desempenho</a>
+      <span>26 · Amdahl e false sharing</span>
+      <a href="../27-cas-lock-free/index.html">27 · CAS e lock-free →</a>
+    </nav>
+    <section class="intro chapter-intro"><p class="eyebrow">CAPÍTULO 26</p><h1>Amdahl<br><span>e false sharing</span></h1></section>
+    <p class="chapter-objective"><strong>Objetivo:</strong> ver o teto de speedup da parte sequencial (Amdahl) e o custo de invalidação quando núcleos tocam a mesma linha de cache.</p>
+    <section class="practice"><div class="practice-heading"><h2>Pré-teste</h2></div>
+      <textarea class="practice-field" data-practice-field="pretest-amdahl" rows="2" placeholder="80% paralelizável → 16 núcleos = 16×?"></textarea>
+    </section>
+    <section class="lab" aria-label="Amdahl e false sharing">
+      <div class="toolbar">
+        <button class="primary" data-tab="amdahl" type="button">Lei de Amdahl</button>
+        <button data-tab="fs" type="button">False sharing</button>
+      </div>
+      <div id="panel-amdahl">
+        <label for="parallel-frac">Parcela paralelizável <strong id="parallel-frac-label">75%</strong></label>
+        <input id="parallel-frac" type="range" min="10" max="99" value="75">
+        <p>Parte sequencial: <strong id="amdahl-seq">25</strong>%</p>
+        <div id="amdahl-table"></div>
+      </div>
+      <div id="panel-fs" hidden>
+        <label for="fs-cores">Núcleos <select id="fs-cores"><option value="2">2</option><option value="4" selected>4</option><option value="8">8</option></select></label>
+        <label for="fs-updates">Atualizações <select id="fs-updates"><option value="10" selected>10</option><option value="50">50</option></select></label>
+        <p id="fs-summary" class="experiment-note"></p>
+      </div>
+    </section>
+    <section class="practice">
+      <ul class="choice-list" role="radiogroup">
+        <li><label><input type="radio" name="mc-ch26" value="b"> False sharing é coerência de cache em dados próximos sem lógica compartilhada.</label></li>
+        <li><label><input type="radio" name="mc-ch26" value="a"> False sharing é corrida de dados em variáveis distintas.</label></li>
+        <li><label><input type="radio" name="mc-ch26" value="c"> Amdahl garante speedup linear.</label></li>
+        <li><label><input type="radio" name="mc-ch26" value="d"> Padding elimina toda contenção.</label></li>
+      </ul>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2"></textarea>
+      <textarea class="practice-field" data-practice-field="mc-why-not" rows="2"></textarea>
+    </section>
+    <section class="practice"><h2>Checkpoint</h2><textarea class="practice-field" data-practice-field="checkpoint-amdahl" rows="2"></textarea></section>
+    <details class="theory"><summary>Teoria <span>+</span></summary><div class="theory-content"><p>Speedup ≈ 1/(s+(1−s)/N). False sharing: linhas de cache, não variáveis lógicas.</p></div></details>
+    <nav class="chapter-bottom-navigation"><a href="../25-contencao-desempenho/index.html">← Anterior</a><a href="../27-cas-lock-free/index.html">Próximo →</a></nav>
+  </main>
+</body>
+</html>

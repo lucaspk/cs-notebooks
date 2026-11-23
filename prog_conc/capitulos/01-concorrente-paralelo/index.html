@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <title>Concorrente e paralelo · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <!-- Mix: pré-teste, exemplo trabalhado, previsão, lab, comparação, MC+justificativa, prós/contras, contexto, design, checkpoint | Bloom: Compreender–Avaliar -->
+  <main data-chapter-id="01-concorrente-paralelo" data-practice-mc="mc-ch01">
+    <header class="page-header">
+      <a class="brand" href="../../index.html" aria-label="Playground, sumário"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> programação concorrente</a>
+      <span class="lesson-tag">CAPÍTULO 01</span>
+    </header>
+
+    <nav class="chapter-navigation" aria-label="Navegação do livro">
+      <a href="../../index.html">← Sumário</a>
+      <span>01 · Concorrente e paralelo</span>
+      <a href="../02-execucao-sequencial/index.html">02 Execução sequencial →</a>
+    </nav>
+
+    <section class="intro chapter-intro" aria-labelledby="page-title">
+      <p class="eyebrow">CAPÍTULO 01</p>
+      <h1 id="page-title">Concorrente<br><span>e paralelo</span></h1>
+    </section>
+
+    <p class="chapter-objective"><strong>Objetivo deste capítulo:</strong> distinguir concorrência de paralelismo no mesmo trabalho, e prever como núcleos e alternância afetam o tempo total — sem confundir “duas tarefas existem” com “duas tarefas executam ao mesmo tempo”.</p>
+
+    <section class="practice" aria-labelledby="pretest-title">
+      <div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES DO EXPERIMENTO</span></div>
+      <p class="practice-lead">Sem abrir a teoria. Chute informado; você compara no checkpoint.</p>
+      <div class="practice-stack">
+        <div>
+          <p class="practice-prompt">1. Mesmo trabalho em cada painel: com <strong>1 núcleo</strong>, as duas tarefas terminam no <strong>mesmo tempo</strong> que com <strong>2 núcleos</strong>?</p>
+          <textarea class="practice-field" data-practice-field="pretest-time" rows="3" placeholder="Sim ou não — e por quê em uma frase."></textarea>
+        </div>
+        <div>
+          <p class="practice-prompt">2. Se duas tarefas rodam em paralelo, elas também estão em concorrência?</p>
+          <textarea class="practice-field" data-practice-field="pretest-parallel" rows="3" placeholder="Sim ou não — e o que você entende por cada termo."></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section class="practice" aria-labelledby="worked-title">
+      <div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2><span class="practice-tag">3 BLOCOS · QUANTUM 1</span></div>
+      <p class="practice-lead">Mini cenário no papel, antes de usar os controles.</p>
+      <section class="practice-worked" aria-label="Passos do exemplo">
+        <p>Duas tarefas (<strong>A</strong> e <strong>B</strong>), <strong>3 blocos</strong> cada, <strong>1 núcleo</strong>, alternância a cada <strong>1 bloco</strong>:</p>
+        <ol>
+          <li>Passo 1: só <strong>A</strong> executa → progresso A 1/3.</li>
+          <li>Passo 2: só <strong>B</strong> executa → B 1/3.</li>
+          <li>Continua alternando A, B, A, B… até ambas 3/3.</li>
+          <li><strong>Tempo total:</strong> 6 unidades (3 + 3 blocos, um por vez). No painel paralelo, seriam <strong>3 unidades</strong> (A e B juntos a cada passo).</li>
+        </ol>
+      </section>
+    </section>
+
+    <section class="practice" aria-labelledby="predict-title">
+      <div class="practice-heading"><h2 id="predict-title">Previsão no experimento</h2><span class="practice-tag">ANTES DO PRIMEIRO PASSO</span></div>
+      <p class="practice-prompt">Quantas tarefas avançam no painel <strong>Concorrente</strong>? E no <strong>Paralelo</strong>?</p>
+      <textarea class="practice-field" data-practice-field="predict-first-step" rows="2" placeholder="Ex.: concorrente 1, paralelo 2."></textarea>
+    </section>
+
+    <section class="lab" aria-label="Simulação de execução">
+      <div class="toolbar">
+        <div class="playback">
+          <button class="primary" id="play" type="button"><span id="play-icon" aria-hidden="true">▶</span><span id="play-label">Executar</span></button>
+          <button id="step" type="button">Um passo <span aria-hidden="true">→</span></button>
+          <button class="reset" id="reset" type="button" aria-label="Reiniciar simulação" title="Reiniciar"><span aria-hidden="true">↺</span></button>
+        </div>
+        <div class="toolbar-meta">
+          <label class="speed-label" for="speed">Velocidade <select id="speed"><option value="1600">0,5×</option><option value="800" selected>1×</option><option value="400">2×</option></select></label>
+          <span class="clock"><span class="clock-dot" aria-hidden="true"></span> tempo <strong id="time">0</strong></span>
+        </div>
+      </div>
+
+      <div class="comparison">
+        <article class="scenario" id="concurrent-panel" aria-labelledby="concurrent-title">
+          <div class="scenario-heading"><span class="mode-icon" aria-hidden="true">⇄</span><span class="hardware">1 NÚCLEO</span><span class="badge" id="concurrent-badge">Pronto</span></div>
+          <h2 id="concurrent-title">Concorrente</h2>
+          <p class="scenario-copy">Um pouco de A, um pouco de B.<br>Uma tarefa executa por vez.</p>
+          <div class="processors" id="concurrent-processors"></div>
+          <div class="tasks" id="concurrent-tasks"></div>
+          <div class="timeline-heading"><h3>Linha do tempo</h3><span>cada bloco = 1 unidade</span></div>
+          <div class="timeline" id="concurrent-timeline" role="img" aria-label="Linha do tempo da execução concorrente"></div>
+          <div class="scenario-footer"><span id="concurrent-status">As duas tarefas estão prontas.</span><span class="finish-time" id="concurrent-finish"></span></div>
+        </article>
+
+        <article class="scenario" id="parallel-panel" aria-labelledby="parallel-title">
+          <div class="scenario-heading"><span class="mode-icon" aria-hidden="true">⇉</span><span class="hardware">2 NÚCLEOS</span><span class="badge" id="parallel-badge">Pronto</span></div>
+          <h2 id="parallel-title">Paralelo</h2>
+          <p class="scenario-copy">A e B avançam juntas.<br>Duas tarefas executam ao mesmo tempo.</p>
+          <div class="processors" id="parallel-processors"></div>
+          <div class="tasks" id="parallel-tasks"></div>
+          <div class="timeline-heading"><h3>Linha do tempo</h3><span>mesma escala de tempo</span></div>
+          <div class="timeline" id="parallel-timeline" role="img" aria-label="Linha do tempo da execução paralela"></div>
+          <div class="scenario-footer"><span id="parallel-status">As duas tarefas estão prontas.</span><span class="finish-time" id="parallel-finish"></span></div>
+        </article>
+      </div>
+
+      <div class="experiment-controls">
+        <label class="work-control" for="work"><span>Trabalho por tarefa <strong id="work-value">6 blocos</strong></span><input id="work" type="range" min="4" max="8" value="6"></label>
+        <label class="quantum-control" for="quantum"><span>No cenário com 1 núcleo, alternar a cada</span><select id="quantum" data-prediction-watch data-prediction-hint="prediction-quantum-hint"><option value="1">1 bloco</option><option value="2">2 blocos</option><option value="3">3 blocos</option></select></label>
+      </div>
+      <p class="experiment-note">Ao mudar o trabalho ou a alternância, a simulação recomeça.</p>
+    </section>
+
+    <aside class="observation" aria-label="Dica do experimento"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow" id="observation-label">EXPERIMENTE</p><p id="observation-text">Clique em <strong>Um passo</strong>. Quantas tarefas avançam em cada cenário?</p></div></aside>
+
+    <section class="practice" aria-labelledby="predict-quantum-title">
+      <div class="practice-heading"><h2 id="predict-quantum-title">Previsão da alternância</h2><span class="practice-tag">ANTES DE EXECUTAR DE NOVO</span></div>
+      <p id="prediction-quantum-hint" class="practice-hint" hidden>Mude a alternância na simulação, registre a previsão abaixo e só então execute de novo.</p>
+      <p class="practice-prompt">Com <strong>6 blocos</strong> por tarefa, mude a alternância para <strong>3 blocos</strong>. O tempo total no painel de 1 núcleo muda em relação a alternar a cada 1 bloco?</p>
+      <textarea class="practice-field" data-practice-field="predict-quantum" rows="3" placeholder="Previsão e motivo — execute e compare depois."></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="compare-title">
+      <div class="practice-heading"><h2 id="compare-title">Comparar cenários</h2><span class="practice-tag">ANALISAR</span></div>
+      <p class="practice-lead">Depois de executar até o fim (com os padrões 6 blocos / alternância 1).</p>
+      <div class="compare-grid">
+        <div>
+          <p class="practice-prompt">O que é <strong>igual</strong> nos dois painéis?</p>
+          <textarea class="practice-field" data-practice-field="compare-same" rows="3" placeholder="Trabalho total, tarefas, tipo de bloco…"></textarea>
+        </div>
+        <div>
+          <p class="practice-prompt">O que <strong>muda</strong> a cada passo?</p>
+          <textarea class="practice-field" data-practice-field="compare-diff" rows="3" placeholder="Quantos núcleos ativos, quem avança…"></textarea>
+        </div>
+      </div>
+      <p class="practice-prompt">Tempos finais: anote <code>t</code> do concorrente e do paralelo.</p>
+      <textarea class="practice-field" data-practice-field="compare-times" rows="2" placeholder="Ex.: 1 núcleo t=12, 2 núcleos t=6."></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="mc-title">
+      <div class="practice-heading"><h2 id="mc-title">Múltipla escolha + justificativa</h2><span class="practice-tag">CHECKPOINT CONCEITUAL</span></div>
+      <p class="practice-prompt">Servidor com <strong>1 núcleo</strong>, duas tarefas de CPU <strong>independentes</strong> e do mesmo tamanho. Qual afirmação é a mais precisa?</p>
+      <ul class="choice-list" role="radiogroup" aria-labelledby="mc-title">
+        <li><label><input type="radio" name="mc-ch01" value="a"> Não há concorrência; só uma tarefa existe de cada vez no sistema.</label></li>
+        <li><label><input type="radio" name="mc-ch01" value="b"> Há concorrência, mas não paralelismo <em>neste</em> hardware.</label></li>
+        <li><label><input type="radio" name="mc-ch01" value="c"> Há paralelismo porque as duas tarefas estão definidas no programa.</label></li>
+        <li><label><input type="radio" name="mc-ch01" value="d"> O tempo total é o mesmo que com 2 núcleos, porque o trabalho é idêntico.</label></li>
+      </ul>
+      <p class="practice-prompt">Por que escolhi essa opção?</p>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="3"></textarea>
+      <p class="practice-prompt">Por que <strong>não</strong> cada uma das outras?</p>
+      <textarea class="practice-field" data-practice-field="mc-why-not" rows="4" placeholder="Uma linha ou frase por alternativa rejeitada."></textarea>
+      <details class="model-answer">
+        <summary>Ver resposta sugerida <span aria-hidden="true">+</span></summary>
+        <div class="theory-content">
+          <p><strong>B.</strong> As duas tarefas avançam no mesmo período (concorrência), mas o núcleo único executa uma por vez — sem paralelismo.</p>
+          <p><strong>Não A:</strong> concorrência não exige execução simultânea. <strong>Não C:</strong> paralelismo é sobre execução ao mesmo tempo, não sobre quantas tarefas o código declara. <strong>Não D:</strong> o trabalho é o mesmo, mas o tempo total costuma dobrar com um núcleo neste modelo.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="practice" aria-labelledby="tradeoff-title">
+      <div class="practice-heading"><h2 id="tradeoff-title">Prós, contras e limites</h2><span class="practice-tag">AVALIAR</span></div>
+      <p class="practice-lead">Complete mentalmente ou por escrito; use a tabela como guia.</p>
+      <table class="tradeoff-table">
+        <thead><tr><th scope="col">Modo</th><th scope="col">Quando ajuda</th><th scope="col">Custo / limite</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Concorrente (1 núcleo)</th><td>Várias tarefas avançam sem CPU extra; bom para I/O misturado (capítulos futuros).</td><td>CPU-bound puro: tempo soma; alternância não encurta o trabalho total aqui.</td></tr>
+          <tr><th scope="row">Paralelo (2+ núcleos)</th><td>Tarefas independentes terminam mais cedo.</td><td>Precisa hardware e tarefas que não disputem o mesmo gargalo.</td></tr>
+          <tr><th scope="row">Sequencial (1 tarefa por vez até o fim)</th><td>Mais simples de raciocinar; menos alternância.</td><td>Sem sobreposição; nem sempre é concorrente no sentido deste livro.</td></tr>
+        </tbody>
+      </table>
+      <p class="practice-prompt">Um caso em que <strong>1 núcleo concorrente</strong> ainda vale a pena antes de pedir mais núcleos:</p>
+      <textarea class="practice-field" data-practice-field="tradeoff-case" rows="3"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="context-title">
+      <div class="practice-heading"><h2 id="context-title">Melhor opção por contexto</h2><span class="practice-tag">AVALIAR</span></div>
+      <p class="practice-prompt">Três tarefas de CPU <strong>independentes</strong>, mesmo tamanho, em uma máquina com <strong>2 núcleos</strong>. O que você espera?</p>
+      <textarea class="practice-field" data-practice-field="context-three-tasks" rows="4" placeholder="Tempo relativo, o que roda junto, o que espera, paralelismo vs fila…"></textarea>
+      <details class="model-answer">
+        <summary>Ver resposta sugerida <span aria-hidden="true">+</span></summary>
+        <div class="theory-content">
+          <p>Dois núcleos executam duas tarefas em paralelo no início; a terceira espera. O tempo total fica entre o de 1 núcleo (tudo serializado) e o de 3 núcleos ideais (todas juntas). Ainda há concorrência; o paralelismo é limitado pelo número de núcleos.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="practice" aria-labelledby="design-title">
+      <div class="practice-heading"><h2 id="design-title">Design mínimo</h2><span class="practice-tag">APLICAR</span></div>
+      <p class="practice-prompt">Na simulação: <strong>6 blocos</strong> por tarefa, <strong>1 núcleo</strong>. Qual configuração de alternância produz tempo total <strong>12</strong>? Justifique com o que você viu na linha do tempo.</p>
+      <textarea class="practice-field" data-practice-field="design-quantum" rows="3"></textarea>
+      <details class="model-answer">
+        <summary>Ver resposta sugerida <span aria-hidden="true">+</span></summary>
+        <div class="theory-content">
+          <p><strong>1, 2 ou 3 blocos</strong> por alternância levam a 12 unidades com duas tarefas iguais de 6 blocos — a ordem dos fatias muda, mas a soma do trabalho não. Confirme rodando cada opção na simulação.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="practice" aria-labelledby="checkpoint-title">
+      <div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2><span class="practice-tag">DEPOIS DO CAPÍTULO</span></div>
+      <p class="practice-lead">Reponha sem copiar o pré-teste. Mudou alguma resposta?</p>
+      <hr class="practice-divider">
+      <div class="practice-stack">
+        <div>
+          <p class="practice-prompt">1. Mesmo trabalho: 1 núcleo vs 2 núcleos — tempo final?</p>
+          <textarea class="practice-field" data-practice-field="checkpoint-time" rows="2"></textarea>
+        </div>
+        <div>
+          <p class="practice-prompt">2. Paralelismo implica concorrência?</p>
+          <textarea class="practice-field" data-practice-field="checkpoint-parallel" rows="2"></textarea>
+        </div>
+        <div>
+          <p class="practice-prompt">3. Em uma frase: defina concorrência e paralelismo <em>como neste experimento</em>.</p>
+          <textarea class="practice-field" data-practice-field="checkpoint-definitions" rows="3"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <details class="theory">
+      <summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary>
+      <div class="theory-content"><p><strong>Concorrência:</strong> tarefas ficam em andamento no mesmo período; podem avançar se alternando.</p><p><strong>Paralelismo:</strong> tarefas executam literalmente ao mesmo tempo. Também é uma forma de concorrência.</p><p>Aqui, o cenário de um núcleo mostra concorrência sem paralelismo. O de dois mostra os dois.</p></div>
+    </details>
+    <nav class="chapter-bottom-navigation" aria-label="Fim do capítulo">
+      <a href="../../index.html">← Voltar ao sumário</a>
+      <a href="../02-execucao-sequencial/index.html">Capítulo 02 →</a>
+    </nav>
+    <p class="sr-only" id="announcement" role="status" aria-live="polite"></p>
+  </main>
+</body>
+</html>

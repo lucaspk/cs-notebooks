@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TOCTOU · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="07-toctou" data-practice-mc="mc-ch07">
+    <header class="page-header"><a class="brand" href="../../index.html">playground</a><span class="lesson-tag">CAPÍTULO 07</span></header>
+    <nav class="chapter-navigation"><a href="../06-contador-perdido/index.html">← 06</a><span>07 · TOCTOU</span><a href="../08-mutex-atomicidade/index.html">08 →</a></nav>
+    <section class="intro chapter-intro"><p class="eyebrow">CAPÍTULO 07</p><h1>TOCTOU<br><span>verificar e usar</span></h1></section>
+    <p class="chapter-objective"><strong>Objetivo:</strong> mostrar <em>time-of-check to time-of-use</em>: duas tarefas passam na verificação da última vaga e ambas usam.</p>
+    <section class="practice"><h2>Pré-teste</h2><textarea class="practice-field" data-practice-field="pretest" rows="2"></textarea></section>
+    <section class="practice"><h2>Previsão</h2><textarea class="practice-field" data-practice-field="predict" rows="2"></textarea></section>
+    <section class="lab">
+      <label>Cenário <select id="scenario"><option value="toctou" selected>Corrida</option><option value="safe">Serializado</option></select></label>
+      <button id="step" type="button">Passo</button><button id="reset" type="button">↺</button>
+      <p>Vagas livres: <strong id="free">1</strong></p>
+      <table><thead><tr><th>Quem</th><th>Fase</th><th>Vagas</th><th>Check OK?</th><th>Uso</th></tr></thead><tbody id="trace"></tbody></table>
+      <p id="verdict"></p>
+    </section>
+    <aside class="observation"><p>Entre <code>check</code> e <code>use</code>, outra tarefa também pode checar.</p></aside>
+    <section class="practice"><h2>MC</h2><ul class="choice-list"><li><label><input type="radio" name="mc-ch07" value="b"> A condição no uso pode já ter mudado desde a verificação.</label></li></ul><textarea class="practice-field" data-practice-field="mc-why" rows="2"></textarea></section>
+    <section class="practice"><h2>Checkpoint</h2><textarea class="practice-field" data-practice-field="checkpoint" rows="2"></textarea></section>
+    <details class="theory"><summary>Teoria +</summary><p>TOCTOU: falha lógica quando check e use não são atômicos juntos.</p></details>
+    <nav class="chapter-bottom-navigation"><a href="../06-contador-perdido/index.html">← 06</a><a href="../08-mutex-atomicidade/index.html">08 →</a></nav>
+  </main>
+</body>
+</html>

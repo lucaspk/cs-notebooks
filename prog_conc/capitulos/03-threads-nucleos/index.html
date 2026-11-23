@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Threads e núcleos · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="03-threads-nucleos" data-practice-mc="mc-ch03">
+    <header class="page-header">
+      <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> programação concorrente</a>
+      <span class="lesson-tag">CAPÍTULO 03</span>
+    </header>
+    <nav class="chapter-navigation">
+      <a href="../02-execucao-sequencial/index.html">← 02 Sequencial</a>
+      <span>03 · Threads e núcleos</span>
+      <a href="../04-espera-io/index.html">04 I/O →</a>
+    </nav>
+    <section class="intro chapter-intro"><p class="eyebrow">CAPÍTULO 03</p><h1>Threads,<br><span>núcleos e escalonamento</span></h1></section>
+    <p class="chapter-objective"><strong>Objetivo:</strong> separar threads de software dos núcleos físicos e prever quantas threads avançam por passo.</p>
+    <section class="practice"><h2>Pré-teste</h2><textarea class="practice-field" data-practice-field="pretest" rows="2" placeholder="1 núcleo, 2 threads: quantas avançam juntas?"></textarea></section>
+    <section class="practice"><h2>Previsão</h2><textarea class="practice-field" data-practice-field="predict" rows="2"></textarea></section>
+    <section class="lab" aria-label="Escalonador">
+      <div class="toolbar">
+        <div class="playback"><button class="primary" id="play" type="button">Executar</button><button id="step" type="button">Passo</button><button class="reset" id="reset" type="button">↺</button></div>
+        <div class="toolbar-meta">tempo <strong id="time">0</strong><select id="speed" hidden><option value="600" selected></option></select></div>
+      </div>
+      <article class="scenario"><span class="badge" id="badge">Pronto</span><div class="processors" id="processors"></div><div class="tasks" id="tasks"></div><div class="timeline" id="timeline"></div><p id="status" class="scenario-copy"></p></article>
+      <div class="experiment-controls">
+        <label>Núcleos <select id="cores" data-prediction-watch data-prediction-hint="pred-hint"><option value="1">1</option><option value="2" selected>2</option></select></label>
+        <label>Threads <select id="thread-count"><option value="2">2</option><option value="4" selected>4</option></select></label>
+        <label>Quantum <select id="quantum"><option value="1" selected>1</option><option value="2">2</option></select></label>
+      </div>
+      <p id="pred-hint" class="practice-hint" hidden>Altere controles e registre nova previsão.</p>
+    </section>
+    <aside class="observation"><p>1×2 alterna; 2×4 coloca duas threads a cada passo inicial.</p></aside>
+    <section class="practice"><h2>MC + justificativa</h2><ul class="choice-list"><li><label><input type="radio" name="mc-ch03" value="b"> Threads podem esperar na fila de prontas.</label></li></ul><textarea class="practice-field" data-practice-field="mc-why" rows="2"></textarea></section>
+    <section class="practice"><h2>Checkpoint</h2><textarea class="practice-field" data-practice-field="checkpoint" rows="2"></textarea></section>
+    <details class="theory"><summary>Teoria +</summary><p>Thread ≠ núcleo: escalonamento decide o mapeamento.</p></details>
+    <nav class="chapter-bottom-navigation"><a href="../02-execucao-sequencial/index.html">← 02</a><a href="../04-espera-io/index.html">04 →</a></nav>
+  </main>
+</body>
+</html>

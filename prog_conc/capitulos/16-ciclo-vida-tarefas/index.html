@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ciclo de vida · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="16-ciclo-vida-tarefas" data-practice-mc="mc-ch16">
+    <header class="page-header"><a class="brand" href="../../index.html"><span class="brand-mark">p.</span> playground <span class="brand-divider">/</span> programação concorrente</a><span class="lesson-tag">CAPÍTULO 16</span></header>
+    <nav class="chapter-navigation"><a href="../15-visibilidade-memoria/index.html">← Visibilidade</a><span>16 · Ciclo de vida</span><a href="../17-dirty-read/index.html">Dirty read →</a></nav>
+    <section class="intro chapter-intro"><p class="eyebrow">CAPÍTULO 16</p><h1>Ciclo de vida<br><span>das tarefas</span></h1></section>
+    <p class="chapter-objective"><strong>Objetivo:</strong> acompanhar pool, fila, falha, timeout e cancelamento — distinguir quem parou de esperar de quem foi abortado.</p>
+    <section class="practice"><h2>Pré-teste</h2><textarea class="practice-field" data-practice-field="pretest" rows="2" placeholder="Timeout do cliente = tarefa cancelada?"></textarea></section>
+    <section class="practice"><h2>Previsão</h2><textarea class="practice-field" data-practice-field="predict" rows="2"></textarea></section>
+    <section class="lab">
+      <div class="toolbar"><div class="playback"><button class="primary" id="play" type="button"><span id="play-icon">▶</span><span id="play-label">Executar</span></button><button id="step" type="button">Um passo →</button><button class="reset" id="reset" type="button">↺</button></div><div class="toolbar-meta"><label for="pool">Pool <select id="pool"><option value="2">2 workers</option><option value="1">1 worker</option></select></label><select id="speed"><option value="800" selected>1×</option></select><span class="clock">t <strong id="time">0</strong></span></div></div>
+      <article class="scenario" id="panel"><span class="badge" id="badge">Pronto</span><h2>Pool e fila</h2><p>Executando: <strong id="pool-live">0</strong> · Fila: <strong id="queue-live">0</strong></p><ul class="task-lifecycle-list" id="tasks"></ul><div class="scenario-footer"><span id="status"></span><span id="finish" class="finish-time"></span></div></article>
+    </section>
+    <aside class="observation"><p id="observation-text"></p></aside>
+    <section class="practice"><h2>MC</h2>
+      <ul class="choice-list"><li><label><input type="radio" name="mc-ch16" value="a"> Timeout sempre cancela a tarefa no worker.</label></li><li><label><input type="radio" name="mc-ch16" value="b"> Quem espera pode desistir sem a tarefa saber.</label></li><li><label><input type="radio" name="mc-ch16" value="c"> Pool cheio + tarefas dependentes pode deadlockar o pool.</label></li><li><label><input type="radio" name="mc-ch16" value="d"> Future.get nunca lança exceção.</label></li></ul>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2"></textarea><textarea class="practice-field" data-practice-field="mc-why-not" rows="2"></textarea>
+      <details class="model-answer"><summary>Resposta</summary><div class="theory-content"><p><strong>B e C</strong> são cenários realistas; A é falso.</p></div></details>
+    </section>
+    <section class="practice"><h2>Checkpoint</h2><textarea class="practice-field" data-practice-field="checkpoint" rows="2"></textarea></section>
+    <details class="theory"><summary>Teoria</summary><div class="theory-content"><p>Coordene encerramento com cancelamento cooperativo e limites de pool.</p></div></details>
+    <nav class="chapter-bottom-navigation"><a href="../15-visibilidade-memoria/index.html">← 15</a><a href="../17-dirty-read/index.html">17 →</a></nav>
+  </main>
+</body>
+</html>

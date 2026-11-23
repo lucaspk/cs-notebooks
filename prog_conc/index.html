@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <title>Programação concorrente · Livro interativo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="book-index">
+    <header class="page-header">
+      <a class="brand" href="index.html" aria-label="Playground, sumário"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> programação concorrente</a>
+      <span class="lesson-tag">LIVRO INTERATIVO · 29 CAPÍTULOS</span>
+    </header>
+    <section class="intro" aria-labelledby="page-title">
+      <h1 id="page-title">MENOS LEITURA.<br><span>MAIS EXPERIMENTO.</span></h1>
+    </section>
+    <section class="contents" aria-labelledby="contents-title">
+      <div class="contents-heading"><h2 id="contents-title">Sumário</h2><span>29 capítulos</span></div>
+      <ol class="chapter-list">
+        <li><a class="chapter-link" href="capitulos/01-concorrente-paralelo/index.html"><span class="chapter-number" aria-hidden="true">01</span><span class="chapter-description"><span class="eyebrow">COMECE AQUI</span><strong>Concorrente e paralelo</strong><span>Um núcleo alternando. Dois núcleos juntos.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/02-execucao-sequencial/index.html"><span class="chapter-number" aria-hidden="true">02</span><span class="chapter-description"><strong>Execução sequencial</strong><span>Fila estrita: A termina, então B.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/03-threads-nucleos/index.html"><span class="chapter-number" aria-hidden="true">03</span><span class="chapter-description"><strong>Threads, núcleos e escalonamento</strong><span>Fila de prontas e capacidade física.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/04-espera-io/index.html"><span class="chapter-number" aria-hidden="true">04</span><span class="chapter-description"><strong>Espera por I/O</strong><span>Bloqueada em I/O; outra tarefa na CPU.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/05-interleavings/index.html"><span class="chapter-number" aria-hidden="true">05</span><span class="chapter-description"><strong>Interleavings e invariantes</strong><span>Ordem dos passos e invariantes.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/06-contador-perdido/index.html"><span class="chapter-number" aria-hidden="true">06</span><span class="chapter-description"><strong>Contador e atualização perdida</strong><span>Ler, somar, escrever — separados.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/07-toctou/index.html"><span class="chapter-number" aria-hidden="true">07</span><span class="chapter-description"><strong>TOCTOU</strong><span>Verificar a vaga, depois usar.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/08-mutex-atomicidade/index.html"><span class="chapter-number" aria-hidden="true">08</span><span class="chapter-description"><strong>Mutex e atomicidade</strong><span>Seção crítica e incremento atômico.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/09-semaforos/index.html"><span class="chapter-number" aria-hidden="true">09</span><span class="chapter-description"><strong>Semáforos</strong><span>Limitar acesso simultâneo.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/10-produtor-consumidor/index.html"><span class="chapter-number" aria-hidden="true">10</span><span class="chapter-description"><strong>Produtor e consumidor</strong><span>Fila limitada e coordenação.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/11-deadlock/index.html"><span class="chapter-number" aria-hidden="true">11</span><span class="chapter-description"><strong>Deadlock</strong><span>Ordem oposta de locks.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/12-livelock/index.html"><span class="chapter-number" aria-hidden="true">12</span><span class="chapter-description"><strong>Livelock</strong><span>Reação sem trabalho útil.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/13-starvation/index.html"><span class="chapter-number" aria-hidden="true">13</span><span class="chapter-description"><strong>Starvation</strong><span>Inanição sob escalonamento injusto.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/14-inversao-prioridade/index.html"><span class="chapter-number" aria-hidden="true">14</span><span class="chapter-description"><strong>Inversão de prioridade</strong><span>Alta espera baixa no mutex.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/15-visibilidade-memoria/index.html"><span class="chapter-number" aria-hidden="true">15</span><span class="chapter-description"><strong>Visibilidade e memória</strong><span>Publicar e observar com segurança.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/16-ciclo-vida-tarefas/index.html"><span class="chapter-number" aria-hidden="true">16</span><span class="chapter-description"><strong>Ciclo de vida das tarefas</strong><span>Pool, fila, timeout, cancelamento.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/17-dirty-read/index.html"><span class="chapter-number" aria-hidden="true">17</span><span class="chapter-description"><strong>Dirty read</strong><span>Ler alteração não confirmada.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/18-dirty-write/index.html"><span class="chapter-number" aria-hidden="true">18</span><span class="chapter-description"><strong>Dirty write</strong><span>Sobrescrever escrita pendente.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/19-leitura-nao-repetivel/index.html"><span class="chapter-number" aria-hidden="true">19</span><span class="chapter-description"><strong>Leitura não repetível</strong><span>Reler e encontrar valor novo.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/20-leitura-fantasma/index.html"><span class="chapter-number" aria-hidden="true">20</span><span class="chapter-description"><strong>Leitura fantasma</strong><span>Conjunto de linhas muda entre leituras.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/21-lost-update-transacao/index.html"><span class="chapter-number" aria-hidden="true">21</span><span class="chapter-description"><strong>Lost update (transação)</strong><span>Escrita baseada em valor antigo.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/22-read-skew/index.html"><span class="chapter-number" aria-hidden="true">22</span><span class="chapter-description"><strong>Read skew</strong><span>Dados relacionados fora de fase.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/23-write-skew/index.html"><span class="chapter-number" aria-hidden="true">23</span><span class="chapter-description"><strong>Write skew</strong><span>Condição compartilhada quebrada em conjunto.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/24-isolamento-niveis/index.html"><span class="chapter-number" aria-hidden="true">24</span><span class="chapter-description"><strong>Níveis de isolamento</strong><span>Comparar garantias simuladas.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/25-contencao-desempenho/index.html"><span class="chapter-number" aria-hidden="true">25</span><span class="chapter-description"><strong>Contenção e desempenho</strong><span>Lock único, muitas threads.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/26-amdahl-false-sharing/index.html"><span class="chapter-number" aria-hidden="true">26</span><span class="chapter-description"><strong>Amdahl e false sharing</strong><span>Parte sequencial e cache.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/27-cas-lock-free/index.html"><span class="chapter-number" aria-hidden="true">27</span><span class="chapter-description"><strong>CAS e lock-free</strong><span>Compare-and-swap na prática.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/28-aba-linearizabilidade/index.html"><span class="chapter-number" aria-hidden="true">28</span><span class="chapter-description"><strong>ABA e linearizabilidade</strong><span>Marcação e histórico.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="chapter-link" href="capitulos/29-servicos-mensagens/index.html"><span class="chapter-number" aria-hidden="true">29</span><span class="chapter-description"><strong>Mensagens entre serviços</strong><span>Duplicatas, ordem, idempotência.</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>
+      </ol>
+    </section>
+    <p class="experiment-note" style="padding:12px 3px 24px">Mapa canônico: <code>capitulos/MAPEAMENTO.md</code>. Molde de prática: <a href="../README.md">playground/README.md</a>.</p>
+  </main>
+</body>
+</html>

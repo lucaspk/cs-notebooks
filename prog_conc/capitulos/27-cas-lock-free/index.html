@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CAS e lock-free · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="27-cas-lock-free" data-practice-mc="mc-ch27">
+    <header class="page-header">
+      <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> programação concorrente</a>
+      <span class="lesson-tag">CAPÍTULO 27</span>
+    </header>
+    <nav class="chapter-navigation">
+      <a href="../26-amdahl-false-sharing/index.html">← 26</a>
+      <span>27 · CAS e lock-free</span>
+      <a href="../28-aba-linearizabilidade/index.html">28 →</a>
+    </nav>
+    <section class="intro chapter-intro"><p class="eyebrow">CAPÍTULO 27</p><h1>CAS<br><span>e lock-free</span></h1></section>
+    <p class="chapter-objective"><strong>Objetivo:</strong> comparar corrida, mutex e compare-and-swap no mesmo contador — e distinguir progresso do sistema de ausência de locks.</p>
+    <section class="practice"><textarea class="practice-field" data-practice-field="pretest-cas" rows="2" placeholder="Lock-free = nunca espera?"></textarea></section>
+    <section class="lab">
+      <label for="mode">Modo <select id="mode"><option value="none">Sem sincronização</option><option value="mutex">Mutex</option><option value="cas" selected>CAS</option></select></label>
+      <span id="mode-chip" class="lesson-tag"></span>
+      <div class="toolbar">
+        <button class="primary" id="play" type="button"><span id="play-label">Executar</span></button>
+        <button id="step" type="button">Um passo</button>
+        <button id="reset" type="button">↺</button>
+        <span>passo <strong id="time">0</strong> · final <strong id="metric-final">—</strong></span>
+      </div>
+      <p id="log" class="experiment-note"></p>
+    </section>
+    <section class="practice">
+      <ul class="choice-list" role="radiogroup">
+        <li><label><input type="radio" name="mc-ch27" value="a"> Lock-free garante que cada thread termina em passos finitos.</label></li>
+        <li><label><input type="radio" name="mc-ch27" value="b"> Lock-free garante progresso do sistema; uma thread pode falhar CAS várias vezes.</label></li>
+        <li><label><input type="radio" name="mc-ch27" value="c"> CAS substitui qualquer mutex sem trade-offs.</label></li>
+        <li><label><input type="radio" name="mc-ch27" value="d"> Sem sincronização é lock-free.</label></li>
+      </ul>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2"></textarea>
+      <textarea class="practice-field" data-practice-field="mc-why-not" rows="2"></textarea>
+    </section>
+    <section class="practice"><textarea class="practice-field" data-practice-field="checkpoint-cas" rows="2"></textarea></section>
+    <details class="theory"><summary>Teoria</summary><div class="theory-content"><p><strong>CAS:</strong> atualiza só se o valor observado ainda é o esperado.</p></div></details>
+    <nav class="chapter-bottom-navigation"><a href="../26-amdahl-false-sharing/index.html">←</a><a href="../28-aba-linearizabilidade/index.html">→</a></nav>
+  </main>
+</body>
+</html>

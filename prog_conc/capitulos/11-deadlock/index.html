@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deadlock · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="11-deadlock" data-practice-mc="mc-ch11">
+    <header class="page-header"><a class="brand" href="../../index.html"><span class="brand-mark">p.</span> playground <span class="brand-divider">/</span> programação concorrente</a><span class="lesson-tag">CAPÍTULO 11</span></header>
+    <nav class="chapter-navigation"><a href="../10-produtor-consumidor/index.html">← Produtor e consumidor</a><span>11 · Deadlock</span><a href="../12-livelock/index.html">Livelock →</a></nav>
+    <section class="intro chapter-intro"><p class="eyebrow">CAPÍTULO 11</p><h1>Deadlock<br><span>ordem dos locks</span></h1></section>
+    <p class="chapter-objective"><strong>Objetivo:</strong> reconhecer deadlock por ordem oposta de aquisição de dois recursos e prever como uma ordem global evita o ciclo.</p>
+    <section class="practice"><h2>Pré-teste</h2><textarea class="practice-field" data-practice-field="pretest" rows="2" placeholder="A segura R1 e quer R2; B segura R2 e quer R1 — o que acontece?"></textarea></section>
+    <section class="practice"><h2>Exemplo trabalhado</h2><section class="practice-worked"><p>Ciclo: <strong>A→R2←B</strong> com <strong>R1←A</strong> e <strong>R2←B</strong> já segurados.</p></section></section>
+    <section class="practice"><h2>Previsão</h2><p class="practice-prompt">Em qual passo o painel <strong>Ordem oposta</strong> trava?</p><textarea class="practice-field" data-practice-field="predict-step" rows="2"></textarea></section>
+    <section class="lab">
+      <div class="toolbar"><div class="playback"><button class="primary" id="play" type="button"><span id="play-icon">▶</span><span id="play-label">Executar</span></button><button id="step" type="button">Um passo →</button><button class="reset" id="reset" type="button">↺</button></div><div class="toolbar-meta"><select id="speed"><option value="800" selected>1×</option></select><span class="clock">t <strong id="time">0</strong></span></div></div>
+      <div class="comparison">
+        <article class="scenario" id="risky-panel"><div class="scenario-heading"><span class="badge" id="risky-badge">Pronto</span></div><h2>Ordem oposta</h2><div class="resource-row" id="risky-resources"></div><div id="risky-tasks"></div><div class="scenario-footer"><span id="risky-status"></span><span id="risky-finish" class="finish-time"></span></div></article>
+        <article class="scenario" id="safe-panel"><div class="scenario-heading"><span class="badge" id="safe-badge">Pronto</span></div><h2>Ordem fixa R1→R2</h2><div class="resource-row" id="safe-resources"></div><div id="safe-tasks"></div><div class="scenario-footer"><span id="safe-status"></span><span id="safe-finish" class="finish-time"></span></div></article>
+      </div>
+    </section>
+    <aside class="observation"><span class="observation-mark">↳</span><p id="observation-text">Execute o painel oposto.</p></aside>
+    <section class="practice"><h2>Comparar</h2><textarea class="practice-field" data-practice-field="compare" rows="3"></textarea></section>
+    <section class="practice"><h2>MC</h2>
+      <ul class="choice-list"><li><label><input type="radio" name="mc-ch11" value="a"> Deadlock = CPU a 100% sem trabalho útil.</label></li><li><label><input type="radio" name="mc-ch11" value="b"> Deadlock = ciclo de espera por recursos já segurados.</label></li><li><label><input type="radio" name="mc-ch11" value="c"> Basta adicionar threads para resolver.</label></li><li><label><input type="radio" name="mc-ch11" value="d"> Só ocorre com mais de dois recursos.</label></li></ul>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2"></textarea><textarea class="practice-field" data-practice-field="mc-why-not" rows="2"></textarea>
+      <details class="model-answer"><summary>Resposta</summary><div class="theory-content"><p><strong>B.</strong> Espera circular com posse mútua.</p></div></details>
+    </section>
+    <section class="practice"><h2>Design</h2><textarea class="practice-field" data-practice-field="design-order" rows="2" placeholder="Ordem global de locks na sua API."></textarea></section>
+    <section class="practice"><h2>Checkpoint</h2><textarea class="practice-field" data-practice-field="checkpoint" rows="2"></textarea></section>
+    <details class="theory"><summary>Teoria</summary><div class="theory-content"><p>Quebrar espera circular com ordenação de recursos.</p></div></details>
+    <nav class="chapter-bottom-navigation"><a href="../10-produtor-consumidor/index.html">← 10</a><a href="../12-livelock/index.html">12 →</a></nav>
+  </main>
+</body>
+</html>

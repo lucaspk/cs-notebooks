@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ABA e linearizabilidade · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="28-aba-linearizabilidade" data-practice-mc="mc-ch28">
+    <header class="page-header">
+      <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> programação concorrente</a>
+      <span class="lesson-tag">CAPÍTULO 28</span>
+    </header>
+    <nav class="chapter-navigation">
+      <a href="../27-cas-lock-free/index.html">← 27</a>
+      <span>28 · ABA e linearizabilidade</span>
+      <a href="../29-servicos-mensagens/index.html">29 →</a>
+    </nav>
+    <section class="intro chapter-intro"><p class="eyebrow">CAPÍTULO 28</p><h1>ABA<br><span>e linearizabilidade</span></h1></section>
+    <p class="chapter-objective"><strong>Objetivo:</strong> ver por que CAS só no valor aceita um A→B→A enganoso — e como versão/stamp recupera um ponto linearizável na história.</p>
+    <section class="practice"><textarea class="practice-field" data-practice-field="pretest-aba" rows="2"></textarea></section>
+    <section class="lab">
+      <label><input id="stamp" type="checkbox"> CAS com versão (stamp)</label>
+      <p id="stamp-label" class="experiment-note"></p>
+      <div class="toolbar"><button id="step" type="button">Um passo</button><button id="reset" type="button">Reiniciar</button></div>
+      <p id="log"></p>
+      <ol id="history"></ol>
+      <p>Passo <strong id="step-num">0</strong> · <strong id="aba-flag">—</strong></p>
+    </section>
+    <section class="practice">
+      <ul class="choice-list" role="radiogroup">
+        <li><label><input type="radio" name="mc-ch28" value="a"> ABA mostra que o valor nunca mudou — é seguro.</label></li>
+        <li><label><input type="radio" name="mc-ch28" value="b"> ABA: o valor repete mas a estrutura já foi alterada; versão ajuda.</label></li>
+        <li><label><input type="radio" name="mc-ch28" value="c"> Linearizável equivale a serializar no instante da chamada.</label></li>
+        <li><label><input type="radio" name="mc-ch28" value="d"> ABA só ocorre com garbage collection.</label></li>
+      </ul>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2"></textarea>
+      <textarea class="practice-field" data-practice-field="mc-why-not" rows="2"></textarea>
+    </section>
+    <section class="practice"><textarea class="practice-field" data-practice-field="checkpoint-aba" rows="2"></textarea></section>
+    <nav class="chapter-bottom-navigation"><a href="../27-cas-lock-free/index.html">←</a><a href="../29-servicos-mensagens/index.html">→</a></nav>
+  </main>
+</body>
+</html>

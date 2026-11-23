@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Visibilidade · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="15-visibilidade-memoria" data-practice-mc="mc-ch15">
+    <header class="page-header"><a class="brand" href="../../index.html"><span class="brand-mark">p.</span> playground <span class="brand-divider">/</span> programação concorrente</a><span class="lesson-tag">CAPÍTULO 15</span></header>
+    <nav class="chapter-navigation"><a href="../14-inversao-prioridade/index.html">← Inversão</a><span>15 · Visibilidade</span><a href="../16-ciclo-vida-tarefas/index.html">Ciclo de vida →</a></nav>
+    <section class="intro chapter-intro"><p class="eyebrow">CAPÍTULO 15</p><h1>Visibilidade<br><span>e memória</span></h1></section>
+    <p class="chapter-objective"><strong>Objetivo:</strong> separar atomicidade de visibilidade — publicar <code>ready</code> antes de <code>data</code> ser visível pode enganar o leitor.</p>
+    <section class="practice"><h2>Pré-teste</h2><textarea class="practice-field" data-practice-field="pretest" rows="2"></textarea></section>
+    <section class="practice"><h2>Previsão</h2><textarea class="practice-field" data-practice-field="predict" rows="2"></textarea></section>
+    <section class="lab">
+      <div class="toolbar"><div class="playback"><button class="primary" id="play" type="button"><span id="play-icon">▶</span><span id="play-label">Executar</span></button><button id="step" type="button">Um passo →</button><button class="reset" id="reset" type="button">↺</button></div><div class="toolbar-meta"><select id="speed"><option value="800" selected>1×</option></select><span class="clock">t <strong id="time">0</strong></span></div></div>
+      <div class="comparison">
+        <article class="scenario" id="unsafe-panel"><span class="badge" id="unsafe-badge">Pronto</span><h2>Publicação insegura</h2><p>Memória: data=<strong id="unsafe-mem-data">0</strong> ready=<strong id="unsafe-mem-ready">0</strong></p><p>Leitor: data=<strong id="unsafe-read-data">—</strong> ready=<strong id="unsafe-read-ready">0</strong></p><p>Bug: <strong id="unsafe-bug">ok</strong></p><p class="experiment-note" id="unsafe-note"></p><div class="scenario-footer"><span id="unsafe-status"></span><span id="unsafe-finish" class="finish-time"></span></div></article>
+        <article class="scenario" id="safe-panel"><span class="badge" id="safe-badge">Pronto</span><h2>Com happens-before</h2><p>Memória: data=<strong id="safe-mem-data">0</strong> ready=<strong id="safe-mem-ready">0</strong></p><p>Leitor: data=<strong id="safe-read-data">—</strong> ready=<strong id="safe-read-ready">0</strong></p><p>Bug: <strong id="safe-bug">ok</strong></p><p class="experiment-note" id="safe-note"></p><div class="scenario-footer"><span id="safe-status"></span><span id="safe-finish" class="finish-time"></span></div></article>
+      </div>
+    </section>
+    <aside class="observation"><p id="observation-text"></p></aside>
+    <section class="practice"><h2>MC</h2>
+      <ul class="choice-list"><li><label><input type="radio" name="mc-ch15" value="a"> Mutex garante apenas ordenação, nunca visibilidade.</label></li><li><label><input type="radio" name="mc-ch15" value="b"> Sem sincronização, leituras podem ver valores defasados.</label></li><li><label><input type="radio" name="mc-ch15" value="c"> volatile torna qualquer programa race-free.</label></li><li><label><input type="radio" name="mc-ch15" value="d"> Data race é sinônimo de condição de corrida lógica.</label></li></ul>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2"></textarea><textarea class="practice-field" data-practice-field="mc-why-not" rows="2"></textarea>
+      <details class="model-answer"><summary>Resposta</summary><div class="theory-content"><p><strong>B.</strong> Modelo de memória exige release/acquire para publicar.</p></div></details>
+    </section>
+    <section class="practice"><h2>Checkpoint</h2><textarea class="practice-field" data-practice-field="checkpoint" rows="2"></textarea></section>
+    <details class="theory"><summary>Teoria</summary><div class="theory-content"><p><em>Happens-before</em> define o que leituras podem observar.</p></div></details>
+    <nav class="chapter-bottom-navigation"><a href="../14-inversao-prioridade/index.html">← 14</a><a href="../16-ciclo-vida-tarefas/index.html">16 →</a></nav>
+  </main>
+</body>
+</html>

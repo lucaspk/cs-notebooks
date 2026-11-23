@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Produtor e consumidor · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="10-produtor-consumidor" data-practice-mc="mc-ch10">
+    <header class="page-header"><a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> programação concorrente</a><span class="lesson-tag">CAPÍTULO 10</span></header>
+    <nav class="chapter-navigation"><a href="../09-semaforos/index.html">← Semáforos</a><span>10 · Produtor e consumidor</span><a href="../11-deadlock/index.html">Deadlock →</a></nav>
+    <section class="intro chapter-intro"><p class="eyebrow">CAPÍTULO 10</p><h1>Produtor<br><span>e consumidor</span></h1></section>
+    <p class="chapter-objective"><strong>Objetivo deste capítulo:</strong> coordenar fila limitada entre produtor e consumidor — bloquear quando cheia ou vazia — e ver o custo de ignorar essa sincronização.</p>
+
+    <section class="practice"><div class="practice-heading"><h2>Pré-teste</h2><span class="practice-tag">ANTES</span></div>
+      <p class="practice-prompt">Fila com capacidade 3 e produtor mais rápido: o que deve acontecer?</p>
+      <textarea class="practice-field" data-practice-field="pretest-full" rows="2"></textarea>
+    </section>
+    <section class="practice"><div class="practice-heading"><h2>Exemplo trabalhado</h2></div>
+      <section class="practice-worked"><p>Buffer <strong>2</strong>, produzir itens 1 e 2 enche; produtor <strong>bloqueia</strong> até o consumidor retirar um.</p></section>
+    </section>
+    <section class="practice"><div class="practice-heading"><h2>Previsão</h2></div>
+      <p class="practice-prompt">No painel sincronizado, em que passo o produtor fica <strong>blocked</strong>?</p>
+      <textarea class="practice-field" data-practice-field="predict-block" rows="2"></textarea>
+    </section>
+
+    <section class="lab">
+      <div class="toolbar">
+        <div class="playback"><button class="primary" id="play" type="button"><span id="play-icon">▶</span><span id="play-label">Executar</span></button><button id="step" type="button">Um passo →</button><button class="reset" id="reset" type="button">↺</button></div>
+        <div class="toolbar-meta"><label for="speed">Velocidade <select id="speed"><option value="800" selected>1×</option></select></label><span class="clock">tempo <strong id="time">0</strong></span></div>
+      </div>
+      <div class="comparison">
+        <article class="scenario" id="sync-panel">
+          <div class="scenario-heading"><span class="badge" id="sync-badge">Pronto</span></div>
+          <h2>Com bloqueio</h2>
+          <p class="scenario-copy">Produtor espera fila cheia; consumidor espera fila vazia.</p>
+          <div class="buffer-strip" id="sync-buffer"></div>
+          <div class="lab-metrics"><span class="lab-metric">produzidos <strong id="sync-metrics-prod">0</strong></span><span class="lab-metric">consumidos <strong id="sync-metrics-cons">0</strong></span></div>
+          <p>Produtor: <strong id="sync-producer-state">idle</strong> · Consumidor: <strong id="sync-consumer-state">idle</strong></p>
+          <div class="scenario-footer"><span id="sync-status"></span><span id="sync-finish" class="finish-time"></span></div>
+        </article>
+        <article class="scenario" id="unsafe-panel">
+          <div class="scenario-heading"><span class="badge" id="unsafe-badge">Pronto</span></div>
+          <h2>Sem bloqueio</h2>
+          <p class="scenario-copy">Produtor ignora o limite — observe excesso.</p>
+          <div class="buffer-strip" id="unsafe-buffer"></div>
+          <div class="lab-metrics"><span class="lab-metric">produzidos <strong id="unsafe-metrics-prod">0</strong></span><span class="lab-metric">overflows <strong id="unsafe-overflow">0</strong></span></div>
+          <p>Produtor: <strong id="unsafe-producer-state">idle</strong> · Consumidor: <strong id="unsafe-consumer-state">idle</strong></p>
+          <div class="scenario-footer"><span id="unsafe-status"></span><span id="unsafe-finish" class="finish-time"></span></div>
+        </article>
+      </div>
+      <div class="experiment-controls">
+        <label for="buffer">Capacidade <strong id="buffer-value">2 slots</strong> <select id="buffer"><option value="2" selected>2</option><option value="3">3</option></select></label>
+        <label for="items">Itens totais <select id="items"><option value="6" selected>6</option><option value="8">8</option></select></label>
+      </div>
+    </section>
+    <aside class="observation"><span class="observation-mark">↳</span><div><p class="eyebrow">OBSERVE</p><p id="observation-text">Quem bloqueia?</p></div></aside>
+
+    <section class="practice"><h2>Comparar cenários</h2>
+      <textarea class="practice-field" data-practice-field="compare-sync" rows="3" placeholder="Bloqueios vs overflows."></textarea>
+    </section>
+    <section class="practice"><h2>Múltipla escolha</h2>
+      <p class="practice-prompt">Fila cheia e produtor tenta inserir com sincronização correta:</p>
+      <ul class="choice-list"><li><label><input type="radio" name="mc-ch10" value="a"> Corrompe o elemento no slot 0.</label></li><li><label><input type="radio" name="mc-ch10" value="b"> Bloqueia até haver espaço.</label></li><li><label><input type="radio" name="mc-ch10" value="c"> Descarta o item silenciosamente.</label></li><li><label><input type="radio" name="mc-ch10" value="d"> Expande o buffer automaticamente.</label></li></ul>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2"></textarea>
+      <textarea class="practice-field" data-practice-field="mc-why-not" rows="2"></textarea>
+      <details class="model-answer"><summary>Resposta <span>+</span></summary><div class="theory-content"><p><strong>B.</strong> Espera por condição com mutex + sinais ou bloqueio em semáforos.</p></div></details>
+    </section>
+    <section class="practice"><h2>Design mínimo</h2><p class="practice-prompt">Dois semáforos + mutex: quais contadores?</p><textarea class="practice-field" data-practice-field="design-sem" rows="2"></textarea></section>
+    <section class="practice"><h2>Checkpoint</h2><textarea class="practice-field" data-practice-field="checkpoint" rows="3"></textarea></section>
+    <details class="theory"><summary>Teoria <span>+</span></summary><div class="theory-content"><p>Produtor-consumidor clássico: fila limitada, espera por condição, verificar de novo ao acordar.</p></div></details>
+    <nav class="chapter-bottom-navigation"><a href="../09-semaforos/index.html">← 09</a><a href="../11-deadlock/index.html">11 →</a></nav>
+  </main>
+</body>
+</html>

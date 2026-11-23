@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interleavings · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="05-interleavings" data-practice-mc="mc-ch05">
+    <header class="page-header"><a class="brand" href="../../index.html">playground</a><span class="lesson-tag">CAPÍTULO 05</span></header>
+    <nav class="chapter-navigation"><a href="../04-espera-io/index.html">← 04</a><span>05 · Interleavings</span><a href="../06-contador-perdido/index.html">06 →</a></nav>
+    <section class="intro chapter-intro"><p class="eyebrow">CAPÍTULO 05</p><h1>Interleavings<br><span>e invariantes</span></h1></section>
+    <p class="chapter-objective"><strong>Objetivo:</strong> ver que a ordem dos passos (read/add/write) muda o resultado; testar o invariante <em>x = 2</em> após dois incrementos.</p>
+    <section class="practice"><h2>Pré-teste</h2><textarea class="practice-field" data-practice-field="pretest" rows="2"></textarea></section>
+    <section class="practice"><h2>Previsão</h2><textarea class="practice-field" data-practice-field="predict" rows="2" placeholder="Preset perdido: contador final?"></textarea></section>
+    <section class="lab">
+      <div class="experiment-controls">
+        <label>Cenário <select id="preset" data-prediction-watch data-prediction-hint="pred-hint"><option value="safe">Serializado</option><option value="lost" selected>Entrelaceado</option><option value="classic">Misto</option></select></label>
+        <button id="step" type="button">Próximo passo</button><button id="reset" type="button">Reiniciar</button>
+      </div>
+      <p>Ordem: <code id="sequence"></code></p>
+      <p>Contador compartilhado: <strong id="counter">0</strong> · <span id="invariant"></span> · <span id="done"></span></p>
+      <ul id="log"></ul>
+      <p id="pred-hint" class="practice-hint" hidden>Mude o cenário, preencha previsão, depois execute.</p>
+    </section>
+    <aside class="observation"><p>Mesmas operações, ordens diferentes → resultados diferentes (não determinismo).</p></aside>
+    <section class="practice"><h2>MC</h2><ul class="choice-list"><li><label><input type="radio" name="mc-ch05" value="b"> Safety: nada incorreto acontece — aqui, x deve ser 2.</label></li></ul><textarea class="practice-field" data-practice-field="mc-why" rows="2"></textarea></section>
+    <section class="practice"><h2>Checkpoint</h2><textarea class="practice-field" data-practice-field="checkpoint" rows="2"></textarea></section>
+    <details class="theory"><summary>Teoria +</summary><p>Interleaving = intercalação de passos de tarefas sem paralelismo obrigatório.</p></details>
+    <nav class="chapter-bottom-navigation"><a href="../04-espera-io/index.html">← 04</a><a href="../06-contador-perdido/index.html">06 →</a></nav>
+  </main>
+</body>
+</html>

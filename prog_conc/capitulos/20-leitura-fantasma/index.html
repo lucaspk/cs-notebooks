@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <title>Leitura fantasma · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <!-- Mix pedagógico completo | Bloom: Compreender–Avaliar | Lab: sim -->
+  <main data-chapter-id="20-leitura-fantasma" data-practice-mc="mc-ch20">
+    <header class="page-header">
+      <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> programação concorrente</a>
+      <span class="lesson-tag">CAPÍTULO 20</span>
+    </header>
+    <nav class="chapter-navigation" aria-label="Navegação do livro">
+      <a href="../19-leitura-nao-repetivel/index.html">← 19 · Leitura não repetível</a>
+      <span>20 · Leitura fantasma</span>
+      <a href="../21-lost-update-transacao/index.html">21 · Lost update →</a>
+    </nav>
+    <section class="intro chapter-intro"><p class="eyebrow">CAPÍTULO 20</p>
+      <h1>Leitura fantasma<br><span>phantom read</span></h1></section>
+    <p class="chapter-objective"><strong>Objetivo deste capítulo:</strong> repetir uma consulta por intervalo e detectar linhas novas confirmadas por outra transação — fantasma vs snapshot estável.</p>
+
+    <section class="practice" aria-labelledby="pretest-title">
+      <div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES DO EXPERIMENTO</span></div>
+      <p class="practice-lead">Sem abrir a teoria. Registre sua previsão.</p>
+      <textarea class="practice-field" data-practice-field="pretest-1" rows="3" placeholder="O que você espera que aconteça no roteiro?"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="worked-title">
+      <div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2><span class="practice-tag">NO PAPEL</span></div>
+      <p class="practice-worked">Consulta idade≥30: 1 linha (Ana). T2 insere Bruno e confirma. T1 consulta de novo: 2 linhas em RC; 1 em RR.</p>
+    </section>
+
+    <section class="practice" aria-labelledby="predict-title">
+      <div class="practice-heading"><h2 id="predict-title">Previsão</h2><span class="practice-tag">ANTES DO LAB</span></div>
+      <textarea class="practice-field" data-practice-field="predict-1" rows="2" placeholder="Qual anomalia aparece? Em qual passo?"></textarea>
+    </section>
+
+    <section class="lab" aria-label="Laboratório de transações">
+      <div class="toolbar"><div class="playback">
+      <button class="primary" id="play" type="button"><span id="play-icon" aria-hidden="true">▶</span><span id="play-label">Executar</span></button>
+      <button id="step" type="button">Um passo <span aria-hidden="true">→</span></button>
+      <button class="reset" id="reset" type="button" aria-label="Reiniciar"><span aria-hidden="true">↺</span></button>
+    </div><div class="toolbar-meta"><label class="speed-label" for="speed">Velocidade
+      <select id="speed"><option value="1600">0,5×</option><option value="800" selected>1×</option><option value="400">2×</option></select></label>
+      <span class="clock"><span class="clock-dot" aria-hidden="true"></span> passo <strong id="time">0</strong></span></div></div>
+      <div class="lab-metrics"><span class="lab-metric">Contagem consulta <strong id="query-counts">—</strong></span>
+        <span class="lab-metric" id="anomaly-flag">—</span></div><ul id="rows-committed"></ul>
+        <ul class="op-log" id="op-log"></ul><p id="status" class="experiment-note"></p>
+      <div class="experiment-controls"><label class="quantum-control" for="isolation"><span>Isolamento</span>
+            <select id="isolation"><option value="read-committed">READ COMMITTED</option><option value="repeatable-read">REPEATABLE READ</option></select></label></div>
+      <p class="experiment-note">Mudar o controle reinicia o roteiro.</p>
+    </section>
+
+    <aside class="observation" aria-label="Dica"><span class="observation-mark" aria-hidden="true">↳</span>
+      <div><p class="eyebrow" id="observation-label">EXPERIMENTE</p>
+      <p id="observation-text">Use <strong>Um passo</strong> e acompanhe o registro de operações.</p></div></aside>
+
+    <section class="practice" aria-labelledby="compare-title">
+      <div class="practice-heading"><h2 id="compare-title">Comparar cenários</h2><span class="practice-tag">ANALISAR</span></div>
+      <textarea class="practice-field" data-practice-field="compare-1" rows="3" placeholder="Compare os dois modos/isolamentos do seletor."></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="mc-title">
+      <div class="practice-heading"><h2 id="mc-title">Múltipla escolha + justificativa</h2><span class="practice-tag">CHECKPOINT</span></div>
+      <p class="practice-prompt">A mesma consulta retorna 1 linha e depois 2 sem T1 alterar nada. Nome?</p>
+      <ul class="choice-list" role="radiogroup" aria-labelledby="mc-title">
+        <li><label><input type="radio" name="mc-ch20" value="a"> Termo errado — não envolve transações.</label></li>
+        <li><label><input type="radio" name="mc-ch20" value="b"> Descrição correta da anomalia / nível.</label></li>
+        <li><label><input type="radio" name="mc-ch20" value="c"> Confunde com condição de corrida em memória.</label></li>
+        <li><label><input type="radio" name="mc-ch20" value="d"> Confunde com deadlock.</label></li>
+      </ul>
+      <textarea class="practice-field" data-practice-field="mc-why" rows="3" placeholder="Por que escolhi essa opção?"></textarea>
+      <details class="model-answer"><summary>Resposta sugerida <span aria-hidden="true">+</span></summary>
+        <div class="theory-content"><p><strong>B.</strong> Leitura fantasma.</p></div></details>
+    </section>
+
+    <section class="practice" aria-labelledby="tradeoff-title">
+      <div class="practice-heading"><h2 id="tradeoff-title">Prós, contras e limites</h2></div>
+      <textarea class="practice-field" data-practice-field="tradeoff-1" rows="3" placeholder="Custo de prevenir esta anomalia (locks, aborts, latência)…"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="context-title">
+      <div class="practice-heading"><h2 id="context-title">Contexto real</h2></div>
+      <textarea class="practice-field" data-practice-field="context-1" rows="3" placeholder="Onde isso aparece em API/ORM/banco que você usa?"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="design-title">
+      <div class="practice-heading"><h2 id="design-title">Design mínimo</h2></div>
+      <textarea class="practice-field" data-practice-field="design-1" rows="3" placeholder="Qual nível ou trava você escolheria para este caso?"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="checkpoint-title">
+      <div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2></div>
+      <textarea class="practice-field" data-practice-field="checkpoint-1" rows="3" placeholder="Defina a anomalia em uma frase e como o lab a mostrou."></textarea>
+    </section>
+
+    <details class="theory"><summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary>
+      <div class="theory-content"><p><strong>Phantom read:</strong> o conjunto de linhas que satisfaz um filtro muda entre leituras. RR (snapshot) estabiliza o conjunto visto por T1.</p></div></details>
+
+    <nav class="chapter-bottom-navigation" aria-label="Fim do capítulo">
+      <a href="../21-lost-update-transacao/index.html">Próximo capítulo →</a>
+      <a href="../../index.html">← Sumário</a>
+    </nav>
+  </main>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <title>Semáforos · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <!-- Mix: pré-teste, exemplo, previsão, lab, comparação, MC, prós/contras, contexto, design, checkpoint | Bloom: Compreender–Avaliar -->
+  <main data-chapter-id="09-semaforos" data-practice-mc="mc-ch09">
+    <header class="page-header">
+      <a class="brand" href="../../index.html" aria-label="Playground, sumário"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> programação concorrente</a>
+      <span class="lesson-tag">CAPÍTULO 09</span>
+    </header>
+    <nav class="chapter-navigation" aria-label="Navegação do livro">
+      <a href="../08-mutex-atomicidade/index.html">← Mutex e atomicidade</a>
+      <span>09 · Semáforos</span>
+      <a href="../10-produtor-consumidor/index.html">Produtor e consumidor →</a>
+    </nav>
+    <section class="intro chapter-intro" aria-labelledby="page-title">
+      <p class="eyebrow">CAPÍTULO 09</p>
+      <h1 id="page-title">Semáforos<br><span>limitar acessos</span></h1>
+    </section>
+    <p class="chapter-objective"><strong>Objetivo deste capítulo:</strong> distinguir semáforo de mutex — limitar quantas tarefas entram num recurso ao mesmo tempo (não só “uma por vez”) — e prever fila versus pico de ocupação.</p>
+
+    <section class="practice" aria-labelledby="pretest-title">
+      <div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES DO EXPERIMENTO</span></div>
+      <p class="practice-lead">Sem abrir a teoria.</p>
+      <div class="practice-stack">
+        <div>
+          <p class="practice-prompt">1. Semáforo com contagem <strong>2</strong> e <strong>4</strong> tarefas: quantas podem estar dentro do recurso no mesmo instante?</p>
+          <textarea class="practice-field" data-practice-field="pretest-peak" rows="2" placeholder="Número máximo e o que acontece com as outras."></textarea>
+        </div>
+        <div>
+          <p class="practice-prompt">2. Mutex é um semáforo especial?</p>
+          <textarea class="practice-field" data-practice-field="pretest-mutex" rows="2" placeholder="Sim/não e em que sentido."></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section class="practice" aria-labelledby="worked-title">
+      <div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2><span class="practice-tag">CAPACIDADE 2</span></div>
+      <section class="practice-worked" aria-label="Passos do exemplo">
+        <p>Quatro tarefas <strong>A–D</strong>, <strong>2 blocos</strong> cada dentro do recurso, semáforo <strong>(2)</strong>:</p>
+        <ol>
+          <li>Passo 1: <strong>A</strong> e <strong>B</strong> entram; <strong>C</strong> e <strong>D</strong> aguardam.</li>
+          <li>Passo 2: todos dentro avançam 1 bloco; fila continua.</li>
+          <li>Quando <strong>A</strong> termina, <strong>C</strong> entra — no máximo <strong>2</strong> dentro a cada instante.</li>
+        </ol>
+      </section>
+    </section>
+
+    <section class="practice" aria-labelledby="predict-title">
+      <div class="practice-heading"><h2 id="predict-title">Previsão no experimento</h2><span class="practice-tag">ANTES DO PRIMEIRO PASSO</span></div>
+      <p class="practice-prompt">No painel <strong>Com semáforo (2)</strong>, quantas tarefas estão dentro no passo 1? E no painel <strong>Sem limite</strong>?</p>
+      <textarea class="practice-field" data-practice-field="predict-inside" rows="2" placeholder="Ex.: limitado 2; sem limite 4."></textarea>
+    </section>
+
+    <section class="lab" aria-label="Simulação de semáforo">
+      <div class="toolbar">
+        <div class="playback">
+          <button class="primary" id="play" type="button"><span id="play-icon" aria-hidden="true">▶</span><span id="play-label">Executar</span></button>
+          <button id="step" type="button">Um passo <span aria-hidden="true">→</span></button>
+          <button class="reset" id="reset" type="button" aria-label="Reiniciar"><span aria-hidden="true">↺</span></button>
+        </div>
+        <div class="toolbar-meta">
+          <label class="speed-label" for="speed">Velocidade <select id="speed"><option value="1600">0,5×</option><option value="800" selected>1×</option><option value="400">2×</option></select></label>
+          <span class="clock"><span class="clock-dot" aria-hidden="true"></span> tempo <strong id="time">0</strong></span>
+        </div>
+      </div>
+      <div class="comparison">
+        <article class="scenario" id="limited-panel">
+          <div class="scenario-heading"><span class="mode-icon" aria-hidden="true">②</span><span class="hardware">SEMÁFORO (2)</span><span class="badge" id="limited-badge">Pronto</span></div>
+          <h2>Com limite</h2>
+          <p class="scenario-copy">No máximo duas tarefas dentro do recurso compartilhado.</p>
+          <div class="lab-metrics"><span class="lab-metric">dentro <strong id="limited-inside">0/2</strong></span><span class="lab-metric">fila <strong id="limited-waiting">0</strong></span><span class="lab-metric">pico <strong id="limited-peak">0</strong></span></div>
+          <div class="tasks" id="limited-tasks"></div>
+          <div class="scenario-footer"><span id="limited-status">Pronto.</span><span class="finish-time" id="limited-finish"></span></div>
+        </article>
+        <article class="scenario" id="unlimited-panel">
+          <div class="scenario-heading"><span class="mode-icon" aria-hidden="true">∞</span><span class="hardware">SEM LIMITE</span><span class="badge" id="unlimited-badge">Pronto</span></div>
+          <h2>Sem semáforo</h2>
+          <p class="scenario-copy">Todas podem entrar — compara o pico de ocupação.</p>
+          <div class="lab-metrics"><span class="lab-metric">dentro <strong id="unlimited-inside">0/4</strong></span><span class="lab-metric">fila <strong id="unlimited-waiting">0</strong></span><span class="lab-metric">pico <strong id="unlimited-peak">0</strong></span></div>
+          <div class="tasks" id="unlimited-tasks"></div>
+          <div class="scenario-footer"><span id="unlimited-status">Pronto.</span><span class="finish-time" id="unlimited-finish"></span></div>
+        </article>
+      </div>
+      <div class="experiment-controls">
+        <label class="work-control" for="work"><span>Trabalho no recurso <strong id="work-value">2 blocos</strong></span><input id="work" type="range" min="2" max="4" value="2"></label>
+        <label class="quantum-control" for="capacity"><span>Capacidade do semáforo</span><select id="capacity" data-prediction-watch data-prediction-hint="prediction-cap-hint"><option value="1">1 (mutex)</option><option value="2" selected>2</option><option value="3">3</option></select></label>
+      </div>
+      <p id="prediction-cap-hint" class="practice-hint" hidden>Mude a capacidade, registre a previsão abaixo e execute de novo.</p>
+      <p class="experiment-note">Ao mudar trabalho ou capacidade, a simulação recomeça.</p>
+    </section>
+
+    <aside class="observation" aria-label="Dica"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow">EXPERIMENTE</p><p id="observation-text">Use <strong>Um passo</strong> e compare ocupação versus fila.</p></div></aside>
+
+    <section class="practice" aria-labelledby="compare-title">
+      <div class="practice-heading"><h2 id="compare-title">Comparar cenários</h2><span class="practice-tag">ANALISAR</span></div>
+      <div class="compare-grid">
+        <div><p class="practice-prompt">O que permanece igual nos dois painéis?</p><textarea class="practice-field" data-practice-field="compare-same" rows="3"></textarea></div>
+        <div><p class="practice-prompt">O que muda no pico dentro do recurso?</p><textarea class="practice-field" data-practice-field="compare-diff" rows="3"></textarea></div>
+      </div>
+    </section>
+
+    <section class="practice" aria-labelledby="mc-title">
+      <div class="practice-heading"><h2 id="mc-title">Múltipla escolha + justificativa</h2><span class="practice-tag">CHECKPOINT</span></div>
+      <p class="practice-prompt">Piscina com <strong>30 vagas</strong>, semáforo <strong>(30)</strong>. O que ele garante?</p>
+      <ul class="choice-list" role="radiogroup">
+        <li><label><input type="radio" name="mc-ch09" value="a"> Atomicidade de operações compostas em qualquer ordem.</label></li>
+        <li><label><input type="radio" name="mc-ch09" value="b"> No máximo 30 banhistas ao mesmo tempo na piscina.</label></li>
+        <li><label><input type="radio" name="mc-ch09" value="c"> Ordem FIFO estrita entre todas as threads do processo.</label></li>
+        <li><label><input type="radio" name="mc-ch09" value="d"> Que nunca haverá fila de espera.</label></li>
+      </ul>
+      <p class="practice-prompt">Por que escolhi essa opção?</p>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2"></textarea>
+      <p class="practice-prompt">Por que não as outras?</p>
+      <textarea class="practice-field" data-practice-field="mc-why-not" rows="3"></textarea>
+      <details class="model-answer"><summary>Ver resposta sugerida <span aria-hidden="true">+</span></summary><div class="theory-content"><p><strong>B.</strong> Contador de vagas. <strong>Não A:</strong> composto precisa de mutex ou coordenação extra. <strong>Não C/D:</strong> semáforo não define justiça global nem elimina fila.</p></div></details>
+    </section>
+
+    <section class="practice" aria-labelledby="tradeoff-title">
+      <div class="practice-heading"><h2 id="tradeoff-title">Prós, contras e limites</h2></div>
+      <table class="tradeoff-table"><thead><tr><th>Ferramenta</th><th>Quando ajuda</th><th>Limite</th></tr></thead><tbody><tr><th>Semáforo (N&gt;1)</th><td>Recursos com várias unidades (conexões, vagas).</td><td>Não torna sequências compostas atômicas sozinho.</td></tr><tr><th>Mutex (N=1)</th><td>Seção crítica única.</td><td>Subutiliza se o recurso aguenta paralelismo.</td></tr></tbody></table>
+      <p class="practice-prompt">Caso em que semáforo (3) é melhor que mutex:</p>
+      <textarea class="practice-field" data-practice-field="tradeoff-case" rows="2"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="design-title">
+      <div class="practice-heading"><h2 id="design-title">Design mínimo</h2></div>
+      <p class="practice-prompt">API com <strong>acquire()</strong> / <strong>release()</strong> para garagem de 5 vagas e 20 carros: o que o contador representa?</p>
+      <textarea class="practice-field" data-practice-field="design-count" rows="2"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="checkpoint-title">
+      <div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2></div>
+      <textarea class="practice-field" data-practice-field="checkpoint-1" rows="2" placeholder="Semáforo (1) vs mutex em uma frase."></textarea>
+      <textarea class="practice-field" data-practice-field="checkpoint-2" rows="2" placeholder="Quando aparece fila neste experimento?"></textarea>
+    </section>
+
+    <details class="theory"><summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary><div class="theory-content"><p><strong>Semáforo:</strong> contador de permissões; <code>acquire</code> decrementa (bloqueia se zero), <code>release</code> incrementa.</p><p><strong>Mutex:</strong> semáforo binário usado para exclusão mútua, não para contagem de vagas múltiplas.</p></div></details>
+    <nav class="chapter-bottom-navigation"><a href="../08-mutex-atomicidade/index.html">← Mutex</a><a href="../10-produtor-consumidor/index.html">Capítulo 10 →</a></nav>
+  </main>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mutex e atomicidade · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="08-mutex-atomicidade" data-practice-mc="mc-ch08">
+    <header class="page-header"><a class="brand" href="../../index.html">playground</a><span class="lesson-tag">CAPÍTULO 08</span></header>
+    <nav class="chapter-navigation"><a href="../07-toctou/index.html">← 07</a><span>08 · Mutex</span><a href="../09-semaforos/index.html">Semáforos →</a></nav>
+    <section class="intro chapter-intro"><p class="eyebrow">CAPÍTULO 08</p><h1>Mutex<br><span>e atomicidade</span></h1></section>
+    <p class="chapter-objective"><strong>Objetivo:</strong> corrigir o contador com exclusão mútua ou incremento atômico; ver seção crítica e operação indivisível.</p>
+    <section class="practice"><h2>Pré-teste</h2><textarea class="practice-field" data-practice-field="pretest" rows="2"></textarea></section>
+    <section class="practice"><h2>Previsão</h2><textarea class="practice-field" data-practice-field="predict" rows="2"></textarea></section>
+    <section class="lab">
+      <label>Proteção <select id="mode" data-prediction-watch data-prediction-hint="pred-hint"><option value="none">Nenhuma</option><option value="mutex" selected>Mutex</option><option value="atomic">Atômico</option></select></label>
+      <p>Contador: <strong id="counter"></strong></p>
+      <p id="verdict"></p>
+      <table><thead><tr><th>Quem</th><th>Passo</th><th>Contador</th><th>Lock</th></tr></thead><tbody id="trace"></tbody></table>
+      <p id="pred-hint" class="practice-hint" hidden>Preveja o contador antes de trocar o modo.</p>
+    </section>
+    <aside class="observation"><p>Mutex serializa a seção crítica; atômico colapsa read-add-write em um passo.</p></aside>
+    <section class="practice"><h2>Prós / contras</h2><textarea class="practice-field" data-practice-field="tradeoff" rows="3"></textarea></section>
+    <section class="practice"><h2>MC</h2><ul class="choice-list"><li><label><input type="radio" name="mc-ch08" value="b"> Mutex protege a operação composta inteira, não só cada leitura isolada.</label></li></ul><textarea class="practice-field" data-practice-field="mc-why" rows="2"></textarea></section>
+    <section class="practice"><h2>Checkpoint</h2><textarea class="practice-field" data-practice-field="checkpoint" rows="2"></textarea></section>
+    <details class="theory"><summary>Teoria +</summary><p>Exclusão mútua = no máximo um emissor na seção crítica; atomicidade = efeito observado de uma só vez.</p></details>
+    <nav class="chapter-bottom-navigation"><a href="../07-toctou/index.html">← 07</a><a href="../09-semaforos/index.html">09 →</a></nav>
+  </main>
+</body>
+</html>
