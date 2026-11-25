@@ -1,0 +1,58 @@
+[
+  [
+    "01",
+    "01-quatro-leituras-mesmo-problema",
+    "COMECE AQUI",
+    "Quatro leituras",
+    "Mesmo problema, estilos diferentes."
+  ],
+  [
+    "02",
+    "02-mutacao-vs-valor",
+    "",
+    "Mutação vs valor",
+    "Aliasing e cópia."
+  ],
+  [
+    "03",
+    "03-funcoes-primeira-classe",
+    "",
+    "Funções de primeira classe",
+    "map / pipeline."
+  ],
+  [
+    "04",
+    "04-encapsulamento-mensagem",
+    "",
+    "Encapsulamento",
+    "Mensagens e invariantes."
+  ],
+  [
+    "05",
+    "05-composicao-heranca",
+    "",
+    "Composição vs herança",
+    "Delegar vs estender."
+  ],
+  [
+    "06",
+    "06-tipos-estatico-dinamico",
+    "",
+    "Tipos estático/dinâmico",
+    "Checagem cedo vs tarde."
+  ],
+  [
+    "07",
+    "07-concorrencia-mensagem-estado",
+    "",
+    "Concorrência",
+    "Mensagem vs memória compartilhada."
+  ],
+  [
+    "08",
+    "08-escolher-paradigma",
+    "",
+    "Escolher paradigma",
+    "Trade-offs por contexto."
+  ]
+]

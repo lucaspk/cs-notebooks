@@ -55,7 +55,7 @@ function copyTree(src, dst) {
     else {
       const raw = fs.readFileSync(from, 'utf8');
       const ext = path.extname(name);
-      const out = ext === '.mjs' || ext === '.md' || ext === '.js' || ext === '.html' ? replaceAll(raw) : raw;
+      const out = ext === '.mjs' || ext === '.md' || ext === '.js' || (ext === '.html' || ext === '.json') ? replaceAll(raw) : raw;
       fs.writeFileSync(to, out);
     }
   }
@@ -63,10 +63,6 @@ function copyTree(src, dst) {
 
 copyTree(templateRoot, dest);
 
-const stylesSrc = path.join(repoRoot, 'prog_conc', 'styles.css');
-if (fs.existsSync(stylesSrc)) {
-  fs.copyFileSync(stylesSrc, path.join(dest, 'styles.css'));
-}
 
 try {
   maintainBook(slug, { strict: false });

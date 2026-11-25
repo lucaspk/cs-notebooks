@@ -1,3 +1,4 @@
+import { readChapterMap } from './build-book-index.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -15,16 +16,9 @@ const GOLD_DEFAULTS = {
 };
 
 export function parsePlannedSlugs(bookSlug, { repo = defaultRepo } = {}) {
-  const script = path.join(repo, bookSlug, 'capitulos', '_tools', 'build-index.mjs');
-  if (!fs.existsSync(script)) return [];
-  const src = fs.readFileSync(script, 'utf8');
-  const slugs = [];
-  const re = /\[\s*'(\d{2})'\s*,\s*'([^']+)'/g;
-  let m;
-  while ((m = re.exec(src)) !== null) {
-    slugs.push({ num: m[1], slug: m[2] });
-  }
-  return slugs;
+  const root = path.join(repo, bookSlug);
+  if (!fs.existsSync(path.join(root, 'capitulos/MAPEAMENTO.md'))) return [];
+  return readChapterMap(root).map(({ num, slug }) => ({ num, slug }));
 }
 
 export function bookPublicationStats(bookSlug, { repo = defaultRepo } = {}) {

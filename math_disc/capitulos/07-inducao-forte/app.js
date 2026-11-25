@@ -1,1 +1,1 @@
-'use strict';document.getElementById('lab-host').innerHTML='<pre id=out></pre>';document.getElementById('out').textContent=String(MathLab.step(5));
+'use strict';document.getElementById('lab-host').innerHTML='<p class=mini-lab-case>Entrada fixa: n = 5. Observe o resultado calculado pelo modelo do passo indutivo.</p><pre id=out role=status aria-live=polite></pre>';document.getElementById('out').textContent=String(MathLab.step(5));

@@ -1,1 +1,1 @@
-'use strict';document.getElementById('lab-host').innerHTML='<pre id=out></pre>';document.getElementById('out').textContent=JSON.stringify(MathLab.quant([1,2,3,4],x=>x>0));
+'use strict';document.getElementById('lab-host').innerHTML='<p class=mini-lab-case>Domínio: {1, 2, 3, 4}. Predicado: x > 0. Compare as respostas dos quantificadores universal e existencial.</p><pre id=out role=status aria-live=polite></pre>';document.getElementById('out').textContent=JSON.stringify(MathLab.quant([1,2,3,4],x=>x>0));

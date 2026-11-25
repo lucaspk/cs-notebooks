@@ -1,1 +1,1 @@
-'use strict';document.getElementById('lab-host').innerHTML='n <input id=n value=10> <pre id=out></pre>';const $=id=>document.getElementById(id);const R=()=>$('out').textContent=String(MathLab.sum($('n').value));$('n').oninput=R;R();
+'use strict';document.getElementById('lab-host').innerHTML='<label class="mini-lab-field">Limite n<input id=n type=number min=0 value=10></label> <pre id=out role=status aria-live=polite></pre>';const $=id=>document.getElementById(id);const R=()=>$('out').textContent=String(MathLab.sum($('n').value));$('n').oninput=R;R();

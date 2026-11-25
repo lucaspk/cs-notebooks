@@ -1,6 +1,6 @@
 'use strict';
 
-const $ = (id) => document.getElementById(id);
+const $ = PlaygroundLab.$;
 const HOSTS = ArpLab.createSubnet([
   { id: 'A', hostOctet: 1, mac: 'aa:11:00:00:00:01', label: 'Host A' },
   { id: 'B', hostOctet: 2, mac: 'aa:11:00:00:00:02', label: 'Host B' },
@@ -9,7 +9,7 @@ const HOSTS = ArpLab.createSubnet([
 
 let cache = {};
 let plan = ArpLab.buildArpPlan(HOSTS, 'A', '10.0.0.2', cache);
-let time = 0;
+let stepper;
 
 function destIp() {
   const v = $('dest-ip').value;
@@ -28,13 +28,10 @@ function renderCache() {
 function rebuild(resetCache) {
   if (resetCache) cache = {};
   plan = ArpLab.buildArpPlan(HOSTS, 'A', destIp(), cache);
-  time = 0;
-  render();
+  stepper.reset(false);
 }
 
-function render() {
-  const view = ArpLab.snapshot(plan, time);
-  $('time').textContent = String(view.time);
+function paint(view) {
   $('step-list').innerHTML = view.steps
     .map((s) => {
       const tag = s.broadcast ? ' · broadcast' : '';
@@ -59,12 +56,13 @@ function render() {
   }
 }
 
-$('step').addEventListener('click', () => {
-  if (time < plan.steps.length) time += 1;
-  render();
+stepper = PlaygroundLab.mountStepper({
+  stepId: 'step', resetId: 'reset', clockId: 'time',
+  getPlan: () => plan, snapshot: ArpLab.snapshot, paint,
+  onReset: () => {
+    cache = {};
+    plan = ArpLab.buildArpPlan(HOSTS, 'A', destIp(), cache);
+  },
 });
-$('reset').addEventListener('click', () => rebuild(true));
 $('dest-ip').addEventListener('change', () => rebuild(false));
 $('clear-cache').addEventListener('click', () => rebuild(true));
-
-rebuild(true);

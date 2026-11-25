@@ -1,7 +1,7 @@
 # Plano — deduplicação shared (`_shared/`, `lab-kit`, partials)
 
-**Status:** Fase 1 implementada em 2026-11-25; testes automatizados verdes; smoke em navegador pendente. Fases 2–5 ainda não implementadas.  
-**Público:** agente que vai implementar a melhoria  
+**Status:** Infra das fases 1–5 implementada em 2026-11-25; revisão estrutural de layout dos 61 capítulos concluída. 107 testes verdes e manutenção dos cinco livros verde. Aceite visual no navegador e Pages ainda pendente. Sem PR/push nesta sessão.
+**Público:** agente que mantém a infraestrutura
 **Contexto:** análise 80/20 de duplicação em ~60 capítulos e 5 livros — ver conversa que originou este arquivo.
 
 ## Objetivo
@@ -15,7 +15,7 @@ Reduzir cópias de `practice.js`, CSS, wiring de labs e esqueleto HTML **sem** q
 | Gabarito HTML a partir de markdown | `_tools/gabarito-lib.mjs`, `finalize-chapter.mjs`, `maintain-book.mjs` |
 | Molde pedagógico | [README.md § Molde](README.md#molde-pedagógico-todos-os-livros-e-capítulos) |
 | Novo livro | `_template-livro/`, `_tools/new-livro.mjs` |
-| Persistência de campos/MC (hoje por livro) | `<livro>/practice.js` (6 cópias quase idênticas) |
+| Persistência de campos/MC | `_shared/practice.js`; cinco pilotos migrados, scripts locais antigos mantidos durante transição |
 
 ## Restrições (obrigatórias)
 
@@ -140,7 +140,7 @@ Cada fase = PR revisável; testes verdes antes de merge.
 
 **Critérios de aceite**
 
-- [ ] Novo livro via `new-livro.mjs` não contém cópia completa de `practice.js`.
+- [x] Novo livro via `new-livro.mjs` não contém cópia completa de `practice.js`.
 - [ ] Piloto: campos e MC persistem após reload.
 - [ ] `prog_conc` cap. 01: migração legacy ainda funciona se testada manualmente.
 
@@ -168,8 +168,8 @@ Cada fase = PR revisável; testes verdes antes de merge.
 
 **Critérios de aceite**
 
-- [ ] `node --test` dos dois caps piloto verdes.
-- [ ] `app.js` piloto reduzido essencialmente a config + chamadas ao kit.
+- [x] `node --test` dos dois caps piloto verdes.
+- [x] `app.js` piloto reduzido essencialmente a config + chamadas ao kit.
 - [ ] Comportamento do lab idêntico ao antes (smoke manual).
 
 ### Fase 4 — partials + scaffold (opcional mas alto valor para caps novos)
@@ -182,7 +182,7 @@ Cada fase = PR revisável; testes verdes antes de merge.
 **Critérios de aceite**
 
 - [ ] Agente consegue gerar capítulo 01 mínimo a partir do scaffold alinhado ao [molde](README.md#molde-pedagógico-todos-os-livros-e-capítulos).
-- [ ] `finalize-chapter` continua passando.
+- [x] `finalize-chapter` continua passando.
 
 ### Fase 5 — `build-book-index.mjs` + política `lib/`
 
@@ -194,8 +194,8 @@ Cada fase = PR revisável; testes verdes antes de merge.
 
 **Critérios de aceite**
 
-- [ ] `node` rebuild de índice para os 5 livros sem diff inesperado (ou diff só de links se intencional).
-- [ ] README/AGENTS apontam para `plan.md` como referência de infra.
+- [x] `node` rebuild de índice para os 5 livros sem diff inesperado (ou diff só de links se intencional).
+- [x] README/AGENTS apontam para `plan.md` como referência de infra.
 
 ## Migração gradual dos capítulos existentes
 
@@ -249,3 +249,41 @@ Smoke browser: abrir capítulo piloto via `file://` (com `local-links.js` se nec
 ---
 
 *Documento gerado para handoff entre agentes. Origem: auditoria 80/20 de duplicação em `cs-notebooks`.*
+## Entrega — 2026-11-25
+- Fase 1: shared practice e pilotos cap. 01 dos cinco livros; scripts antigos preservados para migração gradual.
+- Fase 2: base completa em _shared/playground.css; styles.css locais são imports + deltas. Novos livros copiam apenas o import.
+- Fase 3: lab-kit e pilotos vv_eng/01 e comp_net/07; testes exercitam os controles, cache e reset.
+- Fase 4: quatro partials documentados para autoria manual; scaffold executável opcional não necessário.
+- Fase 5: gerador único com wrappers de três linhas. MAPEAMENTO define sequência; index-metadata.json guarda textos editoriais; index-template.html preserva layouts existentes. README de cada livro continua fonte pedagógica; metadados visuais explícitos evitam extrair informações de prosa livre.
+- Correção adicional: sincronização de gabarito idempotente, sem acumular indentação.
+- Verificação: maintain-all, testes dos cinco livros e shared, teste de rebuild idêntico e resolução de recursos, geração de livro temporário (removido depois).
+- Smoke visual via file:// tentado, mas o Chrome encerrou antes de produzir DOM. Não foi validado no Pages.
+
+## Revisão geral de laboratórios — 2026-11-25
+
+Revisão de código e estrutura dos 61 capítulos publicados, autorizada pelo usuário. Esta revisão não equivale a inspeção visual em navegador.
+
+| Livro | Capítulos revisados | Resultado |
+| --- | --- | --- |
+| comp_net | 01–08 (8) | Layouts próprios preservados; margens compartilhadas para métricas e tabelas, rodapé de controles ajustado |
+| prog_conc | 01–29 (29) | Toolbar/comparações preservadas; métricas, listas e logs diretos recebem margens compartilhadas |
+| paradigms | 01–08 (8) | Cap. 01 preservado; caps. 02–08 recebem espaçamento de compact-lab para controles soltos |
+| math_disc | 01–09 (9) | Nove mini-labs com cabeçalho, padding, controles e resultado; exemplos fixos apresentam a entrada |
+| vv_eng | 01–07 (7) | Cap. 01 com cartões de evidência; outros seis com mini-lab compartilhado, campos rotulados e saída destacada |
+
+### Concluído e verificado
+- [x] CSS compartilhado de mini-lab: entradas, checkboxes, saída e adaptação móvel.
+- [x] Removida instrução para alterar controles nos exemplos que não possuem controles.
+- [x] Rótulos de campos em pirâmide, AAA, invariantes, conectivos e indução.
+- [x] Resultado dos mini-labs anunciado por role=status/aria-live.
+- [x] Manutenção dos cinco livros e 107 testes automatizados verdes.
+- [x] Geração de livro sem cópia de practice.js, rebuild idêntico de índices e testes de controles dos pilotos (entrega anterior).
+
+### Pendências e limites
+- [ ] Inspeção visual em navegador, desktop e móvel, cobrindo mini-lab, compact-lab, redes, concorrência e laboratório de evidências. Chrome encerrou no ambiente na tentativa anterior.
+- [ ] Smoke file:// com persistência real após reload; testes atuais usam DOM/storage simulados.
+- [ ] Smoke no GitHub Pages após publicação.
+- [ ] Commit/PR/push, quando solicitado.
+- Migração dos scripts practice.js e wiring de todos os capítulos é gradual; só cinco pilotos de persistência e dois de lab-kit foram migrados. Não é requisito migrar todo o acervo para concluir a infraestrutura.
+- Snippets manuais foram entregues; scaffold executável permanece opcional e não foi implementado.
+- Labs com entradas fixas continuam exemplos demonstrativos. Transformá-los em experimentos mais ricos é débito pedagógico independente desta correção de layout.

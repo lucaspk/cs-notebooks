@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <base href="./">
+  <title>Redes de computadores · Livro interativo</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="../local-links.js" defer></script>
+</head>
+<body>
+  <main class="book-index">
+    <header class="page-header">
+      <a class="brand" href="../index.html" aria-label="Playground, sumário geral"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> redes de computadores</a>
+      <span class="lesson-tag">LIVRO INTERATIVO · {{publishedCount}}/{{plannedCount}} CAPÍTULOS</span>
+    </header>
+    <section class="intro" aria-labelledby="page-title">
+      <h1 id="page-title">MENOS LEITURA.<br><span>MAIS PACOTE NO FIO.</span></h1>
+    </section>
+    <section class="contents" aria-labelledby="contents-title">
+      <div class="contents-heading"><h2 id="contents-title">Sumário</h2><span>{{publishedCount}} publicados · {{plannedCount}} no roteiro</span></div>
+      <ol class="chapter-list">
+{{items}}
+      </ol>
+    </section>
+  </main>
+</body>
+</html>

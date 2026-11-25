@@ -237,3 +237,10 @@ O molde pedagógico **não se repete** em cada README de livro; basta referencia
 10. Teoria / aprofundar recolhidos
 
 No `<main>`: `data-chapter-id="NN-slug"` e, se houver MC, `data-practice-mc="mc-chNN"`.
+
+## Infra compartilhada
+Referência de arquitetura: [plan.md](plan.md). Capítulos novos usam main[data-book-slug] e ../../../_shared/practice.js; styles.css do livro importa ../_shared/playground.css e contém apenas o restante da cascata e estilos próprios.
+Use ../../../_shared/lab-kit.js antes de app.js para wiring de toggles e steppers. Exemplos: vv_eng/01-falha-reproduzivel e comp_net/07-arp-primeiro-salto.
+Lógica de domínio compartilhada vai primeiro para lib/ (IIFE + export Node), com testes; carregue lib antes de model.js, sem require no browser.
+Autoria: snippets em _template-livro/partials/; curar conteúdo antes de publicar.
+O sumário lê capitulos/MAPEAMENTO.md, com apresentação em capitulos/index-template.html e textos em capitulos/index-metadata.json. Não acrescente arrays ao wrapper build-index.mjs.

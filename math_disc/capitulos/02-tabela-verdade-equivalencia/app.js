@@ -1,1 +1,1 @@
-'use strict';document.getElementById('lab-host').innerHTML='<pre id=out></pre>';const t=MathLab.rows(MathLab.implies);document.getElementById('out').textContent=t.map(r=>JSON.stringify(r)).join('\n');
+'use strict';document.getElementById('lab-host').innerHTML='<p class=mini-lab-case>Caso: implicação p → q nas quatro combinações de valores de p e q.</p><pre id=out role=status aria-live=polite></pre>';const t=MathLab.rows(MathLab.implies);document.getElementById('out').textContent=t.map(r=>JSON.stringify(r)).join('\n');

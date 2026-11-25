@@ -1,1 +1,1 @@
-'use strict';document.getElementById('lab-host').innerHTML='<pre id=out></pre>';document.getElementById('out').textContent=String(MathLab.passwords(4,26));
+'use strict';document.getElementById('lab-host').innerHTML='<p class=mini-lab-case>Caso: palavras de 4 posições, com 26 letras por posição e repetição permitida.</p><pre id=out role=status aria-live=polite></pre>';document.getElementById('out').textContent=String(MathLab.passwords(4,26));

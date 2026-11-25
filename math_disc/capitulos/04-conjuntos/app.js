@@ -1,1 +1,1 @@
-'use strict';document.getElementById('lab-host').innerHTML='<pre id=out></pre>';document.getElementById('out').textContent=JSON.stringify(MathLab.ops([1,2,3],[2,3,4]));
+'use strict';document.getElementById('lab-host').innerHTML='<p class=mini-lab-case>Conjuntos de entrada: A = {1, 2, 3} e B = {2, 3, 4}. Observe união e interseção.</p><pre id=out role=status aria-live=polite></pre>';document.getElementById('out').textContent=JSON.stringify(MathLab.ops([1,2,3],[2,3,4]));

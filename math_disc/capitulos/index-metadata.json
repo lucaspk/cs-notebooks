@@ -1,0 +1,65 @@
+[
+  [
+    "01",
+    "01-proposicoes-conectivos",
+    "COMECE AQUI",
+    "Proposições e conectivos",
+    "AND, OR, IMP."
+  ],
+  [
+    "02",
+    "02-tabela-verdade-equivalencia",
+    "",
+    "Tabela-verdade",
+    "Implicação."
+  ],
+  [
+    "03",
+    "03-quantificadores",
+    "",
+    "Quantificadores",
+    "∀ e ∃."
+  ],
+  [
+    "04",
+    "04-conjuntos",
+    "",
+    "Conjuntos",
+    "União e interseção."
+  ],
+  [
+    "05",
+    "05-relacoes-funcoes",
+    "",
+    "Relações e funções",
+    "É função?"
+  ],
+  [
+    "06",
+    "06-inducao-simples",
+    "",
+    "Indução simples",
+    "Soma 1..n."
+  ],
+  [
+    "07",
+    "07-inducao-forte",
+    "",
+    "Indução forte",
+    "Passo indutivo."
+  ],
+  [
+    "08",
+    "08-grafos-definicoes",
+    "",
+    "Grafos (definições)",
+    "Caminho; algoritmos em dsa."
+  ],
+  [
+    "09",
+    "09-contagem-combinatoria",
+    "",
+    "Contagem",
+    "Regra do produto."
+  ]
+]

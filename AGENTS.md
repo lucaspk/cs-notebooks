@@ -39,7 +39,7 @@ Ordem obrigatória:
    - Em capítulos novos, apresente termos/contexto e um exemplo mínimo antes de pedir previsão sobre esse conjunto.
    - Não aceite texto genérico de placeholders (`Alternativa incorreta típica`, `Ver modelo no lab`, `Outra distração`) ou perguntas que pressupõem outro capítulo.
 2. `capitulos/NN-slug/GABARITO.md` — critérios completos (pré-teste, previsões, MC, checkpoint). **Sem isso o repositório falha na validação.**
-3. `capitulos/MAPEAMENTO.md` e `capitulos/_tools/build-index.mjs` (lista de capítulos), se for capítulo novo.
+3. `capitulos/MAPEAMENTO.md` e `capitulos/index-metadata.json` (textos do sumário), se for capítulo novo.
 4. **Finalizar** (o agente executa):
    ```bash
    node _tools/finalize-chapter.mjs <livro> <NN-slug>
@@ -103,3 +103,10 @@ node --test prog_conc/capitulos/*/model.test.js
 ## GitHub Pages
 
 Raiz publicada = esta pasta; `.nojekyll` presente. Push é enough — sem build no CI obrigatório (agente pode rodar `maintain-all` e `refresh-workboard` antes de commit se quiser garantir).
+
+## Infra compartilhada
+Referência de arquitetura: [plan.md](plan.md). Capítulos novos usam main[data-book-slug] e ../../../_shared/practice.js; styles.css do livro importa ../_shared/playground.css e contém apenas o restante da cascata e estilos próprios.
+Use ../../../_shared/lab-kit.js antes de app.js para wiring de toggles e steppers. Exemplos: vv_eng/01-falha-reproduzivel e comp_net/07-arp-primeiro-salto.
+Lógica de domínio compartilhada vai primeiro para lib/ (IIFE + export Node), com testes; carregue lib antes de model.js, sem require no browser.
+Autoria: snippets em _template-livro/partials/; curar conteúdo antes de publicar.
+O sumário lê capitulos/MAPEAMENTO.md, com apresentação em capitulos/index-template.html e textos em capitulos/index-metadata.json. Não acrescente arrays ao wrapper build-index.mjs.

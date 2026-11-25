@@ -6,10 +6,10 @@ Abra `index.html` no navegador para o sumário. Cada capítulo terá sua própri
 
 ## Organização
 
-- `index.html` — sumário (`node capitulos/_tools/build-index.mjs` após editar a lista de capítulos no script).
+- `index.html` — sumário (`node capitulos/_tools/build-index.mjs` após editar MAPEAMENTO.md e index-metadata.json).
 - `capitulos/MAPEAMENTO.md` — slugs canônicos.
 - `capitulos/README.md`, `capitulos/TEMPLATE.html` — convenções do livro.
-- `styles.css`, `practice.js` — compartilhados.
+- `styles.css`, `../_shared/practice.js` — compartilhados.
 - `lib/` — opcional; funções puras reutilizáveis entre capítulos (`lib/README.md`).
 - Molde pedagógico: [playground/README.md](../README.md#molde-pedagógico-todos-os-livros-e-capítulos).
 
@@ -18,7 +18,7 @@ Abra `index.html` no navegador para o sumário. Cada capítulo terá sua própri
 1. Definir **ordem didática** e tabela de capítulos planejados (objetivo em uma frase + mix de prática) neste README.
 2. Preencher `capitulos/MAPEAMENTO.md`.
 3. Implementar capítulo **01** (capítulo ouro) + `node --test`.
-4. Atualizar `build-index.mjs` e regenerar o sumário.
+4. Atualizar `MAPEAMENTO.md` e `index-metadata.json` e regenerar o sumário.
 
 ## Capítulos planejados
 

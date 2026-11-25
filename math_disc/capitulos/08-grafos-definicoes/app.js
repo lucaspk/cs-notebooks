@@ -1,1 +1,1 @@
-'use strict';document.getElementById('lab-host').innerHTML='<pre id=out></pre>';document.getElementById('out').textContent=String(MathLab.path({a:['b'],b:['c'],c:[]},'a','c'));
+'use strict';document.getElementById('lab-host').innerHTML='<p class=mini-lab-case>Grafo dirigido: a → b → c. O resultado indica se existe caminho de a até c.</p><pre id=out role=status aria-live=polite></pre>';document.getElementById('out').textContent=String(MathLab.path({a:['b'],b:['c'],c:[]},'a','c'));

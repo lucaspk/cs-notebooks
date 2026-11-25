@@ -1,1 +1,1 @@
-'use strict';document.getElementById('lab-host').innerHTML='<pre id=out></pre>';document.getElementById('out').textContent=String(MathLab.isFn([[1,'a'],[1,'b']]));
+'use strict';document.getElementById('lab-host').innerHTML='<p class=mini-lab-case>Relação de entrada: {(1, a), (1, b)}. O resultado indica se ela é uma função.</p><pre id=out role=status aria-live=polite></pre>';document.getElementById('out').textContent=String(MathLab.isFn([[1,'a'],[1,'b']]));

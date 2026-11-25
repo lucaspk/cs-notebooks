@@ -83,8 +83,8 @@ ${body.split('\n').map((l) => (l ? `        ${l}` : l)).join('\n')}
 }
 
 function upsertGabarito(html, block) {
-  const re = /<details class="chapter-gabarito">[\s\S]*?<\/details>\s*/;
-  if (re.test(html)) return html.replace(re, `${block}\n`);
+  const re = /^[ \t]*<details class="chapter-gabarito">[\s\S]*?<\/details>\s*/m;
+  if (re.test(html)) return html.replace(re, (match) => `${match.match(/^[ \t]*/)[0]}${block.trimStart()}\n`);
   const markers = ['<details class="theory">', '<nav class="chapter-bottom-navigation">'];
   for (const m of markers) {
     if (html.includes(m)) return html.replace(m, `${block}\n\n    ${m}`);

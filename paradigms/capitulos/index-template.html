@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <base href="./">
+  <title>Paradigmas de linguagens · Livro interativo</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="../local-links.js" defer></script>
+</head>
+<body>
+  <main class="book-index">
+    <header class="page-header">
+      <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> paradigmas</a>
+      <span class="lesson-tag">LIVRO · {{publishedCount}}/{{plannedCount}}</span>
+    </header>
+    <section class="intro"><h1>MENOS SINTAXE.<br><span>MAIS ESTILO.</span></h1></section>
+    <section class="contents"><motion-div class="contents-heading"><h2>Sumário</h2><span>{{publishedCount}} publicados</span></motion-div>
+      <ol class="chapter-list">
+{{items}}
+      </ol>
+    </section>
+  </main>
+</body>
+</html>
