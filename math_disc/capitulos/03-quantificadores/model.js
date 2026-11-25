@@ -1,0 +1,1 @@
+(function(r){'use strict';function quant(dom,p){return{all:dom.every(p),exists:dom.some(p)};}const api={quant};if(typeof module!=='undefined'&&module.exports)module.exports=api;else r.MathLab=api;})(typeof globalThis!=='undefined'?globalThis:this);

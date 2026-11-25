@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mutação vs valor · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="02-mutacao-vs-valor" data-practice-mc="mc-ch02">
+    <header class="page-header">
+      <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> paradigmas</a>
+      <span class="lesson-tag">CAPÍTULO 02</span>
+    </header>
+    <nav class="chapter-navigation">
+      <a href="../01-quatro-leituras-mesmo-problema/index.html">← 01</a>
+      <span>02 · Mutação vs valor</span>
+      <a href="../03-funcoes-primeira-classe/index.html">03 →</a>
+    </nav>
+    <section class="intro chapter-intro"><p class="eyebrow">CAPÍTULO 02</p><h1>Mutação<br><span>vs valor</span></h1></section>
+    <p class="chapter-objective"><strong>Objetivo:</strong> prever quando alterar <em>A</em> muda <em>B</em> por referência compartilhada — e quando uma cópia isola o efeito.</p>
+    <section class="practice">
+      <h2>Pré-teste</h2>
+      <textarea class="practice-field" data-practice-field="pretest-alias" rows="2" placeholder="Duas variáveis, um objeto?"></textarea>
+      <textarea class="practice-field" data-practice-field="pretest-copy" rows="2" placeholder="Cópia rasa vs profunda (intuição)"></textarea>
+    </section>
+    <section class="practice"><h2>Previsão</h2>
+      <p>Modo mutação, delta 5: o que muda em B sem tocar B?</p>
+      <textarea class="practice-field" data-practice-field="predict-b" rows="2"></textarea>
+    </section>
+    <section class="lab">
+      <h2>Laboratório</h2>
+      <p id="lab-error" class="lab-error" hidden></p>
+      <label><input type="radio" name="mode" value="mutate" checked> Mutação compartilhada</label>
+      <label><input type="radio" name="mode" value="copy"> Novo valor (cópia)</label>
+      <label>Delta <input id="delta" type="number" value="5"></label>
+      <p>Cart A: <code id="cart-a">—</code></p>
+      <p>Cart B: <code id="cart-b">—</code></p>
+      <p id="surprise">—</p>
+    </section>
+    <section class="practice">
+      <h2>Comparar</h2>
+      <textarea class="practice-field" data-practice-field="compare-fp" rows="3"></textarea>
+      <h2>MC</h2>
+      <ul class="choice-list">
+        <li><label><input type="radio" name="mc-ch02" value="a"> A) B tem bug próprio.</label></li>
+        <li><label><input type="radio" name="mc-ch02" value="b"> B) JavaScript não tem referência.</label></li>
+        <li><label><input type="radio" name="mc-ch02" value="c"> C) Mesmo array em A e B.</label></li>
+        <li><label><input type="radio" name="mc-ch02" value="d"> D) Total é primitivo imutável então B nunca muda.</label></li>
+      </ul>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2"></textarea>
+      <textarea class="practice-field" data-practice-field="mc-why-not" rows="2"></textarea>
+      <details class="model-answer"><summary>Resposta +</summary><p><strong>C.</strong></p></details>
+    </section>
+    <section class="practice"><h2>Checkpoint</h2>
+      <textarea class="practice-field" data-practice-field="checkpoint-value" rows="2"></textarea>
+      <textarea class="practice-field" data-practice-field="checkpoint-risk" rows="2"></textarea>
+    </section>
+                                                                                                                                                                                                                                <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Pré-teste</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>pretest-alias</code> — Duas variáveis podem apontar para o mesmo objeto/array.</p>
+        <p><strong>2</strong> <code>pretest-copy</code> — Cópia rasa ainda pode compartilhar arrays internos se não clonar.</p>
+        <h4>Previsão (`predict-b`)</h4>
+        <p>Modo mutação + delta 5: o array de B ganha o mesmo item que A — <strong>surpresa por aliasing</strong> (total numérico de B pode ficar desatualizado se for cópia rasa).</p>
+        <h4>Comparar (`compare-fp`)</h4>
+        <p>Imutabilidade (novo valor) evita efeito colateral oculto; mutação é mais rápida mas exige disciplina.</p>
+        <h4>MC (`mc-ch02`)</h4>
+        <p><strong>Correta: C</strong> — referência compartilhada faz B ver a mutação em A.</p>
+        <h4>Checkpoint</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>checkpoint-value</code> — Valor novo vs lugar mutado no heap.</p>
+        <p><strong>2</strong> <code>checkpoint-risk</code> — Paradigma funcional puxa cópia/transformação; imperativo assume mutação local.</p>
+      </div>
+    </details>
+<details class="theory"><summary>Teoria +</summary><p>Imperativo assume estado mutável; estilo funcional prefere valores novos. Ambos aparecem nos labs do repo.</p></details>
+    <nav class="chapter-bottom-navigation"><a href="../01-quatro-leituras-mesmo-problema/index.html">← 01</a><a href="../03-funcoes-primeira-classe/index.html">03 →</a></nav>
+  </main>
+</body>
+</html>

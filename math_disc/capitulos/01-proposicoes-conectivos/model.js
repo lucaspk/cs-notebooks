@@ -1,0 +1,1 @@
+(function(r){'use strict';function evalConnective(p,q,op){if(op==='AND')return p&&q;if(op==='OR')return p||q;if(op==='IMP')return!p||q;throw new RangeError('op');}const api={evalConnective};if(typeof module!=='undefined'&&module.exports)module.exports=api;else r.MathLab=api;})(typeof globalThis!=='undefined'?globalThis:this);

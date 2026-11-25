@@ -1,0 +1,1 @@
+(function(r){'use strict';function step(n){function S(k){return k*(k+1)/2;}const k=Math.floor(n);return S(k)+(k+1)===S(k+1);}const api={step};if(typeof module!=='undefined'&&module.exports)module.exports=api;else r.MathLab=api;})(typeof globalThis!=='undefined'?globalThis:this);

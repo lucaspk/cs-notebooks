@@ -1,0 +1,1 @@
+'use strict';document.getElementById('lab-host').innerHTML='<input id=nums value="3 1 2"> <p id=out></p>';const R=()=>{const a=document.getElementById('nums').value.split(/\s+/).map(Number);document.getElementById('out').textContent=String(VvLab.sorted(a));};document.getElementById('nums').oninput=R;R();

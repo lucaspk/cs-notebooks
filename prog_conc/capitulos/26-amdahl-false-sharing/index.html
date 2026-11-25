@@ -53,7 +53,25 @@
       <textarea class="practice-field" data-practice-field="mc-why-not" rows="2"></textarea>
     </section>
     <section class="practice"><h2>Checkpoint</h2><textarea class="practice-field" data-practice-field="checkpoint-amdahl" rows="2"></textarea></section>
-    <details class="theory"><summary>Teoria <span>+</span></summary><div class="theory-content"><p>Speedup ≈ 1/(s+(1−s)/N). False sharing: linhas de cache, não variáveis lógicas.</p></div></details>
+                                    <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Objetivo</h4>
+        <p>Objetivo: ver o teto de speedup da parte sequencial (Amdahl) e o custo de invalidação quando núcleos tocam a mesma linha de cache.</p>
+        <h4>Pré-teste e previsões</h4>
+        <p>Pergunta: 80% paralelizável → 16 núcleos = 16×?</p>
+        <p><strong>pretest-amdahl</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+        <h4>Demais campos</h4>
+        <p><strong>mc-why-yes</strong> — ver bloco no capítulo</p>
+        <p>Justificar a letra correta da MC e refutar cada alternativa em uma linha.</p>
+        <p><strong>mc-why-not</strong> — ver bloco no capítulo</p>
+        <p>Justificar a letra correta da MC e refutar cada alternativa em uma linha.</p>
+        <h4>Checkpoint</h4>
+        <p>Pergunta: Checkpoint</p>
+        <p><strong>checkpoint-amdahl</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+      </div>
+    </details>
+<details class="theory"><summary>Teoria <span>+</span></summary><div class="theory-content"><p>Speedup ≈ 1/(s+(1−s)/N). False sharing: linhas de cache, não variáveis lógicas.</p></div></details>
     <nav class="chapter-bottom-navigation"><a href="../25-contencao-desempenho/index.html">← Anterior</a><a href="../27-cas-lock-free/index.html">Próximo →</a></nav>
   </main>
 </body>

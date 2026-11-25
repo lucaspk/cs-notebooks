@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <title>Throughput e gargalo · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="04-throughput-gargalo" data-practice-mc="mc-ch04">
+    <header class="page-header">
+      <a class="brand" href="../../index.html" aria-label="Playground, sumário"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> redes de computadores</a>
+      <span class="lesson-tag">CAPÍTULO 04</span>
+    </header>
+
+    <nav class="chapter-navigation" aria-label="Navegação do livro">
+      <a href="../03-perda-fila-esgotada/index.html">← 03 Perda</a>
+      <span>04 · Throughput</span>
+      <a href="../05-encapsulamento-camadas/index.html">05 Camadas →</a>
+    </nav>
+
+    <section class="intro chapter-intro" aria-labelledby="page-title">
+      <p class="eyebrow">CAPÍTULO 04</p>
+      <h1 id="page-title">Throughput<br><span>e gargalo</span></h1>
+    </section>
+
+    <p class="chapter-objective"><strong>Objetivo deste capítulo:</strong> calcular o throughput fim a fim pelo <em>elo mais lento</em> (modelo do tubo) — antes de escolher onde investir em banda.</p>
+
+    <section class="practice" aria-labelledby="pretest-title">
+      <div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES</span></div>
+      <div class="practice-stack">
+        <textarea class="practice-field" data-practice-field="pretest-throughput" rows="2" placeholder="1. O que é throughput fim a fim?"></textarea>
+        <textarea class="practice-field" data-practice-field="pretest-upgrade" rows="2" placeholder="2. Upgrade só no Wi‑Fi 1 Gbps garante download 1 Gbps do mundo?"></textarea>
+      </div>
+    </section>
+
+    <section class="practice" aria-labelledby="worked-title">
+      <div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2><span class="practice-tag">NO PAPEL</span></div>
+      <section class="practice-worked">
+        <p>Três trechos em série: <strong>1000</strong> · <strong>10</strong> · <strong>1000</strong> Mbps. Arquivo 80 MB.</p>
+        <p>Taxa efetiva = min(elos) = <strong>10 Mbps</strong>. Tempo ≈ (80×8) / 10 segundos.</p>
+      </section>
+      <textarea class="practice-field" data-practice-field="worked-tube" rows="2" placeholder="Qual elo você marcaria no diagrama?"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="predict-title">
+      <div class="practice-heading"><h2 id="predict-title">Previsão</h2><span class="practice-tag">ANTES DO LAB</span></div>
+      <p class="practice-lead">Elos padrão: 100 / 5 / 100 Mbps · arquivo 50 MB.</p>
+      <textarea class="practice-field" data-practice-field="predict-bottleneck" rows="2" placeholder="Qual trecho é o gargalo?"></textarea>
+    </section>
+
+    <section class="lab" aria-label="Modelo do tubo">
+      <div class="lab-metrics">
+        <span class="lab-metric">Gargalo <strong id="bottleneck-mbps">—</strong> Mbps</span>
+        <span class="lab-metric">Trecho <strong id="bottleneck-id">—</strong></span>
+        <span class="lab-metric">Tempo ~ <strong id="eta">—</strong></span>
+      </div>
+      <div class="throughput-pipe" id="pipe-segments" aria-hidden="false"></div>
+      <div class="experiment-controls">
+        <label class="work-control" for="link-a"><span>A→B Mbps</span><input id="link-a" type="range" min="1" max="1000" step="1" value="100"></label>
+        <label class="work-control" for="link-b"><span>B→C Mbps</span><input id="link-b" type="range" min="1" max="1000" step="1" value="5"></label>
+        <label class="work-control" for="link-c"><span>C→dest Mbps</span><input id="link-c" type="range" min="1" max="1000" step="1" value="100"></label>
+        <label class="work-control" for="file-mb"><span>Arquivo <strong id="file-preview">50</strong> MB</span><input id="file-mb" type="range" min="1" max="500" step="1" value="50"></label>
+      </div>
+    </section>
+
+    <aside class="observation" aria-label="Dica"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow" id="observation-label">EXPERIMENTE</p><p id="observation-text">Suba só o elo 3 para 1000 Mbps — o tempo total muda muito?</p></div></aside>
+
+    <section class="practice" aria-labelledby="mc-title">
+      <div class="practice-heading"><h2 id="mc-title">Múltipla escolha</h2><span class="practice-tag">CHECKPOINT</span></div>
+      <p class="practice-prompt">Fibra 1 Gbps em casa; servidor na nuvem com uplink 200 Mbps compartilhado. Download enorme parece travar em ~20 Mbps. Melhor leitura?</p>
+      <ul class="choice-list" role="radiogroup">
+        <li><label><input type="radio" name="mc-ch04" value="a"> Gargalo provavelmente não é o último metro; o tubo tem um elo estreito no caminho.</label></li>
+        <li><label><input type="radio" name="mc-ch04" value="b"> Propagação limita throughput de arquivo.</label></li>
+        <li><label><input type="radio" name="mc-ch04" value="c"> Basta somar Mbps de cada trecho.</label></li>
+        <li><label><input type="radio" name="mc-ch04" value="d"> RTT alto impede qualquer throughput.</label></li>
+      </ul>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2"></textarea>
+      <textarea class="practice-field" data-practice-field="mc-why-not" rows="3"></textarea>
+      <details class="model-answer"><summary>Ver resposta <span>+</span></summary><p class="theory-content"><strong>A.</strong></p></details>
+    </section>
+
+    <section class="practice" aria-labelledby="design-title">
+      <div class="practice-heading"><h2 id="design-title">Design mínimo</h2><span class="practice-tag">APLICAR</span></div>
+      <textarea class="practice-field" data-practice-field="design-video" rows="3" placeholder="Vídeo 4K para N usuários: onde você mediria o gargalo?"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="checkpoint-title">
+      <div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2><span class="practice-tag">DEPOIS</span></div>
+      <div class="practice-stack">
+        <textarea class="practice-field" data-practice-field="checkpoint-formula" rows="2" placeholder="1. Fórmula mental do tempo de transferência (modelo simples)."></textarea>
+        <textarea class="practice-field" data-practice-field="checkpoint-vs-rtt" rows="2" placeholder="2. Diferença throughput vs RTT."></textarea>
+        <textarea class="practice-field" data-practice-field="checkpoint-parallel" rows="2" placeholder="3. Várias conexões paralelas mudam o quê?"></textarea>
+      </div>
+    </section>
+
+                                                                                <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Pré-teste</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>pretest-throughput</code> — Taxa útil efetiva fim a fim (não pico de um trecho só).</p>
+        <p><strong>2</strong> <code>pretest-upgrade</code> — Melhorar enlace que já não era gargalo muda pouco o tempo total.</p>
+        <h4>Exemplo trabalhado (`worked-tube`)</h4>
+        <p>Três elos 1000 / 10 / 1000 Mbps → gargalo <strong>10 Mbps</strong> no meio.</p>
+        <h4>Previsão (`predict-bottleneck`)</h4>
+        <p>Padrão 100 / 5 / 100 → <strong>B→C (5 Mbps)</strong>.</p>
+        <h4>MC (`mc-ch04`)</h4>
+        <p><strong>Correta: A</strong> — gargalo no meio; upgrade no último km não altera fim a fim.</p>
+        <h4>Design (`design-video`)</h4>
+        <p>Apontar gargalo (uplink cliente, Wi‑Fi, peering, servidor origem) — não só “comprar mais bandwidth” num elo já rápido.</p>
+        <h4>Checkpoint</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>checkpoint-formula</code> — tempo ≈ tamanho / taxa do elo mais lento (modelo tubo).</p>
+        <p><strong>2</strong> <code>checkpoint-vs-rtt</code> — Throughput ≠ RTT (cap. 02): arquivo grande mede vazão, não eco.</p>
+        <p><strong>3</strong> <code>checkpoint-parallel</code> — Várias conexões TCP podem encher elos — gargalo ainda existe.</p>
+      </div>
+    </details>
+<details class="theory">
+      <summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary>
+      <div class="theory-content"><p>Modelo tubo: conservação de fluxo em regime estável; janelas TCP complicam o sustentado mas o <strong>min(R)</strong> permanece guia mental.</p></div>
+    </details>
+
+    <nav class="chapter-bottom-navigation" aria-label="Fim">
+      <a href="../03-perda-fila-esgotada/index.html">← Capítulo 03</a>
+      <a href="../05-encapsulamento-camadas/index.html">Capítulo 05 →</a>
+    </nav>
+  </main>
+</body>
+</html>

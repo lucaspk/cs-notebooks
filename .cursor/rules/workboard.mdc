@@ -1,0 +1,15 @@
+---
+description: cs-notebooks — WORKBOARD e capítulos (workspace = cs-notebooks/)
+globs: "**/*"
+alwaysApply: true
+---
+
+# cs-notebooks — agentes (Cursor)
+
+**Obrigatório antes de capítulos / _tools / livros:**
+
+1. [WORKBOARD.md](WORKBOARD.md) — reivindicações, próxima onda, diário, publicação (auto).
+2. [AGENTS.md](AGENTS.md) — fluxo completo; [CODEX.md](CODEX.md) — checklist.
+3. Reivindicar slug → codar → `finalize-chapter` → testes → `refresh-workboard` → diário → liberar.
+
+Padrão ouro: `comp_net/capitulos/07-arp-primeiro-salto/`. `model.js` sem `require` no browser. Usuário não roda CLI.

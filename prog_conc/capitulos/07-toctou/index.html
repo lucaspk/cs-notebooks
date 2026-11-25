@@ -27,7 +27,25 @@
     <aside class="observation"><p>Entre <code>check</code> e <code>use</code>, outra tarefa também pode checar.</p></aside>
     <section class="practice"><h2>MC</h2><ul class="choice-list"><li><label><input type="radio" name="mc-ch07" value="b"> A condição no uso pode já ter mudado desde a verificação.</label></li></ul><textarea class="practice-field" data-practice-field="mc-why" rows="2"></textarea></section>
     <section class="practice"><h2>Checkpoint</h2><textarea class="practice-field" data-practice-field="checkpoint" rows="2"></textarea></section>
-    <details class="theory"><summary>Teoria +</summary><p>TOCTOU: falha lógica quando check e use não são atômicos juntos.</p></details>
+                                    <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Objetivo</h4>
+        <p>Objetivo: mostrar time-of-check to time-of-use : duas tarefas passam na verificação da última vaga e ambas usam.</p>
+        <h4>Pré-teste e previsões</h4>
+        <p>Pergunta: Pré-teste</p>
+        <p><strong>pretest</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+        <p>Pergunta: Previsão</p>
+        <p><strong>predict</strong> Conferir após executar o experimento; previsão errada antes do lab é esperada.</p>
+        <h4>Demais campos</h4>
+        <p><strong>mc-why</strong> — ver bloco no capítulo</p>
+        <p>Justificar a letra correta da MC e refutar cada alternativa em uma linha.</p>
+        <h4>Checkpoint</h4>
+        <p>Pergunta: Checkpoint</p>
+        <p><strong>checkpoint</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+      </div>
+    </details>
+<details class="theory"><summary>Teoria +</summary><p>TOCTOU: falha lógica quando check e use não são atômicos juntos.</p></details>
     <nav class="chapter-bottom-navigation"><a href="../06-contador-perdido/index.html">← 06</a><a href="../08-mutex-atomicidade/index.html">08 →</a></nav>
   </main>
 </body>

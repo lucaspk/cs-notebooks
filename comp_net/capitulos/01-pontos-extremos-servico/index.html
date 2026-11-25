@@ -8,11 +8,11 @@
   <link rel="stylesheet" href="../../styles.css">
   <script src="model.js" defer></script>
   <script src="app.js" defer></script>
-  <script src="../../practice.js" defer></script>
+  <script src="../../../_shared/practice.js" defer></script>
 </head>
 <body>
   <!-- Mix: pré-teste, teaser URL, exemplo, previsão, lab, comparação, MC, contexto, design, checkpoint | Bloom: Compreender–Avaliar -->
-  <main data-chapter-id="01-pontos-extremos-servico" data-practice-mc="mc-ch01">
+  <main data-book-slug="comp_net" data-chapter-id="01-pontos-extremos-servico" data-practice-mc="mc-ch01">
     <header class="page-header">
       <a class="brand" href="../../index.html" aria-label="Playground, sumário"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> redes de computadores</a>
       <span class="lesson-tag">CAPÍTULO 01</span>
@@ -199,7 +199,46 @@
       </div>
     </section>
 
-    <details class="theory">
+                                                                                        <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Pré-teste</h4>
+        <p><strong>#</strong> Sim/não + essência</p>
+        <p><strong>1 (<code>pretest-meaning</code>)</strong> <strong>Não.</strong> A rede entrega bytes; não interpreta idioma, JSON, HTTP, etc.</p>
+        <p><strong>2 (<code>pretest-intact</code>)</strong> <strong>Não.</strong> Entrega correta ≠ semântica correta na app (ex.: <code>Olá</code> num parser JSON).</p>
+        <p>Aceitar respostas que separem <strong>serviço de rede</strong> (entrega) de <strong>camada de aplicação</strong> (significado).</p>
+        <h4>Teaser URL</h4>
+        <p><strong>História (<code>teaser-url-story</code>):</strong> incompleta é ok no pré-19; deve mencionar resolução de nome e/ou conexão e troca de dados; não precisa ordem perfeita.</p>
+        <p><strong>Caixas:</strong> marcar DNS, TCP, TLS, HTTP; <strong>não</strong> marcar “roteador valida JSON”.</p>
+        <p><strong><code>teaser-why-not-router</code>:</strong> roteador decide por endereço (L3/L2), não pelo payload da aplicação.</p>
+        <h4>Exemplo trabalhado</h4>
+        <p>Confirmar: mesmos bytes em todos os modos B; só o parser em B muda o resultado.</p>
+        <h4>Previsão no experimento (`predict-wire`)</h4>
+        <p><strong>Só “N bytes opacos”</strong> (ou equivalente) no passo do enlace — não texto legível no fio.</p>
+        <h4>Previsão JSON (`predict-json`)</h4>
+        <p><strong>Erro / falha</strong> em B com mensagem <code>Olá</code> e modo JSON (entrega pode estar ok).</p>
+        <h4>Comparar</h4>
+        <p><strong>Campo</strong> Essência</p>
+        <p><strong><code>compare-same</code></strong> Mesma mensagem de A, mesmos bytes no enlace, mesmos passos de entrega.</p>
+        <p><strong><code>compare-diff</code></strong> Resultado em B (ok vs erro), interpretação na aplicação.</p>
+        <h4>MC (`mc-ch01`)</h4>
+        <p><strong>Correta: B.</strong> Gabarito narrativo no HTML (<code>details.model-answer</code>).</p>
+        <h4>Contexto (`context-debug`)</h4>
+        <p><strong>Corpo / Content-Type / aplicação primeiro</strong> se entrega e bytes batem; TLS/Wi‑Fi depois se suspeita de transporte; não “JSON no roteador”.</p>
+        <h4>Design (`design-guarantees`)</h4>
+        <p><strong>Camada</strong> Garantia típica</p>
+        <p><strong>Rede (neste cap.)</strong> Entregar datagramas/fluxo entre hosts (best effort ou confiável — conforme protocolo futuro).</p>
+        <p><strong>App P2P</strong> Formato, ordem lógica, presença online, criptografia ponta a ponta se quiser — <strong>não</strong> exigir que o fio “entenda” chat.</p>
+        <h4>Checkpoint</h4>
+        <p>Alinhado ao pré-teste:</p>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>checkpoint-meaning</code> — <strong>Não</strong> interpreta conteúdo.</p>
+        <p><strong>2</strong> <code>checkpoint-router</code> — <strong>Não</strong> valida JSON (nem HTTP, etc.).</p>
+        <p><strong>3</strong> <code>checkpoint-def</code> — Extremos = apps; meio = serviço de transporte de bytes opacos.</p>
+        <p>Ganho esperado: pré-teste mais vago → checkpoint com vocabulário do lab.</p>
+      </div>
+    </details>
+<details class="theory">
       <summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary>
       <div class="theory-content">
         <p>Modelo Internet: aplicações nos <strong>pontos extremos</strong>; a rede oferece um serviço limitado de entrega de datagramas entre hosts.</p>

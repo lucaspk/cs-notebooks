@@ -10,6 +10,7 @@ Guia para criar `capitulos/NN-slug/` alinhado ao [molde pedagógico do playgroun
 | `app.js` | se houver lab | Interação e renderização |
 | `model.js` | se houver lógica testável | Funções puras (sem DOM) |
 | `model.test.js` | recomendado com `model.js` | `node --test capitulos/NN-slug/model.test.js` |
+| `GABARITO.md` | sim (capítulo publicado) | Agente: `node _tools/finalize-chapter.mjs comp_net NN-slug` — ver [AGENTS.md](../../AGENTS.md) |
 
 Compartilhados do livro:
 
@@ -30,7 +31,7 @@ Copie `TEMPLATE.html` para `NN-slug/index.html`.
 ## Ao publicar
 
 1. `capitulos/MAPEAMENTO.md`
-2. `node capitulos/_tools/build-index.mjs`
+2. `node _tools/finalize-chapter.mjs comp_net NN-slug` (ou `node _tools/maintain-book.mjs comp_net`)
 3. Navegação anterior/próximo
 4. `node --test capitulos/NN-slug/model.test.js`
 5. Checklist do [molde](../../README.md#checklist-antes-de-publicar-um-capítulo)

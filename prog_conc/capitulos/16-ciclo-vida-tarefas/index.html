@@ -28,7 +28,34 @@
       <details class="model-answer"><summary>Resposta</summary><div class="theory-content"><p><strong>B e C</strong> são cenários realistas; A é falso.</p></div></details>
     </section>
     <section class="practice"><h2>Checkpoint</h2><textarea class="practice-field" data-practice-field="checkpoint" rows="2"></textarea></section>
-    <details class="theory"><summary>Teoria</summary><div class="theory-content"><p>Coordene encerramento com cancelamento cooperativo e limites de pool.</p></div></details>
+                                    <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Objetivo</h4>
+        <p>Objetivo: acompanhar pool, fila, falha, timeout e cancelamento — distinguir quem parou de esperar de quem foi abortado.</p>
+        <h4>Pré-teste e previsões</h4>
+        <p>Pergunta: Timeout do cliente = tarefa cancelada?</p>
+        <p><strong>pretest</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+        <p>Pergunta: Previsão</p>
+        <p><strong>predict</strong> Conferir após executar o experimento; previsão errada antes do lab é esperada.</p>
+        <h4>Demais campos</h4>
+        <p><strong>mc-why-yes</strong> — ver bloco no capítulo</p>
+        <p>Justificar a letra correta da MC e refutar cada alternativa em uma linha.</p>
+        <p><strong>mc-why-not</strong> — ver bloco no capítulo</p>
+        <p>Justificar a letra correta da MC e refutar cada alternativa em uma linha.</p>
+        <h4>Checkpoint</h4>
+        <p>Pergunta: Checkpoint</p>
+        <p><strong>checkpoint</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+        <h4>MC (mc-ch16)</h4>
+        <p>B e C são cenários realistas; A é falso.</p>
+        <p><strong>Letra</strong> Por que não</p>
+        <p><strong>A</strong> rejeitar — Timeout sempre cancela a tarefa no worker.</p>
+        <p><strong>B</strong> <strong>correta</strong> — Quem espera pode desistir sem a tarefa saber.</p>
+        <p><strong>C</strong> rejeitar — Pool cheio + tarefas dependentes pode deadlockar o pool.</p>
+        <p><strong>D</strong> rejeitar — Future.get nunca lança exceção.</p>
+      </div>
+    </details>
+<details class="theory"><summary>Teoria</summary><div class="theory-content"><p>Coordene encerramento com cancelamento cooperativo e limites de pool.</p></div></details>
     <nav class="chapter-bottom-navigation"><a href="../15-visibilidade-memoria/index.html">← 15</a><a href="../17-dirty-read/index.html">17 →</a></nav>
   </main>
 </body>

@@ -1,0 +1,1 @@
+'use strict';document.getElementById('lab-host').innerHTML='<pre id=out></pre>';document.getElementById('out').textContent=JSON.stringify(MathLab.quant([1,2,3,4],x=>x>0));

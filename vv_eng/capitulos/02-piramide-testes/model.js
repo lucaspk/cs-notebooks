@@ -1,0 +1,1 @@
+(function(r){'use strict';function advice(u,i,e){const t=(+u||0)+(+i||0)+(+e||0)||1;return{unit:u/t,e2e:e/t,hint:e/t>0.5?'muitos e2e':u/t<0.4?'poucos unit':'ok'};}const api={advice};if(typeof module!=='undefined'&&module.exports)module.exports=api;else r.VvLab=api;})(typeof globalThis!=='undefined'?globalThis:this);

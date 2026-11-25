@@ -2,7 +2,7 @@
 
 Abra `index.html` no navegador para o sumário. Cada capítulo terá sua própria página. Sem servidor nem build (mesmo molde de `prog_conc/` e `comp_net/`).
 
-**Status:** roteiro em elaboração; nenhum capítulo publicado ainda.
+**Status:** roteiro em elaboração; nenhum capítulo publicado ainda. Coordenação: [WORKBOARD.md](../WORKBOARD.md).
 
 ## Organização
 
@@ -29,3 +29,4 @@ Abra `index.html` no navegador para o sumário. Cada capítulo terá sua própri
 ## Ordem didática sugerida
 
 1. …
+Persistência: capítulos usam ../../../_shared/practice.js e main[data-book-slug]. O livro não precisa de uma cópia local de practice.js.

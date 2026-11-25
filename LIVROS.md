@@ -2,10 +2,14 @@
 
 Cada **livro** = pasta na raiz do repositório (`prog_conc/`, `comp_net/`, …). Todos seguem o [molde pedagógico](README.md#molde-pedagógico-todos-os-livros-e-capítulos).
 
+**Progresso e coordenação entre agentes:** [WORKBOARD.md](WORKBOARD.md) (publicados vs roteiro, reivindicações, próxima onda) · [AGENTS.md](AGENTS.md).
+
 ## Convenções
 
 | Item | Regra |
 | --- | --- |
+| **Fase** | Todo livro pertence a uma fase canônica (0–6), indicada no README, catálogo e sumário. |
+| **Pré-requisitos** | Cada tópico novo declara o que o estudante precisa já entender; não assume conhecimento implícito de outro tópico/livro. |
 | **Pasta** | `snake_case` curto: `comp_net`, `dist_sys`, `db_sys` |
 | **Capítulo** | `capitulos/NN-slug/` (`NN` = 01, 02…) |
 | **localStorage** | `playground_<pasta>__<chapter-id>` (ver `practice.js` do livro) |
@@ -138,10 +142,13 @@ Cada tópico = experimento pequeno (prever complexidade ou resultado de BFS/Dijk
 
 ## Livros no repositório
 
-| Slug | Título (UI) | Status |
-| --- | --- | --- |
-| `prog_conc` | Programação concorrente | **29 capítulos** publicados |
-| `comp_net` | Redes de computadores | **01** publicado; roteiro 30+31 |
+| Fase | Slug | Título (UI) | Status |
+| --- | --- | --- | --- |
+| 0a | `vv_eng` | Verificação e validação | **7 capítulos** publicados |
+| 0b | `math_disc` | Matemática discreta | **9 capítulos** publicados |
+| 0c | `paradigms` | Paradigmas de linguagens | **8 capítulos** publicados |
+| 3 | `prog_conc` | Programação concorrente | **29 capítulos** publicados |
+| 3 | `comp_net` | Redes de computadores | **8 capítulos** publicados; roteiro 31 |
 
 ## Roadmap de livros (planejados)
 

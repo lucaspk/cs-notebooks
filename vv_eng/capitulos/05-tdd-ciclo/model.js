@@ -1,0 +1,1 @@
+(function(r){'use strict';function state(red,green){if(red&&!green)return'red';if(red&&green)return'green';return'refactor';}const api={state};if(typeof module!=='undefined'&&module.exports)module.exports=api;else r.VvLab=api;})(typeof globalThis!=='undefined'?globalThis:this);

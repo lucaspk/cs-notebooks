@@ -72,7 +72,38 @@
     </section>
     <section class="practice"><h2>Design mínimo</h2><p class="practice-prompt">Dois semáforos + mutex: quais contadores?</p><textarea class="practice-field" data-practice-field="design-sem" rows="2"></textarea></section>
     <section class="practice"><h2>Checkpoint</h2><textarea class="practice-field" data-practice-field="checkpoint" rows="3"></textarea></section>
-    <details class="theory"><summary>Teoria <span>+</span></summary><div class="theory-content"><p>Produtor-consumidor clássico: fila limitada, espera por condição, verificar de novo ao acordar.</p></div></details>
+                                    <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Objetivo</h4>
+        <p>Objetivo deste capítulo: coordenar fila limitada entre produtor e consumidor — bloquear quando cheia ou vazia — e ver o custo de ignorar essa sincronização.</p>
+        <h4>Pré-teste e previsões</h4>
+        <p>Pergunta: Fila com capacidade 3 e produtor mais rápido: o que deve acontecer?</p>
+        <p><strong>pretest-full</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+        <p>Pergunta: No painel sincronizado, em que passo o produtor fica blocked ?</p>
+        <p><strong>predict-block</strong> Conferir após executar o experimento; previsão errada antes do lab é esperada.</p>
+        <h4>Demais campos</h4>
+        <p><strong>design-sem</strong> — Fila cheia e produtor tenta inserir com sincronização correta: Corrompe o elemento no slot 0. Bloqueia até haver espaço. Descarta o item silenciosamente. Expande o buffer automaticamente. Resposta + B. Espera por condição com mutex + sinais ou bloqueio em semáforos. Design mínimo Dois semáforos + mutex: quais contadores?</p>
+        <p>Proposta mínima coerente com o objetivo; citar trade-off explícito.</p>
+        <p><strong>compare-sync</strong> — Bloqueios vs overflows.</p>
+        <p>Separar o que é invariante (trabalho, invariante, protocolo) do que muda (tempo, ordem, visibilidade, anomalia).</p>
+        <p><strong>mc-why-yes</strong> — ver bloco no capítulo</p>
+        <p>Justificar a letra correta da MC e refutar cada alternativa em uma linha.</p>
+        <p><strong>mc-why-not</strong> — ver bloco no capítulo</p>
+        <p>Justificar a letra correta da MC e refutar cada alternativa em uma linha.</p>
+        <h4>Checkpoint</h4>
+        <p>Pergunta: Checkpoint</p>
+        <p><strong>checkpoint</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+        <h4>MC (mc-ch10)</h4>
+        <p>B. Espera por condição com mutex + sinais ou bloqueio em semáforos.</p>
+        <p><strong>Letra</strong> Por que não</p>
+        <p><strong>A</strong> rejeitar — Corrompe o elemento no slot 0.</p>
+        <p><strong>B</strong> <strong>correta</strong> — Bloqueia até haver espaço.</p>
+        <p><strong>C</strong> rejeitar — Descarta o item silenciosamente.</p>
+        <p><strong>D</strong> rejeitar — Expande o buffer automaticamente.</p>
+      </div>
+    </details>
+<details class="theory"><summary>Teoria <span>+</span></summary><div class="theory-content"><p>Produtor-consumidor clássico: fila limitada, espera por condição, verificar de novo ao acordar.</p></div></details>
     <nav class="chapter-bottom-navigation"><a href="../09-semaforos/index.html">← 09</a><a href="../11-deadlock/index.html">11 →</a></nav>
   </main>
 </body>

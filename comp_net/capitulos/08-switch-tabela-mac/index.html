@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <title>Switch e tabela MAC · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="08-switch-tabela-mac" data-practice-mc="mc-ch08">
+    <header class="page-header">
+      <a class="brand" href="../../index.html" aria-label="Playground, sumário"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> redes de computadores</a>
+      <span class="lesson-tag">CAPÍTULO 08</span>
+    </header>
+
+    <nav class="chapter-navigation" aria-label="Navegação do livro">
+      <a href="../07-arp-primeiro-salto/index.html">← 07 ARP</a>
+      <span>08 · Switch</span>
+      <a href="../09-sub-rede-roteador/index.html">09 Sub-rede →</a>
+    </nav>
+
+    <section class="intro chapter-intro" aria-labelledby="page-title">
+      <p class="eyebrow">CAPÍTULO 08</p>
+      <h1 id="page-title">Switch<br><span>e tabela MAC</span></h1>
+    </section>
+
+    <p class="chapter-objective"><strong>Objetivo:</strong> prever <em>flood</em> vs <em>unicast</em> conforme a tabela MAC aprende a origem em cada porta.</p>
+
+    <section class="practice" aria-labelledby="pretest-title">
+      <div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES</span></div>
+      <div class="practice-stack">
+        <textarea class="practice-field" data-practice-field="pretest-hub" rows="2"></textarea>
+        <textarea class="practice-field" data-practice-field="pretest-learn" rows="2"></textarea>
+      </div>
+    </section>
+
+    <section class="practice" aria-labelledby="predict-title">
+      <div class="practice-heading"><h2 id="predict-title">Previsão</h2><span class="practice-tag">ANTES DO LAB</span></div>
+      <textarea class="practice-field" data-practice-field="predict-first" rows="2" placeholder="1º envio A→B"></textarea>
+      <textarea class="practice-field" data-practice-field="predict-third" rows="2" placeholder="3º envio A→B (após B falar)"></textarea>
+    </section>
+
+    <section class="lab" aria-label="Switch">
+      <div class="toolbar">
+        <div class="playback"><button class="primary" id="send" type="button">Enviar quadro</button><button id="reset" type="button">Reiniciar switch</button></div>
+      </div>
+      <div class="switch-ports" aria-label="Portas do switch">
+        <div class="switch-port" id="p1">P1 · A</div>
+        <div class="switch-port" id="p2">P2 · B</div>
+        <div class="switch-port" id="p3">P3 · C</div>
+      </div>
+      <table class="switch-table" aria-label="Tabela MAC">
+        <thead><tr><th>MAC</th><th>Porta</th></tr></thead>
+        <tbody id="switch-table-body"></tbody>
+      </table>
+      <ol class="net-step-list" id="log-list"></ol>
+      <p class="experiment-note">Cenário guiado: 1º A→B, B→A, 2º A→B — compare flood e unicast.</p>
+    </section>
+
+    <aside class="observation" aria-label="Dica"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow">OBSERVE</p><p id="observation-text">—</p></div></aside>
+
+    <section class="practice" aria-labelledby="compare-title">
+      <div class="practice-heading"><h2 id="compare-title">Comparar</h2><span class="practice-tag">ANALISAR</span></div>
+      <div class="compare-grid">
+        <textarea class="practice-field" data-practice-field="compare-arp-flood" rows="3"></textarea>
+        <textarea class="practice-field" data-practice-field="compare-router" rows="3"></textarea>
+      </div>
+    </section>
+
+    <section class="practice" aria-labelledby="mc-title">
+      <div class="practice-heading"><h2 id="mc-title">Múltipla escolha</h2><span class="practice-tag">CHECKPOINT</span></div>
+      <p class="practice-prompt">Tabela já tem MAC de B na porta 2. Novo quadro unicast para B entra na porta 1. O switch?</p>
+      <ul class="choice-list" role="radiogroup">
+        <li><label><input type="radio" name="mc-ch08" value="a"> Inunda todas as portas sempre.</label></li>
+        <li><label><input type="radio" name="mc-ch08" value="b"> Encaminha para todas exceto gateway.</label></li>
+        <li><label><input type="radio" name="mc-ch08" value="c"> Encaminha só na porta 2.</label></li>
+        <li><label><input type="radio" name="mc-ch08" value="d"> Consulta DNS antes.</label></li>
+      </ul>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2"></textarea>
+      <textarea class="practice-field" data-practice-field="mc-why-not" rows="3"></textarea>
+      <details class="model-answer"><summary>Ver resposta <span>+</span></summary><p class="theory-content"><strong>C.</strong></p></details>
+    </section>
+
+    <section class="practice" aria-labelledby="checkpoint-title">
+      <div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2><span class="practice-tag">DEPOIS</span></div>
+      <div class="practice-stack">
+        <textarea class="practice-field" data-practice-field="checkpoint-flood-when" rows="2"></textarea>
+        <textarea class="practice-field" data-practice-field="checkpoint-unicast-when" rows="2"></textarea>
+        <textarea class="practice-field" data-practice-field="checkpoint-storm" rows="2"></textarea>
+      </div>
+    </section>
+
+                                                <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Pré-teste</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>pretest-hub</code> — Hub repetia em tudo; switch aprende e filtra unicast conhecido.</p>
+        <p><strong>2</strong> <code>pretest-learn</code> — Aprende MAC <strong>origem</strong> na <strong>porta de ingresso</strong>.</p>
+        <h4>Previsão (`predict-first`)</h4>
+        <p>1º quadro A→B: <strong>flood</strong> (B ainda desconhecido na tabela).</p>
+        <h4>Previsão (`predict-third`)</h4>
+        <p>3º quadro A→B (após B responder): <strong>unicast</strong> só porta 2.</p>
+        <h4>Comparar</h4>
+        <p><strong>Campo</strong> Essência</p>
+        <p><strong><code>compare-arp-flood</code></strong> ARP request desconhecido → flood até aprender.</p>
+        <p><strong><code>compare-router</code></strong> Switch L2; roteador L3 — não confundir domínios.</p>
+        <h4>MC (`mc-ch08`)</h4>
+        <p><strong>Correta: C</strong> — destino MAC conhecido na tabela → encaminha só aquela porta.</p>
+        <h4>Checkpoint</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>checkpoint-flood-when</code> — MAC destino ausente ou broadcast.</p>
+        <p><strong>2</strong> <code>checkpoint-unicast-when</code> — Entrada existente para destino.</p>
+        <p><strong>3</strong> <code>checkpoint-storm</code> — Loops L2 podem amplificar flood — cap. 27.</p>
+      </div>
+    </details>
+<details class="theory">
+      <summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary>
+      <div class="theory-content"><p>MACs envelhecem e somem da tabela; fabricantes podem usar hold time. Modelo didático ignora aging.</p></div>
+    </details>
+
+    <nav class="chapter-bottom-navigation" aria-label="Fim">
+      <a href="../07-arp-primeiro-salto/index.html">← Capítulo 07</a>
+      <a href="../09-sub-rede-roteador/index.html">Capítulo 09 →</a>
+    </nav>
+  </main>
+</body>
+</html>

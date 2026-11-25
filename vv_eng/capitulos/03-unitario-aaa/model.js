@@ -1,0 +1,1 @@
+(function(r){'use strict';function aaa(name){const p=String(name).split('_');return{arrange:p[0]||'?',act:p[1]||'?',assert:p[2]||'?'};}const api={aaa};if(typeof module!=='undefined'&&module.exports)module.exports=api;else r.VvLab=api;})(typeof globalThis!=='undefined'?globalThis:this);

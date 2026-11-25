@@ -1,0 +1,1 @@
+'use strict';document.getElementById('lab-host').innerHTML='n <input id=n value=10> <pre id=out></pre>';const $=id=>document.getElementById(id);const R=()=>$('out').textContent=String(MathLab.sum($('n').value));$('n').oninput=R;R();

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <title>Encapsulamento · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="05-encapsulamento-camadas" data-practice-mc="mc-ch05">
+    <header class="page-header">
+      <a class="brand" href="../../index.html" aria-label="Playground, sumário"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> redes de computadores</a>
+      <span class="lesson-tag">CAPÍTULO 05</span>
+    </header>
+
+    <nav class="chapter-navigation" aria-label="Navegação do livro">
+      <a href="../04-throughput-gargalo/index.html">← 04 Throughput</a>
+      <span>05 · Encapsulamento</span>
+      <a href="../06-quadro-ethernet-broadcast/index.html">06 Ethernet →</a>
+    </nav>
+
+    <section class="intro chapter-intro" aria-labelledby="page-title">
+      <p class="eyebrow">CAPÍTULO 05</p>
+      <h1 id="page-title">Encapsulamento<br><span>e camadas</span></h1>
+    </section>
+
+    <p class="chapter-objective"><strong>Objetivo deste capítulo:</strong> empilhar e despilhar cabeçalhos (app → transporte → IP → Ethernet) sem confundir <em>função de camada</em> com <em>caixa na sala de máquinas</em>.</p>
+
+    <section class="practice" aria-labelledby="pretest-title">
+      <div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES</span></div>
+      <div class="practice-stack">
+        <textarea class="practice-field" data-practice-field="pretest-router-tcp" rows="2" placeholder="1. O roteador “fecha” conexões TCP?"></textarea>
+        <textarea class="practice-field" data-practice-field="pretest-osi-box" rows="2" placeholder="2. Cada camada OSI = um rack no datacenter?"></textarea>
+      </div>
+    </section>
+
+    <section class="practice" aria-labelledby="predict-title">
+      <div class="practice-heading"><h2 id="predict-title">Previsão</h2><span class="practice-tag">ANTES DO LAB</span></div>
+      <textarea class="practice-field" data-practice-field="predict-strip" rows="2" placeholder="No roteador: quais camadas são retiradas e quais permanecem?"></textarea>
+    </section>
+
+    <section class="lab" aria-label="Encapsulamento">
+      <div class="toolbar">
+        <div class="playback">
+          <button class="primary" id="play" type="button"><span id="play-label">Executar</span></button>
+          <button id="step" type="button">Um passo →</button>
+          <button class="reset" id="reset" type="button" aria-label="Reiniciar">↺</button>
+        </div>
+        <span class="clock">Passo <strong id="time">0</strong> / <strong id="total-steps">0</strong> · <strong id="wire-bytes">0</strong> B no fio</span>
+      </div>
+      <p class="experiment-note" id="step-caption" style="padding:8px 22px 0">—</p>
+      <div class="encap-stack" id="encap-stack" aria-live="polite"></div>
+      <div class="experiment-controls">
+        <label class="work-control" for="payload"><span>Payload <strong id="payload-preview">256</strong> B</span><input id="payload" type="range" min="32" max="1400" step="16" value="256"></label>
+        <label class="quantum-control" for="transport"><span>Transporte</span>
+          <select id="transport"><option value="udp">UDP</option><option value="tcp">TCP</option></select>
+        </label>
+      </div>
+    </section>
+
+    <aside class="observation" aria-label="Dica"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow" id="observation-label">EXPERIMENTE</p><p id="observation-text">Avance até o roteador — Ethernet sai, IP continua.</p></div></aside>
+
+    <section class="practice" aria-labelledby="compare-title">
+      <div class="practice-heading"><h2 id="compare-title">Comparar</h2><span class="practice-tag">ANALISAR</span></div>
+      <div class="compare-grid">
+        <textarea class="practice-field" data-practice-field="compare-switch" rows="3" placeholder="Switch: até onde ele “enxerga” o pacote?"></textarea>
+        <textarea class="practice-field" data-practice-field="compare-payload" rows="3" placeholder="Onde o GET /api vive após o IP?"></textarea>
+      </div>
+    </section>
+
+    <section class="practice" aria-labelledby="mc-title">
+      <div class="practice-heading"><h2 id="mc-title">Múltipla escolha</h2><span class="practice-tag">CHECKPOINT</span></div>
+      <p class="practice-prompt">Cliente envia HTTP JSON para um servidor. No primeiro roteador da LAN, o que é verdadeiro?</p>
+      <ul class="choice-list" role="radiogroup">
+        <li><label><input type="radio" name="mc-ch05" value="a"> O roteador valida o schema JSON.</label></li>
+        <li><label><input type="radio" name="mc-ch05" value="b"> O roteador mantém estado da sessão TLS.</label></li>
+        <li><label><input type="radio" name="mc-ch05" value="c"> O roteador lê cabeçalho IP para encaminhar e troca quadro Ethernet.</label></li>
+        <li><label><input type="radio" name="mc-ch05" value="d"> O roteador reescreve o método HTTP.</label></li>
+      </ul>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2"></textarea>
+      <textarea class="practice-field" data-practice-field="mc-why-not" rows="3"></textarea>
+      <details class="model-answer"><summary>Ver resposta <span>+</span></summary><p class="theory-content"><strong>C.</strong></p></details>
+    </section>
+
+    <section class="practice" aria-labelledby="checkpoint-title">
+      <div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2><span class="practice-tag">DEPOIS</span></div>
+      <div class="practice-stack">
+        <textarea class="practice-field" data-practice-field="checkpoint-order" rows="2" placeholder="1. Ordem de saída do host (de dentro para fora)."></textarea>
+        <textarea class="practice-field" data-practice-field="checkpoint-router" rows="2" placeholder="2. O que o roteador altera vs preserva."></textarea>
+        <textarea class="practice-field" data-practice-field="checkpoint-device" rows="2" placeholder="3. Camada ≠ dispositivo — um exemplo."></textarea>
+      </div>
+    </section>
+
+                                                                                <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Pré-teste</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>pretest-router-tcp</code> — Roteador típico não termina TCP — encaminha IP; TCP nos hosts.</p>
+        <p><strong>2</strong> <code>pretest-osi-box</code> — Camada lógica ≠ caixa física; um dispositivo implementa várias funções.</p>
+        <h4>Previsão (`predict-strip`)</h4>
+        <p>No passo do roteador: despacha enlace (Ethernet), relê IP, reaplica enlace no próximo hop.</p>
+        <h4>Comparar</h4>
+        <p><strong>Campo</strong> Essência</p>
+        <p><strong><code>compare-switch</code></strong> Switch L2 manipula Ethernet/MAC, não olha URL.</p>
+        <p><strong><code>compare-payload</code></strong> Payload HTTP permanece opaco para IP (cap. 01).</p>
+        <h4>MC (`mc-ch05`)</h4>
+        <p><strong>Correta: C</strong> — roteador encaminha IP; não monta sessão TCP nem interpreta JSON.</p>
+        <h4>Checkpoint</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>checkpoint-order</code> — App → transporte → rede → enlace na saída do host.</p>
+        <p><strong>2</strong> <code>checkpoint-router</code> — Só troca cabeçalho de enlace no hop L3→L2.</p>
+        <p><strong>3</strong> <code>checkpoint-device</code> — Função (camada) vs fabricante/dispositivo.</p>
+      </div>
+    </details>
+<details class="theory">
+      <summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary>
+      <div class="theory-content"><p>PDU: segmento/diagrama/IP/quadro. Tamanhos de cabeçalho são didáticos, não RFC byte-a-byte.</p></div>
+    </details>
+
+    <nav class="chapter-bottom-navigation" aria-label="Fim">
+      <a href="../04-throughput-gargalo/index.html">← Capítulo 04</a>
+      <a href="../06-quadro-ethernet-broadcast/index.html">Capítulo 06 →</a>
+    </nav>
+  </main>
+</body>
+</html>

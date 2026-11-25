@@ -31,7 +31,34 @@
       <details class="model-answer"><summary>Resposta</summary><div class="theory-content"><p><strong>B.</strong> Modelo de memória exige release/acquire para publicar.</p></div></details>
     </section>
     <section class="practice"><h2>Checkpoint</h2><textarea class="practice-field" data-practice-field="checkpoint" rows="2"></textarea></section>
-    <details class="theory"><summary>Teoria</summary><div class="theory-content"><p><em>Happens-before</em> define o que leituras podem observar.</p></div></details>
+                                    <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Objetivo</h4>
+        <p>Objetivo: separar atomicidade de visibilidade — publicar ready antes de data ser visível pode enganar o leitor.</p>
+        <h4>Pré-teste e previsões</h4>
+        <p>Pergunta: Pré-teste</p>
+        <p><strong>pretest</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+        <p>Pergunta: Previsão</p>
+        <p><strong>predict</strong> Conferir após executar o experimento; previsão errada antes do lab é esperada.</p>
+        <h4>Demais campos</h4>
+        <p><strong>mc-why-yes</strong> — ver bloco no capítulo</p>
+        <p>Justificar a letra correta da MC e refutar cada alternativa em uma linha.</p>
+        <p><strong>mc-why-not</strong> — ver bloco no capítulo</p>
+        <p>Justificar a letra correta da MC e refutar cada alternativa em uma linha.</p>
+        <h4>Checkpoint</h4>
+        <p>Pergunta: Checkpoint</p>
+        <p><strong>checkpoint</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+        <h4>MC (mc-ch15)</h4>
+        <p>B. Modelo de memória exige release/acquire para publicar.</p>
+        <p><strong>Letra</strong> Por que não</p>
+        <p><strong>A</strong> rejeitar — Mutex garante apenas ordenação, nunca visibilidade.</p>
+        <p><strong>B</strong> <strong>correta</strong> — Sem sincronização, leituras podem ver valores defasados.</p>
+        <p><strong>C</strong> rejeitar — volatile torna qualquer programa race-free.</p>
+        <p><strong>D</strong> rejeitar — Data race é sinônimo de condição de corrida lógica.</p>
+      </div>
+    </details>
+<details class="theory"><summary>Teoria</summary><div class="theory-content"><p><em>Happens-before</em> define o que leituras podem observar.</p></div></details>
     <nav class="chapter-bottom-navigation"><a href="../14-inversao-prioridade/index.html">← 14</a><a href="../16-ciclo-vida-tarefas/index.html">16 →</a></nav>
   </main>
 </body>

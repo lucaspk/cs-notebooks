@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <title>As quatro fontes de atraso · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="02-atraso-quatro-fontes" data-practice-mc="mc-ch02">
+    <header class="page-header">
+      <a class="brand" href="../../index.html" aria-label="Playground, sumário"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> redes de computadores</a>
+      <span class="lesson-tag">CAPÍTULO 02</span>
+    </header>
+
+    <nav class="chapter-navigation" aria-label="Navegação do livro">
+      <a href="../01-pontos-extremos-servico/index.html">← 01 Serviço</a>
+      <span>02 · Quatro fontes de atraso</span>
+      <a href="../03-perda-fila-esgotada/index.html">03 Perda →</a>
+    </nav>
+
+    <section class="intro chapter-intro" aria-labelledby="page-title">
+      <p class="eyebrow">CAPÍTULO 02</p>
+      <h1 id="page-title">Quatro fontes<br><span>de atraso</span></h1>
+    </section>
+
+    <p class="chapter-objective"><strong>Objetivo deste capítulo:</strong> decompor o atraso (e o RTT) em <em>propagação</em>, <em>transmissão</em>, <em>fila</em> e <em>processamento</em> — e prever qual termo domina antes de mexer no lab.</p>
+
+    <section class="practice" aria-labelledby="pretest-title">
+      <div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES DO EXPERIMENTO</span></div>
+      <div class="practice-stack">
+        <div>
+          <p class="practice-prompt">1. Em uma palavra: o que é RTT?</p>
+          <textarea class="practice-field" data-practice-field="pretest-rtt" rows="2"></textarea>
+        </div>
+        <div>
+          <p class="practice-prompt">2. Dobrar a banda do enlace sempre corta o RTT pela metade?</p>
+          <textarea class="practice-field" data-practice-field="pretest-bandwidth" rows="2"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section class="practice" aria-labelledby="predict-title">
+      <div class="practice-heading"><h2 id="predict-title">Previsão</h2><span class="practice-tag">ANTES DO LAB</span></div>
+      <p class="practice-lead">Valores iniciais: distância 5000 km, 10 Mbps, pacote 1200 bytes, fila 0 ms, processamento 2 ms.</p>
+      <p class="practice-prompt">Qual componente domina o atraso de <strong>ida</strong> nesse cenário?</p>
+      <textarea class="practice-field" data-practice-field="predict-dominant" rows="2"></textarea>
+    </section>
+
+    <section class="lab" aria-label="Decomposição de atraso">
+      <div class="lab-metrics" aria-label="Métricas">
+        <span class="lab-metric">RTT <strong id="rtt-value">—</strong> ms</span>
+        <span class="lab-metric">Ida <strong id="oneway-value">—</strong> ms</span>
+        <span class="lab-metric">Domina <strong id="dominant-label">—</strong></span>
+      </div>
+      <div class="delay-breakdown" id="delay-bars" aria-live="polite"></div>
+      <div class="experiment-controls">
+        <label class="work-control" for="distance"><span>Distância (ida) <strong id="distance-preview">5000</strong> km</span><input id="distance" type="range" min="1" max="20000" step="1" value="5000"></label>
+        <label class="work-control" for="link-mbps"><span>Enlace <strong id="link-preview">10</strong> Mbps</span><input id="link-mbps" type="range" min="0.5" max="1000" step="0.5" value="10"></label>
+        <label class="work-control" for="packet-bytes"><span>Pacote <strong id="packet-preview">1200</strong> B</span><input id="packet-bytes" type="range" min="64" max="9000" step="64" value="1200"></label>
+        <label class="work-control" for="queue-ms"><span>Fila (espera) <strong id="queue-preview">0</strong> ms</span><input id="queue-ms" type="range" min="0" max="200" step="1" value="0"></label>
+        <label class="work-control" for="process-ms"><span>Processamento <strong>2</strong> ms</span><input id="process-ms" type="range" min="0" max="20" step="0.5" value="2"></label>
+      </div>
+      <p class="experiment-note">Mude <strong>uma</strong> variável por vez na previsão; depois compare com a barra dominante.</p>
+    </section>
+
+    <aside class="observation" aria-label="Dica"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow" id="observation-label">EXPERIMENTE</p><p id="observation-text">Ajuste a distância para 50 km e depois para 10000 km — qual barra cresce mais?</p></div></aside>
+
+    <section class="practice" aria-labelledby="compare-title">
+      <div class="practice-heading"><h2 id="compare-title">Comparar cenários</h2><span class="practice-tag">ANALISAR</span></div>
+      <div class="compare-grid">
+        <div>
+          <p class="practice-prompt">Chat na mesma cidade (poucos km, fila no servidor 50 ms): o que tende a dominar?</p>
+          <textarea class="practice-field" data-practice-field="compare-local" rows="3"></textarea>
+        </div>
+        <div>
+          <p class="practice-prompt">Enlace via satélite geo (~36000 km ida): o que domina mesmo com 100 Mbps?</p>
+          <textarea class="practice-field" data-practice-field="compare-satellite" rows="3"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section class="practice" aria-labelledby="mc-title">
+      <div class="practice-heading"><h2 id="mc-title">Múltipla escolha + justificativa</h2><span class="practice-tag">CHECKPOINT</span></div>
+      <p class="practice-prompt">Dois escritórios nos EUA e Brasil. Você aumenta só o uplink doméstico para 1 Gbps. O RTT medido quase não muda. Explicação mais plausível?</p>
+      <ul class="choice-list" role="radiogroup" aria-labelledby="mc-title">
+        <li><label><input type="radio" name="mc-ch02" value="a"> A fila zerou magicamente no Brasil.</label></li>
+        <li><label><input type="radio" name="mc-ch02" value="b"> Propagação sumiu porque o cabo é de fibra “rápida”.</label></li>
+        <li><label><input type="radio" name="mc-ch02" value="c"> Propagação transcontinental ainda pesa; o gargalo não era só o último metro.</label></li>
+        <li><label><input type="radio" name="mc-ch02" value="d"> RTT não depende de distância.</label></li>
+      </ul>
+      <p class="practice-prompt">Por que escolhi essa opção?</p>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="3"></textarea>
+      <p class="practice-prompt">Por que <strong>não</strong> cada uma das outras?</p>
+      <textarea class="practice-field" data-practice-field="mc-why-not" rows="4"></textarea>
+      <details class="model-answer">
+        <summary>Ver resposta sugerida <span aria-hidden="true">+</span></summary>
+        <div class="theory-content"><p><strong>C.</strong> Luz/sinal limita ida e volta; melhorar só um trecho estreito não redefine o RTT global.</p></div>
+      </details>
+    </section>
+
+    <section class="practice" aria-labelledby="checkpoint-title">
+      <div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2><span class="practice-tag">DEPOIS</span></div>
+      <div class="practice-stack">
+        <div>
+          <p class="practice-prompt">1. Liste as quatro fontes (uma palavra cada).</p>
+          <textarea class="practice-field" data-practice-field="checkpoint-four" rows="2"></textarea>
+        </div>
+        <div>
+          <p class="practice-prompt">2. Site lento no celular: por que “culpar só o Wi‑Fi” é insuficiente?</p>
+          <textarea class="practice-field" data-practice-field="checkpoint-symptom" rows="2"></textarea>
+        </div>
+        <div>
+          <p class="practice-prompt">3. Como este lab monta o RTT a partir da ida?</p>
+          <textarea class="practice-field" data-practice-field="checkpoint-rtt" rows="2"></textarea>
+        </div>
+      </div>
+    </section>
+
+                                                                                <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Pré-teste</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>pretest-rtt</code> — RTT ≈ tempo ida + volta (eco, ACK, resposta); não é só “velocidade do Wi‑Fi”.</p>
+        <p><strong>2</strong> <code>pretest-bandwidth</code> — Mais Mbps não reduz propagação (distância/velocidade do sinal); pode reduzir transmissão (L/R).</p>
+        <h4>Previsão (`predict-dominant`)</h4>
+        <p>Cenário padrão do lab (≈5000 km, 10 Mbps, pacote 1200 B, fila 0): <strong>propagação</strong> domina na ida.</p>
+        <h4>Comparar</h4>
+        <p><strong>Campo</strong> Essência</p>
+        <p><strong><code>compare-local</code></strong> Fila ou processamento podem dominar com distância curta e enlace rápido.</p>
+        <p><strong><code>compare-satellite</code></strong> Propagação domina em enlace geo (milhares de km).</p>
+        <h4>MC (`mc-ch02`)</h4>
+        <p><strong>Correta: C</strong> — propagação limitada por distância; upload 1 Gbps não divide RTT transcontinental pela metade.</p>
+        <h4>Checkpoint</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>checkpoint-four</code> — Propagação, transmissão, fila, processamento.</p>
+        <p><strong>2</strong> <code>checkpoint-symptom</code> — Lentidão pode ser fila/DNS/servidor — medir componentes antes de culpar só o Wi‑Fi.</p>
+        <p><strong>3</strong> <code>checkpoint-rtt</code> — RTT soma ida e volta nos quatro termos (simétrico neste modelo).</p>
+      </div>
+    </details>
+<details class="theory">
+      <summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary>
+      <div class="theory-content">
+        <p><strong>Propagação</strong> = distância / velocidade do meio. <strong>Transmissão</strong> = L/R (colocar todos os bits no fio). <strong>Fila</strong> = espera em buffer. <strong>Processamento</strong> = tempo no nó (roteador, NIC).</p>
+        <p>RTT em eco (ping) inclui ida e volta — neste capítulo assumimos caminho simétrico.</p>
+      </div>
+    </details>
+
+    <nav class="chapter-bottom-navigation" aria-label="Fim do capítulo">
+      <a href="../01-pontos-extremos-servico/index.html">← Capítulo 01</a>
+      <a href="../03-perda-fila-esgotada/index.html">Capítulo 03 →</a>
+    </nav>
+  </main>
+</body>
+</html>

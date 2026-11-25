@@ -1,0 +1,1 @@
+'use strict';document.getElementById('lab-host').innerHTML='u<input id=u value=5> i<input id=i value=3> e<input id=e value=20> <pre id=out></pre>';const $=id=>document.getElementById(id);const R=()=>$('out').textContent=JSON.stringify(VvLab.advice($('u').value,$('i').value,$('e').value));['u','i','e'].forEach(id=>$(id).oninput=R);R();

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <title>Perda e fila esgotada · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="../../lib/queue.js" defer></script>
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="03-perda-fila-esgotada" data-practice-mc="mc-ch03">
+    <header class="page-header">
+      <a class="brand" href="../../index.html" aria-label="Playground, sumário"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> redes de computadores</a>
+      <span class="lesson-tag">CAPÍTULO 03</span>
+    </header>
+
+    <nav class="chapter-navigation" aria-label="Navegação do livro">
+      <a href="../02-atraso-quatro-fontes/index.html">← 02 Atraso</a>
+      <span>03 · Perda e fila</span>
+      <a href="../04-throughput-gargalo/index.html">04 Throughput →</a>
+    </nav>
+
+    <section class="intro chapter-intro" aria-labelledby="page-title">
+      <p class="eyebrow">CAPÍTULO 03</p>
+      <h1 id="page-title">Perda e fila<br><span>esgotada</span></h1>
+    </section>
+
+    <p class="chapter-objective"><strong>Objetivo deste capítulo:</strong> separar perda por <em>fila cheia</em> de perda por <em>enlace com erro</em> — e prever a taxa de entrega antes de rodar a simulação.</p>
+
+    <section class="practice" aria-labelledby="pretest-title">
+      <div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES</span></div>
+      <div class="practice-stack">
+        <div>
+          <p class="practice-prompt">1. UDP “garante” entrega?</p>
+          <textarea class="practice-field" data-practice-field="pretest-udp" rows="2"></textarea>
+        </div>
+        <div>
+          <p class="practice-prompt">2. Packet loss no trace sempre significa Wi‑Fi ruim?</p>
+          <textarea class="practice-field" data-practice-field="pretest-wifi" rows="2"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section class="practice" aria-labelledby="predict-title">
+      <div class="practice-heading"><h2 id="predict-title">Previsão</h2><span class="practice-tag">ANTES DO LAB</span></div>
+      <p class="practice-lead">40 pacotes, rajada 5/rodada, fila 4, saída 2/rodada, BER 0%.</p>
+      <p class="practice-prompt">Qual mecanismo de perda deve dominar?</p>
+      <textarea class="practice-field" data-practice-field="predict-loss" rows="2"></textarea>
+    </section>
+
+    <section class="lab" aria-label="Simulação de perda">
+      <div class="toolbar">
+        <div class="playback"><button class="primary" id="run" type="button">Rodar simulação</button></div>
+        <span class="clock">Causa principal: <strong id="loss-kind">—</strong></span>
+      </div>
+      <div class="lab-metrics">
+        <span class="lab-metric">Entregues <strong id="delivered">0</strong></span>
+        <span class="lab-metric">Descarte fila <strong id="drop-queue">0</strong></span>
+        <span class="lab-metric">Descarte enlace <strong id="drop-link">0</strong></span>
+        <span class="lab-metric">Taxa <strong id="rate">0%</strong></span>
+      </div>
+      <div class="experiment-controls">
+        <label class="work-control" for="arrivals"><span>Chegadas <strong id="arrivals-preview">40</strong></span><input id="arrivals" type="range" min="5" max="80" step="1" value="40"></label>
+        <label class="work-control" for="capacity"><span>Capacidade fila <strong id="capacity-preview">4</strong></span><input id="capacity" type="range" min="1" max="30" step="1" value="4"></label>
+        <label class="work-control" for="arrival-burst"><span>Rajada / rodada <strong id="burst-preview">5</strong></span><input id="arrival-burst" type="range" min="1" max="8" step="1" value="5"></label>
+        <label class="work-control" for="service-rate"><span>Saída / rodada <strong id="service-preview">2</strong></span><input id="service-rate" type="range" min="1" max="6" step="1" value="2"></label>
+        <label class="work-control" for="ber"><span>BER enlace % <strong id="ber-preview">0</strong></span><input id="ber" type="range" min="0" max="40" step="0.5" value="0"></label>
+        <label class="quantum-control" for="seed"><span>Semente</span><input id="seed" type="number" min="1" max="99" value="3" style="width:56px"></label>
+      </div>
+      <p class="experiment-note">Mude <strong>BER ou fila</strong>, não os dois na mesma previsão.</p>
+    </section>
+
+    <aside class="observation" aria-label="Dica"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow" id="observation-label">EXPERIMENTE</p><p id="observation-text">Zere o BER e encha a fila; depois esvazie a fila e suba o BER.</p></div></aside>
+
+    <section class="practice" aria-labelledby="compare-title">
+      <div class="practice-heading"><h2 id="compare-title">Comparar</h2><span class="practice-tag">ANALISAR</span></div>
+      <div class="compare-grid">
+        <div>
+          <p class="practice-prompt">Mesma perda na simulação, mas TCP em cima: o que o usuário pode perceber?</p>
+          <textarea class="practice-field" data-practice-field="compare-tcp" rows="3"></textarea>
+        </div>
+        <div>
+          <p class="practice-prompt">Como distinguir fila vs enlace <em>neste</em> lab?</p>
+          <textarea class="practice-field" data-practice-field="compare-queue-vs-ber" rows="3"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section class="practice" aria-labelledby="mc-title">
+      <div class="practice-heading"><h2 id="mc-title">Múltipla escolha</h2><span class="practice-tag">CHECKPOINT</span></div>
+      <p class="practice-prompt">Você mede 8% de perda com BER 0% e fila pequena no roteador. Afirmação mais precisa?</p>
+      <ul class="choice-list" role="radiogroup">
+        <li><label><input type="radio" name="mc-ch03" value="a"> Só existe perda em Wi‑Fi.</label></li>
+        <li><label><input type="radio" name="mc-ch03" value="b"> Fila esgotada pode descartar mesmo com enlace “sem erro”.</label></li>
+        <li><label><input type="radio" name="mc-ch03" value="c"> UDP retransmite automaticamente.</label></li>
+        <li><label><input type="radio" name="mc-ch03" value="d"> Descarte na fila é sempre BER alto.</label></li>
+      </ul>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2" placeholder="Por que escolhi essa opção?"></textarea>
+      <textarea class="practice-field" data-practice-field="mc-why-not" rows="3" placeholder="Por que não as outras?"></textarea>
+      <details class="model-answer"><summary>Ver resposta <span>+</span></summary><p class="theory-content"><strong>B.</strong></p></details>
+    </section>
+
+    <section class="practice" aria-labelledby="checkpoint-title">
+      <div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2><span class="practice-tag">DEPOIS</span></div>
+      <div class="practice-stack">
+        <textarea class="practice-field" data-practice-field="checkpoint-measure" rows="2" placeholder="1. Que métricas você olha antes de culpar o meio?"></textarea>
+        <textarea class="practice-field" data-practice-field="checkpoint-two-causes" rows="2" placeholder="2. Duas causas distintas de perda neste capítulo."></textarea>
+        <textarea class="practice-field" data-practice-field="checkpoint-tie-delay" rows="2" placeholder="3. Relação com atraso de fila (cap. 02)."></textarea>
+      </div>
+    </section>
+
+                                                                                <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Pré-teste</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>pretest-udp</code> — UDP não garante entrega; perda pode ocorrer na rede.</p>
+        <p><strong>2</strong> <code>pretest-wifi</code> — Perda também vem de fila cheia, policer, servidor — não só meio sem fio.</p>
+        <h4>Previsão (`predict-loss`)</h4>
+        <p>Cenário inicial (40 pacotes, rajada 5, fila 4, saída 2/rodada, BER 0%): <strong>fila</strong> deve dominar descartes.</p>
+        <h4>Comparar</h4>
+        <p><strong>Campo</strong> Essência</p>
+        <p><strong><code>compare-tcp</code></strong> TCP retransmite — usuário vê atraso, nem sempre “perda visível”.</p>
+        <p><strong><code>compare-queue-vs-ber</code></strong> Contadores diferentes: <code>droppedQueue</code> vs <code>droppedLink</code>; investigar fila antes de culpar só o ar.</p>
+        <h4>MC (`mc-ch03`)</h4>
+        <p><strong>Correta: B</strong> — fila esgotada descarta mesmo em enlace “limpo”; BER é outro contador.</p>
+        <h4>Checkpoint</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>checkpoint-measure</code> — Taxa entregue / taxa descarte / fila final — não só “deu ruim”.</p>
+        <p><strong>2</strong> <code>checkpoint-two-causes</code> — Fila cheia (congestionamento local) vs erro no enlace.</p>
+        <p><strong>3</strong> <code>checkpoint-tie-delay</code> — Fila cheia aumenta atraso (cap. 02); perda aqui é consequência de overflow.</p>
+      </div>
+    </details>
+<details class="theory">
+      <summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary>
+      <div class="theory-content"><p>RED/ tail drop são políticas reais de buffer; aqui usamos fila finita com descarte simples.</p></div>
+    </details>
+
+    <nav class="chapter-bottom-navigation" aria-label="Fim">
+      <a href="../02-atraso-quatro-fontes/index.html">← Capítulo 02</a>
+      <a href="../04-throughput-gargalo/index.html">Capítulo 04 →</a>
+    </nav>
+  </main>
+</body>
+</html>

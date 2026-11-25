@@ -1,0 +1,1 @@
+(function(r){'use strict';function iso(real,mock){return{isolated:!real&&mock,risk:real?'alto':'baixo'};}const api={iso};if(typeof module!=='undefined'&&module.exports)module.exports=api;else r.VvLab=api;})(typeof globalThis!=='undefined'?globalThis:this);

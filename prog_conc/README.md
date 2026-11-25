@@ -1,5 +1,7 @@
 # Programação concorrente — playground
 
+**Fase 3** — sistemas concorrentes e paralelos. Pré-requisitos recomendados: arquitetura básica e sistemas operacionais; pode estudar em paralelo com redes de computadores.
+
 Abra `index.html` no navegador para acessar o sumário do livro interativo. Cada capítulo tem sua própria página. Não precisa instalar dependências ou iniciar um servidor.
 
 Parte do monorepo [cs-notebooks](../README.md) · [catálogo de livros e fundamentos](../LIVROS.md) · sumário geral: [../index.html](../index.html).

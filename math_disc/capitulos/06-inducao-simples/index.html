@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indução simples · Playground</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="model.js" defer></script><script src="app.js" defer></script><script src="../../practice.js" defer></script>
+</head><body>
+<main data-chapter-id="06-inducao-simples" data-practice-mc="mc-ch06">
+<header class="page-header"><a class="brand" href="../../index.html">playground / discreta</a><span class="lesson-tag">CAP 06</span></header>
+<nav class="chapter-navigation"><a href="../05-relacoes-funcoes/index.html">←</a> <span>Indução simples</span> <a href="../07-inducao-forte/index.html">→</a></nav>
+<section class="intro chapter-intro"><h1>Indução simples</h1></section>
+<p class="chapter-objective"><strong>Objetivo:</strong> Fechar uma propriedade pelo caso base e passo indutivo</p>
+
+    <section class="practice" aria-labelledby="worked-title"><div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2><span class="practice-tag">NO PAPEL</span></div><section class="practice-worked"><p>Para provar P(n), mostre P(1), suponha P(k) e derive P(k+1).</p></section><textarea class="practice-field" data-practice-field="worked-observation" rows="2" placeholder="Qual regra você aplicou?"></textarea></section>
+<section class="practice" aria-labelledby="pretest-title"><div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES</span></div><div class="practice-stack"><textarea class="practice-field" data-practice-field="pretest-1" rows="2" placeholder="O que você já sabe sobre o tema?"></textarea><textarea class="practice-field" data-practice-field="pretest-example" rows="2" placeholder="Dê um exemplo ou contraexemplo curto."></textarea></div></section>
+<section class="practice" aria-labelledby="predict-title"><div class="practice-heading"><h2 id="predict-title">Previsão</h2><span class="practice-tag">ANTES DO LAB</span></div><textarea class="practice-field" data-practice-field="predict-1" rows="2" placeholder="Faça uma previsão antes de abrir o lab."></textarea></section>
+<section class="lab" aria-label="Lab interativo"><div class="experiment-controls"><p><strong>Laboratório:</strong> altere os controles e observe a saída.</p></div><div id="lab-host"></div></section>
+
+    <section class="practice" aria-labelledby="compare-title"><div class="practice-heading"><h2 id="compare-title">Comparar</h2><span class="practice-tag">ANALISAR</span></div><div class="compare-grid"><textarea class="practice-field" data-practice-field="compare-case" rows="3" placeholder="Encadeamento: Por que o passo não pode depender apenas do próximo caso?"></textarea><textarea class="practice-field" data-practice-field="compare-limit" rows="3" placeholder="O caso base pode começar em n=0?"></textarea></div></section>
+    <section class="practice" aria-labelledby="mc-title"><div class="practice-heading"><h2 id="mc-title">Múltipla escolha</h2><span class="practice-tag">JUSTIFICAR</span></div><p class="practice-prompt">Qual afirmação está alinhada ao lab?</p><ul class="choice-list" role="radiogroup"><li><label><input type="radio" name="mc-ch01" value="a"> A) O resultado depende apenas da intuição e não da definição.</label></li><li><label><input type="radio" name="mc-ch01" value="b"> B) Base cria o primeiro verdadeiro; passo liga cada verdadeiro ao seguinte.</label></li><li><label><input type="radio" name="mc-ch01" value="c"> C) Mudança de base pode deslocar todos os índices válidos.</label></li><li><label><input type="radio" name="mc-ch01" value="d"> D) A conclusão vale sem verificar o domínio ou as condições.</label></li></ul><textarea class="practice-field" data-practice-field="mc-why-yes" rows="2" placeholder="Por que a alternativa correta é a melhor?"></textarea><textarea class="practice-field" data-practice-field="mc-why-not" rows="3" placeholder="Por que pelo menos uma alternativa errada não serve?"></textarea><details class="model-answer"><summary>Ver resposta <span>+</span></summary><p class="theory-content"><strong>B.</strong> Base cria o primeiro verdadeiro; passo liga cada verdadeiro ao seguinte.</p></details></section>
+    <section class="practice" aria-labelledby="checkpoint-title">
+      <div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2><span class="practice-tag">DEPOIS</span></div><div class="practice-stack"><textarea class="practice-field" data-practice-field="checkpoint-1" rows="2" placeholder="Explique a regra central com suas palavras."></textarea><textarea class="practice-field" data-practice-field="checkpoint-counter" rows="2" placeholder="Dê um contraexemplo ou limite da regra."></textarea></div></section>
+
+    <aside class="observation" aria-label="Dica"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow">OBSERVE</p><p>Observe a regra antes de decorar o resultado: o lab é a evidência que separa hipótese de conclusão.</p></div></aside>
+    <details class="theory"><summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary><div class="theory-content"><p>Confira a definição antes de uma exceção ou atalho; abstrações só são úteis quando preservam os casos válidos.</p></div></details>
+                                                                                                                                                                                            <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Pré-teste</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>pretest-1</code> — Sempre explicite hipótese, índice e conclusão do passo.</p>
+        <p><strong>2</strong> <code>pretest-example</code> — O estudante deve dar um exemplo ou contraexemplo ligado à definição.</p>
+        <h4>Exemplo trabalhado (`worked-observation`)</h4>
+        <p>Leia o exemplo e marque a regra aplicada; não copie o resultado sem explicar o mecanismo.</p>
+        <h4>Previsão (`predict-1`)</h4>
+        <p>Antes do lab, aceitar uma previsão que indique a regra central: Por que o passo não pode depender apenas do próximo caso?</p>
+        <h4>Comparar</h4>
+        <p><strong>Campo</strong> Essência</p>
+        <p><strong><code>compare-case</code></strong> Encadeamento: Por que o passo não pode depender apenas do próximo caso?</p>
+        <p><strong><code>compare-limit</code></strong> O caso base pode começar em n=0?: Indução não é observação de poucos casos.</p>
+        <h4>MC (`mc-ch01`)</h4>
+        <p><strong>Correta: B</strong> — Base cria o primeiro verdadeiro; passo liga cada verdadeiro ao seguinte.</p>
+        <p>Distratores: A confunde intuição com definição; C ignora condições; D elimina o domínio ou a forma da regra.</p>
+        <h4>Checkpoint</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>checkpoint-1</code> — Explicar a regra central com linguagem própria.</p>
+        <p><strong>2</strong> <code>checkpoint-counter</code> — Dar um limite ou contraexemplo coerente.</p>
+      </div>
+    </details>
+<nav class="chapter-bottom-navigation"><a href="../05-relacoes-funcoes/index.html">←</a> <a href="../07-inducao-forte/index.html">→</a></nav>
+</main></body></html>

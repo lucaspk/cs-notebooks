@@ -1,0 +1,1 @@
+(function(r){'use strict';function sorted(a){const c=[...a].sort((x,y)=>x-y);return c.every((v,i)=>i===0||c[i-1]<=v);}const api={sorted};if(typeof module!=='undefined'&&module.exports)module.exports=api;else r.VvLab=api;})(typeof globalThis!=='undefined'?globalThis:this);

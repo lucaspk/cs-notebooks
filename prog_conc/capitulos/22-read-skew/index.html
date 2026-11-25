@@ -101,7 +101,40 @@
       <textarea class="practice-field" data-practice-field="checkpoint-1" rows="3" placeholder="Defina a anomalia em uma frase e como o lab a mostrou."></textarea>
     </section>
 
-    <details class="theory"><summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary>
+                                    <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Objetivo</h4>
+        <p>Objetivo deste capítulo: ler duas linhas relacionadas em momentos diferentes e ver soma impossível (transferência entre contas).</p>
+        <h4>Pré-teste e previsões</h4>
+        <p>Pergunta: O que você espera que aconteça no roteiro?</p>
+        <p><strong>pretest-1</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+        <p>Pergunta: Qual anomalia aparece? Em qual passo?</p>
+        <p><strong>predict-1</strong> Conferir após executar o experimento; previsão errada antes do lab é esperada.</p>
+        <h4>Demais campos</h4>
+        <p><strong>compare-1</strong> — Compare os dois modos/isolamentos do seletor.</p>
+        <p>Separar o que é invariante (trabalho, invariante, protocolo) do que muda (tempo, ordem, visibilidade, anomalia).</p>
+        <p><strong>mc-why</strong> — Por que escolhi essa opção?</p>
+        <p>Justificar a letra correta da MC e refutar cada alternativa em uma linha.</p>
+        <p><strong>tradeoff-1</strong> — Custo de prevenir esta anomalia (locks, aborts, latência)…</p>
+        <p>Proposta mínima coerente com o objetivo; citar trade-off explícito.</p>
+        <p><strong>context-1</strong> — Onde isso aparece em API/ORM/banco que você usa?</p>
+        <p>Proposta mínima coerente com o objetivo; citar trade-off explícito.</p>
+        <p><strong>design-1</strong> — Qual nível ou trava você escolheria para este caso?</p>
+        <p>Proposta mínima coerente com o objetivo; citar trade-off explícito.</p>
+        <h4>Checkpoint</h4>
+        <p>Pergunta: Defina a anomalia em uma frase e como o lab a mostrou.</p>
+        <p><strong>checkpoint-1</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+        <h4>MC (mc-ch22)</h4>
+        <p>B. Read skew.</p>
+        <p><strong>Letra</strong> Por que não</p>
+        <p><strong>A</strong> rejeitar — Termo errado — não envolve transações.</p>
+        <p><strong>B</strong> <strong>correta</strong> — Descrição correta da anomalia / nível.</p>
+        <p><strong>C</strong> rejeitar — Confunde com condição de corrida em memória.</p>
+        <p><strong>D</strong> rejeitar — Confunde com deadlock.</p>
+      </div>
+    </details>
+<details class="theory"><summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary>
       <div class="theory-content"><p><strong>Read skew:</strong> invariante entre linhas quebra na leitura. Snapshot isolation alinha as leituras de T1.</p></div></details>
 
     <nav class="chapter-bottom-navigation" aria-label="Fim do capítulo">

@@ -1,0 +1,1 @@
+'use strict';document.getElementById('lab-host').innerHTML='<pre id=out></pre>';document.getElementById('out').textContent=String(MathLab.passwords(4,26));

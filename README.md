@@ -10,9 +10,33 @@ Mais prática do que teoria. Pouquinho de teoria e muita prática e assim vou.
 
 Cada livro do repositório (por tema) segue o mesmo molde de capítulo descrito abaixo. O **README do livro** guarda o roteiro daquele assunto; este arquivo guarda o **molde pedagógico** comum e o **mapa de fundamentos**. Catálogo de livros, slugs e scaffolding: [LIVROS.md](LIVROS.md).
 
-**Livros hoje:** [prog_conc/](prog_conc/README.md) (concorrência, 29 caps.) · [comp_net/](comp_net/README.md) (redes, em progresso). Sumário geral: abra [index.html](index.html) no navegador.
+**Livros hoje:** [prog_conc/](prog_conc/README.md) (29) · [comp_net/](comp_net/README.md) (8/31) · fase 0: [paradigms/](paradigms/) · [math_disc/](math_disc/) · [vv_eng/](vv_eng/). Progresso canônico: [WORKBOARD.md](WORKBOARD.md). Sumário: [index.html](index.html) — site **estático** (sem backend, sem build no deploy). Publicável em [GitHub Pages](#publicação-github-pages); links são todos **relativos** (`prog_conc/…`, `capitulos/…`). O preview de HTML **dentro do editor** costuma não navegar; use o navegador (arquivo local ou a URL publicada).
 
-**Novo livro:** `node _tools/new-livro.mjs --slug <pasta> --title "Título" --brand "nome no cabeçalho"` (esqueleto em [`_template-livro/`](_template-livro/)).
+**Novo livro / manutenção:** só o **agente** (ver [AGENTS.md](AGENTS.md) e quadro compartilhado [WORKBOARD.md](WORKBOARD.md)). Você abre `index.html` e estuda; gabarito no fim de cada capítulo (**Gabarito +**).
+
+**Agentes em paralelo (Cursor, Codex, …):** reivindiquem slugs no [WORKBOARD.md](WORKBOARD.md) antes de codar; ao fechar, rodem `node _tools/refresh-workboard.mjs` e registrem o **Diário**.
+
+### Para agentes de IA (onde cada ferramenta costuma olhar)
+
+| Ferramenta | Arquivo na raiz `cs-notebooks/` |
+| --- | --- |
+| Qualquer (canônico) | [AGENTS.md](AGENTS.md) + [WORKBOARD.md](WORKBOARD.md) |
+| OpenAI Codex | [CODEX.md](CODEX.md) |
+| Anthropic Claude | [CLAUDE.md](CLAUDE.md) |
+| GitHub Copilot / Codex cloud | [.github/copilot-instructions.md](.github/copilot-instructions.md) |
+| Cursor (regra sempre ativa nesta pasta) | [.cursor/rules/workboard.mdc](.cursor/rules/workboard.mdc) |
+| Cursor / legado | [.cursorrules](.cursorrules) |
+| Workspace = pasta `repos/` (monorepo) | [../AGENTS.md](../AGENTS.md) + [../.cursor/rules/cs-notebooks.mdc](../.cursor/rules/cs-notebooks.mdc) |
+
+### Publicação (GitHub Pages)
+
+1. Repositório com a raiz em **esta pasta** (`index.html` na raiz do repo que o Pages publica).
+2. GitHub → **Settings → Pages** → fonte: branch `main` (ou `gh-pages`), pasta **`/` (root)**.
+3. O arquivo [`.nojekyll`](.nojekyll) evita que o Jekyll ignore pastas com `_` (`_tools/`, `_template-livro/`) e sirva tudo como HTML/CSS/JS puro.
+4. URL típica: `https://<usuário>.github.io/<repo>/` — abra `index.html` ou a raiz do site; os livros entram por `prog_conc/index.html`, `comp_net/index.html`, etc.
+5. Nada de `npm run build` no deploy: só `git push`. Scripts Node (`build-index.mjs`, testes) são **só para quem desenvolve** capítulos, não para o visitante.
+
+Se o git estiver num monorepo maior, publique só `cs-notebooks/` (repo dedicado, ou submódulo, ou Actions copiando esta pasta para o branch do Pages).
 
 ---
 
@@ -25,12 +49,12 @@ Base sólida como rocha: prática guiada por experimento, não enciclopédia. A 
 | Área | O que você deve conseguir fazer (evidência) | Livro / slug |
 | --- | --- | --- |
 | **Estruturas de dados e algoritmos** | Escolher estrutura e complexidade; **grafos** (representação, busca, caminhos, árvores geradoras, ordenação topológica, fluxo intro); prever custo e trade-offs | `dsa` (planejado) |
-| **Matemática discreta e lógica** | Lógica, conjuntos, relações, indução; grafos como objeto matemático (vocabulário) — algoritmos de grafo ficam em `dsa` | `math_disc` (planejado) |
+| **Matemática discreta e lógica** | Lógica, conjuntos, relações, indução; grafos como objeto matemático (vocabulário) — algoritmos de grafo ficam em `dsa` | [`math_disc`](math_disc/) |
 | **Teoria da computação** | Saber o que é decidível; reduzir problemas; intuição P/NP sem dogma | `th_cs` (planejado) |
 | **Arquitetura de computadores** | Explicar cache miss, pipeline e memória virtual em cenários concretos | `arch_cpu` (planejado) |
 | **Sistemas operacionais** | Processo vs thread, escalonamento, FS, syscalls, por que I/O bloqueia | `os_kern` (planejado) |
 | **Compiladores** | Seguir token → AST → IR; ligar erro de sintaxe a fase do compilador | `compilers` (planejado) |
-| **Paradigmas de linguagens** | Escolher estilo (imperativo, FP, OO, concorrente) por expressividade e risco | `paradigms` (planejado) |
+| **Paradigmas de linguagens** | Escolher estilo (imperativo, FP, OO, concorrente) por expressividade e risco | [`paradigms`](paradigms/) |
 
 ### Sistemas, dados e rede
 
@@ -51,7 +75,7 @@ Base sólida como rocha: prática guiada por experimento, não enciclopédia. A 
 | Área | O que você deve conseguir fazer (evidência) | Livro / slug |
 | --- | --- | --- |
 | **Engenharia de software** | Requisitos, design, débito técnico, mudança segura, APIs | `soft_eng` (planejado) |
-| **Verificação e validação** | Pirâmide de testes, contratos, propriedades, revisão útil | `vv_eng` (planejado) |
+| **Verificação e validação** | Pirâmide de testes, contratos, propriedades, revisão útil | [`vv_eng`](vv_eng/) |
 | **Segurança** | Ameaça → controle; authn/z; superfície de ataque em apps reais | `sec_eng` (planejado) |
 
 ### Transversal (capítulos ou “aprofundar” em vários livros)
@@ -104,6 +128,20 @@ Não é trilha única obrigatória — é a sequência que **menos quebra workin
 
 Cada capítulo deve caber na working memory: um objetivo pequeno, um experimento quando fizer sentido, teoria só o necessário (recolhida por padrão). A prática não decora resposta — exige **escolher, justificar e descartar alternativas** na hora.
 
+### Fase e dependências
+
+Todo livro e todo tópico publicado ou planejado pertence a uma fase canônica:
+
+- **Fase 0:** ferramentas mentais (`vv_eng`, `math_disc`, `paradigms`).
+- **Fase 1:** estruturas e algoritmos.
+- **Fase 2:** arquitetura, compiladores e sistemas operacionais.
+- **Fase 3:** programação concorrente e redes.
+- **Fase 4:** dados e performance.
+- **Fase 5:** sistemas distribuídos e operação.
+- **Fase 6:** segurança, engenharia de software e teoria da computação.
+
+O identificador da fase deve aparecer no README do livro, no catálogo e na UI de sumário. Capítulos futuros devem indicar também o pré-requisito ou sua dependência explícita. Quando um capítulo introduzir vocabulario usado depois, a própria página deve apresentar esse contexto antes da primeira previsão ou atividade dependente dele.
+
 ### Taxonomia de Bloom × tipos de prática
 
 | Tipo de prática | Níveis de Bloom (principal) | O que o estudante faz | Quando usar |
@@ -139,23 +177,36 @@ Capítulos mais avançados podem encurtar o exemplo trabalhado e puxar mais **av
 2. **Justificativa obrigatória** — Em MC, a interface ou o texto pede: “por que esta” e “por que não cada uma das outras” (mesmo que em campos curtos).
 3. **Alternativas plausíveis** — Erradas devem ser erros reais de iniciante, não absurdos.
 4. **Sem vazar a resposta no experimento** — O interativo mostra evidência; a conclusão o estudante articula.
+5. **Referentes explícitos antes da pergunta** — Nunca use “os quatro”, “ambos”, “as opções”, “o modelo” ou nomes técnicos antes de os definir ou apresentar. Uma previsão só pode perguntar sobre uma lista ou conjunto que já apareceu no capítulo. Em capítulos introdutórios, contextualização e exemplo trabalhado vêm antes da previsão sobre esse conjunto.
+6. **Contexto independente de conhecimento externo** — Cada página deve fornecer termos, escopo e exemplos mínimos necessários para agir; não assumirá conteúdo conhecido apenas pelo título, por laboratório anterior ou por outro livro.
 5. **Checkpoint** — No fim, 2–4 perguntas alinhadas ao objetivo (podem repetir formato de pré-teste para ver ganho).
 6. **Teoria recolhida** — Definições e links longos em `<details>` ou seção “aprofundar”, não no fluxo principal.
+7. **Gabarito recolhido** — `GABARITO.md` na pasta do capítulo; o HTML ganha `<details class="chapter-gabarito">` via `_tools/` (**agente** roda `maintain-book` / `finalize-chapter` — ver [AGENTS.md](AGENTS.md)).
 
 ### Checklist antes de publicar um capítulo
 
 - [ ] Objetivo de aprendizagem em uma frase
+- [ ] Fase canônica indicada no README/entrada do livro e relação com pré-requisitos explícita
 - [ ] Níveis de Bloom alvo indicados (para o autor; não precisa aparecer na UI)
 - [ ] Mix de práticas escolhido e na ordem razoável
 - [ ] Pré-teste ou previsão no início
+- [ ] Referentes definidos antes das perguntas: não usar “os quatro”, “ambos”, “as opções” ou nomes técnicos sem apresentação anterior
+- [ ] Previsão ocorre depois do contexto mínimo necessário; não exige adivinhar termos ou assumir outro capítulo
 - [ ] Pelo menos uma atividade que force **descartar** alternativas (MC justificada, comparação ou “melhor por contexto”)
 - [ ] Exemplo trabalhado ou experimento guiado antes do exercício mais difícil
 - [ ] Design/aplicação mínima **ou** motivo documentado de não caber neste capítulo
 - [ ] Checkpoint final
+- [ ] `GABARITO.md` no capítulo (agente: `node _tools/finalize-chapter.mjs <livro> <slug>`)
 
 ### Onde isso aparece na estrutura de arquivos
 
-Cada livro na raiz do repositório (`<slug>/`, ex. `prog_conc/`, `comp_net/`) mantém:
+Na raiz do repositório publicado:
+
+- `index.html` — hub dos livros
+- `local-links.js` — ajuda navegação só em `file://` / preview do editor; em GitHub Pages (https) o navegador segue os links normais
+- `.nojekyll` — obrigatório no Pages com pastas `_…`
+
+Cada livro (`<slug>/`, ex. `prog_conc/`, `comp_net/`) mantém:
 
 - `index.html` — sumário
 - `styles.css` — aparência do livro e classes de prática (`.practice-*`)

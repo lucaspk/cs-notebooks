@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Escolher paradigma · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="08-escolher-paradigma" data-practice-mc="mc-ch08">
+    <nav class="chapter-navigation"><a href="../07-concorrencia-mensagem-estado/index.html">← 07</a><span>08 Escolha</span><a href="../../index.html">Sumário →</a></nav>
+    <h1>Escolher<br><span>paradigma</span></h1>
+    <p class="chapter-objective"><strong>Objetivo:</strong> selecionar um paradigma pelos riscos e pela equipe</p>
+    <section class="practice" aria-labelledby="worked-title"><div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2><span class="practice-tag">NO PAPEL</span></div><section class="practice-worked"><p>Risco de concorrência alto tende a aumentar o uso de isolamento por mensagem ou estado controlado.</p></section><textarea class="practice-field" data-practice-field="worked-08" rows="2" placeholder="Qual é a regra aplicada?"></textarea></section>
+    <section class="practice" aria-labelledby="pretest-title"><div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES</span></div><textarea class="practice-field" data-practice-field="pretest-dogma" rows="2"></textarea></section>
+    <p>1–5: mudança     <section class="practice" aria-labelledby="predict-title"><div class="practice-heading"><h2 id="predict-title">Previsão</h2><span class="practice-tag">ANTES DO LAB</span></div><textarea class="practice-field" data-practice-field="predict-choice" rows="2" placeholder="O que você prevê que o lab mostrará?"></textarea></section>
+    <input id="mudanca" type="range" min="1" max="5" value="3">
+      equipe <input id="equipe" type="range" min="1" max="5" value="3">
+      risco conc <input id="conc" type="range" min="1" max="5" value="3">
+      expressividade <input id="express" type="range" min="1" max="5" value="3"></p>
+    <p>Sugestão: <strong id="top">—</strong></p>
+    <ol id="list"></ol>
+    <section class="practice" aria-labelledby="compare-title"><div class="practice-heading"><h2 id="compare-title">Comparar</h2><span class="practice-tag">ANALISAR</span></div><div class="compare-grid"><textarea class="practice-field" data-practice-field="compare-model" rows="3" placeholder="Modelo atual: Mudança, equipe, concorrência e expressividade como critérios."></textarea><textarea class="practice-field" data-practice-field="compare-limit" rows="3" placeholder="Quando o modelo deixa de ajudar?"></textarea></div></section>
+    <aside class="observation" aria-label="Dica"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow">OBSERVE</p><p>Não há paradigma universal.</p></div></aside>
+    <section class="practice" aria-labelledby="mc-title"><div class="practice-heading"><h2 id="mc-title">Múltipla escolha</h2><span class="practice-tag">JUSTIFICAR</span></div><p class="practice-prompt">Qual afirmação está alinhada ao laboratório?</p>
+    <ul class="choice-list">
+      <li><label><input type="radio" name="mc-ch08" value="a"> A) Decisão por contexto e risco.</label></li>
+      <li><label><input type="radio" name="mc-ch08" value="b"> B) Sempre OO.</label></li>
+      <li><label><input type="radio" name="mc-ch08" value="c"> C) Paradigma não afeta manutenção.</label></li>
+      <li><label><input type="radio" name="mc-ch08" value="d"> D) Funcional proíbe estado.</label></li>
+    </ul>
+    <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2" placeholder="Por que a correta é melhor?"></textarea>
+    <textarea class="practice-field" data-practice-field="mc-why-not" rows="3" placeholder="Por que uma alternativa errada não serve?"></textarea>
+    </section>
+    <textarea class="practice-field" data-practice-field="checkpoint-next" rows="2"></textarea>
+    <details class="theory"><summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary><div class="theory-content"><p>Paradigmas são ferramentas: escolha pelo invariante, mudança e capacidade da equipe.</p></div></details>
+                                                                                                                                                                                                                            <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Pré-teste</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>pretest-dogma</code> — Reconhecer o fenômeno antes de escolher uma solução.</p>
+        <h4>Exemplo trabalhado (`worked-08`)</h4>
+        <p>Risco de concorrência alto tende a aumentar o uso de isolamento por mensagem ou estado controlado.</p>
+        <h4>Previsão (`predict-choice`)</h4>
+        <p>Aceitar uma previsão que use a regra central, não apenas copiar o resultado mostrado.</p>
+        <h4>Comparar</h4>
+        <p><strong>Campo</strong> Essência</p>
+        <p><strong><code>compare-model</code></strong> Mudança, equipe, concorrência e expressividade como critérios.</p>
+        <p><strong><code>compare-limit</code></strong> Indicar o limite da abstração ou o cenário onde ela deixa de ajudar.</p>
+        <h4>MC (`mc-ch08`)</h4>
+        <p><strong>Correta: A</strong> — Decisão por contexto e risco.</p>
+        <p><strong>Justificativa negativa:</strong> OO, funcional ou imperativo não são respostas universais.</p>
+        <h4>Checkpoint</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>checkpoint-next</code> — Explicar a regra central com suas palavras e dar um limite ou contraexemplo.</p>
+      </div>
+    </details>
+<nav class="chapter-bottom-navigation"><a href="../07-concorrencia-mensagem-estado/index.html">← 07</a><a href="../../index.html">Sumário →</a></nav>
+  </main>
+</body>
+</html>

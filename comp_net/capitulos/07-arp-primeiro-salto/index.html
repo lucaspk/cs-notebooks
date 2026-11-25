@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <title>ARP e primeiro salto · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="07-arp-primeiro-salto" data-practice-mc="mc-ch07">
+    <header class="page-header">
+      <a class="brand" href="../../index.html" aria-label="Playground, sumário"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> redes de computadores</a>
+      <span class="lesson-tag">CAPÍTULO 07</span>
+    </header>
+
+    <nav class="chapter-navigation" aria-label="Navegação do livro">
+      <a href="../06-quadro-ethernet-broadcast/index.html">← 06 Ethernet</a>
+      <span>07 · ARP</span>
+      <a href="../08-switch-tabela-mac/index.html">08 Switch →</a>
+    </nav>
+
+    <section class="intro chapter-intro" aria-labelledby="page-title">
+      <p class="eyebrow">CAPÍTULO 07</p>
+      <h1 id="page-title">ARP<br><span>e primeiro salto</span></h1>
+    </section>
+
+    <p class="chapter-objective"><strong>Objetivo:</strong> resolver “tenho IP, preciso MAC” na mesma sub-rede — request broadcast, reply unicast, cache.</p>
+
+    <section class="practice" aria-labelledby="pretest-title">
+      <div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES</span></div>
+      <div class="practice-stack">
+        <textarea class="practice-field" data-practice-field="pretest-arp-why" rows="2"></textarea>
+        <textarea class="practice-field" data-practice-field="pretest-arp-who" rows="2"></textarea>
+      </div>
+    </section>
+
+    <section class="practice" aria-labelledby="worked-title">
+      <div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2><span class="practice-tag">NO PAPEL</span></div>
+      <section class="practice-worked">
+        <p>A (10.0.0.1) quer enviar a B (10.0.0.2). Passos: ARP request → reply com MAC de B → quadro IP unicast.</p>
+      </section>
+      <textarea class="practice-field" data-practice-field="worked-cache" rows="2" placeholder="O que muda na segunda vez?"></textarea>
+    </section>
+
+    <section class="practice" aria-labelledby="predict-title">
+      <div class="practice-heading"><h2 id="predict-title">Previsão</h2><span class="practice-tag">ANTES DO LAB</span></div>
+      <textarea class="practice-field" data-practice-field="predict-arp-type" rows="2" placeholder="Tipo Ethernet do request e do reply."></textarea>
+    </section>
+
+    <section class="lab" aria-label="Resolução ARP">
+      <div class="toolbar">
+        <div class="playback"><button id="step" type="button" class="primary">Um passo →</button><button id="reset" type="button">Reiniciar fluxo</button><button id="clear-cache" type="button">Limpar cache</button></div>
+        <span class="clock">Passo <strong id="time">0</strong></span>
+      </div>
+      <table class="mac-table" aria-label="Cache ARP">
+        <thead><tr><th>Chave</th><th>MAC</th></tr></thead>
+        <tbody id="cache-body"></tbody>
+      </table>
+      <ol class="net-step-list" id="step-list"></ol>
+      <div class="experiment-controls">
+        <label class="quantum-control" for="dest-ip"><span>Destino IP (de A)</span>
+          <select id="dest-ip">
+            <option value="B">10.0.0.2 (B)</option>
+            <option value="gateway">10.0.0.254 (gateway)</option>
+            <option value="remote">192.0.2.50 (fora)</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <aside class="observation" aria-label="Dica"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow">OBSERVE</p><p id="observation-text">—</p></div></aside>
+
+    <section class="practice" aria-labelledby="compare-title">
+      <div class="practice-heading"><h2 id="compare-title">Comparar</h2><span class="practice-tag">ANALISAR</span></div>
+      <div class="compare-grid">
+        <textarea class="practice-field" data-practice-field="compare-dns" rows="3"></textarea>
+        <textarea class="practice-field" data-practice-field="compare-remote" rows="3"></textarea>
+      </div>
+    </section>
+
+    <section class="practice" aria-labelledby="mc-title">
+      <div class="practice-heading"><h2 id="mc-title">Múltipla escolha</h2><span class="practice-tag">CHECKPOINT</span></div>
+      <p class="practice-prompt">Primeira resolução ARP na LAN. O que é correto?</p>
+      <ul class="choice-list" role="radiogroup">
+        <li><label><input type="radio" name="mc-ch07" value="a"> Request em broadcast; reply unicast para quem perguntou.</label></li>
+        <li><label><input type="radio" name="mc-ch07" value="b"> Ambos em broadcast.</label></li>
+        <li><label><input type="radio" name="mc-ch07" value="c"> Roteador responde ARP pelo servidor na nuvem.</label></li>
+        <li><label><input type="radio" name="mc-ch07" value="d"> ARP substitui DNS.</label></li>
+      </ul>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2"></textarea>
+      <textarea class="practice-field" data-practice-field="mc-why-not" rows="3"></textarea>
+      <details class="model-answer"><summary>Ver resposta <span>+</span></summary><p class="theory-content"><strong>A.</strong></p></details>
+    </section>
+
+    <section class="practice" aria-labelledby="checkpoint-title">
+      <div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2><span class="practice-tag">DEPOIS</span></div>
+      <div class="practice-stack">
+        <textarea class="practice-field" data-practice-field="checkpoint-packet" rows="2"></textarea>
+        <textarea class="practice-field" data-practice-field="checkpoint-security" rows="2"></textarea>
+        <textarea class="practice-field" data-practice-field="checkpoint-switch" rows="2"></textarea>
+      </div>
+    </section>
+
+                                                <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Pré-teste</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>pretest-arp-why</code> — Camada Ethernet precisa MAC; IP sozinho não basta na LAN.</p>
+        <p><strong>2</strong> <code>pretest-arp-who</code> — ARP mapeia IP → MAC na mesma sub-rede (resolvers locais).</p>
+        <h4>Previsão (`predict-arp-type`)</h4>
+        <p>Primeira vez A→10.0.0.2: <strong>request broadcast</strong> + <strong>reply unicast</strong>.</p>
+        <h4>Exemplo trabalhado (`worked-cache`)</h4>
+        <p>Segunda consulta ao mesmo IP: cache hit, sem broadcast.</p>
+        <h4>Comparar</h4>
+        <p><strong>Campo</strong> Essência</p>
+        <p><strong><code>compare-dns</code></strong> DNS: nome→IP (app/camada alta); ARP: IP→MAC (L2 adjacente).</p>
+        <p><strong><code>compare-remote</code></strong> IP fora da sub-rede: ARP do gateway, não do servidor remoto.</p>
+        <h4>MC (`mc-ch07`)</h4>
+        <p><strong>Correta: A</strong> — ARP request em broadcast; resposta unicast ao solicitante.</p>
+        <h4>Checkpoint</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>checkpoint-packet</code> — ARP é mensagem própria antes do quadro IP de dados.</p>
+        <p><strong>2</strong> <code>checkpoint-security</code> — ARP spoofing existe — confiança LAN não é garantia absoluta.</p>
+        <p><strong>3</strong> <code>checkpoint-switch</code> — Switch flood de ARP no cap. 08.</p>
+      </div>
+    </details>
+<details class="theory">
+      <summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary>
+      <div class="theory-content"><p>IPv6 usa NDP no lugar de ARP; ideia análoga na camada de enlace.</p></div>
+    </details>
+
+    <nav class="chapter-bottom-navigation" aria-label="Fim">
+      <a href="../06-quadro-ethernet-broadcast/index.html">← Capítulo 06</a>
+      <a href="../08-switch-tabela-mac/index.html">Capítulo 08 →</a>
+    </nav>
+  </main>
+</body>
+</html>

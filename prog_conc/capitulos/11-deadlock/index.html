@@ -34,7 +34,38 @@
     </section>
     <section class="practice"><h2>Design</h2><textarea class="practice-field" data-practice-field="design-order" rows="2" placeholder="Ordem global de locks na sua API."></textarea></section>
     <section class="practice"><h2>Checkpoint</h2><textarea class="practice-field" data-practice-field="checkpoint" rows="2"></textarea></section>
-    <details class="theory"><summary>Teoria</summary><div class="theory-content"><p>Quebrar espera circular com ordenação de recursos.</p></div></details>
+                                    <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Objetivo</h4>
+        <p>Objetivo: reconhecer deadlock por ordem oposta de aquisição de dois recursos e prever como uma ordem global evita o ciclo.</p>
+        <h4>Pré-teste e previsões</h4>
+        <p>Pergunta: Em qual passo o painel Ordem oposta trava?</p>
+        <p><strong>predict-step</strong> Conferir após executar o experimento; previsão errada antes do lab é esperada.</p>
+        <p>Pergunta: A segura R1 e quer R2; B segura R2 e quer R1 — o que acontece?</p>
+        <p><strong>pretest</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+        <h4>Demais campos</h4>
+        <p><strong>design-order</strong> — Ordem global de locks na sua API.</p>
+        <p>Proposta mínima coerente com o objetivo; citar trade-off explícito.</p>
+        <p><strong>compare</strong> — Comparar</p>
+        <p>Separar o que é invariante (trabalho, invariante, protocolo) do que muda (tempo, ordem, visibilidade, anomalia).</p>
+        <p><strong>mc-why-yes</strong> — ver bloco no capítulo</p>
+        <p>Justificar a letra correta da MC e refutar cada alternativa em uma linha.</p>
+        <p><strong>mc-why-not</strong> — ver bloco no capítulo</p>
+        <p>Justificar a letra correta da MC e refutar cada alternativa em uma linha.</p>
+        <h4>Checkpoint</h4>
+        <p>Pergunta: Checkpoint</p>
+        <p><strong>checkpoint</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+        <h4>MC (mc-ch11)</h4>
+        <p>B. Espera circular com posse mútua.</p>
+        <p><strong>Letra</strong> Por que não</p>
+        <p><strong>A</strong> rejeitar — Deadlock = CPU a 100% sem trabalho útil.</p>
+        <p><strong>B</strong> <strong>correta</strong> — Deadlock = ciclo de espera por recursos já segurados.</p>
+        <p><strong>C</strong> rejeitar — Basta adicionar threads para resolver.</p>
+        <p><strong>D</strong> rejeitar — Só ocorre com mais de dois recursos.</p>
+      </div>
+    </details>
+<details class="theory"><summary>Teoria</summary><div class="theory-content"><p>Quebrar espera circular com ordenação de recursos.</p></div></details>
     <nav class="chapter-bottom-navigation"><a href="../10-produtor-consumidor/index.html">← 10</a><a href="../12-livelock/index.html">12 →</a></nav>
   </main>
 </body>

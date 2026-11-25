@@ -2,7 +2,7 @@
 
 const main = document.querySelector('main[data-chapter-id]');
 const chapterId = main?.dataset.chapterId;
-const STORAGE_KEY = chapterId ? `playground_{{SLUG}}__${chapterId}` : null;
+const STORAGE_KEY = chapterId ? `playground_vv_eng__${chapterId}` : null;
 
 function readStore() {
   if (!STORAGE_KEY) return {};

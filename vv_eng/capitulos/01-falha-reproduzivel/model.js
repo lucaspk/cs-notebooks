@@ -1,0 +1,1 @@
+(function(r){'use strict';function score(s){const keys=['sintoma','passos','esperado','observado','ambiente'];return keys.filter(k=>s[k]).length;}const api={score};if(typeof module!=='undefined'&&module.exports)module.exports=api;else r.VvLab=api;})(typeof globalThis!=='undefined'?globalThis:this);

@@ -144,7 +144,46 @@
       <textarea class="practice-field" data-practice-field="checkpoint-2" rows="2" placeholder="Quando aparece fila neste experimento?"></textarea>
     </section>
 
-    <details class="theory"><summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary><div class="theory-content"><p><strong>Semáforo:</strong> contador de permissões; <code>acquire</code> decrementa (bloqueia se zero), <code>release</code> incrementa.</p><p><strong>Mutex:</strong> semáforo binário usado para exclusão mútua, não para contagem de vagas múltiplas.</p></div></details>
+                                    <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Objetivo</h4>
+        <p>Objetivo deste capítulo: distinguir semáforo de mutex — limitar quantas tarefas entram num recurso ao mesmo tempo (não só “uma por vez”) — e prever fila versus pico de ocupação.</p>
+        <h4>Pré-teste e previsões</h4>
+        <p>Pergunta: 1. Semáforo com contagem 2 e 4 tarefas: quantas podem estar dentro do recurso no mesmo instante?</p>
+        <p><strong>pretest-peak</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+        <p>Pergunta: 2. Mutex é um semáforo especial?</p>
+        <p><strong>pretest-mutex</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+        <p>Pergunta: No painel Com semáforo (2) , quantas tarefas estão dentro no passo 1? E no painel Sem limite ?</p>
+        <p><strong>predict-inside</strong> Conferir após executar o experimento; previsão errada antes do lab é esperada.</p>
+        <h4>Demais campos</h4>
+        <p><strong>compare-same</strong> — O que permanece igual nos dois painéis?</p>
+        <p>Separar o que é invariante (trabalho, invariante, protocolo) do que muda (tempo, ordem, visibilidade, anomalia).</p>
+        <p><strong>compare-diff</strong> — O que muda no pico dentro do recurso?</p>
+        <p>Separar o que é invariante (trabalho, invariante, protocolo) do que muda (tempo, ordem, visibilidade, anomalia).</p>
+        <p><strong>mc-why-yes</strong> — Piscina com 30 vagas , semáforo (30) . O que ele garante? Atomicidade de operações compostas em qualquer ordem. No máximo 30 banhistas ao mesmo tempo na piscina. Ordem FIFO estrita entre todas as threads do processo. Que nunca haverá fila de espera. Por que escolhi essa opção?</p>
+        <p>Justificar a letra correta da MC e refutar cada alternativa em uma linha.</p>
+        <p><strong>mc-why-not</strong> — Por que não as outras?</p>
+        <p>Justificar a letra correta da MC e refutar cada alternativa em uma linha.</p>
+        <p><strong>tradeoff-case</strong> — Caso em que semáforo (3) é melhor que mutex:</p>
+        <p>Proposta mínima coerente com o objetivo; citar trade-off explícito.</p>
+        <p><strong>design-count</strong> — API com acquire() / release() para garagem de 5 vagas e 20 carros: o que o contador representa?</p>
+        <p>Proposta mínima coerente com o objetivo; citar trade-off explícito.</p>
+        <h4>Checkpoint</h4>
+        <p>Pergunta: Semáforo (1) vs mutex em uma frase.</p>
+        <p><strong>checkpoint-1</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+        <p>Pergunta: Quando aparece fila neste experimento?</p>
+        <p><strong>checkpoint-2</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+        <h4>MC (mc-ch09)</h4>
+        <p>B. Contador de vagas. Não A: composto precisa de mutex ou coordenação extra. Não C/D: semáforo não define justiça global nem elimina fila.</p>
+        <p><strong>Letra</strong> Por que não</p>
+        <p><strong>A</strong> rejeitar — Atomicidade de operações compostas em qualquer ordem.</p>
+        <p><strong>B</strong> <strong>correta</strong> — No máximo 30 banhistas ao mesmo tempo na piscina.</p>
+        <p><strong>C</strong> rejeitar — Ordem FIFO estrita entre todas as threads do processo.</p>
+        <p><strong>D</strong> rejeitar — Que nunca haverá fila de espera.</p>
+      </div>
+    </details>
+<details class="theory"><summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary><div class="theory-content"><p><strong>Semáforo:</strong> contador de permissões; <code>acquire</code> decrementa (bloqueia se zero), <code>release</code> incrementa.</p><p><strong>Mutex:</strong> semáforo binário usado para exclusão mútua, não para contagem de vagas múltiplas.</p></div></details>
     <nav class="chapter-bottom-navigation"><a href="../08-mutex-atomicidade/index.html">← Mutex</a><a href="../10-produtor-consumidor/index.html">Capítulo 10 →</a></nav>
   </main>
 </body>

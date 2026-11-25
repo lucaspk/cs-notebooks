@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Funções de primeira classe · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="03-funcoes-primeira-classe" data-practice-mc="mc-ch03">
+    <header class="page-header"><a class="brand" href="../../index.html">playground / paradigmas</a><span class="lesson-tag">CAP 03</span></header>
+    <nav class="chapter-navigation"><a href="../02-mutacao-vs-valor/index.html">← 02</a><span>03 · Primeira classe</span><a href="../04-encapsulamento-mensagem/index.html">04 →</a></nav>
+    <section class="intro chapter-intro"><h1>Funções<br><span>de primeira classe</span></h1></section>
+    <p class="chapter-objective"><strong>Objetivo:</strong> encadear transformações passando funções — base do estilo funcional nos labs.</p>
+    <section class="practice" aria-labelledby="worked-title"><div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2><span class="practice-tag">NO PAPEL</span></div><section class="practice-worked"><p>Pipeline double → inc aplica cada função em sequência sobre os números 1, -2, 3; a ordem altera o resultado.</p></section><textarea class="practice-field" data-practice-field="worked-03" rows="2" placeholder="Qual é a regra central?"></textarea></section></section>
+    <section class="practice" aria-labelledby="compare-title"><div class="practice-heading"><h2 id="compare-title">Comparar</h2><span class="practice-tag">ANALISAR</span></div><div class="compare-grid"><textarea class="practice-field" data-practice-field="compare-model" rows="3" placeholder="Compare o modelo atual: map aplica transformação elemento a elemento; filter seleciona elementos."></textarea><textarea class="practice-field" data-practice-field="compare-limit" rows="3" placeholder="Quando esta abstração deixa de ajudar?"></textarea></div></section>
+    <section class="practice"><section class="practice" aria-labelledby="pretest-title"><div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES</span></div><textarea class="practice-field" data-practice-field="pretest-hof" rows="2"></textarea></section><textarea class="practice-field" data-practice-field="predict-pipeline" rows="2"></textarea></section>
+    <section class="lab">
+      <p id="lab-error" class="lab-error" hidden></p>
+      <input id="nums" value="1 -2 3">
+      <label><input type="checkbox" name="op" value="double" checked> double</label>
+      <label><input type="checkbox" name="op" value="inc" checked> inc</label>
+      <label><input type="checkbox" name="op" value="abs"> abs</label>
+      <p>Resultado: <strong id="out">—</strong></p>
+      <ol id="trace"></ol>
+    </section>
+    <section class="practice">
+      <aside class="observation" aria-label="Dica"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow">OBSERVE</p><p>A composição tem ordem.</p></div></aside>
+    <section class="practice" aria-labelledby="mc-title"><div class="practice-heading"><h2 id="mc-title">Múltipla escolha</h2><span class="practice-tag">JUSTIFICAR</span></div><p class="practice-prompt">Qual afirmação está alinhada ao laboratório?</p>
+    <ul class="choice-list">
+        <li><label><input type="radio" name="mc-ch03" value="a"> A) map só existe em Haskell.</label></li>
+        <li><label><input type="radio" name="mc-ch03" value="b"> B) Ordem das funções no pipeline muda o vetor.</label></li>
+        <li><label><input type="radio" name="mc-ch03" value="c"> C) Função não pode ser valor.</label></li>
+        <li><label><input type="radio" name="mc-ch03" value="d"> D) abs antes de inc é igual a inc antes de abs sempre.</label></li>
+      </ul>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2" placeholder="Por que a correta é melhor?"></textarea><textarea class="practice-field" data-practice-field="mc-why-not" rows="3" placeholder="Por que uma alternativa errada não serve?"></textarea>
+      <details class="model-answer"><summary>+</summary><p><strong>B.</strong></p></details>
+      </section>
+    <textarea class="practice-field" data-practice-field="checkpoint-read" rows="2"></textarea>
+    </section>
+                                                                
+    <details class="theory"><summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary><div class="theory-content"><p>Uma função de primeira classe pode ser argumento, retorno e valor.</p></div></details>
+                                                                                                                                                            <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Pré-teste</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>pretest-hof</code> — Reconhecer o fenômeno antes de escolher uma solução.</p>
+        <h4>Exemplo trabalhado (`worked-03`)</h4>
+        <p>No lab, &lt;code&gt;double&lt;/code&gt; e &lt;code&gt;inc&lt;/code&gt; transformam cada número em sequência; trocar a ordem muda o vetor.</p>
+        <h4>Previsão (`predict-pipeline`)</h4>
+        <p>Aceitar uma previsão que use a regra central, não apenas copiar o resultado mostrado.</p>
+        <h4>Comparar</h4>
+        <p><strong>Campo</strong> Essência</p>
+        <p><strong><code>compare-model</code></strong> Ordenar funções e comparar map com filter.</p>
+        <p><strong><code>compare-limit</code></strong> Indicar o limite da abstração ou o cenário onde ela deixa de ajudar.</p>
+        <h4>MC (`mc-ch03`)</h4>
+        <p><strong>Correta: B</strong> — Ordem das funções no pipeline muda o vetor.</p>
+        <p><strong>Justificativa negativa:</strong> Uma função não deixa de ser primeira classe por ser curta.</p>
+        <h4>Checkpoint</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>checkpoint-read</code> — Explicar a regra central com suas palavras e dar um limite ou contraexemplo.</p>
+      </div>
+    </details>
+<nav class="chapter-bottom-navigation"><a href="../02-mutacao-vs-valor/index.html">← 02</a><a href="../04-encapsulamento-mensagem/index.html">04 →</a></nav>
+  </main>
+</body>
+</html>

@@ -8,6 +8,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { maintainBook } from './gabarito-lib.mjs';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const templateRoot = path.join(repoRoot, '_template-livro');
@@ -67,10 +68,11 @@ if (fs.existsSync(stylesSrc)) {
   fs.copyFileSync(stylesSrc, path.join(dest, 'styles.css'));
 }
 
-const buildScript = path.join(dest, 'capitulos', '_tools', 'build-index.mjs');
-if (fs.existsSync(buildScript)) {
-  execSync(`node "${buildScript}"`, { stdio: 'inherit' });
+try {
+  maintainBook(slug, { strict: false });
+} catch {
+  execSync(`node "${path.join(dest, 'capitulos', '_tools', 'build-index.mjs')}"`, { stdio: 'inherit' });
 }
 
 console.log(`\nLivro criado: ${dest}/`);
-console.log('Próximo: editar README + MAPEAMENTO, depois capítulo 01.');
+console.log('Agente: README + MAPEAMENTO + cap. 01 + GABARITO.md → finalize-chapter.');

@@ -1,0 +1,1 @@
+'use strict';document.getElementById('lab-host').innerHTML='<pre id=out></pre>';document.getElementById('out').textContent=JSON.stringify(MathLab.ops([1,2,3],[2,3,4]));

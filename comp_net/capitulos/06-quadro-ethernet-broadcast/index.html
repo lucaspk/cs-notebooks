@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <title>Quadro Ethernet e broadcast · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="06-quadro-ethernet-broadcast" data-practice-mc="mc-ch06">
+    <header class="page-header">
+      <a class="brand" href="../../index.html" aria-label="Playground, sumário"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> redes de computadores</a>
+      <span class="lesson-tag">CAPÍTULO 06</span>
+    </header>
+
+    <nav class="chapter-navigation" aria-label="Navegação do livro">
+      <a href="../05-encapsulamento-camadas/index.html">← 05 Camadas</a>
+      <span>06 · Ethernet</span>
+      <a href="../07-arp-primeiro-salto/index.html">07 ARP →</a>
+    </nav>
+
+    <section class="intro chapter-intro" aria-labelledby="page-title">
+      <p class="eyebrow">CAPÍTULO 06</p>
+      <h1 id="page-title">Quadro Ethernet<br><span>e broadcast</span></h1>
+    </section>
+
+    <p class="chapter-objective"><strong>Objetivo:</strong> ver unicast vs broadcast no <em>mesmo enlace</em> — quem realmente recebe o quadro e por quê.</p>
+
+    <section class="practice" aria-labelledby="pretest-title">
+      <div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES</span></div>
+      <div class="practice-stack">
+        <textarea class="practice-field" data-practice-field="pretest-mac" rows="2" placeholder="1. Para que serve endereço MAC?"></textarea>
+        <textarea class="practice-field" data-practice-field="pretest-broadcast" rows="2" placeholder="2. Broadcast “vaza” para toda a Internet?"></textarea>
+      </div>
+    </section>
+
+    <section class="practice" aria-labelledby="predict-title">
+      <div class="practice-heading"><h2 id="predict-title">Previsão</h2><span class="practice-tag">ANTES DO LAB</span></div>
+      <p class="practice-lead">Padrão: Host A → unicast para B.</p>
+      <textarea class="practice-field" data-practice-field="predict-recv" rows="2" placeholder="Quantos hosts (além de A) recebem o quadro?"></textarea>
+    </section>
+
+    <section class="lab" aria-label="LAN Ethernet">
+      <div class="toolbar">
+        <div class="playback">
+          <button class="primary" id="play" type="button"><span id="play-label">Executar</span></button>
+          <button id="step" type="button">Um passo →</button>
+          <button class="reset" id="reset" type="button" aria-label="Reiniciar">↺</button>
+        </div>
+        <span class="clock">Modo <strong id="mode-label">—</strong> · receptores <strong id="recv-count">0</strong> · passo <strong id="time">0</strong></span>
+      </div>
+      <div class="net-topology">
+        <div class="net-host" id="host-a"><span class="net-host-id">A</span><span class="net-host-role">aa:…:01</span></div>
+        <div class="net-link" id="host-link"><span>Enlace L2</span><div class="net-link-bar"></div></div>
+        <div class="net-host" id="host-b"><span class="net-host-id">B</span><span class="net-host-role">aa:…:02</span></div>
+        <div class="net-host" id="host-c"><span class="net-host-id">C</span><span class="net-host-role">aa:…:03</span></div>
+      </div>
+      <ol class="net-step-list" id="step-list"></ol>
+      <div class="experiment-controls">
+        <label class="quantum-control" for="src"><span>Origem</span><select id="src"><option value="A">Host A</option><option value="B">Host B</option><option value="C">Host C</option></select></label>
+        <label class="quantum-control" for="dest"><span>Destino MAC</span>
+          <select id="dest">
+            <option value="B">Unicast → B</option>
+            <option value="C">Unicast → C</option>
+            <option value="broadcast">Broadcast</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <aside class="observation" aria-label="Dica"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow">OBSERVE</p><p id="observation-text">—</p></div></aside>
+
+    <section class="practice" aria-labelledby="compare-title">
+      <div class="practice-heading"><h2 id="compare-title">Comparar</h2><span class="practice-tag">ANALISAR</span></div>
+      <div class="compare-grid">
+        <textarea class="practice-field" data-practice-field="compare-ip" rows="3" placeholder="MAC vs IP — escopo de cada um."></textarea>
+        <textarea class="practice-field" data-practice-field="compare-wifi" rows="3" placeholder="Broadcast ainda existe no Wi‑Fi?"></textarea>
+      </div>
+    </section>
+
+    <section class="practice" aria-labelledby="mc-title">
+      <div class="practice-heading"><h2 id="mc-title">Múltipla escolha</h2><span class="practice-tag">CHECKPOINT</span></div>
+      <p class="practice-prompt">Host A envia quadro Ethernet com destino broadcast no segmento. Quem é preciso dizer que recebe no modelo L2?</p>
+      <ul class="choice-list" role="radiogroup">
+        <li><label><input type="radio" name="mc-ch06" value="a"> Só o roteador padrão.</label></li>
+        <li><label><input type="radio" name="mc-ch06" value="b"> Todas as interfaces no mesmo domínio de broadcast (salvo nuances do emissor).</label></li>
+        <li><label><input type="radio" name="mc-ch06" value="c"> Qualquer host na Internet com IP público.</label></li>
+        <li><label><input type="radio" name="mc-ch06" value="d"> Ninguém — broadcast morre no switch sempre.</label></li>
+      </ul>
+      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2"></textarea>
+      <textarea class="practice-field" data-practice-field="mc-why-not" rows="3"></textarea>
+      <details class="model-answer"><summary>Ver resposta <span>+</span></summary><p class="theory-content"><strong>B.</strong> (Switch pode flood, mas ainda é escopo L2 local.)</p></details>
+    </section>
+
+    <section class="practice" aria-labelledby="checkpoint-title">
+      <div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2><span class="practice-tag">DEPOIS</span></div>
+      <div class="practice-stack">
+        <textarea class="practice-field" data-practice-field="checkpoint-broadcast-mac" rows="2" placeholder="1. MAC de broadcast Ethernet."></textarea>
+        <textarea class="practice-field" data-practice-field="checkpoint-why-arp" rows="2" placeholder="2. Por que o próximo capítulo é ARP?"></textarea>
+        <textarea class="practice-field" data-practice-field="checkpoint-router" rows="2" placeholder="3. Roteador e broadcast."></textarea>
+      </div>
+    </section>
+
+                                                <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Pré-teste</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>pretest-mac</code> — MAC identifica interface na LAN; não é roteamento global.</p>
+        <p><strong>2</strong> <code>pretest-broadcast</code> — Broadcast L2 chega a todos no mesmo domínio de broadcast (mesmo segmento).</p>
+        <h4>Previsão (`predict-recv`)</h4>
+        <p>Unicast A→B: <strong>1</strong> receptor (B). Broadcast de A: <strong>2</strong> (B e C).</p>
+        <h4>Comparar</h4>
+        <p><strong>Campo</strong> Essência</p>
+        <p><strong><code>compare-ip</code></strong> IP roteia entre redes; MAC vale no enlace local.</p>
+        <p><strong><code>compare-wifi</code></strong> Wi‑Fi ainda é LAN L2 — broadcast existe (com moderação).</p>
+        <h4>MC (`mc-ch06`)</h4>
+        <p><strong>Correta: B</strong> — quadro com destino broadcast é recebido por todas as NICs do segmento (exceto emissor não “se escuta” neste modelo).</p>
+        <h4>Checkpoint</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>checkpoint-broadcast-mac</code> — <code>ff:ff:ff:ff:ff:ff</code> (ou equivalente).</p>
+        <p><strong>2</strong> <code>checkpoint-why-arp</code> — Precisa achar MAC na LAN antes de unicast IP local — gancho cap. 07.</p>
+        <p><strong>3</strong> <code>checkpoint-router</code> — Roteador <strong>não</strong> propaga broadcast IPv4 arbitrário para a Internet inteira.</p>
+      </div>
+    </details>
+<details class="theory">
+      <summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary>
+      <div class="theory-content"><p>Domínio de broadcast termina no roteador (L3). VLANs particionam L2 sem mudar o conceito dentro de cada VLAN.</p></div>
+    </details>
+
+    <nav class="chapter-bottom-navigation" aria-label="Fim">
+      <a href="../05-encapsulamento-camadas/index.html">← Capítulo 05</a>
+      <a href="../07-arp-primeiro-salto/index.html">Capítulo 07 →</a>
+    </nav>
+  </main>
+</body>
+</html>

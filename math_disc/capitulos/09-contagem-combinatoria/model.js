@@ -1,0 +1,1 @@
+(function(r){'use strict';function passwords(len,alpha){return Math.pow(Math.floor(alpha),Math.floor(len));}const api={passwords};if(typeof module!=='undefined'&&module.exports)module.exports=api;else r.MathLab=api;})(typeof globalThis!=='undefined'?globalThis:this);

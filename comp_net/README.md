@@ -1,10 +1,12 @@
 # Redes de computadores — playground
 
+**Fase 3** — redes e sistemas distribuídos. Pré-requisitos recomendados: estruturas básicas e sistemas operacionais leves; pode estudar em paralelo com programação concorrente.
+
 Abra `index.html` no navegador para acessar o sumário do livro interativo. Cada capítulo terá sua própria página. Não precisa instalar dependências ou iniciar um servidor (mesmo molde de `prog_conc/`).
 
 Parte do monorepo [cs-notebooks](../README.md) · [catálogo de livros e fundamentos](../LIVROS.md) · sumário geral: [../index.html](../index.html).
 
-**Status:** roteiro aprovado (**30 + 31 opcional**). Infra do livro publicada (`styles.css`, `practice.js`, `index.html`, `TEMPLATE.html`, `lib/`, `build-index.mjs`). Capítulos publicados: **01** — demais entradas do sumário ainda sem página.
+**Status:** roteiro aprovado (**30 + 31 opcional**). Infra do livro publicada (`styles.css`, `practice.js`, `index.html`, `TEMPLATE.html`, `lib/`, `build-index.mjs`). Capítulos publicados: **01–08** (métricas + LAN L2) — demais entradas do sumário ainda sem página.
 
 ## Por que este livro é diferente de um curso “de camadas”
 
@@ -39,7 +41,7 @@ Isso mantém o caderno **sólido para desenvolver e operar sistemas distribuído
 
 Os tipos de prática e a sequência sugerida estão no [molde pedagógico](../README.md#molde-pedagógico-todos-os-livros-e-capítulos).
 
-Testes: `node --test lib/queue.test.js lib/topology.test.js capitulos/01-pontos-extremos-servico/model.test.js`
+Testes: `node --test lib/queue.test.js lib/topology.test.js comp_net/capitulos/*/model.test.js` (a partir da raiz do repo: `node --test comp_net/lib/*.test.js comp_net/capitulos/*/model.test.js`)
 
 ## Capítulo publicado (01)
 
@@ -170,8 +172,10 @@ Cada `model.js` deve ser **determinístico e testável** com `node --test`, como
 
 ## Próximo passo (implementação)
 
-1. Copiar/adaptar `styles.css`, `practice.js`, `TEMPLATE.html`, `build-index.mjs` de `prog_conc/`.
-2. Implementar capítulos em ondas (sugestão: **01–05** primeiro — base mensurável + encapsulamento).
-3. `index.html` do sumário e checklist do molde por capítulo publicado.
+**Onda atual (ver [WORKBOARD.md](../WORKBOARD.md)):** caps **09–11** — `09-sub-rede-roteador`, `10-tabela-roteamento-lpm`, `11-caminho-pacote-hop`. Tom: `07-arp-primeiro-salto`.
+
+1. Reivindicar slug(s) no WORKBOARD antes de codar.
+2. `GABARITO.md` + `node _tools/finalize-chapter.mjs comp_net <slug>`.
+3. `node _tools/refresh-workboard.mjs` ao terminar a onda.
 
 Slugs canônicos: `capitulos/MAPEAMENTO.md`.

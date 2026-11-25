@@ -1,0 +1,1 @@
+(function(r){'use strict';function review(items){const req=['comportamento','teste','risco','legibilidade'];return req.filter(k=>items[k]).length;}const api={review};if(typeof module!=='undefined'&&module.exports)module.exports=api;else r.VvLab=api;})(typeof globalThis!=='undefined'?globalThis:this);

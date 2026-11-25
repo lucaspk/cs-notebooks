@@ -1,0 +1,1 @@
+'use strict';document.getElementById('lab-host').innerHTML='<pre id=out></pre>';const t=MathLab.rows(MathLab.implies);document.getElementById('out').textContent=t.map(r=>JSON.stringify(r)).join('\n');

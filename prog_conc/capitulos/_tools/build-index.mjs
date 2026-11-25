@@ -2,6 +2,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { chapterPublished, renderChapterListItem } from '../../../_tools/index-items.mjs';
+import { syncBookGabarito } from '../../../_tools/gabarito-lib.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const chapters = [
@@ -36,10 +38,8 @@ const chapters = [
   ['29', '29-servicos-mensagens', '', 'Mensagens entre serviços', 'Duplicatas, ordem, idempotência.'],
 ];
 
-const items = chapters.map(([num, slug, eyebrow, title, blurb]) => {
-  const eye = eyebrow ? `<span class="eyebrow">${eyebrow}</span>` : '';
-  return `        <li><a class="chapter-link" href="capitulos/${slug}/index.html"><span class="chapter-number" aria-hidden="true">${num}</span><span class="chapter-description">${eye}<strong>${title}</strong><span>${blurb}</span></span><span class="chapter-arrow" aria-hidden="true">→</span></a></li>`;
-}).join('\n');
+const items = chapters.map((row) => renderChapterListItem(root, row)).join('\n');
+const publishedCount = chapters.filter(([, slug]) => chapterPublished(root, slug)).length;
 
 const html = `<!doctype html>
 <html lang="pt-BR">
@@ -47,25 +47,26 @@ const html = `<!doctype html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f5f0">
+  <base href="./">
   <title>Programação concorrente · Livro interativo</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="../local-links.js" defer></script>
 </head>
 <body>
   <main class="book-index">
     <header class="page-header">
-      <a class="brand" href="index.html" aria-label="Playground, sumário"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> programação concorrente</a>
-      <span class="lesson-tag">LIVRO INTERATIVO · ${chapters.length} CAPÍTULOS</span>
+      <a class="brand" href="../index.html" aria-label="Playground, sumário geral"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> programação concorrente</a>
+      <span class="lesson-tag">LIVRO INTERATIVO · ${publishedCount}/${chapters.length} CAPÍTULOS</span>
     </header>
     <section class="intro" aria-labelledby="page-title">
       <h1 id="page-title">MENOS LEITURA.<br><span>MAIS EXPERIMENTO.</span></h1>
     </section>
     <section class="contents" aria-labelledby="contents-title">
-      <div class="contents-heading"><h2 id="contents-title">Sumário</h2><span>${chapters.length} capítulos</span></div>
+      <div class="contents-heading"><h2 id="contents-title">Sumário</h2><span>${publishedCount} publicados · ${chapters.length} no roteiro</span></div>
       <ol class="chapter-list">
 ${items}
       </ol>
     </section>
-    <p class="experiment-note" style="padding:12px 3px 24px">Mapa canônico: <code>capitulos/MAPEAMENTO.md</code>. Molde de prática: <a href="../README.md">playground/README.md</a>.</p>
   </main>
 </body>
 </html>
@@ -73,3 +74,4 @@ ${items}
 
 fs.writeFileSync(path.join(root, 'index.html'), html);
 console.log(`Wrote index.html with ${chapters.length} chapters`);
+syncBookGabarito(path.basename(root), { repo: path.dirname(root) });

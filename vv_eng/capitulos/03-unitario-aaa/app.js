@@ -1,0 +1,1 @@
+'use strict';document.getElementById('lab-host').innerHTML='<input id=n value=given_when_then> <pre id=out></pre>';const $=id=>document.getElementById(id);$('n').oninput=()=>$('out').textContent=JSON.stringify(VvLab.aaa($('n').value));$('n').dispatchEvent(new Event('input'));

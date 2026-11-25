@@ -127,7 +127,44 @@
       <textarea class="practice-field" data-practice-field="checkpoint-contention" rows="2" placeholder="Contenção em uma frase neste experimento."></textarea>
     </section>
 
-    <details class="theory"><summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary>
+                                    <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Objetivo</h4>
+        <p>Objetivo deste capítulo: medir quando coordenação (um lock compartilhado, muitas threads) consome o ganho de paralelismo — e quando fragmentar locks ou reduzir threads ajuda.</p>
+        <h4>Pré-teste e previsões</h4>
+        <p>Pergunta: Dobrar o número de workers em um lock global sempre dobra o throughput?</p>
+        <p><strong>pretest-oversub</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+        <p>Pergunta: Contenção é só “estar em paralelo”?</p>
+        <p><strong>pretest-definition</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+        <p>Pergunta: Com 6 workers , lock único e 2 núcleos , o tempo total será maior que com 2 workers ? A espera acumulada?</p>
+        <p><strong>predict-workers</strong> Conferir após executar o experimento; previsão errada antes do lab é esperada.</p>
+        <h4>Demais campos</h4>
+        <p><strong>context-http</strong> — App com lock global em caminho quente, CPU ociosa em espera. Ação mais direta para testar primeiro? Comprar mais núcleos sem mudar o código. Medir espera no lock; tentar granularidade menor ou menos threads no lock. Remover o lock e confiar na ordem natural das threads. Aumentar só o número de threads para reduzir fila. Ver resposta sugerida + B. Mais threads atrás de um lock raramente resolve; núcleos extras não eliminam serialização no lock quente. Prós, contras e limites Melhor opção por contexto Fila HTTP: 200 workers, 8 núcleos, lock global em sessão. O que priorizar?</p>
+        <p>Proposta mínima coerente com o objetivo; citar trade-off explícito.</p>
+        <p><strong>design-shard</strong> — Proponha um lock por partição de usuário vs lock global — trade-off em uma frase cada.</p>
+        <p>Proposta mínima coerente com o objetivo; citar trade-off explícito.</p>
+        <p><strong>compare-sharded</strong> — Lock único vs fragmentado: o que muda na fila e na duração?</p>
+        <p>Separar o que é invariante (trabalho, invariante, protocolo) do que muda (tempo, ordem, visibilidade, anomalia).</p>
+        <p><strong>mc-why-yes</strong> — Por que essa opção?</p>
+        <p>Justificar a letra correta da MC e refutar cada alternativa em uma linha.</p>
+        <p><strong>mc-why-not</strong> — Por que não as outras?</p>
+        <p>Justificar a letra correta da MC e refutar cada alternativa em uma linha.</p>
+        <p><strong>tradeoff-threads</strong> — Mais threads: ajuda quando? não ajuda quando?</p>
+        <p>Proposta mínima coerente com o objetivo; citar trade-off explícito.</p>
+        <h4>Checkpoint</h4>
+        <p>Pergunta: Contenção em uma frase neste experimento.</p>
+        <p><strong>checkpoint-contention</strong> <strong>Sim/não</strong> quando a pergunta pedir; uma frase que cite evidência do lab ou o objetivo do capítulo.</p>
+        <h4>MC (mc-ch25)</h4>
+        <p>B. Mais threads atrás de um lock raramente resolve; núcleos extras não eliminam serialização no lock quente.</p>
+        <p><strong>Letra</strong> Por que não</p>
+        <p><strong>A</strong> rejeitar — Comprar mais núcleos sem mudar o código.</p>
+        <p><strong>B</strong> <strong>correta</strong> — Medir espera no lock; tentar granularidade menor ou menos threads no lock.</p>
+        <p><strong>C</strong> rejeitar — Remover o lock e confiar na ordem natural das threads.</p>
+        <p><strong>D</strong> rejeitar — Aumentar só o número de threads para reduzir fila.</p>
+      </div>
+    </details>
+<details class="theory"><summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary>
       <div class="theory-content"><p><strong>Contenção:</strong> disputa pelo mesmo recurso; trabalho útil cai e espera cresce.</p><p><strong>Oversubscription:</strong> mais threads executáveis do que capacidade útil aumenta disputa e context switches.</p></div>
     </details>
     <nav class="chapter-bottom-navigation" aria-label="Fim do capítulo">

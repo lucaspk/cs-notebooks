@@ -6,6 +6,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { syncBookGabarito } from '../../../_tools/gabarito-lib.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const BOOK_TITLE = '{{TITLE}}';
@@ -40,7 +41,6 @@ const html = `<!doctype html>
 ${items}
       </ol>
     </section>
-    <p class="experiment-note" style="padding:12px 3px 24px">Molde: <a href="../README.md">README.md</a> · Catálogo: <a href="../LIVROS.md">LIVROS.md</a></p>
   </main>
 </body>
 </html>
@@ -48,3 +48,4 @@ ${items}
 
 fs.writeFileSync(path.join(root, 'index.html'), html);
 console.log(`Wrote index.html (${chapters.length} chapters)`);
+syncBookGabarito(path.basename(root), { repo: path.dirname(root) });

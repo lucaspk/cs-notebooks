@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Concorrência · Playground</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../../practice.js" defer></script>
+</head>
+<body>
+  <main data-chapter-id="07-concorrencia-mensagem-estado" data-practice-mc="mc-ch07">
+    <nav class="chapter-navigation"><a href="../06-tipos-estatico-dinamico/index.html">← 06</a><span>07 Concorrência</span><a href="../08-escolher-paradigma/index.html">08 →</a></nav>
+    <h1>Concorrência<br><span>mensagem vs estado</span></h1>
+    <p class="chapter-objective"><strong>Objetivo:</strong> distinguir estado compartilhado de estado protegido por mensagens</p>
+    <section class="practice" aria-labelledby="worked-title"><div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2><span class="practice-tag">NO PAPEL</span></div><section class="practice-worked"><p>Com três turnos, o modelo compartilha contador no primeiro caso e serializa mensagens no segundo.</p></section><textarea class="practice-field" data-practice-field="worked-07" rows="2" placeholder="Qual é a regra aplicada?"></textarea></section>
+    <section class="practice" aria-labelledby="pretest-title"><div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES</span></div><textarea class="practice-field" data-practice-field="pretest-race" rows="2"></textarea></section>
+    Turnos     <section class="practice" aria-labelledby="predict-title"><div class="practice-heading"><h2 id="predict-title">Previsão</h2><span class="practice-tag">ANTES DO LAB</span></div><textarea class="practice-field" data-practice-field="predict-race" rows="2" placeholder="O que você prevê que o lab mostrará?"></textarea></section>
+    <input id="turns" type="number" value="3">
+    <p>Compartilhado: <span id="shared">—</span></p>
+    <p>Mensagens: <span id="msg">—</span></p>
+    <section class="practice" aria-labelledby="compare-title"><div class="practice-heading"><h2 id="compare-title">Comparar</h2><span class="practice-tag">ANALISAR</span></div><div class="compare-grid"><textarea class="practice-field" data-practice-field="compare-model" rows="3" placeholder="Modelo atual: Locks protegem memória compartilhada; atores/filas isolam estado."></textarea><textarea class="practice-field" data-practice-field="compare-limit" rows="3" placeholder="Quando o modelo deixa de ajudar?"></textarea></div></section>
+    <aside class="observation" aria-label="Dica"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow">OBSERVE</p><p>Mensagens mudam propriedade do estado; não removem concorrência.</p></div></aside>
+    <section class="practice" aria-labelledby="mc-title"><div class="practice-heading"><h2 id="mc-title">Múltipla escolha</h2><span class="practice-tag">JUSTIFICAR</span></div><p class="practice-prompt">Qual afirmação está alinhada ao laboratório?</p>
+    <ul class="choice-list">
+      <li><label><input type="radio" name="mc-ch07" value="a"> A) Mensagens sempre mais lentas e erradas.</label></li>
+      <li><label><input type="radio" name="mc-ch07" value="b"> B) Não há diferença conceitual.</label></li>
+      <li><label><input type="radio" name="mc-ch07" value="c"> C) Mensagens isolam estado; locks protegem compartilhado.</label></li>
+      <li><label><input type="radio" name="mc-ch07" value="d"> D) Paradigma não afeta concorrência.</label></li>
+    </ul>
+    <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2" placeholder="Por que a correta é melhor?"></textarea>
+    <textarea class="practice-field" data-practice-field="mc-why-not" rows="3" placeholder="Por que uma alternativa errada não serve?"></textarea>
+    </section>
+    <textarea class="practice-field" data-practice-field="checkpoint-progconc" rows="2"></textarea>
+    <details class="theory"><summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary><div class="theory-content"><p>Cada modelo precisa explicitar proprietário, ordem e visibilidade do estado.</p></div></details>
+                                                                                                                                                                                                                            <details class="chapter-gabarito">
+      <summary>Gabarito <span aria-hidden="true">+</span></summary>
+      <div class="gabarito-content">
+        <h4>Pré-teste</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>pretest-race</code> — Reconhecer o fenômeno antes de escolher uma solução.</p>
+        <h4>Exemplo trabalhado (`worked-07`)</h4>
+        <p>Com três turnos, o modelo compartilha contador no primeiro caso e serializa mensagens no segundo.</p>
+        <h4>Previsão (`predict-race`)</h4>
+        <p>Aceitar uma previsão que use a regra central, não apenas copiar o resultado mostrado.</p>
+        <h4>Comparar</h4>
+        <p><strong>Campo</strong> Essência</p>
+        <p><strong><code>compare-model</code></strong> Locks protegem memória compartilhada; atores/filas isolam estado.</p>
+        <p><strong><code>compare-limit</code></strong> Indicar o limite da abstração ou o cenário onde ela deixa de ajudar.</p>
+        <h4>MC (`mc-ch07`)</h4>
+        <p><strong>Correta: C</strong> — Mensagens isolam estado; locks protegem compartilhado.</p>
+        <p><strong>Justificativa negativa:</strong> Trocar paradigma não elimina a necessidade de sincronização conceitual.</p>
+        <h4>Checkpoint</h4>
+        <p><strong>#</strong> Campo — Essência</p>
+        <p><strong>1</strong> <code>checkpoint-progconc</code> — Explicar a regra central com suas palavras e dar um limite ou contraexemplo.</p>
+      </div>
+    </details>
+<nav class="chapter-bottom-navigation"><a href="../06-tipos-estatico-dinamico/index.html">← 06</a><a href="../08-escolher-paradigma/index.html">08 →</a></nav>
+  </main>
+</body>
+</html>

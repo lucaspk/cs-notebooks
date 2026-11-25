@@ -1,0 +1,1 @@
+'use strict';document.getElementById('lab-host').innerHTML='<pre id=out></pre>';document.getElementById('out').textContent=String(MathLab.path({a:['b'],b:['c'],c:[]},'a','c'));
