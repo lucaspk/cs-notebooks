@@ -1,61 +1,17 @@
 <!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f6f5f0">
-  <title>Quatro leituras · Playground</title>
-  <link rel="stylesheet" href="../../styles.css">
-  <script src="model.js" defer></script>
-  <script src="app.js" defer></script>
-  <script src="../../../_shared/practice.js" defer></script>
-</head>
-<body>
-  <main data-book-slug="paradigms" data-chapter-id="01-quatro-leituras-mesmo-problema" data-practice-mc="mc-ch01">
-    <header class="page-header">
-      <a class="brand" href="../../index.html" aria-label="Playground, sumário"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> paradigmas</a>
-      <span class="lesson-tag">CAPÍTULO 01</span>
-    </header>
-    <nav class="chapter-navigation" aria-label="Navegação do livro">
-      <a href="../../index.html">← Sumário</a>
-      <span>01 · Quatro leituras</span>
-      <a href="../02-mutacao-vs-valor/index.html">02 Mutação →</a>
-    </nav>
-    <section class="intro chapter-intro" aria-labelledby="page-title">
-      <p class="eyebrow">CAPÍTULO 01</p>
-      <h1 id="page-title">Quatro leituras<br><span>do mesmo problema</span></h1>
-    </section>
-    <p class="chapter-objective"><strong>Objetivo deste capítulo:</strong> somar uma lista e comparar quatro formas explícitas de escrever o mesmo cálculo. Cada forma usa o mesmo problema — não suponha conhecimento prévio de nenhum paradigma.</p>
-    <section class="practice" aria-labelledby="pretest-title">
-      <div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES</span></div>
-      <p class="practice-lead">Sem abrir a teoria.</p>
-      <div class="practice-stack">
-        <div>
-          <p class="practice-prompt">1. “Paradigma de linguagem” é o nome do editor ou o estilo de organizar o programa?</p>
-          <textarea class="practice-field" data-practice-field="pretest-paradigm" rows="2"></textarea>
-        </div>
-        <div>
-          <p class="practice-prompt">2. Dois programas com estilos diferentes podem imprimir o mesmo resultado?</p>
-          <textarea class="practice-field" data-practice-field="pretest-same" rows="2"></textarea>
-        </div>
-      </div>
-    </section>
-    <section class="practice" aria-labelledby="four-reads-title">
-      <div class="practice-heading"><h2 id="four-reads-title">Quais são as quatro leituras?</h2><span class="practice-tag">CONTEXTUALIZE</span></div>
-      <div class="compare-grid">
-        <section class="practice-worked"><h3>1. Imperativo</h3><p><code>total = 0</code>; percorra a lista com um loop e some cada número a <code>total</code>. A variável acumuladora muda durante a execução.</p></section>
-        <section class="practice-worked"><h3>2. Dobragem explícita</h3><p>Ainda percorra a lista, mas escreva a soma como uma regra de atualizar acumulador: <code>total = total + número</code>. O “dobrar” é separar o estado inicial da função que o combina com cada item.</p></section>
-        <section class="practice-worked"><h3>3. <code>Reduce</code></h3><p>Entregue ao método <code>reduce</code> um valor inicial e uma função que combina o acumulador com o próximo número. Não há loop escrito por você.</p></section>
-        <section class="practice-worked"><h3>4. Pipeline</h3><p>Observe o mesmo cálculo como uma sequência de valores: comece em <code>0</code> e aplique a operação “somar próximo” a cada item da lista.</p></section>
-      </div>
-      <p class="practice-lead">Estas quatro alternativas são apenas leituras didáticas deste capítulo. Não estamos alegando que “pipeline” ou “dobragem” são outra operação matemática: todas implementam a soma dos elementos.</p>
-    </section>
-    <section class="practice" aria-labelledby="predict-title">
-      <div class="practice-heading"><h2 id="predict-title">Previsão</h2><span class="practice-tag">ANTES DO LAB</span></div>
-      <p class="practice-prompt">Agora que você conhece as quatro formas, calcule manualmente <code>1 + 2 + 3 + 4</code>. Depois escreva: qual soma espera e se espera algum estilo dar outro valor. Justifique a previsão usando o que acabou de ler.</p>
-      <textarea class="practice-field" data-practice-field="predict-same-sum" rows="3" placeholder="Exemplo: espero 10 em todas, porque todas começam em 0 e somam os mesmos quatro números."></textarea>
-    </section>
-    <section class="lab sum-lab" id="sum-lab" aria-labelledby="lab-title">
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quatro leituras · Playground</title><link rel="stylesheet" href="../../styles.css"><script src="../../../_shared/practice.js" defer></script><script src="../../../_shared/lab-kit.js" defer></script><script src="../../../_shared/lab-components.js" defer></script><script src="model.js" defer></script><script src="app.js" defer></script></head>
+<body><main data-book-slug="paradigms" data-chapter-id="01-quatro-leituras-mesmo-problema" data-practice-mc="mc-ch01">
+<header class="page-header"><a class="brand" href="../../index.html">playground / paradigmas</a><span class="lesson-tag">FASE 0 · CAP 01</span></header>
+<nav class="chapter-navigation" aria-label="Navegação do capítulo"><a href="../../index.html">← Sumário</a><span>01</span><a href="../02-mutacao-vs-valor/index.html">02 →</a></nav>
+<section class="intro chapter-intro"><p class="eyebrow">FERRAMENTAS MENTAIS</p><h1>Quatro leituras</h1></section>
+<p class="chapter-objective"><strong>Objetivo:</strong> Comparar leituras de código mantendo a mesma especificação.</p>
+<p class="lesson-prerequisites">Pré-requisitos: nenhum capítulo anterior; os conceitos necessários são apresentados nesta página.</p>
+<section class="practice" aria-labelledby="pretest-title"><div class="practice-heading"><h2 id="pretest-title">Antes de começar</h2></div><label class="lesson-question">Um cálculo escrito com reduce tem necessariamente resultado diferente de um loop?<textarea class="practice-field" data-practice-field="pretest-paradigm" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="context-title"><div class="practice-heading"><h2 id="context-title">Conceitos para o experimento</h2></div><p>O mesmo cálculo pode ser expresso por um loop imperativo (atualiza acumulador), uma dobragem (combina cada item com o acumulado), reduce (API de combinação de uma coleção) ou um pipeline de operações (valores passam por etapas). As quatro leituras deste lab representam a mesma soma; não são quatro linguagens nem uma classificação exaustiva de paradigmas.</p></section>
+<section class="practice" aria-labelledby="worked-title"><div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2></div><div class="practice-worked"><p>Para [1,2,3,4], começando em 0, o acumulador percorre 0→1→3→6→10. Em cada leitura o operador é soma e a ordem dos itens é preservada, portanto o total é 10.</p></div><label class="lesson-question">Identifique no exemplo a regra que liga a entrada ao resultado. Explique uma etapa, sem apenas repetir a saída.<textarea class="practice-field" data-practice-field="worked-observation" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="predict-title"><div class="practice-heading"><h2 id="predict-title">Previsão — antes do laboratório</h2></div><label class="lesson-question">Use 5 −2 7. Qual total espera nas quatro leituras?<textarea class="practice-field" data-practice-field="predict-same-sum" rows="3"></textarea></label></section>
+<section class="lab sum-lab" id="sum-lab" aria-labelledby="lab-title">
       <header class="sum-lab-header">
         <div>
           <p class="eyebrow">LABORATÓRIO INTERATIVO</p>
@@ -108,61 +64,38 @@
         </div>
       </div>
     </section>
-    <section class="practice" aria-labelledby="compare-title">
-      <div class="practice-heading"><h2 id="compare-title">Comparar</h2></div>
-      <p class="practice-prompt">As quatro leituras percorrem quatro itens. Por que o número de etapas pode ser parecido, mesmo a forma de escrever ser diferente?</p>
-      <textarea class="practice-field" data-practice-field="compare-steps" rows="3"></textarea>
-      <p class="practice-prompt">O que muda na prática ao trocar estilo, se o resultado é o mesmo?</p>
-      <textarea class="practice-field" data-practice-field="compare-style" rows="3"></textarea>
-    </section>
-    <section class="practice" aria-labelledby="mc-title">
-      <div class="practice-heading"><h2 id="mc-title">Múltipla escolha</h2></div>
-      <p class="practice-prompt">Equipe troca um <code>for</code> por <code>reduce</code> na soma. O total da nota fiscal de testes continua 100. Afirmação mais precisa?</p>
-      <ul class="choice-list">
-        <li><label><input type="radio" name="mc-ch01" value="a"> A) Mudou o paradigma, logo o resultado tem que mudar.</label></li>
-        <li><label><input type="radio" name="mc-ch01" value="b"> B) Estilo de leitura mudou; a operação matemática é a mesma neste caso.</label></li>
-        <li><label><input type="radio" name="mc-ch01" value="c"> C) Reduce só funciona em linguagens funcionais.</label></li>
-        <li><label><input type="radio" name="mc-ch01" value="d"> D) Paradigma é sinônimo de compilador.</label></li>
-      </ul>
-      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2" placeholder="Por que escolhi…"></textarea>
-      <textarea class="practice-field" data-practice-field="mc-why-not" rows="3" placeholder="Por que não as outras…"></textarea>
-      <details class="model-answer"><summary>Resposta sugerida +</summary><div class="theory-content"><p><strong>B.</strong> Mesma operação, outra forma de expressar o fluxo.</p></div></details>
-    </section>
-    <section class="practice" aria-labelledby="checkpoint-title">
-      <div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2></div>
-      <textarea class="practice-field" data-practice-field="checkpoint-paradigm" rows="2" placeholder="1. Imperativo vs funcional leve (uma frase cada)"></textarea>
-      <textarea class="practice-field" data-practice-field="checkpoint-why" rows="2" placeholder="2. Por que isso importa nos outros livros?"></textarea>
-      <textarea class="practice-field" data-practice-field="checkpoint-result" rows="2" placeholder="3. Quantos resultados diferentes vimos?"></textarea>
-    </section>
-                                                                                                                                                                                                                                            <details class="chapter-gabarito">
+<section class="practice" aria-labelledby="compare-title"><div class="practice-heading"><h2 id="compare-title">Compare com sua previsão</h2></div><label class="lesson-question">Compare os traços de loop e reduce. Etapas iguais provam desempenho igual?<textarea class="practice-field" data-practice-field="compare-steps" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="mc-title"><div class="practice-heading"><h2 id="mc-title">Escolha e justifique</h2></div><p class="practice-prompt">Trocar for por reduce preservou a soma. Qual conclusão é válida?</p><ul class="choice-list"><li><label><input type="radio" name="mc-ch01" value="a"> A) O programa virou uma linguagem funcional.</label></li><li><label><input type="radio" name="mc-ch01" value="b"> B) Reduce sempre é mais rápido.</label></li><li><label><input type="radio" name="mc-ch01" value="c"> C) A organização da expressão mudou, mas esse comportamento foi preservado.</label></li><li><label><input type="radio" name="mc-ch01" value="d"> D) Todos os paradigmas são idênticos.</label></li></ul><label class="lesson-question">Explique por que a alternativa escolhida responde ao caso.<textarea class="practice-field" data-practice-field="mc-why-yes" rows="3"></textarea></label><label class="lesson-question">Descarte cada uma das outras alternativas com uma razão específica.<textarea class="practice-field" data-practice-field="mc-why-not" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="design-title"><div class="practice-heading"><h2 id="design-title">Transfira para outro contexto</h2></div><label class="lesson-question">Se o acumulador começar em 100 em só uma leitura, a comparação ainda verifica a mesma especificação?<textarea class="practice-field" data-practice-field="design-transfer" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="checkpoint-title"><div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2></div><label class="lesson-question">Retome o exemplo trabalhado e explique a regra central usando seus dados.<textarea class="practice-field" data-practice-field="checkpoint-paradigm" rows="3"></textarea></label><label class="lesson-question">Que conclusão o laboratório não permite tirar? Dê um limite concreto.<textarea class="practice-field" data-practice-field="checkpoint-limit" rows="3"></textarea></label></section>
+    <details class="chapter-gabarito">
       <summary>Gabarito <span aria-hidden="true">+</span></summary>
       <div class="gabarito-content">
-        <h4>As quatro leituras</h4>
-        <p>1. <strong>Imperativo:</strong> loop explícito com variável <code>total</code> que muda.</p>
-        <p>2. <strong>Dobragem explícita:</strong> define a regra <code>total = total + item</code> para combinar estado e próximo elemento.</p>
-        <p>3. <strong><code>Reduce</code>:</strong> delega a combinação ao método <code>reduce</code>, usando valor inicial e função combinadora.</p>
-        <p>4. <strong>Pipeline:</strong> representa a mesma combinação como uma sequência de operações sobre o valor acumulado.</p>
         <h4>Pré-teste</h4>
-        <p><strong>#</strong> Campo — Essência</p>
-        <p><strong>1</strong> <code>pretest-paradigm</code> — Paradigma = estilo de organizar programa (não é linguagem nem editor).</p>
-        <p><strong>2</strong> <code>pretest-same</code> — Mesmo problema pode ter várias leituras; o resultado numérico pode coincidir.</p>
-        <h4>Previsão (`predict-same-sum`)</h4>
-        <p>Lista <code>1 2 3 4</code>: os quatro estilos devem dar <strong>10</strong> com passos parecidos (um passo por elemento + início).</p>
+        <p>pretest-paradigm: Não. Se mantiver entradas, operação e valor inicial, pode preservar exatamente o mesmo resultado.</p>
+        <h4>Exemplo trabalhado</h4>
+        <p>worked-observation: Para [1,2,3,4], começando em 0, o acumulador percorre 0→1→3→6→10. Em cada leitura o operador é soma e a ordem dos itens é preservada, portanto o total é 10. Exigir explicação do mecanismo: O mesmo cálculo pode ser expresso por um loop imperativo (atualiza acumulador), uma dobragem (combina cada item com o acumulado), reduce (API de combinação de uma coleção) ou um pipeline de operações (valores passam por etapas). As quatro leituras deste lab representam a mesma soma; não são quatro linguagens nem uma classificação exaustiva de paradigmas.</p>
+        <h4>Previsão</h4>
+        <p>predict-same-sum: 10 em todas: 0+5=5; 5−2=3; 3+7=10. Aceitar hipótese inicial diferente se explicitada antes da execução; após observar, exigir correção fundamentada.</p>
         <h4>Comparar</h4>
-        <p><strong>Campo</strong> Essência</p>
-        <p><strong><code>compare-steps</code></strong> Imperativo e reduce costumam ter o mesmo número de passos neste modelo; diferença é *como* se expressa o acumulador (loop explícito vs função de ordem superior).</p>
-        <p><strong><code>compare-style</code></strong> Estilo não muda resultado aqui; muda legibilidade, composição e risco ao mudar o código.</p>
-        <h4>MC (`mc-ch01`)</h4>
-        <p><strong>Correta: B</strong> — paradigma descreve organização do programa; trocar for por reduce não muda a soma neste lab.</p>
+        <p>compare-steps: Não. Os traços mostram a mesma combinação lógica, mas alocação, compilação e execução real podem diferir; medir desempenho exige outro experimento.</p>
+        <h4>Múltipla escolha</h4>
+        <p>Correta: C.</p>
+        <p>A: Uma API não muda a linguagem inteira.</p>
+        <p>B: O lab não mede tempo real.</p>
+        <p>C: O resultado e o traço sustentam equivalência neste cálculo.</p>
+        <p>D: Outros comportamentos e compromissos podem diferir.</p>
+        <p>mc-why-yes: ligar a escolha ao caso e à definição, com a razão da alternativa correta acima.</p>
+        <p>mc-why-not: descartar todas as demais pelas razões específicas acima; não aceitar apenas “está errada”.</p>
+        <h4>Transferência</h4>
+        <p>design-transfer: Não. Mudou a condição inicial, e o total diverge em 100; comparar estilos exige manter a especificação.</p>
         <h4>Checkpoint</h4>
-        <p><strong>#</strong> Campo — Essência</p>
-        <p><strong>1</strong> <code>checkpoint-paradigm</code> — Imperativo: passos e estado mutável; funcional leve: encadear transformações / fold.</p>
-        <p><strong>2</strong> <code>checkpoint-why</code> — Ler labs de outros livros exige reconhecer estilo (mutação vs imutável, OO vs funções).</p>
-        <p><strong>3</strong> <code>checkpoint-result</code> — Quatro leituras, <strong>um</strong> resultado quando a operação é a mesma.</p>
+        <p>checkpoint-paradigm: usar dados do exemplo: Para [1,2,3,4], começando em 0, o acumulador percorre 0→1→3→6→10. Em cada leitura o operador é soma e a ordem dos itens é preservada, portanto o total é 10. Explicar a regra: O mesmo cálculo pode ser expresso por um loop imperativo (atualiza acumulador), uma dobragem (combina cada item com o acumulado), reduce (API de combinação de uma coleção) ou um pipeline de operações (valores passam por etapas). As quatro leituras deste lab representam a mesma soma; não são quatro linguagens nem uma classificação exaustiva de paradigmas.</p>
+        <p>checkpoint-limit: Este lab usa números finitos e o Number de JavaScript. Associatividade matemática não garante resultados idênticos sob reordenação em ponto flutuante; não reordenamos operações aqui.</p>
+        <h4>Critérios de correção</h4>
+        <p>Resposta completa liga regra, dados e conclusão e respeita os limites. Resposta parcial identifica o resultado mas não explica o mecanismo ou omite condição relevante. Revisar se contradiz a definição ou extrapola a simulação para uma garantia geral.</p>
       </div>
     </details>
-<details class="theory"><summary>Teoria +</summary><div class="theory-content"><p><strong>Paradigma</strong> não é marca de linguagem: é convenção de como estruturar estado, controle e abstração. Livros como <code>prog_conc</code> misturam estilos nos labs de propósito.</p></div></details>
-    <nav class="chapter-bottom-navigation"><a href="../../index.html">← Sumário</a><a href="../02-mutacao-vs-valor/index.html">Capítulo 02 →</a></nav>
-  </main>
-</body>
-</html>
+<details class="theory"><summary>Limites do modelo <span aria-hidden="true">+</span></summary><div class="theory-content"><p>Este lab usa números finitos e o Number de JavaScript. Associatividade matemática não garante resultados idênticos sob reordenação em ponto flutuante; não reordenamos operações aqui.</p></div></details>
+<nav class="chapter-bottom-navigation" aria-label="Navegação do capítulo"><a href="../../index.html">← Sumário</a><span>01</span><a href="../02-mutacao-vs-valor/index.html">02 →</a></nav>
+</main></body></html>

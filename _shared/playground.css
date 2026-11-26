@@ -253,3 +253,14 @@ a.chapter-link:hover{background:#f0f3e9;border-color:#bcc8b8}
 .component-table caption{text-align:left;margin-bottom:10px}
 .component-table th,.component-table td{padding:10px;text-align:left;border-bottom:1px solid var(--line)}
 @media(max-width:620px){.component-body{padding:20px}.component-fields{grid-template-columns:1fr}}
+
+/* Atividades da Fase 0: enunciados visíveis e controles com espaço próprio. */
+.lesson-question{display:block;max-width:75ch;font-size:13px;line-height:1.7;margin:16px 0}
+.lesson-question .practice-field{display:block;margin-top:9px;width:100%}
+.lesson-prerequisites{font-size:11px;line-height:1.7;color:var(--muted);max-width:75ch;margin-bottom:24px}
+.compact-lab>label{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0;font-size:12px}
+.compact-lab>label:has(input:not([type=checkbox])){flex-direction:column;align-items:stretch;max-width:440px}
+.compact-lab input[type=checkbox],.compact-lab input[type=radio]{accent-color:var(--green)}
+.compact-lab fieldset{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:16px 0}
+.compact-lab fieldset label{display:inline-flex;gap:8px;margin:6px 14px 6px 0}
+.compact-lab [role=status]{overflow-wrap:anywhere}

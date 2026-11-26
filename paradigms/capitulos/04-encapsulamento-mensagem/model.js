@@ -2,17 +2,18 @@
   'use strict';
 
   function makeAccount(initial) {
-    let balance = Number(initial) || 0;
+    let balance = Number(initial);
+    if(!Number.isFinite(balance)||balance<0) throw new RangeError('saldo inicial inválido');
     return {
       deposit(amount) {
         const a = Number(amount);
-        if (a <= 0) throw new RangeError('depósito inválido');
+        if (!Number.isFinite(a) || a <= 0) throw new RangeError('depósito inválido');
         balance += a;
         return balance;
       },
       withdraw(amount) {
         const a = Number(amount);
-        if (a <= 0) throw new RangeError('saque inválido');
+        if (!Number.isFinite(a) || a <= 0) throw new RangeError('saque inválido');
         if (a > balance) throw new RangeError('saldo insuficiente');
         balance -= a;
         return balance;

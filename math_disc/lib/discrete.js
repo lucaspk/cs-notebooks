@@ -1,3 +1,4 @@
+(function(root) {
 'use strict';
 
 function evalConnective(p, q, op) {
@@ -82,7 +83,7 @@ function countPassword(length, alphabet) {
   return Math.pow(a, l);
 }
 
-module.exports = {
+const api = {
   evalConnective,
   truthTableBinary,
   forallExists,
@@ -94,3 +95,6 @@ module.exports = {
   hasPath,
   countPassword,
 };
+if (typeof module !== 'undefined' && module.exports) module.exports = api;
+else root.DiscreteLab = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this);

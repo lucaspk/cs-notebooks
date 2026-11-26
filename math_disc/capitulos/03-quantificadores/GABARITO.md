@@ -1,36 +1,47 @@
-# Gabarito — cap. 03 (03-quantificadores)
+# Gabarito — Quantificadores
 
 ## Pré-teste
 
-| # | Campo | Essência |
-| --- | --- | --- |
-| 1 | `pretest-1` | Quantificadores têm escopo e domínio, não apenas palavras-chave. |
-| 2 | `pretest-example` | O estudante deve dar um exemplo ou contraexemplo ligado à definição. |
+pretest-1: Não. É uma testemunha para ∃, mas ainda pode haver um contraexemplo para ∀.
 
-## Exemplo trabalhado (`worked-observation`)
+## Exemplo trabalhado
 
-Leia o exemplo e marque a regra aplicada; não copie o resultado sem explicar o mecanismo.
+worked-observation: No domínio {−1,2}, x>0 é falso em −1 e verdadeiro em 2: ∀ é F, ∃ é V. No domínio vazio, ∀ é V por vacuidade e ∃ é F. Exigir explicação do mecanismo: Um domínio é o conjunto dos objetos considerados. Um predicado, como x>0, pode ser V ou F para cada objeto. ∀ significa “para todo”; ∃ significa “existe pelo menos um”. Um contraexemplo refuta ∀; uma testemunha confirma ∃.
 
-## Previsão (`predict-1`)
+## Previsão
 
-Antes do lab, aceitar uma previsão que indique a regra central: O que é necessário para provar ou refutar cada quantificador?
+predict-1: ∀=F; ∃=V. Testemunhas: 3 e 4. Contraexemplos: 1 e 2. Aceitar hipótese inicial diferente se explicitada antes da execução; após observar, exigir correção fundamentada.
 
 ## Comparar
 
-| Campo | Essência |
-| --- | --- |
-| `compare-case` | Escopo: O que é necessário para provar ou refutar cada quantificador? |
-| `compare-limit` | Um contraexemplo afirma o oposto de “todo”?: O domínio altera o significado; nunca o deixe implícito. |
+compare-case: Não há contraexemplo, então ∀ é V; não há testemunha, então ∃ é F.
 
-## MC (`mc-ch01`)
+## Múltipla escolha
 
-**Correta: B** — Negar “todo” produz “existe pelo menos um não”.
+Correta: C.
 
-Distratores: A confunde intuição com definição; C ignora condições; D elimina o domínio ou a forma da regra.
+A: “Nenhum” é mais forte que a negação do universal.
+
+B: Também exige que todos falhem, o que não é necessário.
+
+C: Basta um contraexemplo: ¬∀P equivale a ∃¬P.
+
+D: Pode coexistir com pedidos não pagos.
+
+mc-why-yes: ligar a escolha ao caso e à definição, com a razão da alternativa correta acima.
+
+mc-why-not: descartar todas as demais pelas razões específicas acima; não aceitar apenas “está errada”.
+
+## Transferência
+
+design-transfer: Não. É verdade universal por vacuidade; existência exigiria um registro e uma testemunha.
 
 ## Checkpoint
 
-| # | Campo | Essência |
-| --- | --- |
-| 1 | `checkpoint-1` | Explicar a regra central com linguagem própria. |
-| 2 | `checkpoint-counter` | Dar um limite ou contraexemplo coerente. |
+checkpoint-1: usar dados do exemplo: No domínio {−1,2}, x>0 é falso em −1 e verdadeiro em 2: ∀ é F, ∃ é V. No domínio vazio, ∀ é V por vacuidade e ∃ é F. Explicar a regra: Um domínio é o conjunto dos objetos considerados. Um predicado, como x>0, pode ser V ou F para cada objeto. ∀ significa “para todo”; ∃ significa “existe pelo menos um”. Um contraexemplo refuta ∀; uma testemunha confirma ∃.
+
+checkpoint-limit: Declarar o domínio faz parte da afirmação. Mudar o domínio pode mudar a resposta sem alterar o predicado.
+
+## Critérios de correção
+
+Resposta completa liga regra, dados e conclusão e respeita os limites. Resposta parcial identifica o resultado mas não explica o mecanismo ou omite condição relevante. Revisar se contradiz a definição ou extrapola a simulação para uma garantia geral.

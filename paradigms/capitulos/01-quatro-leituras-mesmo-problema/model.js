@@ -58,7 +58,7 @@
       .split(/[\s,;]+/)
       .filter(Boolean)
       .map(Number);
-    if (parsed.some((n) => Number.isNaN(n))) throw new RangeError('números inválidos');
+    if (parsed.some((n) => !Number.isFinite(n))) throw new RangeError('números inválidos');
     if (parsed.length === 0) throw new RangeError('lista vazia');
     const results = Object.fromEntries(
       Object.entries(STYLES).map(([key, fn]) => [key, fn(parsed)])

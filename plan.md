@@ -286,7 +286,7 @@ Revisão de código e estrutura dos 61 capítulos publicados, autorizada pelo us
 - [ ] Commit/PR/push, quando solicitado.
 - Migração dos scripts practice.js e wiring de todos os capítulos é gradual; só cinco pilotos de persistência e dois de lab-kit foram migrados. Não é requisito migrar todo o acervo para concluir a infraestrutura.
 - Snippets manuais e scaffold executável entregues; veja atualização de 2026-11-26.
-- Labs com entradas fixas continuam exemplos demonstrativos. Transformá-los em experimentos mais ricos é débito pedagógico independente desta correção de layout.
+- Débito histórico de labs fixos: resolvido na onda de enriquecimento da Fase 0 em 2026-11-26; ver entrega abaixo.
 
 
 ## Geração futura — entrega 2026-11-26
@@ -305,3 +305,14 @@ Validação estrita roda no capítulo passado a finalize-chapter. maintain-all c
 Migração de todo o acervo para componentes segue gradual. Não houve reescrita dos capítulos publicados nesta entrega.
 
 Validação final desta entrega: 114 testes Node verdes; maintain-all e git diff --check verdes.
+
+
+## Enriquecimento da Fase 0 — 2026-11-26
+Concluídos os 24 capítulos: matemática discreta 9/9, V&V 7/7 e paradigmas 8/8.
+- Conceitos e exemplos corretos antes de previsões; exercícios específicos, alternativas plausíveis, transferência e critérios completos nos gabaritos.
+- Matemática: domínio/predicado, conjuntos, relações com domínio explícito, soma/indução, prova por selos com quatro bases, grafo dirigido e contagem com/sem repetição. Entradas manipuláveis; contagens grandes usam BigInt para exatidão.
+- V&V: custo ilustrativo de suíte, Arrange/Act/Assert executado, dependências simuladas, ordem TDD e propriedades de ordenação que distinguem ordem de preservação.
+- Paradigmas: laboratório rico de soma preservado; comparação de ordem de funções, composição com dependência substituível, validação de conta, conversão explícita e escalonamento com incremento perdido.
+- Persistência compartilhada nos 24; lógica matemática reutilizada via lib; apps novos usam componentes. Gabarito somente no collapse final.
+- Validação final: 138 testes Node, maintain-all e validação estática dos 24 capítulos verdes. Nenhum teste real de navegador.
+Limites conscientes: banco, threads e checagem estática real não são executados; ranking de paradigma e custos de testes são heurísticos didáticos. Testes de propriedades usam casos escolhidos, sem gerador automático. Esses limites constam nas páginas e no WORKBOARD.

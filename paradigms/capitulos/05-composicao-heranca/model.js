@@ -1,45 +1,18 @@
-(function (root) {
+(function(root) {
   'use strict';
-
-  function encoderBase() {
-    return {
-      encode(msg) {
-        return String(msg);
-      },
-    };
+  const encoders={plain:msg=>String(msg),upper:msg=>String(msg).toUpperCase()};
+  class BaseEncoder { encode(msg){return String(msg);} }
+  class LoggedEncoder extends BaseEncoder { encode(msg){return '[LOG] '+super.encode(msg);} }
+  function viaInheritance(msg){return new LoggedEncoder().encode(msg);}
+  function viaComposition(msg,kind='plain'){
+    if(!encoders[kind])throw new RangeError('Codificador desconhecido');
+    const inner={encode:encoders[kind]};
+    return '[LOG] '+inner.encode(msg);
   }
-
-  function viaInheritance(msg) {
-    const parent = encoderBase();
-    const child = {
-      encode(msg) {
-        return `[LOG] ${parent.encode(msg)}`;
-      },
-    };
-    return child.encode(msg);
+  function compare(msg,kind='plain'){
+    const inheritance=viaInheritance(msg),composition=viaComposition(msg,kind);
+    return {inheritance,composition,same:inheritance===composition};
   }
-
-  function viaComposition(msg) {
-    const inner = encoderBase();
-    const wrapper = {
-      inner,
-      encode(msg) {
-        return `[LOG] ${this.inner.encode(msg)}`;
-      },
-    };
-    return wrapper.encode(msg);
-  }
-
-  function compare(msg) {
-    const text = String(msg);
-    return {
-      inheritance: viaInheritance(text),
-      composition: viaComposition(text),
-      same: viaInheritance(text) === viaComposition(text),
-    };
-  }
-
-  const api = { compare, viaInheritance, viaComposition };
-  if (typeof module !== 'undefined' && module.exports) module.exports = api;
-  else root.ComposeLab = api;
-})(typeof globalThis !== 'undefined' ? globalThis : this);
+  const api={compare,viaInheritance,viaComposition};
+  if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.ComposeLab=api;
+})(typeof globalThis!=='undefined'?globalThis:this);

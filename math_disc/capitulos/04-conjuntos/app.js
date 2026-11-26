@@ -1,1 +1,9 @@
-'use strict';document.getElementById('lab-host').innerHTML='<p class=mini-lab-case>Conjuntos de entrada: A = {1, 2, 3} e B = {2, 3, 4}. Observe união e interseção.</p><pre id=out role=status aria-live=polite></pre>';document.getElementById('out').textContent=JSON.stringify(MathLab.ops([1,2,3],[2,3,4]));
+'use strict';
+PlaygroundComponents.mount('#lab-host', {
+ id:'explore', title:"União e interseção", description:"Use números separados por espaço. Repetições representam o mesmo elemento.",
+ fields:[{"id": "a", "label": "Conjunto A", "type": "text", "value": "1 2 3"}, {"id": "b", "label": "Conjunto B", "type": "text", "value": "2 3 4"}],
+ evaluate: s => {
+ const r=MathLab.setOps(MathLab.numbers(s.a),MathLab.numbers(s.b));
+ return 'A ∪ B = {'+r.union.join(', ')+'}; A ∩ B = {'+r.inter.join(', ')+'}';
+}
+});

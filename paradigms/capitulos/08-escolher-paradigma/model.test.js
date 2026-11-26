@@ -9,3 +9,8 @@ describe('cap 08 escolher paradigma', () => {
     assert.strictEqual(r.top.style, 'mensagens / atores');
   });
 });
+it('low concurrency changes ranking under the declared heuristic',()=>{
+ const r=scoreChoice({mudanca:3,equipe:3,conc:1,express:3});
+ assert.strictEqual(r.top.style,'imperativo local');
+ assert.strictEqual(r.top.score,8);
+});

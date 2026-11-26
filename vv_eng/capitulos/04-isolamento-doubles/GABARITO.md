@@ -1,36 +1,47 @@
-# Gabarito — cap. 04 (04-isolamento-doubles)
+# Gabarito — Isolamento
 
 ## Pré-teste
 
-| # | Campo | Essência |
-| --- | --- | --- |
-| 1 | `pretest-1` | Escolha fake/stub/mock pela finalidade do teste. |
-| 2 | `pretest-example` | O estudante deve dar um exemplo ou contraexemplo ligado à definição. |
+pretest-1: Não. Verifica o consumidor com uma resposta controlada; consulta, esquema e conexão exigem testes de integração.
 
-## Exemplo trabalhado (`worked-observation`)
+## Exemplo trabalhado
 
-Leia o exemplo e marque a regra aplicada; não copie o resultado sem explicar o mecanismo.
+worked-observation: Uma regra consulta saldo 10. O double retorna 10 sem conexão; o banco externo simulado pode estar indisponível. A falha de conexão não demonstra por si só defeito na regra aritmética. Exigir explicação do mecanismo: Um double substitui uma dependência durante o teste. Um stub fornece respostas predefinidas; um mock também pode verificar interações esperadas. Controlar uma dependência ajuda a isolar a regra. Um teste de integração com a dependência real verifica contratos que o double pode não representar.
 
-## Previsão (`predict-1`)
+## Previsão
 
-Antes do lab, aceitar uma previsão que indique a regra central: O double deve espelhar a interface ou o comportamento real?
+predict-1: Double retorna saldo 10; banco externo simulado falha por conexão. A regra não mudou, só a dependência. Aceitar hipótese inicial diferente se explicitada antes da execução; após observar, exigir correção fundamentada.
 
 ## Comparar
 
-| Campo | Essência |
-| --- | --- |
-| `compare-case` | Fronteira: O double deve espelhar a interface ou o comportamento real? |
-| `compare-limit` | Teste com mock conta chamadas ou só resultado?: Integração ainda é necessária para validar contrato real. |
+compare-case: A colaboração simulada pode concluir; em um sistema real, ainda seria preciso exercitar consulta e esquema verdadeiros. O lab não acessa banco algum.
 
-## MC (`mc-ch01`)
+## Múltipla escolha
 
-**Correta: D** — Doubles substituem dependências lentas ou instáveis sem testar a dependência real no mesmo unitário.
+Correta: D.
 
-Distratores: A confunde intuição com definição; C ignora condições; D elimina o domínio ou a forma da regra.
+A: A causa pode ser infraestrutura.
+
+B: Doubles são úteis quando representam contratos controlados.
+
+C: O escopo inclui a dependência externa.
+
+D: Separar regra e integração permite diagnosticar melhor.
+
+mc-why-yes: ligar a escolha ao caso e à definição, com a razão da alternativa correta acima.
+
+mc-why-not: descartar todas as demais pelas razões específicas acima; não aceitar apenas “está errada”.
+
+## Transferência
+
+design-transfer: Adicionar teste de contrato ou integração entre consumidor e API; atualizar fixtures com base no contrato real, sem considerar o double fonte da verdade.
 
 ## Checkpoint
 
-| # | Campo | Essência |
-| --- | --- |
-| 1 | `checkpoint-1` | Explicar a regra central com linguagem própria. |
-| 2 | `checkpoint-counter` | Dar um limite ou contraexemplo coerente. |
+checkpoint-1: usar dados do exemplo: Uma regra consulta saldo 10. O double retorna 10 sem conexão; o banco externo simulado pode estar indisponível. A falha de conexão não demonstra por si só defeito na regra aritmética. Explicar a regra: Um double substitui uma dependência durante o teste. Um stub fornece respostas predefinidas; um mock também pode verificar interações esperadas. Controlar uma dependência ajuda a isolar a regra. Um teste de integração com a dependência real verifica contratos que o double pode não representar.
+
+checkpoint-limit: Isolamento reduz fontes externas de variação; não torna o teste automaticamente correto. Doubles irreais podem ocultar incompatibilidades.
+
+## Critérios de correção
+
+Resposta completa liga regra, dados e conclusão e respeita os limites. Resposta parcial identifica o resultado mas não explica o mecanismo ou omite condição relevante. Revisar se contradiz a definição ou extrapola a simulação para uma garantia geral.

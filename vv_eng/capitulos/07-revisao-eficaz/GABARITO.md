@@ -1,36 +1,47 @@
-# Gabarito — cap. 07 (07-revisao-eficaz)
+# Gabarito — Revisão
 
 ## Pré-teste
 
-| # | Campo | Essência |
-| --- | --- | --- |
-| 1 | `pretest-1` | Revise primeiro risco, falha possível e contrato. |
-| 2 | `pretest-example` | O estudante deve dar um exemplo ou contraexemplo ligado à definição. |
+pretest-1: O segundo aponta caminho, efeito e entrada verificável; pode ser confirmado ou refutado.
 
-## Exemplo trabalhado (`worked-observation`)
+## Exemplo trabalhado
 
-Leia o exemplo e marque a regra aplicada; não copie o resultado sem explicar o mecanismo.
+worked-observation: Mudança: trocar preço em centavos por valor decimal. Um comentário útil aponta onde arredondamento muda o total, traz um caso (0,1+0,2) e pede uma regra explícita; “não gostei” não oferece critério de decisão. Exigir explicação do mecanismo: Uma revisão eficaz liga comentários a consequências verificáveis. Examine comportamento, testes, risco e legibilidade. Marcar um item significa que ele foi considerado, não que foi resolvido. Prioridade depende de impacto e probabilidade, com evidência no código e no cenário.
 
-## Previsão (`predict-1`)
+## Previsão
 
-Antes do lab, aceitar uma previsão que indique a regra central: Uma revisão deve apontar toda preferência estilística?
+predict-1: Não. Só informa itens considerados. Risco aberto pode impedir aprovação mesmo com 4/4. Aceitar hipótese inicial diferente se explicitada antes da execução; após observar, exigir correção fundamentada.
 
 ## Comparar
 
-| Campo | Essência |
-| --- | --- |
-| `compare-case` | Critério: Uma revisão deve apontar toda preferência estilística? |
-| `compare-limit` | Evidência e risco têm prioridade sobre opinião?: A justificativa ajuda o autor a decidir e aprender. |
+compare-case: A segunda exige casos monetários, compatibilidade e risco financeiro do cálculo; renomeação local foca referências e clareza. O checklist é igual, a profundidade varia.
 
-## MC (`mc-ch01`)
+## Múltipla escolha
 
-**Correta: A** — Revisão útil diferencia defeitos, dúvida e preferência.
+Correta: A.
 
-Distratores: A confunde intuição com definição; C ignora condições; D elimina o domínio ou a forma da regra.
+A: Fornece caso, resultado esperado e consequência que podem ser verificados.
+
+B: Não localiza problema ou critério.
+
+C: Preferência pessoal não fundamenta a mudança.
+
+D: Checklist não substitui evidência.
+
+mc-why-yes: ligar a escolha ao caso e à definição, com a razão da alternativa correta acima.
+
+mc-why-not: descartar todas as demais pelas razões específicas acima; não aceitar apenas “está errada”.
+
+## Transferência
+
+design-transfer: Indicar entrada [1,1], esperado [1,1], obtido [1], explicar perda de multiplicidade e sugerir teste de regressão.
 
 ## Checkpoint
 
-| # | Campo | Essência |
-| --- | --- |
-| 1 | `checkpoint-1` | Explicar a regra central com linguagem própria. |
-| 2 | `checkpoint-counter` | Dar um limite ou contraexemplo coerente. |
+checkpoint-1: usar dados do exemplo: Mudança: trocar preço em centavos por valor decimal. Um comentário útil aponta onde arredondamento muda o total, traz um caso (0,1+0,2) e pede uma regra explícita; “não gostei” não oferece critério de decisão. Explicar a regra: Uma revisão eficaz liga comentários a consequências verificáveis. Examine comportamento, testes, risco e legibilidade. Marcar um item significa que ele foi considerado, não que foi resolvido. Prioridade depende de impacto e probabilidade, com evidência no código e no cenário.
+
+checkpoint-limit: Revisão complementa testes e análise; ninguém garante ausência de defeitos por marcar uma lista. Diferencie bloqueio por correção de sugestão de estilo.
+
+## Critérios de correção
+
+Resposta completa liga regra, dados e conclusão e respeita os limites. Resposta parcial identifica o resultado mas não explica o mecanismo ou omite condição relevante. Revisar se contradiz a definição ou extrapola a simulação para uma garantia geral.

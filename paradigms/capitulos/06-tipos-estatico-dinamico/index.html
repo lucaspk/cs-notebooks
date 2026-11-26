@@ -1,63 +1,53 @@
 <!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tipos estático e dinâmico · Playground</title>
-  <link rel="stylesheet" href="../../styles.css">
-  <script src="model.js" defer></script>
-  <script src="app.js" defer></script>
-  <script src="../../practice.js" defer></script>
-</head>
-<body>
-  <main data-chapter-id="06-tipos-estatico-dinamico" data-practice-mc="mc-ch06">
-    <nav class="chapter-navigation"><a href="../05-composicao-heranca/index.html">← 05</a><span>06 Tipos</span><a href="../07-concorrencia-mensagem-estado/index.html">07 →</a></nav>
-    <h1>Tipos estático<br><span>e dinâmico</span></h1>
-    <p class="chapter-objective"><strong>Objetivo:</strong> prever quando um tipo é conhecido e quando o erro aparece</p>
-    <section class="practice" aria-labelledby="worked-title"><div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2><span class="practice-tag">NO PAPEL</span></div><section class="practice-worked"><p>Se <code>hours</code> recebe uma string <code>2</code>, o modelo estático rejeita a combinação antes da execução.</p></section><textarea class="practice-field" data-practice-field="worked-06" rows="2" placeholder="Qual é a regra aplicada?"></textarea></section>
-    <section class="practice" aria-labelledby="pretest-title"><div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES</span></div><textarea class="practice-field" data-practice-field="pretest-when" rows="2"></textarea></section>
-    <label><input type="radio" name="kind" value="static" checked> Checagem estática (modelo)</label>
-    <label><input type="radio" name="kind" value="dynamic"> Dinâmico</label>
-    Horário     <section class="practice" aria-labelledby="predict-title"><div class="practice-heading"><h2 id="predict-title">Previsão</h2><span class="practice-tag">ANTES DO LAB</span></div><textarea class="practice-field" data-practice-field="predict-type" rows="2" placeholder="O que você prevê que o lab mostrará?"></textarea></section>
-    <input id="sched" value="10:00"> Horas <input id="hours" value="2">
-    <p><code id="out">—</code></p>
-    <section class="practice" aria-labelledby="compare-title"><div class="practice-heading"><h2 id="compare-title">Comparar</h2><span class="practice-tag">ANALISAR</span></div><div class="compare-grid"><textarea class="practice-field" data-practice-field="compare-model" rows="3" placeholder="Modelo atual: Checagem estática contra contrato detectado em runtime."></textarea><textarea class="practice-field" data-practice-field="compare-limit" rows="3" placeholder="Quando o modelo deixa de ajudar?"></textarea></div></section>
-    <aside class="observation" aria-label="Dica"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow">OBSERVE</p><p>Estático antecipa; dinâmico observa em execução.</p></div></aside>
-    <section class="practice" aria-labelledby="mc-title"><div class="practice-heading"><h2 id="mc-title">Múltipla escolha</h2><span class="practice-tag">JUSTIFICAR</span></div><p class="practice-prompt">Qual afirmação está alinhada ao laboratório?</p>
-    <ul class="choice-list">
-      <li><label><input type="radio" name="mc-ch06" value="a"> A) Dinâmico checa em compilar.</label></li>
-      <li><label><input type="radio" name="mc-ch06" value="b"> B) Estático rejeita tipo errado antes de rodar.</label></li>
-      <li><label><input type="radio" name="mc-ch06" value="c"> C) JavaScript do lab é estaticamente tipado.</label></li>
-      <li><label><input type="radio" name="mc-ch06" value="d"> D) Tipos não importam em APIs.</label></li>
-    </ul>
-    <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2" placeholder="Por que a correta é melhor?"></textarea>
-    <textarea class="practice-field" data-practice-field="mc-why-not" rows="3" placeholder="Por que uma alternativa errada não serve?"></textarea>
-    </section>
-    <textarea class="practice-field" data-practice-field="checkpoint-trade" rows="2"></textarea>
-    <details class="theory"><summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary><div class="theory-content"><p>Tipagem é momento de verificação, não ausência ou presença absoluta de tipo.</p></div></details>
-                                                                                                                                                                                                                            <details class="chapter-gabarito">
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tipos estático/dinâmico · Playground</title><link rel="stylesheet" href="../../styles.css"><script src="../../../_shared/practice.js" defer></script><script src="../../../_shared/lab-kit.js" defer></script><script src="../../../_shared/lab-components.js" defer></script><script src="model.js" defer></script><script src="app.js" defer></script></head>
+<body><main data-book-slug="paradigms" data-chapter-id="06-tipos-estatico-dinamico" data-practice-mc="mc-ch06">
+<header class="page-header"><a class="brand" href="../../index.html">playground / paradigmas</a><span class="lesson-tag">FASE 0 · CAP 06</span></header>
+<nav class="chapter-navigation" aria-label="Navegação do capítulo"><a href="../05-composicao-heranca/index.html">← 05</a><span>06</span><a href="../07-concorrencia-mensagem-estado/index.html">07 →</a></nav>
+<section class="intro chapter-intro"><p class="eyebrow">FERRAMENTAS MENTAIS</p><h1>Tipos estático/dinâmico</h1></section>
+<p class="chapter-objective"><strong>Objetivo:</strong> Separar tipo de valor, regra de domínio e momento de verificação.</p>
+<p class="lesson-prerequisites">Pré-requisitos: leitura de entradas e resultados simples; os termos usados no experimento são definidos nesta página. A sequência recomendada vem do capítulo anterior.</p>
+<section class="practice" aria-labelledby="pretest-title"><div class="practice-heading"><h2 id="pretest-title">Antes de começar</h2></div><label class="lesson-question">Um campo HTML com conteúdo 2 entrega automaticamente um number para o código?<textarea class="practice-field" data-practice-field="pretest-when" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="context-title"><div class="practice-heading"><h2 id="context-title">Conceitos para o experimento</h2></div><p>Tipagem estática analisa compatibilidade antes de executar; linguagens dinâmicas também possuem tipos e podem verificar contratos em execução. O lab é JavaScript: seu modo chamado estático simula uma checagem antecipada, mas a função de checagem roda em execução. A entrada “2” de um campo HTML é texto até ser convertida.</p></section>
+<section class="practice" aria-labelledby="worked-title"><div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2></div><div class="practice-worked"><p>Contrato: horário é string e horas é number finito. A string “2” é rejeitada no modo de checagem; o número 2 é aceito. O modo dinâmico do exemplo apenas formata texto, sem validar ou calcular um horário real.</p></div><label class="lesson-question">Identifique no exemplo a regra que liga a entrada ao resultado. Explique uma etapa, sem apenas repetir a saída.<textarea class="practice-field" data-practice-field="worked-06" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="predict-title"><div class="practice-heading"><h2 id="predict-title">Previsão — antes do laboratório</h2></div><label class="lesson-question">Modo de checagem selecionado: compare horas como texto e horas convertidas para número.<textarea class="practice-field" data-practice-field="predict-type" rows="3"></textarea></label></section>
+<section class="lab compact-lab" aria-labelledby="lab-title"><h2 id="lab-title">Conteúdo igual, tipos diferentes</h2>
+<fieldset><legend>Modo simulado</legend><label><input type="radio" name="kind" value="static" checked>Checagem de contrato</label><label><input type="radio" name="kind" value="dynamic">Formatação sem checagem</label></fieldset>
+<label>Horário<input id="sched" value="10:00"></label><label>Horas<input id="hours" value="2"></label>
+<label><input type="checkbox" id="as-number">Converter horas para number</label>
+<p role="status" aria-live="polite"><code id="out"></code></p></section>
+<section class="practice" aria-labelledby="compare-title"><div class="practice-heading"><h2 id="compare-title">Compare com sua previsão</h2></div><label class="lesson-question">No modo dinâmico, aceitar “duas” prova que o cálculo de horário está correto?<textarea class="practice-field" data-practice-field="compare-model" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="mc-title"><div class="practice-heading"><h2 id="mc-title">Escolha e justifique</h2></div><p class="practice-prompt">Qual descrição do lab é precisa?</p><ul class="choice-list"><li><label><input type="radio" name="mc-ch06" value="a"> A) JavaScript tornou-se estaticamente tipado.</label></li><li><label><input type="radio" name="mc-ch06" value="b"> B) Dinâmico significa ausência de tipos.</label></li><li><label><input type="radio" name="mc-ch06" value="c"> C) Uma função em JavaScript simula um contrato e a diferença entre string e number.</label></li><li><label><input type="radio" name="mc-ch06" value="d"> D) Se passou no tipo, o horário é sempre válido.</label></li></ul><label class="lesson-question">Explique por que a alternativa escolhida responde ao caso.<textarea class="practice-field" data-practice-field="mc-why-yes" rows="3"></textarea></label><label class="lesson-question">Descarte cada uma das outras alternativas com uma razão específica.<textarea class="practice-field" data-practice-field="mc-why-not" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="design-title"><div class="practice-heading"><h2 id="design-title">Transfira para outro contexto</h2></div><label class="lesson-question">Uma API recebe idade:string e precisa de idade:number. Que duas verificações distintas são necessárias?<textarea class="practice-field" data-practice-field="design-transfer" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="checkpoint-title"><div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2></div><label class="lesson-question">Retome o exemplo trabalhado e explique a regra central usando seus dados.<textarea class="practice-field" data-practice-field="checkpoint-trade" rows="3"></textarea></label><label class="lesson-question">Que conclusão o laboratório não permite tirar? Dê um limite concreto.<textarea class="practice-field" data-practice-field="checkpoint-limit" rows="3"></textarea></label></section>
+    <details class="chapter-gabarito">
       <summary>Gabarito <span aria-hidden="true">+</span></summary>
       <div class="gabarito-content">
         <h4>Pré-teste</h4>
-        <p><strong>#</strong> Campo — Essência</p>
-        <p><strong>1</strong> <code>pretest-when</code> — Reconhecer o fenômeno antes de escolher uma solução.</p>
-        <h4>Exemplo trabalhado (`worked-06`)</h4>
-        <p>Se &lt;code&gt;hours&lt;/code&gt; recebe uma string &lt;code&gt;2&lt;/code&gt;, o modelo estático rejeita a combinação antes da execução.</p>
-        <h4>Previsão (`predict-type`)</h4>
-        <p>Aceitar uma previsão que use a regra central, não apenas copiar o resultado mostrado.</p>
+        <p>pretest-when: Não. value é string; é necessária conversão explícita quando o contrato pede number.</p>
+        <h4>Exemplo trabalhado</h4>
+        <p>worked-06: Contrato: horário é string e horas é number finito. A string “2” é rejeitada no modo de checagem; o número 2 é aceito. O modo dinâmico do exemplo apenas formata texto, sem validar ou calcular um horário real. Exigir explicação do mecanismo: Tipagem estática analisa compatibilidade antes de executar; linguagens dinâmicas também possuem tipos e podem verificar contratos em execução. O lab é JavaScript: seu modo chamado estático simula uma checagem antecipada, mas a função de checagem roda em execução. A entrada “2” de um campo HTML é texto até ser convertida.</p>
+        <h4>Previsão</h4>
+        <p>predict-type: Texto “2” é rejeitado; número 2 é aceito. O conteúdo visível pode ser igual e o tipo ser diferente. Aceitar hipótese inicial diferente se explicitada antes da execução; após observar, exigir correção fundamentada.</p>
         <h4>Comparar</h4>
-        <p><strong>Campo</strong> Essência</p>
-        <p><strong><code>compare-model</code></strong> Checagem estática contra contrato detectado em runtime.</p>
-        <p><strong><code>compare-limit</code></strong> Indicar o limite da abstração ou o cenário onde ela deixa de ajudar.</p>
-        <h4>MC (`mc-ch06`)</h4>
-        <p><strong>Correta: B</strong> — Estático rejeita tipo errado antes de rodar.</p>
-        <p><strong>Justificativa negativa:</strong> Dinâmico não checa tudo em compilação e JavaScript não é estaticamente tipado.</p>
+        <p>compare-model: Não. O modelo concatena texto. Aceitação não valida a semântica de hora nem a regra de domínio.</p>
+        <h4>Múltipla escolha</h4>
+        <p>Correta: C.</p>
+        <p>A: Uma função de validação não muda o sistema de tipos da linguagem.</p>
+        <p>B: Valores dinâmicos ainda têm tipos.</p>
+        <p>C: Distingue a simulação da análise estática real.</p>
+        <p>D: Tipo string não garante formato ou faixa válida de horário.</p>
+        <p>mc-why-yes: ligar a escolha ao caso e à definição, com a razão da alternativa correta acima.</p>
+        <p>mc-why-not: descartar todas as demais pelas razões específicas acima; não aceitar apenas “está errada”.</p>
+        <h4>Transferência</h4>
+        <p>design-transfer: Converter/validar representação numérica e verificar a regra de domínio (inteiro, faixa permitida). Checagem de tipo sozinha não resolve faixa.</p>
         <h4>Checkpoint</h4>
-        <p><strong>#</strong> Campo — Essência</p>
-        <p><strong>1</strong> <code>checkpoint-trade</code> — Explicar a regra central com suas palavras e dar um limite ou contraexemplo.</p>
+        <p>checkpoint-trade: usar dados do exemplo: Contrato: horário é string e horas é number finito. A string “2” é rejeitada no modo de checagem; o número 2 é aceito. O modo dinâmico do exemplo apenas formata texto, sem validar ou calcular um horário real. Explicar a regra: Tipagem estática analisa compatibilidade antes de executar; linguagens dinâmicas também possuem tipos e podem verificar contratos em execução. O lab é JavaScript: seu modo chamado estático simula uma checagem antecipada, mas a função de checagem roda em execução. A entrada “2” de um campo HTML é texto até ser convertida.</p>
+        <p>checkpoint-limit: Para demonstrar checagem estática real seria necessário um compilador/analisador apropriado. Este lab não executa essa ferramenta e não soma horários de verdade.</p>
+        <h4>Critérios de correção</h4>
+        <p>Resposta completa liga regra, dados e conclusão e respeita os limites. Resposta parcial identifica o resultado mas não explica o mecanismo ou omite condição relevante. Revisar se contradiz a definição ou extrapola a simulação para uma garantia geral.</p>
       </div>
     </details>
-<nav class="chapter-bottom-navigation"><a href="../05-composicao-heranca/index.html">← 05</a><a href="../07-concorrencia-mensagem-estado/index.html">07 →</a></nav>
-  </main>
-</body>
-</html>
+<details class="theory"><summary>Limites do modelo <span aria-hidden="true">+</span></summary><div class="theory-content"><p>Para demonstrar checagem estática real seria necessário um compilador/analisador apropriado. Este lab não executa essa ferramenta e não soma horários de verdade.</p></div></details>
+<nav class="chapter-bottom-navigation" aria-label="Navegação do capítulo"><a href="../05-composicao-heranca/index.html">← 05</a><span>06</span><a href="../07-concorrencia-mensagem-estado/index.html">07 →</a></nav>
+</main></body></html>

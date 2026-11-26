@@ -22,9 +22,9 @@
 
 | Fase | Livros presentes | Estado |
 | --- | --- | --- |
-| 0a | `vv_eng` | 7/7 publicados |
-| 0b | `math_disc` | 9/9 publicados |
-| 0c | `paradigms` | 8/8 publicados |
+| 0a | `vv_eng` | 7/7 publicados e enriquecidos |
+| 0b | `math_disc` | 9/9 publicados e enriquecidos |
+| 0c | `paradigms` | 8/8 publicados e enriquecidos |
 | 3 | `prog_conc` | 29/29 publicados |
 | 3 | `comp_net` | 8/31 publicados |
 
@@ -36,20 +36,21 @@ Qualquer novo capítulo deve indicar fase, pré-requisitos e a ligação com o p
 | --- | --- | --- | --- | --- |
 | 1 | `comp_net` | `09-sub-rede-roteador`, `10-tabela-roteamento-lpm`, `11-caminho-pacote-hop` | `07-arp-primeiro-salto` | L3 após LAN L2 |
 | 2 | `dsa` | *(livro ainda não criado)* | `comp_net/01` | Criar com `new-livro.mjs` antes |
-| 3 | `math_disc` / `vv_eng` | ondas de **enriquecimento** (mesmos slugs) | `comp_net/02` | Fase 0 publicada mas labs enxutos |
+| 3 | Fase 0 | revisões pontuais conforme feedback | capítulos enriquecidos | Onda dos 24 slugs concluída em 2026-11-26; sem nova onda pendente |
 
 ### Débito de qualidade (não bloqueia, mas evite copiar o mínimo)
 
 | Livro | Situação |
 | --- | --- |
-| `paradigms` | Revisado: `01-quatro-leituras-mesmo-problema` agora define os quatro estilos antes da previsão. Caps 03–08 ainda podem ganhar revisão mais profunda de layout e navegação. |
-| `math_disc`, `vv_eng` | Molde completo; densidade pedida = padrão `comp_net`; validar em passadas futuras a contextualização anterior a previsões/MC. |
+| `paradigms` | 8/8 enriquecidos: contexto, exemplos, previsões específicas, transferência e critérios. Labs 03/05/06/07 ganharam comparação controlada; modo estático é explicitamente simulado e ranking é heurístico. Limites de rede/threads/compilador reais estão declarados. |
+| `math_disc`, `vv_eng` | 16/16 enriquecidos. Matemática: entradas manipuláveis, contraexemplos e indução forte real. V&V: AAA executa asserção, TDD verifica ordem e propriedades detectam perda de duplicatas. Os labs são modelos didáticos; não executam banco, suíte real ou geração automática de propriedades. |
 | **Regra transversal** | Qualquer capítulo novo ou corrigido deve apresentar termos, listas e conjuntos antes de perguntas que os referenciem (`os quatro`, `ambos`, `as opções`). |
 
 ### Diário (prepend — mais recente no topo)
 
 | Quando (UTC) | Quem | Resumo |
 | --- | --- | --- |
+| 2026-11-26 | Codex | Concluída onda de enriquecimento dos 24 slugs publicados da Fase 0: math_disc/01–09, vv_eng/01–07 e paradigms/01–08 (nomes completos na tabela gerada abaixo). Conceitos antes das previsões, exemplos corrigidos, MC com distratores específicos, transferência, limites e 24 GABARITO.md completos. Labs de matemática manipuláveis; corrigidos implicação V→F e indução forte; V&V mostra asserção falhando e perda de duplicatas; paradigmas demonstra ordem, troca de dependência, tipos e lost update. Teste usado: node --test _tools/*.test.mjs _shared/*.cjs _template-livro/lab-examples/model.test.cjs comp_net/lib/*.test.js comp_net/capitulos/*/model.test.js prog_conc/capitulos/*/model.test.js paradigms/capitulos/*/model.test.js math_disc/lib/*.test.js math_disc/capitulos/*/model.test.js vv_eng/lib/*.test.js vv_eng/capitulos/*/model.test.js — 138 verdes; maintain-all e análise estática dos 24 verdes. Sem testes reais de navegador, conforme preferência do usuário. Nenhum slug apenas planejado nesta onda. |
 | 2026-11-26 | Codex | Geração futura: scaffold completo com draft protegido, componentes de lab com layout, validação estática em finalize, metadados consistentes e quatro referências no template. 114 testes Node verdes (incluindo geração dos quatro tipos, eventos dos componentes e casos inválidos), maintain-all verde. Sem testes reais de navegador por solicitação do usuário. plan.md e guias atualizados; sem migração em massa. |
 | 2026-11-25 | Codex | Revisão estrutural dos 61 labs: 15 mini-labs com layout compartilhado, rótulos e contexto de entradas fixas; compact-lab nos paradigmas 02–08; margens de métricas/logs/tabelas compartilhadas. maintain-all e 107 testes verdes, sintaxe dos apps verificada. plan.md atualizado com entregas e pendências visuais/file/Pages; inspeção visual não realizada. |
 | 2026-11-25 | Codex | Ajustado layout de vv_eng/01-falha-reproduzivel: cartões de evidência, hierarquia e espaçamento, resultado legível e grade responsiva. 9 testes verdes (livro + lab-kit); finalize-chapter e refresh-workboard executados. Inspeção visual no navegador não realizada. |
@@ -67,7 +68,7 @@ Qualquer novo capítulo deve indicar fase, pré-requisitos e a ligação com o p
 <!-- workboard:auto:start -->
 ## Publicação (gerado automaticamente)
 
-_Atualizado: 2026-11-26 04:16:19 UTC · comando: `node _tools/refresh-workboard.mjs`_
+_Atualizado: 2026-11-26 04:31:58 UTC · comando: `node _tools/refresh-workboard.mjs`_
 
 | Livro | Publicados | No roteiro | Próximo(s) slug | Gabarito OK | Observação |
 | --- | --- | --- | --- | --- | --- |

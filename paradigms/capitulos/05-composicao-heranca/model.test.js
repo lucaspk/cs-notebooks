@@ -10,3 +10,9 @@ describe('cap 05 composição', () => {
     assert.ok(r.composition.includes('oi'));
   });
 });
+it('composition can replace its dependency independently',()=>{
+ const r=compare('teste','upper');
+ assert.strictEqual(r.inheritance,'[LOG] teste');
+ assert.strictEqual(r.composition,'[LOG] TESTE');
+ assert.ok(!r.same);
+});

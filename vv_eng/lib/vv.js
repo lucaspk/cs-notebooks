@@ -26,7 +26,7 @@ function isolationBenefit(useRealDb, useMock) {
 function tddState(testRed, codeGreen) {
   if (testRed && !codeGreen) return 'red';
   if (testRed && codeGreen) return 'green';
-  return 'refactor';
+  return codeGreen ? 'inválido: green sem red' : 'sem teste';
 }
 
 function sortInvariant(arr) {

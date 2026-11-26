@@ -13,8 +13,11 @@ export function validateChapter(dir) {
   const labels = new Set(tags.filter(m => /^<label\b/i.test(m[0])).map(m => attrs(m[0]).for));
   let labelDepth = 0;
   let main;
+  const sections=[];
   for (const [tag] of tags) {
     const a = attrs(tag);
+    if (/^<section\b/i.test(tag)) sections.push(/(?:^|\s)lab(?:\s|$)/.test(a.class || ''));
+    if (/^<\/section/i.test(tag)) sections.pop();
     if (a.id) {
       if (ids.has(a.id)) issues.push('ID duplicado: ' + a.id);
       ids.add(a.id);
@@ -36,7 +39,7 @@ export function validateChapter(dir) {
         if (!new RegExp('id=["\x27]' + id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '["\x27]').test(html)) issues.push('Rótulo inexistente: ' + id);
       }
     }
-    if (/^<input\b/i.test(tag) && a.type === 'radio' && a.name !== main?.['data-practice-mc']) issues.push('Radio diverge de data-practice-mc: ' + a.name);
+    if (/^<input\b/i.test(tag) && a.type === 'radio' && !sections.includes(true) && a.name !== main?.['data-practice-mc']) issues.push('Radio diverge de data-practice-mc: ' + a.name);
   }
   if (!main?.['data-chapter-id']) issues.push('main sem data-chapter-id');
   if (/{{[^}]+}}|\bTODO\b|\bPREENCHER\b|Alternativa incorreta típica|Ver modelo no lab|Outra distração/.test(html)) issues.push('Placeholder pendente');

@@ -36,7 +36,7 @@
 
   function run(mode, delta) {
     const d = Number(delta);
-    if (Number.isNaN(d)) throw new RangeError('delta inválido');
+    if (!Number.isFinite(d)) throw new RangeError('delta inválido');
     return mode === 'mutate' ? scenarioMutate(d) : scenarioCopy(d);
   }
 

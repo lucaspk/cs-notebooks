@@ -1,6 +1,7 @@
 'use strict';
 const $ = (id) => document.getElementById(id);
 function render() {
+  for(const id of ['mudanca','equipe','conc','express']) $(id+'-value').textContent=$(id).value;
   const r = PickParadigmLab.scoreChoice({
     mudanca: $('mudanca').value,
     equipe: $('equipe').value,

@@ -1,34 +1,47 @@
-# Gabarito — cap. 07 (07-concorrencia-mensagem-estado)
+# Gabarito — Concorrência
 
 ## Pré-teste
 
-| # | Campo | Essência |
-| --- | --- | --- |
-| 1 | `pretest-race` | Reconhecer o fenômeno antes de escolher uma solução. |
+pretest-race: Sim: A lê 0, B lê 0, A grava 1, B grava 1. A segunda escrita sobrescreve o efeito da primeira.
 
-## Exemplo trabalhado (`worked-07`)
+## Exemplo trabalhado
 
-Com três turnos, o modelo compartilha contador no primeiro caso e serializa mensagens no segundo.
+worked-07: Uma rodada contém dois incrementos. Se A e B leem 0 antes de gravar, ambos escrevem 1: perde-se um incremento. Com um dono aplicando duas mensagens, o contador vai a 2. Exigir explicação do mecanismo: Estado compartilhado permite que tarefas leiam e escrevam o mesmo contador. Um incremento pode conter leitura e escrita separadas. No modelo de mensagens, um único dono processa cada incremento em série. Isso muda quem pode alterar o estado, sem prometer entrega perfeita numa rede real.
 
-## Previsão (`predict-race`)
+## Previsão
 
-Aceitar uma previsão que use a regra central, não apenas copiar o resultado mostrado.
+predict-race: Compartilhado=3; mensagens=6; esperado=6. Cada rodada sobreposta perde um dos dois incrementos. Aceitar hipótese inicial diferente se explicitada antes da execução; após observar, exigir correção fundamentada.
 
 ## Comparar
 
-| Campo | Essência |
-| --- | --- |
-| `compare-model` | Locks protegem memória compartilhada; atores/filas isolam estado. |
-| `compare-limit` | Indicar o limite da abstração ou o cenário onde ela deixa de ajudar. |
+compare-model: Não. No escalonamento serial os dois caminhos chegam a 6. A existência de uma execução correta não exclui a execução incorreta.
 
-## MC (`mc-ch07`)
+## Múltipla escolha
 
-**Correta: C** — Mensagens isolam estado; locks protegem compartilhado.
+Correta: B.
 
-**Justificativa negativa:** Trocar paradigma não elimina a necessidade de sincronização conceitual.
+A: O exemplo não modela falhas de rede ou do processo.
+
+B: Essa hipótese impede a sobreposição da leitura/escrita.
+
+C: O dono mantém seu próprio estado.
+
+D: Duplicação alteraria a contagem sem deduplicação.
+
+mc-why-yes: ligar a escolha ao caso e à definição, com a razão da alternativa correta acima.
+
+mc-why-not: descartar todas as demais pelas razões específicas acima; não aceitar apenas “está errada”.
+
+## Transferência
+
+design-transfer: Usar operação atômica ou exclusão mútua sobre leitura+escrita; considerar contenção, escopo do lock e possíveis bloqueios. Mensagens também exigem fila e tratamento de falhas.
 
 ## Checkpoint
 
-| # | Campo | Essência |
-| --- | --- |
-| 1 | `checkpoint-progconc` | Explicar a regra central com suas palavras e dar um limite ou contraexemplo. |
+checkpoint-progconc: usar dados do exemplo: Uma rodada contém dois incrementos. Se A e B leem 0 antes de gravar, ambos escrevem 1: perde-se um incremento. Com um dono aplicando duas mensagens, o contador vai a 2. Explicar a regra: Estado compartilhado permite que tarefas leiam e escrevam o mesmo contador. Um incremento pode conter leitura e escrita separadas. No modelo de mensagens, um único dono processa cada incremento em série. Isso muda quem pode alterar o estado, sem prometer entrega perfeita numa rede real.
+
+checkpoint-limit: O escalonamento é simulado e determinístico. Não executa threads reais, nem demonstra entrega exatamente uma vez em sistemas distribuídos.
+
+## Critérios de correção
+
+Resposta completa liga regra, dados e conclusão e respeita os limites. Resposta parcial identifica o resultado mas não explica o mecanismo ou omite condição relevante. Revisar se contradiz a definição ou extrapola a simulação para uma garantia geral.

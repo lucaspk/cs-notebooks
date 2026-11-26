@@ -9,6 +9,7 @@
 
   function applyPipeline(nums, opKeys) {
     const list = nums.map(Number);
+    if(!list.length || list.some(n=>!Number.isFinite(n))) throw new RangeError('Use uma lista de números finitos');
     let step = 0;
     const trace = [{ step: 0, value: [...list], op: 'entrada' }];
     let cur = list;

@@ -1,1 +1,8 @@
-(function(r){'use strict';function quant(dom,p){return{all:dom.every(p),exists:dom.some(p)};}const api={quant};if(typeof module!=='undefined'&&module.exports)module.exports=api;else r.MathLab=api;})(typeof globalThis!=='undefined'?globalThis:this);
+(function(root) {
+  'use strict';
+  const domain = typeof module !== 'undefined' && module.exports
+    ? require('../../lib/explore.js') : root.DiscreteExplore;
+  const api = { ...domain, quant:domain.forallExists };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  else root.MathLab = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this);

@@ -1,1 +1,8 @@
-(function(r){'use strict';function ops(A,B){const a=new Set(A),b=new Set(B);return{union:[...new Set([...a,...b])].sort(),inter:[...a].filter(x=>b.has(x)).sort()};}const api={ops};if(typeof module!=='undefined'&&module.exports)module.exports=api;else r.MathLab=api;})(typeof globalThis!=='undefined'?globalThis:this);
+(function(root) {
+  'use strict';
+  const domain = typeof module !== 'undefined' && module.exports
+    ? require('../../lib/explore.js') : root.DiscreteExplore;
+  const api = { ...domain, ops:domain.setOps };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  else root.MathLab = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this);

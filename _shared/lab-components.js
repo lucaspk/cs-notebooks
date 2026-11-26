@@ -34,7 +34,9 @@
       if (Object.values(state).some(v => typeof v === 'number' && !Number.isFinite(v))) {
         output.textContent = 'Preencha as entradas numéricas.'; return;
       }
-      const result = evaluate(state);
+      let result;
+      try { result = evaluate(state); }
+      catch (error) { output.textContent = error.message; return; }
       if (columns) output.innerHTML = table(columns, result, title);
       else output.textContent = String(result);
     };

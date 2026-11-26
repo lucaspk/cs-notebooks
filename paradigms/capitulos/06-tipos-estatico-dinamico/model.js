@@ -3,7 +3,7 @@
 
   function checkStatic(value, type) {
     const t = typeof value;
-    if (type === 'number') return t === 'number' && !Number.isNaN(value);
+    if (type === 'number') return t === 'number' && Number.isFinite(value);
     if (type === 'string') return t === 'string';
     return t === type;
   }

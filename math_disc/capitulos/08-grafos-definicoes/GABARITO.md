@@ -1,36 +1,47 @@
-# Gabarito — cap. 08 (08-grafos-definicoes)
+# Gabarito — Grafos (definições)
 
 ## Pré-teste
 
-| # | Campo | Essência |
-| --- | --- | --- |
-| 1 | `pretest-1` | Lembre-se: vértice não é aresta e grau não é número de vértices. |
-| 2 | `pretest-example` | O estudante deve dar um exemplo ou contraexemplo ligado à definição. |
+pretest-1: Não num grafo dirigido. Seria preciso informar a aresta inversa ou declarar o grafo não dirigido.
 
-## Exemplo trabalhado (`worked-observation`)
+## Exemplo trabalhado
 
-Leia o exemplo e marque a regra aplicada; não copie o resultado sem explicar o mecanismo.
+worked-observation: Com a>b e b>c, há caminho a→b→c. Não há caminho c→a. Acrescentar c>a cria um ciclo e torna possível o retorno. Exigir explicação do mecanismo: Um grafo dirigido tem vértices e arestas orientadas. a>b permite ir de a para b; o sentido inverso exige outra aresta. Um caminho dirigido segue as orientações. Um ciclo retorna a um vértice; alcançabilidade não exige que o caminho seja único.
 
-## Previsão (`predict-1`)
+## Previsão
 
-Antes do lab, aceitar uma previsão que indique a regra central: Múltiplas arestas mudam o grau em grafos não simples?
+predict-1: O caminho deixa de existir. a>b sozinho não alcança c. Aceitar hipótese inicial diferente se explicitada antes da execução; após observar, exigir correção fundamentada.
 
 ## Comparar
 
-| Campo | Essência |
-| --- | --- |
-| `compare-case` | Estrutura: Múltiplas arestas mudam o grau em grafos não simples? |
-| `compare-limit` | Adjacente descreve vértices ou arestas?: Definições devem dizer se o grafo é simples, dirigido ou ponderado. |
+compare-case: Passa a existir: c→a→b. Um ciclo não impede a análise de alcançabilidade.
 
-## MC (`mc-ch01`)
+## Múltipla escolha
 
-**Correta: D** — Adjacência compara vértices ligados; grau conta arestas incidentes.
+Correta: D.
 
-Distratores: A confunde intuição com definição; C ignora condições; D elimina o domínio ou a forma da regra.
+A: Quantidade de vértices não estabelece conexões.
+
+B: O ciclo pode estar em outro componente.
+
+C: Aresta saindo do destino não garante chegar nele.
+
+D: Essa é a definição de caminho dirigido.
+
+mc-why-yes: ligar a escolha ao caso e à definição, com a razão da alternativa correta acima.
+
+mc-why-not: descartar todas as demais pelas razões específicas acima; não aceitar apenas “está errada”.
+
+## Transferência
+
+design-transfer: Cada atividade depende da outra; não há uma ordem linear que satisfaça os dois pré-requisitos.
 
 ## Checkpoint
 
-| # | Campo | Essência |
-| --- | --- |
-| 1 | `checkpoint-1` | Explicar a regra central com linguagem própria. |
-| 2 | `checkpoint-counter` | Dar um limite ou contraexemplo coerente. |
+checkpoint-1: usar dados do exemplo: Com a>b e b>c, há caminho a→b→c. Não há caminho c→a. Acrescentar c>a cria um ciclo e torna possível o retorno. Explicar a regra: Um grafo dirigido tem vértices e arestas orientadas. a>b permite ir de a para b; o sentido inverso exige outra aresta. Um caminho dirigido segue as orientações. Um ciclo retorna a um vértice; alcançabilidade não exige que o caminho seja único.
+
+checkpoint-limit: O lab responde existência de caminho e considera caminho de comprimento zero de um vértice para si mesmo. Não calcula menor caminho nem tempo de execução.
+
+## Critérios de correção
+
+Resposta completa liga regra, dados e conclusão e respeita os limites. Resposta parcial identifica o resultado mas não explica o mecanismo ou omite condição relevante. Revisar se contradiz a definição ou extrapola a simulação para uma garantia geral.

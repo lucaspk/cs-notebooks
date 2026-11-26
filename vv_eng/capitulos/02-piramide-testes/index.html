@@ -1,47 +1,49 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pirâmide de testes · Playground</title>
-<link rel="stylesheet" href="../../styles.css">
-<script src="model.js" defer></script><script src="app.js" defer></script><script src="../../practice.js" defer></script>
-</head><body>
-<main data-chapter-id="02-piramide-testes" data-practice-mc="mc-ch02">
-<header class="page-header"><a class="brand" href="../../index.html">playground / V&V</a><span class="lesson-tag">CAP 02</span></header>
-<nav class="chapter-navigation"><a href="../01-falha-reproduzivel/index.html">←</a> <span>Pirâmide de testes</span> <a href="../03-unitario-aaa/index.html">→</a></nav>
-<section class="intro chapter-intro"><h1>Pirâmide de testes</h1></section>
-<p class="chapter-objective"><strong>Objetivo:</strong> Distribuir testes por velocidade, isolamento e confiança</p>
-
-    <section class="practice" aria-labelledby="worked-title"><div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2><span class="practice-tag">NO PAPEL</span></div><section class="practice-worked"><p>Um algoritmo interno merece teste unitário; uma jornada e o banco real merecem integração/e2e em menor volume.</p></section><textarea class="practice-field" data-practice-field="worked-observation" rows="2" placeholder="Qual regra você aplicou?"></textarea></section>
-<section class="practice" aria-labelledby="pretest-title"><div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES</span></div><div class="practice-stack"><textarea class="practice-field" data-practice-field="pretest-1" rows="2" placeholder="O que você já sabe sobre o tema?"></textarea><textarea class="practice-field" data-practice-field="pretest-example" rows="2" placeholder="Dê um exemplo ou contraexemplo curto."></textarea></div></section>
-<section class="practice" aria-labelledby="predict-title"><div class="practice-heading"><h2 id="predict-title">Previsão</h2><span class="practice-tag">ANTES DO LAB</span></div><textarea class="practice-field" data-practice-field="predict-1" rows="2" placeholder="Faça uma previsão antes de abrir o lab."></textarea></section>
-<section class="lab mini-lab" aria-labelledby="mini-lab-title"><header class="mini-lab-header"><p class="eyebrow">LABORATÓRIO</p><h2 id="mini-lab-title">Explore o modelo</h2><p>Altere uma entrada por vez e compare o resultado.</p></header><div id="lab-host"></div></section>
-
-    <section class="practice" aria-labelledby="compare-title"><div class="practice-heading"><h2 id="compare-title">Comparar</h2><span class="practice-tag">ANALISAR</span></div><div class="compare-grid"><textarea class="practice-field" data-practice-field="compare-case" rows="3" placeholder="Camadas: Por que não replicar tudo em testes de ponta a ponta?"></textarea><textarea class="practice-field" data-practice-field="compare-limit" rows="3" placeholder="Unitário encontra o mesmo tipo de falha que e2e?"></textarea></div></section>
-    <section class="practice" aria-labelledby="mc-title"><div class="practice-heading"><h2 id="mc-title">Múltipla escolha</h2><span class="practice-tag">JUSTIFICAR</span></div><p class="practice-prompt">Qual afirmação está alinhada ao lab?</p><ul class="choice-list" role="radiogroup"><li><label><input type="radio" name="mc-ch01" value="a"> A) O resultado depende apenas da intuição e não da definição.</label></li><li><label><input type="radio" name="mc-ch01" value="b"> B) A pirâmide otimiza feedback: muitos testes rápidos na base, menos lentos no topo.</label></li><li><label><input type="radio" name="mc-ch01" value="c"> C) A proporção depende do sistema; pirâmide não é receita rígida.</label></li><li><label><input type="radio" name="mc-ch01" value="d"> D) A conclusão vale sem verificar o domínio ou as condições.</label></li></ul><textarea class="practice-field" data-practice-field="mc-why-yes" rows="2" placeholder="Por que a alternativa correta é a melhor?"></textarea><textarea class="practice-field" data-practice-field="mc-why-not" rows="3" placeholder="Por que pelo menos uma alternativa errada não serve?"></textarea><details class="model-answer"><summary>Ver resposta <span>+</span></summary><p class="theory-content"><strong>C.</strong> A pirâmide otimiza feedback: muitos testes rápidos na base, menos lentos no topo.</p></details></section>
-    <section class="practice" aria-labelledby="checkpoint-title">
-      <div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2><span class="practice-tag">DEPOIS</span></div><div class="practice-stack"><textarea class="practice-field" data-practice-field="checkpoint-1" rows="2" placeholder="Explique a regra central com suas palavras."></textarea><textarea class="practice-field" data-practice-field="checkpoint-counter" rows="2" placeholder="Dê um contraexemplo ou limite da regra."></textarea></div></section>
-                                                                                                                                                            <details class="chapter-gabarito">
+<title>Pirâmide de testes · Playground</title><link rel="stylesheet" href="../../styles.css"><script src="../../../_shared/practice.js" defer></script><script src="../../../_shared/lab-kit.js" defer></script><script src="../../../_shared/lab-components.js" defer></script><script src="../../lib/explore.js" defer></script><script src="model.js" defer></script><script src="app.js" defer></script></head>
+<body><main data-book-slug="vv_eng" data-chapter-id="02-piramide-testes" data-practice-mc="mc-ch02">
+<header class="page-header"><a class="brand" href="../../index.html">playground / verificação e validação</a><span class="lesson-tag">FASE 0 · CAP 02</span></header>
+<nav class="chapter-navigation" aria-label="Navegação do capítulo"><a href="../01-falha-reproduzivel/index.html">← 01</a><span>02</span><a href="../03-unitario-aaa/index.html">03 →</a></nav>
+<section class="intro chapter-intro"><p class="eyebrow">FERRAMENTAS MENTAIS</p><h1>Pirâmide de testes</h1></section>
+<p class="chapter-objective"><strong>Objetivo:</strong> Escolher o nível de teste por risco, custo e dependências.</p>
+<p class="lesson-prerequisites">Pré-requisitos: leitura de entradas e resultados simples; os termos usados no experimento são definidos nesta página. A sequência recomendada vem do capítulo anterior.</p>
+<section class="practice" aria-labelledby="pretest-title"><div class="practice-heading"><h2 id="pretest-title">Antes de começar</h2></div><label class="lesson-question">Um teste unitário de desconto prova que o checkout inteiro funciona?<textarea class="practice-field" data-practice-field="pretest-1" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="context-title"><div class="practice-heading"><h2 id="context-title">Conceitos para o experimento</h2></div><p>Um teste unitário exercita uma unidade com dependências controladas; integração verifica colaboração entre componentes; ponta a ponta atravessa um fluxo amplo. A pirâmide sugere concentrar verificações rápidas na base e usar fluxos amplos para riscos que exigem integração real.</p></section>
+<section class="practice" aria-labelledby="worked-title"><div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2></div><div class="practice-worked"><p>Suíte com 5 unitários, 3 de integração e 20 ponta a ponta: no modelo, custo=5·1+3·5+20·20=420 unidades. O peso 20 é ilustrativo, não uma medição do seu projeto.</p></div><label class="lesson-question">Identifique no exemplo a regra que liga a entrada ao resultado. Explique uma etapa, sem apenas repetir a saída.<textarea class="practice-field" data-practice-field="worked-observation" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="predict-title"><div class="practice-heading"><h2 id="predict-title">Previsão — antes do laboratório</h2></div><label class="lesson-question">Mantenha 5 unitários e 3 de integração; reduza ponta a ponta de 20 para 2.<textarea class="practice-field" data-practice-field="predict-1" rows="3"></textarea></label></section>
+<section class="lab" id="lab-host" aria-label="Laboratório interativo"></section>
+<section class="practice" aria-labelledby="compare-title"><div class="practice-heading"><h2 id="compare-title">Compare com sua previsão</h2></div><label class="lesson-question">Compare 20/3/2 com 5/3/20. O que a distribuição permite concluir e o que não permite?<textarea class="practice-field" data-practice-field="compare-case" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="mc-title"><div class="practice-heading"><h2 id="mc-title">Escolha e justifique</h2></div><p class="practice-prompt">Uma regra pura de desconto possui dezenas de combinações. Onde verificar a maioria delas?</p><ul class="choice-list"><li><label><input type="radio" name="mc-ch02" value="a"> A) Só em cliques manuais.</label></li><li><label><input type="radio" name="mc-ch02" value="b"> B) Só em fluxos completos com navegador.</label></li><li><label><input type="radio" name="mc-ch02" value="c"> C) Em testes unitários, mantendo alguns fluxos de integração e ponta a ponta para a ligação real.</label></li><li><label><input type="radio" name="mc-ch02" value="d"> D) Em qualquer nível, pois custo e diagnóstico são idênticos.</label></li></ul><label class="lesson-question">Explique por que a alternativa escolhida responde ao caso.<textarea class="practice-field" data-practice-field="mc-why-yes" rows="3"></textarea></label><label class="lesson-question">Descarte cada uma das outras alternativas com uma razão específica.<textarea class="practice-field" data-practice-field="mc-why-not" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="design-title"><div class="practice-heading"><h2 id="design-title">Transfira para outro contexto</h2></div><label class="lesson-question">Você removeu 18 testes amplos e ganhou velocidade. Que evidência deve buscar antes de aceitar a mudança?<textarea class="practice-field" data-practice-field="design-transfer" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="checkpoint-title"><div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2></div><label class="lesson-question">Retome o exemplo trabalhado e explique a regra central usando seus dados.<textarea class="practice-field" data-practice-field="checkpoint-1" rows="3"></textarea></label><label class="lesson-question">Que conclusão o laboratório não permite tirar? Dê um limite concreto.<textarea class="practice-field" data-practice-field="checkpoint-limit" rows="3"></textarea></label></section>
+    <details class="chapter-gabarito">
       <summary>Gabarito <span aria-hidden="true">+</span></summary>
       <div class="gabarito-content">
         <h4>Pré-teste</h4>
-        <p><strong>#</strong> Campo — Essência</p>
-        <p><strong>1</strong> <code>pretest-1</code> — Escolha o nível pelo risco e pela fronteira real da falha.</p>
-        <p><strong>2</strong> <code>pretest-example</code> — O estudante deve dar um exemplo ou contraexemplo ligado à definição.</p>
-        <h4>Exemplo trabalhado (`worked-observation`)</h4>
-        <p>Leia o exemplo e marque a regra aplicada; não copie o resultado sem explicar o mecanismo.</p>
-        <h4>Previsão (`predict-1`)</h4>
-        <p>Antes do lab, aceitar uma previsão que indique a regra central: Por que não replicar tudo em testes de ponta a ponta?</p>
+        <p>pretest-1: Não. Não cobre necessariamente banco, configuração, rede e integração da interface com a regra.</p>
+        <h4>Exemplo trabalhado</h4>
+        <p>worked-observation: Suíte com 5 unitários, 3 de integração e 20 ponta a ponta: no modelo, custo=5·1+3·5+20·20=420 unidades. O peso 20 é ilustrativo, não uma medição do seu projeto. Exigir explicação do mecanismo: Um teste unitário exercita uma unidade com dependências controladas; integração verifica colaboração entre componentes; ponta a ponta atravessa um fluxo amplo. A pirâmide sugere concentrar verificações rápidas na base e usar fluxos amplos para riscos que exigem integração real.</p>
+        <h4>Previsão</h4>
+        <p>predict-1: Total passa de 28 para 10; custo de 420 para 60. Isso não prova que a cobertura de riscos permaneceu igual. Aceitar hipótese inicial diferente se explicitada antes da execução; após observar, exigir correção fundamentada.</p>
         <h4>Comparar</h4>
-        <p><strong>Campo</strong> Essência</p>
-        <p><strong><code>compare-case</code></strong> Camadas: Por que não replicar tudo em testes de ponta a ponta?</p>
-        <p><strong><code>compare-limit</code></strong> Unitário encontra o mesmo tipo de falha que e2e?: Cobrir tudo na UI aumenta custo e fragilidade.</p>
-        <h4>MC (`mc-ch01`)</h4>
-        <p><strong>Correta: C</strong> — A pirâmide otimiza feedback: muitos testes rápidos na base, menos lentos no topo.</p>
-        <p>Distratores: A confunde intuição com definição; C ignora condições; D elimina o domínio ou a forma da regra.</p>
+        <p>compare-case: Custos relativos: 75 e 420. A primeira concentra verificações na base; quantidade sozinha não mede qualidade das asserções nem cobertura dos riscos.</p>
+        <h4>Múltipla escolha</h4>
+        <p>Correta: C.</p>
+        <p>A: Repetição manual custa tempo e dificulta regressões.</p>
+        <p>B: Fluxos amplos são caros para muitas combinações de regra pura.</p>
+        <p>C: Concentra combinações locais sem abandonar a verificação da integração.</p>
+        <p>D: Níveis diferem em dependências, custo e localização de falhas.</p>
+        <p>mc-why-yes: ligar a escolha ao caso e à definição, com a razão da alternativa correta acima.</p>
+        <p>mc-why-not: descartar todas as demais pelas razões específicas acima; não aceitar apenas “está errada”.</p>
+        <h4>Transferência</h4>
+        <p>design-transfer: Mapear riscos e asserções removidos para testes menores ou fluxos amplos mantidos; medir a suíte real e verificar que cenários essenciais continuam cobertos.</p>
         <h4>Checkpoint</h4>
-        <p><strong>#</strong> Campo — Essência</p>
-        <p><strong>1</strong> <code>checkpoint-1</code> — Explicar a regra central com linguagem própria.</p>
-        <p><strong>2</strong> <code>checkpoint-counter</code> — Dar um limite ou contraexemplo coerente.</p>
+        <p>checkpoint-1: usar dados do exemplo: Suíte com 5 unitários, 3 de integração e 20 ponta a ponta: no modelo, custo=5·1+3·5+20·20=420 unidades. O peso 20 é ilustrativo, não uma medição do seu projeto. Explicar a regra: Um teste unitário exercita uma unidade com dependências controladas; integração verifica colaboração entre componentes; ponta a ponta atravessa um fluxo amplo. A pirâmide sugere concentrar verificações rápidas na base e usar fluxos amplos para riscos que exigem integração real.</p>
+        <p>checkpoint-limit: Os custos e percentuais são um cenário de decisão. Não existe proporção universal, e uma suíte vazia não é barata “com cobertura”: ela não oferece essa evidência.</p>
+        <h4>Critérios de correção</h4>
+        <p>Resposta completa liga regra, dados e conclusão e respeita os limites. Resposta parcial identifica o resultado mas não explica o mecanismo ou omite condição relevante. Revisar se contradiz a definição ou extrapola a simulação para uma garantia geral.</p>
       </div>
     </details>
-<nav class="chapter-bottom-navigation"><a href="../01-falha-reproduzivel/index.html">←</a> <a href="../03-unitario-aaa/index.html">→</a></nav>
+<details class="theory"><summary>Limites do modelo <span aria-hidden="true">+</span></summary><div class="theory-content"><p>Os custos e percentuais são um cenário de decisão. Não existe proporção universal, e uma suíte vazia não é barata “com cobertura”: ela não oferece essa evidência.</p></div></details>
+<nav class="chapter-bottom-navigation" aria-label="Navegação do capítulo"><a href="../01-falha-reproduzivel/index.html">← 01</a><span>02</span><a href="../03-unitario-aaa/index.html">03 →</a></nav>
 </main></body></html>

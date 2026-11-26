@@ -1,36 +1,47 @@
-# Gabarito — cap. 04 (04-conjuntos)
+# Gabarito — Conjuntos
 
 ## Pré-teste
 
-| # | Campo | Essência |
-| --- | --- | --- |
-| 1 | `pretest-1` | Use símbolo ∈ para elemento e ⊆ para relação entre conjuntos. |
-| 2 | `pretest-example` | O estudante deve dar um exemplo ou contraexemplo ligado à definição. |
+pretest-1: Não. Ambas descrevem {1,2}; repetições e ordem não alteram pertinência.
 
-## Exemplo trabalhado (`worked-observation`)
+## Exemplo trabalhado
 
-Leia o exemplo e marque a regra aplicada; não copie o resultado sem explicar o mecanismo.
+worked-observation: A={1,2,3} e B={2,3,4}: união={1,2,3,4}; interseção={2,3}. Repetir 2 na entrada não cria outro elemento. Exigir explicação do mecanismo: Um conjunto registra pertinência, sem multiplicidade ou ordem. A união A∪B reúne elementos de A ou B. A interseção A∩B reúne os que pertencem a A e a B. O conjunto vazio não contém elementos.
 
-## Previsão (`predict-1`)
+## Previsão
 
-Antes do lab, aceitar uma previsão que indique a regra central: Qual operação contém elementos exclusivos de um conjunto?
+predict-1: Vazia: nenhum elemento pertence aos dois conjuntos. A união é {1,2,3,4,5}. Aceitar hipótese inicial diferente se explicitada antes da execução; após observar, exigir correção fundamentada.
 
 ## Comparar
 
-| Campo | Essência |
-| --- | --- |
-| `compare-case` | Fronteira: Qual operação contém elementos exclusivos de um conjunto? |
-| `compare-limit` | Pertinência é diferente de subconjunto?: Diagramas ajudam, mas a definição decide. |
+compare-case: Com B vazio: união=A e interseção=vazia. Com B=A: ambas são A.
 
-## MC (`mc-ch01`)
+## Múltipla escolha
 
-**Correta: D** — Diferença A−B contém elementos de A que não estão em B.
+Correta: D.
 
-Distratores: A confunde intuição com definição; C ignora condições; D elimina o domínio ou a forma da regra.
+A: A união inclui IDs exclusivos de uma lista.
+
+B: Concatenação pode preservar repetições e exclusivos.
+
+C: Multiplicidade não define pertinência comum.
+
+D: Interseção exige presença em A e em B.
+
+mc-why-yes: ligar a escolha ao caso e à definição, com a razão da alternativa correta acima.
+
+mc-why-not: descartar todas as demais pelas razões específicas acima; não aceitar apenas “está errada”.
+
+## Transferência
+
+design-transfer: As duas: {bia}. Pelo menos uma: {ana,bia,caio}.
 
 ## Checkpoint
 
-| # | Campo | Essência |
-| --- | --- |
-| 1 | `checkpoint-1` | Explicar a regra central com linguagem própria. |
-| 2 | `checkpoint-counter` | Dar um limite ou contraexemplo coerente. |
+checkpoint-1: usar dados do exemplo: A={1,2,3} e B={2,3,4}: união={1,2,3,4}; interseção={2,3}. Repetir 2 na entrada não cria outro elemento. Explicar a regra: Um conjunto registra pertinência, sem multiplicidade ou ordem. A união A∪B reúne elementos de A ou B. A interseção A∩B reúne os que pertencem a A e a B. O conjunto vazio não contém elementos.
+
+checkpoint-limit: Conjuntos não preservam quantidades. Para estoque ou votos repetidos, uma lista ou multiconjunto pode ser necessário.
+
+## Critérios de correção
+
+Resposta completa liga regra, dados e conclusão e respeita os limites. Resposta parcial identifica o resultado mas não explica o mecanismo ou omite condição relevante. Revisar se contradiz a definição ou extrapola a simulação para uma garantia geral.

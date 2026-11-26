@@ -1,1 +1,8 @@
-(function(r){'use strict';function rows(fn){const out=[];for(const p of [false,true])for(const q of [false,true])out.push({p,q,out:fn(p,q)});return out;}const api={rows,implies:(p,q)=>!p||q};if(typeof module!=='undefined'&&module.exports)module.exports=api;else r.MathLab=api;})(typeof globalThis!=='undefined'?globalThis:this);
+(function(root) {
+  'use strict';
+  const domain = typeof module !== 'undefined' && module.exports
+    ? require('../../lib/explore.js') : root.DiscreteExplore;
+  const api = { ...domain, rows:domain.truthTableBinary, implies:(p,q)=>domain.evalConnective(p,q,'IMP') };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  else root.MathLab = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this);

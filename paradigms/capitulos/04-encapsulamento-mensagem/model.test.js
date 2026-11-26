@@ -17,3 +17,12 @@ describe('cap 04 encapsulamento', () => {
     assert.strictEqual(acc.balance(), 1);
   });
 });
+it('rejected withdrawal preserves the previous balance',()=>{
+ const acc=makeAccount(20);
+ assert.throws(()=>acc.withdraw(30),RangeError);
+ assert.strictEqual(acc.balance(),20);
+ assert.throws(()=>acc.deposit(Infinity),RangeError);
+ assert.strictEqual(acc.balance(),20);
+ acc.withdraw(20);assert.strictEqual(acc.balance(),0);
+});
+it('rejects invalid initial state',()=>assert.throws(()=>makeAccount(-1),RangeError));

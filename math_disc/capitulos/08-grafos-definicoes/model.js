@@ -1,1 +1,8 @@
-(function(r){'use strict';function path(adj,from,to){const s=[from],seen=new Set();while(s.length){const v=s.pop();if(v===to)return true;if(seen.has(v))continue;seen.add(v);for(const n of adj[v]||[])s.push(n);}return false;}const api={path};if(typeof module!=='undefined'&&module.exports)module.exports=api;else r.MathLab=api;})(typeof globalThis!=='undefined'?globalThis:this);
+(function(root) {
+  'use strict';
+  const domain = typeof module !== 'undefined' && module.exports
+    ? require('../../lib/explore.js') : root.DiscreteExplore;
+  const api = { ...domain, path:domain.hasPath };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  else root.MathLab = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this);

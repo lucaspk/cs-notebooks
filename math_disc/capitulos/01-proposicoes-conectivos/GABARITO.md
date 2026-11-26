@@ -1,36 +1,47 @@
-# Gabarito — cap. 01 (01-proposicoes-conectivos)
+# Gabarito — Proposições e conectivos
 
 ## Pré-teste
 
-| # | Campo | Essência |
-| --- | --- | --- |
-| 1 | `pretest-1` | Conectivo não é sinônimo de causa: use V/F para construir a tabela. |
-| 2 | `pretest-example` | O estudante deve dar um exemplo ou contraexemplo ligado à definição. |
+pretest-1: A primeira pode receber V/F num contexto definido. A ordem não tem valor de verdade.
 
-## Exemplo trabalhado (`worked-observation`)
+## Exemplo trabalhado
 
-Leia o exemplo e marque a regra aplicada; não copie o resultado sem explicar o mecanismo.
+worked-observation: Com p=V e q=F: AND=F, OR=V e IMP=F. Em IMP, a condição ocorreu mas a consequência não. Com p=F e q=F, IMP=V: essa linha não viola a promessa. Exigir explicação do mecanismo: Uma proposição tem valor verdadeiro (V) ou falso (F). AND exige V nos dois operandos; OR inclusivo exige pelo menos um V; IMP representa “se p, então q” e só é falso com p=V e q=F. A implicação material não afirma causalidade.
 
-## Previsão (`predict-1`)
+## Previsão
 
-Antes do lab, aceitar uma previsão que indique a regra central: O que muda o valor: trocar uma proposição ou trocar o operador?
+predict-1: IMP passa de F para V; o único caso falso é V→F. Aceitar hipótese inicial diferente se explicitada antes da execução; após observar, exigir correção fundamentada.
 
 ## Comparar
 
-| Campo | Essência |
-| --- | --- |
-| `compare-case` | Conectivo: O que muda o valor: trocar uma proposição ou trocar o operador? |
-| `compare-limit` | Como “implicação” difere de “causalidade”?: A tabela depende da forma da expressão, não do significado cotidiano. |
+compare-case: AND=F; OR=V; IMP=V. Trocar operador muda a regra sobre os mesmos valores.
 
-## MC (`mc-ch01`)
+## Múltipla escolha
 
-**Correta: B** — A implicação lógica só exige que não haja verdadeiro→falso.
+Correta: B.
 
-Distratores: A confunde intuição com definição; C ignora condições; D elimina o domínio ou a forma da regra.
+A: Antecedente falso não viola a implicação material.
+
+B: Antecedente verdadeiro e consequente falso é a única violação.
+
+C: Também tem antecedente falso.
+
+D: A consequência foi atendida.
+
+mc-why-yes: ligar a escolha ao caso e à definição, com a razão da alternativa correta acima.
+
+mc-why-not: descartar todas as demais pelas razões específicas acima; não aceitar apenas “está errada”.
+
+## Transferência
+
+design-transfer: p=arquivo existe; q=leitura pode começar. Refutação: existe e leitura não pode começar.
 
 ## Checkpoint
 
-| # | Campo | Essência |
-| --- | --- |
-| 1 | `checkpoint-1` | Explicar a regra central com linguagem própria. |
-| 2 | `checkpoint-counter` | Dar um limite ou contraexemplo coerente. |
+checkpoint-1: usar dados do exemplo: Com p=V e q=F: AND=F, OR=V e IMP=F. Em IMP, a condição ocorreu mas a consequência não. Com p=F e q=F, IMP=V: essa linha não viola a promessa. Explicar a regra: Uma proposição tem valor verdadeiro (V) ou falso (F). AND exige V nos dois operandos; OR inclusivo exige pelo menos um V; IMP representa “se p, então q” e só é falso com p=V e q=F. A implicação material não afirma causalidade.
+
+checkpoint-limit: Uma tabela avalia a forma lógica. Para julgar uma regra real, ainda é preciso definir com precisão p, q e o contexto.
+
+## Critérios de correção
+
+Resposta completa liga regra, dados e conclusão e respeita os limites. Resposta parcial identifica o resultado mas não explica o mecanismo ou omite condição relevante. Revisar se contradiz a definição ou extrapola a simulação para uma garantia geral.

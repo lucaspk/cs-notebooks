@@ -1,47 +1,49 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Unitário AAA · Playground</title>
-<link rel="stylesheet" href="../../styles.css">
-<script src="model.js" defer></script><script src="app.js" defer></script><script src="../../practice.js" defer></script>
-</head><body>
-<main data-chapter-id="03-unitario-aaa" data-practice-mc="mc-ch03">
-<header class="page-header"><a class="brand" href="../../index.html">playground / V&V</a><span class="lesson-tag">CAP 03</span></header>
-<nav class="chapter-navigation"><a href="../02-piramide-testes/index.html">←</a> <span>Unitário AAA</span> <a href="../04-isolamento-doubles/index.html">→</a></nav>
-<section class="intro chapter-intro"><h1>Unitário AAA</h1></section>
-<p class="chapter-objective"><strong>Objetivo:</strong> Organizar Arrange, Act, Assert em exemplos legíveis</p>
-
-    <section class="practice" aria-labelledby="worked-title"><div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2><span class="practice-tag">NO PAPEL</span></div><section class="practice-worked"><p>Arrange: preço=100; Act: aplicar 10% de desconto; Assert: resultado=90.</p></section><textarea class="practice-field" data-practice-field="worked-observation" rows="2" placeholder="Qual regra você aplicou?"></textarea></section>
-<section class="practice" aria-labelledby="pretest-title"><div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES</span></div><div class="practice-stack"><textarea class="practice-field" data-practice-field="pretest-1" rows="2" placeholder="O que você já sabe sobre o tema?"></textarea><textarea class="practice-field" data-practice-field="pretest-example" rows="2" placeholder="Dê um exemplo ou contraexemplo curto."></textarea></div></section>
-<section class="practice" aria-labelledby="predict-title"><div class="practice-heading"><h2 id="predict-title">Previsão</h2><span class="practice-tag">ANTES DO LAB</span></div><textarea class="practice-field" data-practice-field="predict-1" rows="2" placeholder="Faça uma previsão antes de abrir o lab."></textarea></section>
-<section class="lab mini-lab" aria-labelledby="mini-lab-title"><header class="mini-lab-header"><p class="eyebrow">LABORATÓRIO</p><h2 id="mini-lab-title">Explore o modelo</h2><p>Altere uma entrada por vez e compare o resultado.</p></header><div id="lab-host"></div></section>
-
-    <section class="practice" aria-labelledby="compare-title"><div class="practice-heading"><h2 id="compare-title">Comparar</h2><span class="practice-tag">ANALISAR</span></div><div class="compare-grid"><textarea class="practice-field" data-practice-field="compare-case" rows="3" placeholder="Estrutura: O assert deveria executar antes da ação?"></textarea><textarea class="practice-field" data-practice-field="compare-limit" rows="3" placeholder="Arrange prepara estado e dependências antes de agir?"></textarea></div></section>
-    <section class="practice" aria-labelledby="mc-title"><div class="practice-heading"><h2 id="mc-title">Múltipla escolha</h2><span class="practice-tag">JUSTIFICAR</span></div><p class="practice-prompt">Qual afirmação está alinhada ao lab?</p><ul class="choice-list" role="radiogroup"><li><label><input type="radio" name="mc-ch01" value="a"> A) O resultado depende apenas da intuição e não da definição.</label></li><li><label><input type="radio" name="mc-ch01" value="b"> B) AAA separa preparação, operação e verificação.</label></li><li><label><input type="radio" name="mc-ch01" value="c"> C) Nome do teste deve expressar comportamento, não implementação.</label></li><li><label><input type="radio" name="mc-ch01" value="d"> D) A conclusão vale sem verificar o domínio ou as condições.</label></li></ul><textarea class="practice-field" data-practice-field="mc-why-yes" rows="2" placeholder="Por que a alternativa correta é a melhor?"></textarea><textarea class="practice-field" data-practice-field="mc-why-not" rows="3" placeholder="Por que pelo menos uma alternativa errada não serve?"></textarea><details class="model-answer"><summary>Ver resposta <span>+</span></summary><p class="theory-content"><strong>A.</strong> AAA separa preparação, operação e verificação.</p></details></section>
-    <section class="practice" aria-labelledby="checkpoint-title">
-      <div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2><span class="practice-tag">DEPOIS</span></div><div class="practice-stack"><textarea class="practice-field" data-practice-field="checkpoint-1" rows="2" placeholder="Explique a regra central com suas palavras."></textarea><textarea class="practice-field" data-practice-field="checkpoint-counter" rows="2" placeholder="Dê um contraexemplo ou limite da regra."></textarea></div></section>
-                                                                                                                                                            <details class="chapter-gabarito">
+<title>Unitário AAA · Playground</title><link rel="stylesheet" href="../../styles.css"><script src="../../../_shared/practice.js" defer></script><script src="../../../_shared/lab-kit.js" defer></script><script src="../../../_shared/lab-components.js" defer></script><script src="../../lib/explore.js" defer></script><script src="model.js" defer></script><script src="app.js" defer></script></head>
+<body><main data-book-slug="vv_eng" data-chapter-id="03-unitario-aaa" data-practice-mc="mc-ch03">
+<header class="page-header"><a class="brand" href="../../index.html">playground / verificação e validação</a><span class="lesson-tag">FASE 0 · CAP 03</span></header>
+<nav class="chapter-navigation" aria-label="Navegação do capítulo"><a href="../02-piramide-testes/index.html">← 02</a><span>03</span><a href="../04-isolamento-doubles/index.html">04 →</a></nav>
+<section class="intro chapter-intro"><p class="eyebrow">FERRAMENTAS MENTAIS</p><h1>Unitário AAA</h1></section>
+<p class="chapter-objective"><strong>Objetivo:</strong> Definir uma expectativa independente e observar sua falha.</p>
+<p class="lesson-prerequisites">Pré-requisitos: leitura de entradas e resultados simples; os termos usados no experimento são definidos nesta página. A sequência recomendada vem do capítulo anterior.</p>
+<section class="practice" aria-labelledby="pretest-title"><div class="practice-heading"><h2 id="pretest-title">Antes de começar</h2></div><label class="lesson-question">Um teste que chama depositar sem verificar o saldo demonstra que o depósito está correto?<textarea class="practice-field" data-practice-field="pretest-1" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="context-title"><div class="practice-heading"><h2 id="context-title">Conceitos para o experimento</h2></div><p>Arrange prepara o estado e dependências. Act executa a operação de interesse. Assert compara o resultado com uma expectativa independente. O nome do teste pode ajudar a descrever o caso, mas não substitui executar código e conferir uma asserção.</p></section>
+<section class="practice" aria-labelledby="worked-title"><div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2></div><div class="practice-worked"><p>Arrange: saldo 10. Act: depositar 5. Assert: saldo deve ser 15. Obter 15 passa; esperar 14 faz o teste falhar e permite conferir se a asserção detecta a divergência.</p></div><label class="lesson-question">Identifique no exemplo a regra que liga a entrada ao resultado. Explique uma etapa, sem apenas repetir a saída.<textarea class="practice-field" data-practice-field="worked-observation" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="predict-title"><div class="practice-heading"><h2 id="predict-title">Previsão — antes do laboratório</h2></div><label class="lesson-question">No exemplo 10+5, troque o saldo esperado de 15 para 14.<textarea class="practice-field" data-practice-field="predict-1" rows="3"></textarea></label></section>
+<section class="lab" id="lab-host" aria-label="Laboratório interativo"></section>
+<section class="practice" aria-labelledby="compare-title"><div class="practice-heading"><h2 id="compare-title">Compare com sua previsão</h2></div><label class="lesson-question">Mude o depósito para 0 mantendo saldo 10. Defina a expectativa antes de executar.<textarea class="practice-field" data-practice-field="compare-case" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="mc-title"><div class="practice-heading"><h2 id="mc-title">Escolha e justifique</h2></div><p class="practice-prompt">Qual Assert evita um teste tautológico de 10+5?</p><ul class="choice-list"><li><label><input type="radio" name="mc-ch03" value="a"> A) Comparar saldo obtido com o valor esperado 15 definido pelo caso.</label></li><li><label><input type="radio" name="mc-ch03" value="b"> B) Comparar resultado consigo mesmo.</label></li><li><label><input type="radio" name="mc-ch03" value="c"> C) Apenas conferir que a função existe.</label></li><li><label><input type="radio" name="mc-ch03" value="d"> D) Copiar o valor obtido para expected antes da comparação.</label></li></ul><label class="lesson-question">Explique por que a alternativa escolhida responde ao caso.<textarea class="practice-field" data-practice-field="mc-why-yes" rows="3"></textarea></label><label class="lesson-question">Descarte cada uma das outras alternativas com uma razão específica.<textarea class="practice-field" data-practice-field="mc-why-not" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="design-title"><div class="practice-heading"><h2 id="design-title">Transfira para outro contexto</h2></div><label class="lesson-question">Descreva Arrange, Act e Assert para um desconto de 10% sobre 100.<textarea class="practice-field" data-practice-field="design-transfer" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="checkpoint-title"><div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2></div><label class="lesson-question">Retome o exemplo trabalhado e explique a regra central usando seus dados.<textarea class="practice-field" data-practice-field="checkpoint-1" rows="3"></textarea></label><label class="lesson-question">Que conclusão o laboratório não permite tirar? Dê um limite concreto.<textarea class="practice-field" data-practice-field="checkpoint-limit" rows="3"></textarea></label></section>
+    <details class="chapter-gabarito">
       <summary>Gabarito <span aria-hidden="true">+</span></summary>
       <div class="gabarito-content">
         <h4>Pré-teste</h4>
-        <p><strong>#</strong> Campo — Essência</p>
-        <p><strong>1</strong> <code>pretest-1</code> — Testes legíveis dizem dado, ação e consequência.</p>
-        <p><strong>2</strong> <code>pretest-example</code> — O estudante deve dar um exemplo ou contraexemplo ligado à definição.</p>
-        <h4>Exemplo trabalhado (`worked-observation`)</h4>
-        <p>Leia o exemplo e marque a regra aplicada; não copie o resultado sem explicar o mecanismo.</p>
-        <h4>Previsão (`predict-1`)</h4>
-        <p>Antes do lab, aceitar uma previsão que indique a regra central: O assert deveria executar antes da ação?</p>
+        <p>pretest-1: Não. Executar sem erro não verifica o resultado da regra; falta uma asserção relevante.</p>
+        <h4>Exemplo trabalhado</h4>
+        <p>worked-observation: Arrange: saldo 10. Act: depositar 5. Assert: saldo deve ser 15. Obter 15 passa; esperar 14 faz o teste falhar e permite conferir se a asserção detecta a divergência. Exigir explicação do mecanismo: Arrange prepara o estado e dependências. Act executa a operação de interesse. Assert compara o resultado com uma expectativa independente. O nome do teste pode ajudar a descrever o caso, mas não substitui executar código e conferir uma asserção.</p>
+        <h4>Previsão</h4>
+        <p>predict-1: O obtido continua 15 e a asserção falha. Alterar a expectativa não deve alterar a implementação. Aceitar hipótese inicial diferente se explicitada antes da execução; após observar, exigir correção fundamentada.</p>
         <h4>Comparar</h4>
-        <p><strong>Campo</strong> Essência</p>
-        <p><strong><code>compare-case</code></strong> Estrutura: O assert deveria executar antes da ação?</p>
-        <p><strong><code>compare-limit</code></strong> Arrange prepara estado e dependências antes de agir?: Cada teste confirma uma única intenção observável.</p>
-        <h4>MC (`mc-ch01`)</h4>
-        <p><strong>Correta: A</strong> — AAA separa preparação, operação e verificação.</p>
-        <p>Distratores: A confunde intuição com definição; C ignora condições; D elimina o domínio ou a forma da regra.</p>
+        <p>compare-case: Neste modelo aritmético o resultado é 10; em uma conta com contrato de rejeitar depósito zero, a expectativa seria um erro. O contrato precisa ser explícito.</p>
+        <h4>Múltipla escolha</h4>
+        <p>Correta: A.</p>
+        <p>A: A expectativa foi definida independentemente da execução.</p>
+        <p>B: Sempre passa, mesmo se o resultado estiver errado.</p>
+        <p>C: Existência da função não verifica seu efeito.</p>
+        <p>D: Elimina a independência do oráculo.</p>
+        <p>mc-why-yes: ligar a escolha ao caso e à definição, com a razão da alternativa correta acima.</p>
+        <p>mc-why-not: descartar todas as demais pelas razões específicas acima; não aceitar apenas “está errada”.</p>
+        <h4>Transferência</h4>
+        <p>design-transfer: Arrange: preço 100 e taxa 10%; Act: aplicar desconto; Assert: preço final 90, conforme contrato. Distinguir taxa, valor descontado e total final.</p>
         <h4>Checkpoint</h4>
-        <p><strong>#</strong> Campo — Essência</p>
-        <p><strong>1</strong> <code>checkpoint-1</code> — Explicar a regra central com linguagem própria.</p>
-        <p><strong>2</strong> <code>checkpoint-counter</code> — Dar um limite ou contraexemplo coerente.</p>
+        <p>checkpoint-1: usar dados do exemplo: Arrange: saldo 10. Act: depositar 5. Assert: saldo deve ser 15. Obter 15 passa; esperar 14 faz o teste falhar e permite conferir se a asserção detecta a divergência. Explicar a regra: Arrange prepara o estado e dependências. Act executa a operação de interesse. Assert compara o resultado com uma expectativa independente. O nome do teste pode ajudar a descrever o caso, mas não substitui executar código e conferir uma asserção.</p>
+        <p>checkpoint-limit: O lab mostra adição de valores finitos, não um sistema monetário completo. Regras de saldo negativo, arredondamento e validação de depósito precisam de casos próprios.</p>
+        <h4>Critérios de correção</h4>
+        <p>Resposta completa liga regra, dados e conclusão e respeita os limites. Resposta parcial identifica o resultado mas não explica o mecanismo ou omite condição relevante. Revisar se contradiz a definição ou extrapola a simulação para uma garantia geral.</p>
       </div>
     </details>
-<nav class="chapter-bottom-navigation"><a href="../02-piramide-testes/index.html">←</a> <a href="../04-isolamento-doubles/index.html">→</a></nav>
+<details class="theory"><summary>Limites do modelo <span aria-hidden="true">+</span></summary><div class="theory-content"><p>O lab mostra adição de valores finitos, não um sistema monetário completo. Regras de saldo negativo, arredondamento e validação de depósito precisam de casos próprios.</p></div></details>
+<nav class="chapter-bottom-navigation" aria-label="Navegação do capítulo"><a href="../02-piramide-testes/index.html">← 02</a><span>03</span><a href="../04-isolamento-doubles/index.html">04 →</a></nav>
 </main></body></html>

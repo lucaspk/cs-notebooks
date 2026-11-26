@@ -1,1 +1,8 @@
-(function(r){'use strict';function sum(n){const k=Math.floor(Number(n));return k*(k+1)/2;}const api={sum};if(typeof module!=='undefined'&&module.exports)module.exports=api;else r.MathLab=api;})(typeof globalThis!=='undefined'?globalThis:this);
+(function(root) {
+  'use strict';
+  const domain = typeof module !== 'undefined' && module.exports
+    ? require('../../lib/explore.js') : root.DiscreteExplore;
+  const api = { ...domain, sum:domain.sum1toN };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  else root.MathLab = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this);

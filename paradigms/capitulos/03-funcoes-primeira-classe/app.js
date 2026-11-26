@@ -2,7 +2,8 @@
 const $ = (id) => document.getElementById(id);
 
 function selectedOps() {
-  return [...document.querySelectorAll('input[name="op"]:checked')].map((el) => el.value);
+  const ops = [...document.querySelectorAll('input[name="op"]:checked')].map((el) => el.value);
+  return $('reverse-order').checked ? ops.reverse() : ops;
 }
 
 function render() {

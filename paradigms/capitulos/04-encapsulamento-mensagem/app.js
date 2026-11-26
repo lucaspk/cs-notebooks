@@ -8,8 +8,8 @@ function render() {
 }
 
 $('initial').addEventListener('change', () => {
-  acc = EncapLab.makeAccount($('initial').value);
-  render();
+  try { acc = EncapLab.makeAccount($('initial').value); $('msg').textContent='Conta reiniciada'; render(); }
+  catch(e) { $('msg').textContent=e.message; }
 });
 $('btn-dep').addEventListener('click', () => {
   try {

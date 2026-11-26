@@ -1,1 +1,8 @@
-(function(r){'use strict';function isFn(rel){const m=new Map();for(const [a,b] of rel){if(m.has(a)&&m.get(a)!==b)return false;m.set(a,b);}return true;}const api={isFn};if(typeof module!=='undefined'&&module.exports)module.exports=api;else r.MathLab=api;})(typeof globalThis!=='undefined'?globalThis:this);
+(function(root) {
+  'use strict';
+  const domain = typeof module !== 'undefined' && module.exports
+    ? require('../../lib/explore.js') : root.DiscreteExplore;
+  const api = { ...domain, isFn:domain.isFunction };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  else root.MathLab = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this);

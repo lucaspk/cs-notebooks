@@ -1,38 +1,47 @@
-# Gabarito — cap. 01 (quatro leituras)
-
-## As quatro leituras
-
-1. **Imperativo:** loop explícito com variável `total` que muda.
-2. **Dobragem explícita:** define a regra `total = total + item` para combinar estado e próximo elemento.
-3. **`Reduce`:** delega a combinação ao método `reduce`, usando valor inicial e função combinadora.
-4. **Pipeline:** representa a mesma combinação como uma sequência de operações sobre o valor acumulado.
+# Gabarito — Quatro leituras
 
 ## Pré-teste
 
-| # | Campo | Essência |
-| --- | --- | --- |
-| 1 | `pretest-paradigm` | Paradigma = estilo de organizar programa (não é linguagem nem editor). |
-| 2 | `pretest-same` | Mesmo problema pode ter várias leituras; o resultado numérico pode coincidir. |
+pretest-paradigm: Não. Se mantiver entradas, operação e valor inicial, pode preservar exatamente o mesmo resultado.
 
-## Previsão (`predict-same-sum`)
+## Exemplo trabalhado
 
-Lista `1 2 3 4`: os quatro estilos devem dar **10** com passos parecidos (um passo por elemento + início).
+worked-observation: Para [1,2,3,4], começando em 0, o acumulador percorre 0→1→3→6→10. Em cada leitura o operador é soma e a ordem dos itens é preservada, portanto o total é 10. Exigir explicação do mecanismo: O mesmo cálculo pode ser expresso por um loop imperativo (atualiza acumulador), uma dobragem (combina cada item com o acumulado), reduce (API de combinação de uma coleção) ou um pipeline de operações (valores passam por etapas). As quatro leituras deste lab representam a mesma soma; não são quatro linguagens nem uma classificação exaustiva de paradigmas.
+
+## Previsão
+
+predict-same-sum: 10 em todas: 0+5=5; 5−2=3; 3+7=10. Aceitar hipótese inicial diferente se explicitada antes da execução; após observar, exigir correção fundamentada.
 
 ## Comparar
 
-| Campo | Essência |
-| --- | --- |
-| `compare-steps` | Imperativo e reduce costumam ter o mesmo número de passos neste modelo; diferença é *como* se expressa o acumulador (loop explícito vs função de ordem superior). |
-| `compare-style` | Estilo não muda resultado aqui; muda legibilidade, composição e risco ao mudar o código. |
+compare-steps: Não. Os traços mostram a mesma combinação lógica, mas alocação, compilação e execução real podem diferir; medir desempenho exige outro experimento.
 
-## MC (`mc-ch01`)
+## Múltipla escolha
 
-**Correta: B** — paradigma descreve organização do programa; trocar for por reduce não muda a soma neste lab.
+Correta: C.
+
+A: Uma API não muda a linguagem inteira.
+
+B: O lab não mede tempo real.
+
+C: O resultado e o traço sustentam equivalência neste cálculo.
+
+D: Outros comportamentos e compromissos podem diferir.
+
+mc-why-yes: ligar a escolha ao caso e à definição, com a razão da alternativa correta acima.
+
+mc-why-not: descartar todas as demais pelas razões específicas acima; não aceitar apenas “está errada”.
+
+## Transferência
+
+design-transfer: Não. Mudou a condição inicial, e o total diverge em 100; comparar estilos exige manter a especificação.
 
 ## Checkpoint
 
-| # | Campo | Essência |
-| --- | --- | --- |
-| 1 | `checkpoint-paradigm` | Imperativo: passos e estado mutável; funcional leve: encadear transformações / fold. |
-| 2 | `checkpoint-why` | Ler labs de outros livros exige reconhecer estilo (mutação vs imutável, OO vs funções). |
-| 3 | `checkpoint-result` | Quatro leituras, **um** resultado quando a operação é a mesma. |
+checkpoint-paradigm: usar dados do exemplo: Para [1,2,3,4], começando em 0, o acumulador percorre 0→1→3→6→10. Em cada leitura o operador é soma e a ordem dos itens é preservada, portanto o total é 10. Explicar a regra: O mesmo cálculo pode ser expresso por um loop imperativo (atualiza acumulador), uma dobragem (combina cada item com o acumulado), reduce (API de combinação de uma coleção) ou um pipeline de operações (valores passam por etapas). As quatro leituras deste lab representam a mesma soma; não são quatro linguagens nem uma classificação exaustiva de paradigmas.
+
+checkpoint-limit: Este lab usa números finitos e o Number de JavaScript. Associatividade matemática não garante resultados idênticos sob reordenação em ponto flutuante; não reordenamos operações aqui.
+
+## Critérios de correção
+
+Resposta completa liga regra, dados e conclusão e respeita os limites. Resposta parcial identifica o resultado mas não explica o mecanismo ou omite condição relevante. Revisar se contradiz a definição ou extrapola a simulação para uma garantia geral.

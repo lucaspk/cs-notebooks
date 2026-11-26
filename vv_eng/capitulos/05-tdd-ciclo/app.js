@@ -1,1 +1,9 @@
-'use strict';document.getElementById('lab-host').innerHTML='<label><input id=red type=checkbox checked> teste falha</label> <label><input id=gr type=checkbox> código passa</label> <p id=out role=status aria-live=polite></p>';const R=()=>document.getElementById('out').textContent=VvLab.state(document.getElementById('red').checked,document.getElementById('gr').checked);document.querySelectorAll('#red,#gr').forEach(el=>el.onchange=R);R();
+'use strict';
+PlaygroundComponents.mount('#lab-host', {
+ id:'explore', title:"Ordem do ciclo TDD", description:"Eventos aceitos: red green refactor. Green exige um teste que tenha falhado antes.",
+ fields:[{"id": "events", "label": "Sequência de eventos", "type": "text", "value": "red green"}],
+ evaluate: s => {
+ const events=s.events.trim().split(/\s+/).filter(Boolean), r=VerificationExplore.tdd(events);
+ return r.valid?'Estado: '+r.phase+'. Traço: '+(r.trace.join(' → ')||'nenhum evento')+'.':r.error+'. Último estado válido: '+r.phase+'.';
+}
+});

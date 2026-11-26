@@ -1,62 +1,52 @@
 <!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Concorrência · Playground</title>
-  <link rel="stylesheet" href="../../styles.css">
-  <script src="model.js" defer></script>
-  <script src="app.js" defer></script>
-  <script src="../../practice.js" defer></script>
-</head>
-<body>
-  <main data-chapter-id="07-concorrencia-mensagem-estado" data-practice-mc="mc-ch07">
-    <nav class="chapter-navigation"><a href="../06-tipos-estatico-dinamico/index.html">← 06</a><span>07 Concorrência</span><a href="../08-escolher-paradigma/index.html">08 →</a></nav>
-    <h1>Concorrência<br><span>mensagem vs estado</span></h1>
-    <p class="chapter-objective"><strong>Objetivo:</strong> distinguir estado compartilhado de estado protegido por mensagens</p>
-    <section class="practice" aria-labelledby="worked-title"><div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2><span class="practice-tag">NO PAPEL</span></div><section class="practice-worked"><p>Com três turnos, o modelo compartilha contador no primeiro caso e serializa mensagens no segundo.</p></section><textarea class="practice-field" data-practice-field="worked-07" rows="2" placeholder="Qual é a regra aplicada?"></textarea></section>
-    <section class="practice" aria-labelledby="pretest-title"><div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES</span></div><textarea class="practice-field" data-practice-field="pretest-race" rows="2"></textarea></section>
-    Turnos     <section class="practice" aria-labelledby="predict-title"><div class="practice-heading"><h2 id="predict-title">Previsão</h2><span class="practice-tag">ANTES DO LAB</span></div><textarea class="practice-field" data-practice-field="predict-race" rows="2" placeholder="O que você prevê que o lab mostrará?"></textarea></section>
-    <input id="turns" type="number" value="3">
-    <p>Compartilhado: <span id="shared">—</span></p>
-    <p>Mensagens: <span id="msg">—</span></p>
-    <section class="practice" aria-labelledby="compare-title"><div class="practice-heading"><h2 id="compare-title">Comparar</h2><span class="practice-tag">ANALISAR</span></div><div class="compare-grid"><textarea class="practice-field" data-practice-field="compare-model" rows="3" placeholder="Modelo atual: Locks protegem memória compartilhada; atores/filas isolam estado."></textarea><textarea class="practice-field" data-practice-field="compare-limit" rows="3" placeholder="Quando o modelo deixa de ajudar?"></textarea></div></section>
-    <aside class="observation" aria-label="Dica"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow">OBSERVE</p><p>Mensagens mudam propriedade do estado; não removem concorrência.</p></div></aside>
-    <section class="practice" aria-labelledby="mc-title"><div class="practice-heading"><h2 id="mc-title">Múltipla escolha</h2><span class="practice-tag">JUSTIFICAR</span></div><p class="practice-prompt">Qual afirmação está alinhada ao laboratório?</p>
-    <ul class="choice-list">
-      <li><label><input type="radio" name="mc-ch07" value="a"> A) Mensagens sempre mais lentas e erradas.</label></li>
-      <li><label><input type="radio" name="mc-ch07" value="b"> B) Não há diferença conceitual.</label></li>
-      <li><label><input type="radio" name="mc-ch07" value="c"> C) Mensagens isolam estado; locks protegem compartilhado.</label></li>
-      <li><label><input type="radio" name="mc-ch07" value="d"> D) Paradigma não afeta concorrência.</label></li>
-    </ul>
-    <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2" placeholder="Por que a correta é melhor?"></textarea>
-    <textarea class="practice-field" data-practice-field="mc-why-not" rows="3" placeholder="Por que uma alternativa errada não serve?"></textarea>
-    </section>
-    <textarea class="practice-field" data-practice-field="checkpoint-progconc" rows="2"></textarea>
-    <details class="theory"><summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary><div class="theory-content"><p>Cada modelo precisa explicitar proprietário, ordem e visibilidade do estado.</p></div></details>
-                                                                                                                                                                                                                            <details class="chapter-gabarito">
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concorrência · Playground</title><link rel="stylesheet" href="../../styles.css"><script src="../../../_shared/practice.js" defer></script><script src="../../../_shared/lab-kit.js" defer></script><script src="../../../_shared/lab-components.js" defer></script><script src="model.js" defer></script><script src="app.js" defer></script></head>
+<body><main data-book-slug="paradigms" data-chapter-id="07-concorrencia-mensagem-estado" data-practice-mc="mc-ch07">
+<header class="page-header"><a class="brand" href="../../index.html">playground / paradigmas</a><span class="lesson-tag">FASE 0 · CAP 07</span></header>
+<nav class="chapter-navigation" aria-label="Navegação do capítulo"><a href="../06-tipos-estatico-dinamico/index.html">← 06</a><span>07</span><a href="../08-escolher-paradigma/index.html">08 →</a></nav>
+<section class="intro chapter-intro"><p class="eyebrow">FERRAMENTAS MENTAIS</p><h1>Concorrência</h1></section>
+<p class="chapter-objective"><strong>Objetivo:</strong> Explicar um incremento perdido e a hipótese de dono único.</p>
+<p class="lesson-prerequisites">Pré-requisitos: leitura de entradas e resultados simples; os termos usados no experimento são definidos nesta página. A sequência recomendada vem do capítulo anterior.</p>
+<section class="practice" aria-labelledby="pretest-title"><div class="practice-heading"><h2 id="pretest-title">Antes de começar</h2></div><label class="lesson-question">Dois incrementos escritos como leitura+escrita podem terminar em 1? Descreva uma ordem possível.<textarea class="practice-field" data-practice-field="pretest-race" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="context-title"><div class="practice-heading"><h2 id="context-title">Conceitos para o experimento</h2></div><p>Estado compartilhado permite que tarefas leiam e escrevam o mesmo contador. Um incremento pode conter leitura e escrita separadas. No modelo de mensagens, um único dono processa cada incremento em série. Isso muda quem pode alterar o estado, sem prometer entrega perfeita numa rede real.</p></section>
+<section class="practice" aria-labelledby="worked-title"><div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2></div><div class="practice-worked"><p>Uma rodada contém dois incrementos. Se A e B leem 0 antes de gravar, ambos escrevem 1: perde-se um incremento. Com um dono aplicando duas mensagens, o contador vai a 2.</p></div><label class="lesson-question">Identifique no exemplo a regra que liga a entrada ao resultado. Explique uma etapa, sem apenas repetir a saída.<textarea class="practice-field" data-practice-field="worked-07" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="predict-title"><div class="practice-heading"><h2 id="predict-title">Previsão — antes do laboratório</h2></div><label class="lesson-question">Use três rodadas e sobreposição marcada. Quais totais espera?<textarea class="practice-field" data-practice-field="predict-race" rows="3"></textarea></label></section>
+<section class="lab compact-lab" aria-labelledby="lab-title"><h2 id="lab-title">Uma rodada, duas tentativas</h2>
+<label>Rodadas (1 a 20)<input id="turns" type="number" min="1" max="20" value="3"></label>
+<label><input type="checkbox" id="overlap" checked>Sobrepor leituras antes das escritas</label>
+<div role="status" aria-live="polite"><p>Compartilhado: <strong id="shared"></strong></p><p>Mensagens: <strong id="msg"></strong></p><p id="schedule-trace"></p></div></section>
+<section class="practice" aria-labelledby="compare-title"><div class="practice-heading"><h2 id="compare-title">Compare com sua previsão</h2></div><label class="lesson-question">Desmarque sobreposição. O estado compartilhado continua necessariamente errado?<textarea class="practice-field" data-practice-field="compare-model" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="mc-title"><div class="practice-heading"><h2 id="mc-title">Escolha e justifique</h2></div><p class="practice-prompt">Qual hipótese faz o caminho de mensagens preservar os incrementos neste lab?</p><ul class="choice-list"><li><label><input type="radio" name="mc-ch07" value="a"> A) As mensagens eliminam toda falha de sistema.</label></li><li><label><input type="radio" name="mc-ch07" value="b"> B) Um dono aplica cada incremento uma vez, em série.</label></li><li><label><input type="radio" name="mc-ch07" value="c"> C) Mensagens nunca usam estado.</label></li><li><label><input type="radio" name="mc-ch07" value="d"> D) Qualquer fila pode entregar mensagens duplicadas sem efeito.</label></li></ul><label class="lesson-question">Explique por que a alternativa escolhida responde ao caso.<textarea class="practice-field" data-practice-field="mc-why-yes" rows="3"></textarea></label><label class="lesson-question">Descarte cada uma das outras alternativas com uma razão específica.<textarea class="practice-field" data-practice-field="mc-why-not" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="design-title"><div class="practice-heading"><h2 id="design-title">Transfira para outro contexto</h2></div><label class="lesson-question">Como proteger o contador compartilhado sem trocar para mensagens? Que custo ou cuidado surge?<textarea class="practice-field" data-practice-field="design-transfer" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="checkpoint-title"><div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2></div><label class="lesson-question">Retome o exemplo trabalhado e explique a regra central usando seus dados.<textarea class="practice-field" data-practice-field="checkpoint-progconc" rows="3"></textarea></label><label class="lesson-question">Que conclusão o laboratório não permite tirar? Dê um limite concreto.<textarea class="practice-field" data-practice-field="checkpoint-limit" rows="3"></textarea></label></section>
+    <details class="chapter-gabarito">
       <summary>Gabarito <span aria-hidden="true">+</span></summary>
       <div class="gabarito-content">
         <h4>Pré-teste</h4>
-        <p><strong>#</strong> Campo — Essência</p>
-        <p><strong>1</strong> <code>pretest-race</code> — Reconhecer o fenômeno antes de escolher uma solução.</p>
-        <h4>Exemplo trabalhado (`worked-07`)</h4>
-        <p>Com três turnos, o modelo compartilha contador no primeiro caso e serializa mensagens no segundo.</p>
-        <h4>Previsão (`predict-race`)</h4>
-        <p>Aceitar uma previsão que use a regra central, não apenas copiar o resultado mostrado.</p>
+        <p>pretest-race: Sim: A lê 0, B lê 0, A grava 1, B grava 1. A segunda escrita sobrescreve o efeito da primeira.</p>
+        <h4>Exemplo trabalhado</h4>
+        <p>worked-07: Uma rodada contém dois incrementos. Se A e B leem 0 antes de gravar, ambos escrevem 1: perde-se um incremento. Com um dono aplicando duas mensagens, o contador vai a 2. Exigir explicação do mecanismo: Estado compartilhado permite que tarefas leiam e escrevam o mesmo contador. Um incremento pode conter leitura e escrita separadas. No modelo de mensagens, um único dono processa cada incremento em série. Isso muda quem pode alterar o estado, sem prometer entrega perfeita numa rede real.</p>
+        <h4>Previsão</h4>
+        <p>predict-race: Compartilhado=3; mensagens=6; esperado=6. Cada rodada sobreposta perde um dos dois incrementos. Aceitar hipótese inicial diferente se explicitada antes da execução; após observar, exigir correção fundamentada.</p>
         <h4>Comparar</h4>
-        <p><strong>Campo</strong> Essência</p>
-        <p><strong><code>compare-model</code></strong> Locks protegem memória compartilhada; atores/filas isolam estado.</p>
-        <p><strong><code>compare-limit</code></strong> Indicar o limite da abstração ou o cenário onde ela deixa de ajudar.</p>
-        <h4>MC (`mc-ch07`)</h4>
-        <p><strong>Correta: C</strong> — Mensagens isolam estado; locks protegem compartilhado.</p>
-        <p><strong>Justificativa negativa:</strong> Trocar paradigma não elimina a necessidade de sincronização conceitual.</p>
+        <p>compare-model: Não. No escalonamento serial os dois caminhos chegam a 6. A existência de uma execução correta não exclui a execução incorreta.</p>
+        <h4>Múltipla escolha</h4>
+        <p>Correta: B.</p>
+        <p>A: O exemplo não modela falhas de rede ou do processo.</p>
+        <p>B: Essa hipótese impede a sobreposição da leitura/escrita.</p>
+        <p>C: O dono mantém seu próprio estado.</p>
+        <p>D: Duplicação alteraria a contagem sem deduplicação.</p>
+        <p>mc-why-yes: ligar a escolha ao caso e à definição, com a razão da alternativa correta acima.</p>
+        <p>mc-why-not: descartar todas as demais pelas razões específicas acima; não aceitar apenas “está errada”.</p>
+        <h4>Transferência</h4>
+        <p>design-transfer: Usar operação atômica ou exclusão mútua sobre leitura+escrita; considerar contenção, escopo do lock e possíveis bloqueios. Mensagens também exigem fila e tratamento de falhas.</p>
         <h4>Checkpoint</h4>
-        <p><strong>#</strong> Campo — Essência</p>
-        <p><strong>1</strong> <code>checkpoint-progconc</code> — Explicar a regra central com suas palavras e dar um limite ou contraexemplo.</p>
+        <p>checkpoint-progconc: usar dados do exemplo: Uma rodada contém dois incrementos. Se A e B leem 0 antes de gravar, ambos escrevem 1: perde-se um incremento. Com um dono aplicando duas mensagens, o contador vai a 2. Explicar a regra: Estado compartilhado permite que tarefas leiam e escrevam o mesmo contador. Um incremento pode conter leitura e escrita separadas. No modelo de mensagens, um único dono processa cada incremento em série. Isso muda quem pode alterar o estado, sem prometer entrega perfeita numa rede real.</p>
+        <p>checkpoint-limit: O escalonamento é simulado e determinístico. Não executa threads reais, nem demonstra entrega exatamente uma vez em sistemas distribuídos.</p>
+        <h4>Critérios de correção</h4>
+        <p>Resposta completa liga regra, dados e conclusão e respeita os limites. Resposta parcial identifica o resultado mas não explica o mecanismo ou omite condição relevante. Revisar se contradiz a definição ou extrapola a simulação para uma garantia geral.</p>
       </div>
     </details>
-<nav class="chapter-bottom-navigation"><a href="../06-tipos-estatico-dinamico/index.html">← 06</a><a href="../08-escolher-paradigma/index.html">08 →</a></nav>
-  </main>
-</body>
-</html>
+<details class="theory"><summary>Limites do modelo <span aria-hidden="true">+</span></summary><div class="theory-content"><p>O escalonamento é simulado e determinístico. Não executa threads reais, nem demonstra entrega exatamente uma vez em sistemas distribuídos.</p></div></details>
+<nav class="chapter-bottom-navigation" aria-label="Navegação do capítulo"><a href="../06-tipos-estatico-dinamico/index.html">← 06</a><span>07</span><a href="../08-escolher-paradigma/index.html">08 →</a></nav>
+</main></body></html>

@@ -1,50 +1,49 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Grafos (definições) · Playground</title>
-<link rel="stylesheet" href="../../styles.css">
-<script src="model.js" defer></script><script src="app.js" defer></script><script src="../../practice.js" defer></script>
-</head><body>
-<main data-chapter-id="08-grafos-definicoes" data-practice-mc="mc-ch08">
-<header class="page-header"><a class="brand" href="../../index.html">playground / discreta</a><span class="lesson-tag">CAP 08</span></header>
-<nav class="chapter-navigation"><a href="../07-inducao-forte/index.html">←</a> <span>Grafos (definições)</span> <a href="../09-contagem-combinatoria/index.html">→</a></nav>
-<section class="intro chapter-intro"><h1>Grafos (definições)</h1></section>
-<p class="chapter-objective"><strong>Objetivo:</strong> Ler vértices, arestas, grau e adjacência</p>
-
-    <section class="practice" aria-labelledby="worked-title"><div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2><span class="practice-tag">NO PAPEL</span></div><section class="practice-worked"><p>Em um grafo simples com vértice v unido a u e w, grau(v)=2 e u e w são vizinhos.</p></section><textarea class="practice-field" data-practice-field="worked-observation" rows="2" placeholder="Qual regra você aplicou?"></textarea></section>
-<section class="practice" aria-labelledby="pretest-title"><div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES</span></div><div class="practice-stack"><textarea class="practice-field" data-practice-field="pretest-1" rows="2" placeholder="O que você já sabe sobre o tema?"></textarea><textarea class="practice-field" data-practice-field="pretest-example" rows="2" placeholder="Dê um exemplo ou contraexemplo curto."></textarea></div></section>
-<section class="practice" aria-labelledby="predict-title"><div class="practice-heading"><h2 id="predict-title">Previsão</h2><span class="practice-tag">ANTES DO LAB</span></div><textarea class="practice-field" data-practice-field="predict-1" rows="2" placeholder="Faça uma previsão antes de abrir o lab."></textarea></section>
-<section class="lab mini-lab" aria-labelledby="mini-lab-title"><header class="mini-lab-header"><p class="eyebrow">LABORATÓRIO</p><h2 id="mini-lab-title">Explore o modelo</h2><p>Leia o caso apresentado e confira o resultado do modelo.</p></header><div id="lab-host"></div></section>
-
-    <section class="practice" aria-labelledby="compare-title"><div class="practice-heading"><h2 id="compare-title">Comparar</h2><span class="practice-tag">ANALISAR</span></div><div class="compare-grid"><textarea class="practice-field" data-practice-field="compare-case" rows="3" placeholder="Estrutura: Múltiplas arestas mudam o grau em grafos não simples?"></textarea><textarea class="practice-field" data-practice-field="compare-limit" rows="3" placeholder="Adjacente descreve vértices ou arestas?"></textarea></div></section>
-    <section class="practice" aria-labelledby="mc-title"><div class="practice-heading"><h2 id="mc-title">Múltipla escolha</h2><span class="practice-tag">JUSTIFICAR</span></div><p class="practice-prompt">Qual afirmação está alinhada ao lab?</p><ul class="choice-list" role="radiogroup"><li><label><input type="radio" name="mc-ch01" value="a"> A) O resultado depende apenas da intuição e não da definição.</label></li><li><label><input type="radio" name="mc-ch01" value="b"> B) Adjacência compara vértices ligados; grau conta arestas incidentes.</label></li><li><label><input type="radio" name="mc-ch01" value="c"> C) Um laço pode contribuir duas unidades ao grau conforme a convenção.</label></li><li><label><input type="radio" name="mc-ch01" value="d"> D) A conclusão vale sem verificar o domínio ou as condições.</label></li></ul><textarea class="practice-field" data-practice-field="mc-why-yes" rows="2" placeholder="Por que a alternativa correta é a melhor?"></textarea><textarea class="practice-field" data-practice-field="mc-why-not" rows="3" placeholder="Por que pelo menos uma alternativa errada não serve?"></textarea><details class="model-answer"><summary>Ver resposta <span>+</span></summary><p class="theory-content"><strong>D.</strong> Adjacência compara vértices ligados; grau conta arestas incidentes.</p></details></section>
-    <section class="practice" aria-labelledby="checkpoint-title">
-      <div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2><span class="practice-tag">DEPOIS</span></div><div class="practice-stack"><textarea class="practice-field" data-practice-field="checkpoint-1" rows="2" placeholder="Explique a regra central com suas palavras."></textarea><textarea class="practice-field" data-practice-field="checkpoint-counter" rows="2" placeholder="Dê um contraexemplo ou limite da regra."></textarea></div></section>
-
-    <aside class="observation" aria-label="Dica"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow">OBSERVE</p><p>Observe a regra antes de decorar o resultado: o lab é a evidência que separa hipótese de conclusão.</p></div></aside>
-    <details class="theory"><summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary><div class="theory-content"><p>Confira a definição antes de uma exceção ou atalho; abstrações só são úteis quando preservam os casos válidos.</p></div></details>
-                                                                                                                                                                                            <details class="chapter-gabarito">
+<title>Grafos (definições) · Playground</title><link rel="stylesheet" href="../../styles.css"><script src="../../../_shared/practice.js" defer></script><script src="../../../_shared/lab-kit.js" defer></script><script src="../../../_shared/lab-components.js" defer></script><script src="../../lib/discrete.js" defer></script><script src="../../lib/explore.js" defer></script><script src="model.js" defer></script><script src="app.js" defer></script></head>
+<body><main data-book-slug="math_disc" data-chapter-id="08-grafos-definicoes" data-practice-mc="mc-ch08">
+<header class="page-header"><a class="brand" href="../../index.html">playground / matemática discreta</a><span class="lesson-tag">FASE 0 · CAP 08</span></header>
+<nav class="chapter-navigation" aria-label="Navegação do capítulo"><a href="../07-inducao-forte/index.html">← 07</a><span>08</span><a href="../09-contagem-combinatoria/index.html">09 →</a></nav>
+<section class="intro chapter-intro"><p class="eyebrow">FERRAMENTAS MENTAIS</p><h1>Grafos (definições)</h1></section>
+<p class="chapter-objective"><strong>Objetivo:</strong> Interpretar alcançabilidade respeitando orientação das arestas.</p>
+<p class="lesson-prerequisites">Pré-requisitos: leitura de entradas e resultados simples; os termos usados no experimento são definidos nesta página. A sequência recomendada vem do capítulo anterior.</p>
+<section class="practice" aria-labelledby="pretest-title"><div class="practice-heading"><h2 id="pretest-title">Antes de começar</h2></div><label class="lesson-question">Uma ligação a&gt;b permite automaticamente b&gt;a?<textarea class="practice-field" data-practice-field="pretest-1" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="context-title"><div class="practice-heading"><h2 id="context-title">Conceitos para o experimento</h2></div><p>Um grafo dirigido tem vértices e arestas orientadas. a&gt;b permite ir de a para b; o sentido inverso exige outra aresta. Um caminho dirigido segue as orientações. Um ciclo retorna a um vértice; alcançabilidade não exige que o caminho seja único.</p></section>
+<section class="practice" aria-labelledby="worked-title"><div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2></div><div class="practice-worked"><p>Com a&gt;b e b&gt;c, há caminho a→b→c. Não há caminho c→a. Acrescentar c&gt;a cria um ciclo e torna possível o retorno.</p></div><label class="lesson-question">Identifique no exemplo a regra que liga a entrada ao resultado. Explique uma etapa, sem apenas repetir a saída.<textarea class="practice-field" data-practice-field="worked-observation" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="predict-title"><div class="practice-heading"><h2 id="predict-title">Previsão — antes do laboratório</h2></div><label class="lesson-question">Remova b&gt;c do exemplo inicial, mantendo origem a e destino c.<textarea class="practice-field" data-practice-field="predict-1" rows="3"></textarea></label></section>
+<section class="lab" id="lab-host" aria-label="Laboratório interativo"></section>
+<section class="practice" aria-labelledby="compare-title"><div class="practice-heading"><h2 id="compare-title">Compare com sua previsão</h2></div><label class="lesson-question">Acrescente c&gt;a ao exemplo inicial e consulte c→b.<textarea class="practice-field" data-practice-field="compare-case" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="mc-title"><div class="practice-heading"><h2 id="mc-title">Escolha e justifique</h2></div><p class="practice-prompt">Qual informação basta para afirmar que c é alcançável a partir de a?</p><ul class="choice-list"><li><label><input type="radio" name="mc-ch08" value="a"> A) Há três vértices.</label></li><li><label><input type="radio" name="mc-ch08" value="b"> B) Existe qualquer ciclo no grafo.</label></li><li><label><input type="radio" name="mc-ch08" value="c"> C) Existe uma aresta saindo de c.</label></li><li><label><input type="radio" name="mc-ch08" value="d"> D) Há uma sequência de arestas orientadas de a até c.</label></li></ul><label class="lesson-question">Explique por que a alternativa escolhida responde ao caso.<textarea class="practice-field" data-practice-field="mc-why-yes" rows="3"></textarea></label><label class="lesson-question">Descarte cada uma das outras alternativas com uma razão específica.<textarea class="practice-field" data-practice-field="mc-why-not" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="design-title"><div class="practice-heading"><h2 id="design-title">Transfira para outro contexto</h2></div><label class="lesson-question">Num grafo de pré-requisitos, a&gt;b significa que a deve vir antes de b. O que significa um ciclo a&gt;b b&gt;a?<textarea class="practice-field" data-practice-field="design-transfer" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="checkpoint-title"><div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2></div><label class="lesson-question">Retome o exemplo trabalhado e explique a regra central usando seus dados.<textarea class="practice-field" data-practice-field="checkpoint-1" rows="3"></textarea></label><label class="lesson-question">Que conclusão o laboratório não permite tirar? Dê um limite concreto.<textarea class="practice-field" data-practice-field="checkpoint-limit" rows="3"></textarea></label></section>
+    <details class="chapter-gabarito">
       <summary>Gabarito <span aria-hidden="true">+</span></summary>
       <div class="gabarito-content">
         <h4>Pré-teste</h4>
-        <p><strong>#</strong> Campo — Essência</p>
-        <p><strong>1</strong> <code>pretest-1</code> — Lembre-se: vértice não é aresta e grau não é número de vértices.</p>
-        <p><strong>2</strong> <code>pretest-example</code> — O estudante deve dar um exemplo ou contraexemplo ligado à definição.</p>
-        <h4>Exemplo trabalhado (`worked-observation`)</h4>
-        <p>Leia o exemplo e marque a regra aplicada; não copie o resultado sem explicar o mecanismo.</p>
-        <h4>Previsão (`predict-1`)</h4>
-        <p>Antes do lab, aceitar uma previsão que indique a regra central: Múltiplas arestas mudam o grau em grafos não simples?</p>
+        <p>pretest-1: Não num grafo dirigido. Seria preciso informar a aresta inversa ou declarar o grafo não dirigido.</p>
+        <h4>Exemplo trabalhado</h4>
+        <p>worked-observation: Com a&gt;b e b&gt;c, há caminho a→b→c. Não há caminho c→a. Acrescentar c&gt;a cria um ciclo e torna possível o retorno. Exigir explicação do mecanismo: Um grafo dirigido tem vértices e arestas orientadas. a&gt;b permite ir de a para b; o sentido inverso exige outra aresta. Um caminho dirigido segue as orientações. Um ciclo retorna a um vértice; alcançabilidade não exige que o caminho seja único.</p>
+        <h4>Previsão</h4>
+        <p>predict-1: O caminho deixa de existir. a&gt;b sozinho não alcança c. Aceitar hipótese inicial diferente se explicitada antes da execução; após observar, exigir correção fundamentada.</p>
         <h4>Comparar</h4>
-        <p><strong>Campo</strong> Essência</p>
-        <p><strong><code>compare-case</code></strong> Estrutura: Múltiplas arestas mudam o grau em grafos não simples?</p>
-        <p><strong><code>compare-limit</code></strong> Adjacente descreve vértices ou arestas?: Definições devem dizer se o grafo é simples, dirigido ou ponderado.</p>
-        <h4>MC (`mc-ch01`)</h4>
-        <p><strong>Correta: D</strong> — Adjacência compara vértices ligados; grau conta arestas incidentes.</p>
-        <p>Distratores: A confunde intuição com definição; C ignora condições; D elimina o domínio ou a forma da regra.</p>
+        <p>compare-case: Passa a existir: c→a→b. Um ciclo não impede a análise de alcançabilidade.</p>
+        <h4>Múltipla escolha</h4>
+        <p>Correta: D.</p>
+        <p>A: Quantidade de vértices não estabelece conexões.</p>
+        <p>B: O ciclo pode estar em outro componente.</p>
+        <p>C: Aresta saindo do destino não garante chegar nele.</p>
+        <p>D: Essa é a definição de caminho dirigido.</p>
+        <p>mc-why-yes: ligar a escolha ao caso e à definição, com a razão da alternativa correta acima.</p>
+        <p>mc-why-not: descartar todas as demais pelas razões específicas acima; não aceitar apenas “está errada”.</p>
+        <h4>Transferência</h4>
+        <p>design-transfer: Cada atividade depende da outra; não há uma ordem linear que satisfaça os dois pré-requisitos.</p>
         <h4>Checkpoint</h4>
-        <p><strong>#</strong> Campo — Essência</p>
-        <p><strong>1</strong> <code>checkpoint-1</code> — Explicar a regra central com linguagem própria.</p>
-        <p><strong>2</strong> <code>checkpoint-counter</code> — Dar um limite ou contraexemplo coerente.</p>
+        <p>checkpoint-1: usar dados do exemplo: Com a&gt;b e b&gt;c, há caminho a→b→c. Não há caminho c→a. Acrescentar c&gt;a cria um ciclo e torna possível o retorno. Explicar a regra: Um grafo dirigido tem vértices e arestas orientadas. a&gt;b permite ir de a para b; o sentido inverso exige outra aresta. Um caminho dirigido segue as orientações. Um ciclo retorna a um vértice; alcançabilidade não exige que o caminho seja único.</p>
+        <p>checkpoint-limit: O lab responde existência de caminho e considera caminho de comprimento zero de um vértice para si mesmo. Não calcula menor caminho nem tempo de execução.</p>
+        <h4>Critérios de correção</h4>
+        <p>Resposta completa liga regra, dados e conclusão e respeita os limites. Resposta parcial identifica o resultado mas não explica o mecanismo ou omite condição relevante. Revisar se contradiz a definição ou extrapola a simulação para uma garantia geral.</p>
       </div>
     </details>
-<nav class="chapter-bottom-navigation"><a href="../07-inducao-forte/index.html">←</a> <a href="../09-contagem-combinatoria/index.html">→</a></nav>
+<details class="theory"><summary>Limites do modelo <span aria-hidden="true">+</span></summary><div class="theory-content"><p>O lab responde existência de caminho e considera caminho de comprimento zero de um vértice para si mesmo. Não calcula menor caminho nem tempo de execução.</p></div></details>
+<nav class="chapter-bottom-navigation" aria-label="Navegação do capítulo"><a href="../07-inducao-forte/index.html">← 07</a><span>08</span><a href="../09-contagem-combinatoria/index.html">09 →</a></nav>
 </main></body></html>

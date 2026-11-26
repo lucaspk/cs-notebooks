@@ -1,63 +1,52 @@
 <!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Composição vs herança · Playground</title>
-  <link rel="stylesheet" href="../../styles.css">
-  <script src="model.js" defer></script>
-  <script src="app.js" defer></script>
-  <script src="../../practice.js" defer></script>
-</head>
-<body>
-  <main data-chapter-id="05-composicao-heranca" data-practice-mc="mc-ch05">
-    <header class="page-header"><a class="brand" href="../../index.html">playground / paradigmas</a></header>
-    <nav class="chapter-navigation"><a href="../04-encapsulamento-mensagem/index.html">← 04</a><span>05 Composição</span><a href="../06-tipos-estatico-dinamico/index.html">06 →</a></nav>
-    <h1>Composição<br><span>vs herança</span></h1>
-    <p class="chapter-objective"><strong>Objetivo:</strong> escolher composição ou herança pelo relacionamento real</p>
-    <section class="practice" aria-labelledby="worked-title"><div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2><span class="practice-tag">NO PAPEL</span></div><section class="practice-worked"><p>A mensagem <code>teste</code> pode passar por duas implementações; composição delega a uma peça trocável.</p></section><textarea class="practice-field" data-practice-field="worked-05" rows="2" placeholder="Qual é a regra aplicada?"></textarea></section>
-    <section class="practice" aria-labelledby="pretest-title"><div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES</span></div><textarea class="practice-field" data-practice-field="pretest-override" rows="2"></textarea></section>
-    <textarea class="practice-field" data-practice-field="predict-log" rows="2"></textarea>
-    <input id="msg" value="teste">
-    <p>Herança simulada: <code id="inh">—</code></p>
-    <p>Composição: <code id="comp">—</code></p>
-    <section class="practice" aria-labelledby="compare-title"><div class="practice-heading"><h2 id="compare-title">Comparar</h2><span class="practice-tag">ANALISAR</span></div><div class="compare-grid"><textarea class="practice-field" data-practice-field="compare-model" rows="3" placeholder="Modelo atual: Composição delega; herança estabelece relação pai–filho."></textarea><textarea class="practice-field" data-practice-field="compare-limit" rows="3" placeholder="Quando o modelo deixa de ajudar?"></textarea></div></section>
-    <aside class="observation" aria-label="Dica"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow">OBSERVE</p><p>Trocar uma peça não deveria exigir reescrever o todo.</p></div></aside>
-    <section class="practice" aria-labelledby="mc-title"><div class="practice-heading"><h2 id="mc-title">Múltipla escolha</h2><span class="practice-tag">JUSTIFICAR</span></div><p class="practice-prompt">Qual afirmação está alinhada ao laboratório?</p>
-    <ul class="choice-list">
-      <li><label><input type="radio" name="mc-ch05" value="a"> A) Herança sempre ilimitada.</label></li>
-      <li><label><input type="radio" name="mc-ch05" value="b"> B) Composição proíbe reutilizar.</label></li>
-      <li><label><input type="radio" name="mc-ch05" value="c"> C) São iguais sob manutenção.</label></li>
-      <li><label><input type="radio" name="mc-ch05" value="d"> D) Composição troca peça; herança fixa pai.</label></li>
-    </ul>
-    <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2" placeholder="Por que a correta é melhor?"></textarea>
-    <textarea class="practice-field" data-practice-field="mc-why-not" rows="3" placeholder="Por que uma alternativa errada não serve?"></textarea>
-    </section>
-    <textarea class="practice-field" data-practice-field="checkpoint-pick" rows="2"></textarea>
-    <details class="theory"><summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary><div class="theory-content"><p>Use “é um” para herança; use composição para capacidade ou uso.</p></div></details>
-                                                                                                                                                                                                                            <details class="chapter-gabarito">
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Composição vs herança · Playground</title><link rel="stylesheet" href="../../styles.css"><script src="../../../_shared/practice.js" defer></script><script src="../../../_shared/lab-kit.js" defer></script><script src="../../../_shared/lab-components.js" defer></script><script src="model.js" defer></script><script src="app.js" defer></script></head>
+<body><main data-book-slug="paradigms" data-chapter-id="05-composicao-heranca" data-practice-mc="mc-ch05">
+<header class="page-header"><a class="brand" href="../../index.html">playground / paradigmas</a><span class="lesson-tag">FASE 0 · CAP 05</span></header>
+<nav class="chapter-navigation" aria-label="Navegação do capítulo"><a href="../04-encapsulamento-mensagem/index.html">← 04</a><span>05</span><a href="../06-tipos-estatico-dinamico/index.html">06 →</a></nav>
+<section class="intro chapter-intro"><p class="eyebrow">FERRAMENTAS MENTAIS</p><h1>Composição vs herança</h1></section>
+<p class="chapter-objective"><strong>Objetivo:</strong> Distinguir especialização de delegação numa mudança de política.</p>
+<p class="lesson-prerequisites">Pré-requisitos: leitura de entradas e resultados simples; os termos usados no experimento são definidos nesta página. A sequência recomendada vem do capítulo anterior.</p>
+<section class="practice" aria-labelledby="pretest-title"><div class="practice-heading"><h2 id="pretest-title">Antes de começar</h2></div><label class="lesson-question">Dois objetos que retornam o mesmo texto têm necessariamente o mesmo custo de manutenção?<textarea class="practice-field" data-practice-field="pretest-override" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="context-title"><div class="practice-heading"><h2 id="context-title">Conceitos para o experimento</h2></div><p>Herança define uma especialização que deve respeitar o contrato do tipo base; composição guarda uma dependência e delega parte do trabalho. No lab, a subclasse usa super.encode; o wrapper composto recebe um codificador selecionável. Reutilização de texto não basta para decidir uma relação de subtipagem.</p></section>
+<section class="practice" aria-labelledby="worked-title"><div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2></div><div class="practice-worked"><p>Com mensagem teste e codificador simples, ambos produzem [LOG] teste. Trocar apenas o codificador composto para maiúsculas produz [LOG] TESTE nesse caminho; a subclasse simples permanece [LOG] teste.</p></div><label class="lesson-question">Identifique no exemplo a regra que liga a entrada ao resultado. Explique uma etapa, sem apenas repetir a saída.<textarea class="practice-field" data-practice-field="worked-05" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="predict-title"><div class="practice-heading"><h2 id="predict-title">Previsão — antes do laboratório</h2></div><label class="lesson-question">Mantenha mensagem teste e selecione maiúsculas na composição.<textarea class="practice-field" data-practice-field="predict-log" rows="3"></textarea></label></section>
+<section class="lab compact-lab" aria-labelledby="lab-title"><h2 id="lab-title">Troque a dependência</h2>
+<label>Mensagem<input id="msg" value="teste"></label>
+<label>Codificador da composição<select id="encoder"><option value="plain">Texto simples</option><option value="upper">Maiúsculas</option></select></label>
+<div role="status" aria-live="polite"><p>Subclasse com super.encode: <code id="inh"></code></p><p>Composição: <code id="comp"></code></p></div></section>
+<section class="practice" aria-labelledby="compare-title"><div class="practice-heading"><h2 id="compare-title">Compare com sua previsão</h2></div><label class="lesson-question">Que mudança seria necessária para o caminho herdado oferecer a mesma nova política?<textarea class="practice-field" data-practice-field="compare-model" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="mc-title"><div class="practice-heading"><h2 id="mc-title">Escolha e justifique</h2></div><p class="practice-prompt">Uma política de codificação deve ser trocada independentemente do logger. Qual desenho o lab favorece?</p><ul class="choice-list"><li><label><input type="radio" name="mc-ch05" value="a"> A) Uma hierarquia para cada combinação de política.</label></li><li><label><input type="radio" name="mc-ch05" value="b"> B) Composição com dependência de codificação substituível.</label></li><li><label><input type="radio" name="mc-ch05" value="c"> C) Copiar o logger inteiro em cada caso.</label></li><li><label><input type="radio" name="mc-ch05" value="d"> D) Escolher pela quantidade de caracteres do nome.</label></li></ul><label class="lesson-question">Explique por que a alternativa escolhida responde ao caso.<textarea class="practice-field" data-practice-field="mc-why-yes" rows="3"></textarea></label><label class="lesson-question">Descarte cada uma das outras alternativas com uma razão específica.<textarea class="practice-field" data-practice-field="mc-why-not" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="design-title"><div class="practice-heading"><h2 id="design-title">Transfira para outro contexto</h2></div><label class="lesson-question">Quando herança pode ser apropriada? Declare uma condição que a comparação de strings não testa.<textarea class="practice-field" data-practice-field="design-transfer" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="checkpoint-title"><div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2></div><label class="lesson-question">Retome o exemplo trabalhado e explique a regra central usando seus dados.<textarea class="practice-field" data-practice-field="checkpoint-pick" rows="3"></textarea></label><label class="lesson-question">Que conclusão o laboratório não permite tirar? Dê um limite concreto.<textarea class="practice-field" data-practice-field="checkpoint-limit" rows="3"></textarea></label></section>
+    <details class="chapter-gabarito">
       <summary>Gabarito <span aria-hidden="true">+</span></summary>
       <div class="gabarito-content">
         <h4>Pré-teste</h4>
-        <p><strong>#</strong> Campo — Essência</p>
-        <p><strong>1</strong> <code>pretest-override</code> — Reconhecer o fenômeno antes de escolher uma solução.</p>
-        <h4>Exemplo trabalhado (`worked-05`)</h4>
-        <p>A mensagem &lt;code&gt;teste&lt;/code&gt; pode passar por duas implementações; composição delega a uma peça trocável.</p>
-        <h4>Previsão (`predict-log`)</h4>
-        <p>Aceitar uma previsão que use a regra central, não apenas copiar o resultado mostrado.</p>
+        <p>pretest-override: Não. A organização de dependências, pontos de extensão e contratos pode ser diferente.</p>
+        <h4>Exemplo trabalhado</h4>
+        <p>worked-05: Com mensagem teste e codificador simples, ambos produzem [LOG] teste. Trocar apenas o codificador composto para maiúsculas produz [LOG] TESTE nesse caminho; a subclasse simples permanece [LOG] teste. Exigir explicação do mecanismo: Herança define uma especialização que deve respeitar o contrato do tipo base; composição guarda uma dependência e delega parte do trabalho. No lab, a subclasse usa super.encode; o wrapper composto recebe um codificador selecionável. Reutilização de texto não basta para decidir uma relação de subtipagem.</p>
+        <h4>Previsão</h4>
+        <p>predict-log: Herança: [LOG] teste. Composição: [LOG] TESTE. A dependência delegada mudou sem editar a classe base. Aceitar hipótese inicial diferente se explicitada antes da execução; após observar, exigir correção fundamentada.</p>
         <h4>Comparar</h4>
-        <p><strong>Campo</strong> Essência</p>
-        <p><strong><code>compare-model</code></strong> Composição delega; herança estabelece relação pai–filho.</p>
-        <p><strong><code>compare-limit</code></strong> Indicar o limite da abstração ou o cenário onde ela deixa de ajudar.</p>
-        <h4>MC (`mc-ch05`)</h4>
-        <p><strong>Correta: D</strong> — Composição troca peça; herança fixa pai.</p>
-        <p><strong>Justificativa negativa:</strong> Composição não proíbe reutilização e herança não é sempre a melhor.</p>
+        <p>compare-model: Alterar ou acrescentar uma especialização, ou desenhar outro ponto de extensão. A composição já expõe a troca da dependência.</p>
+        <h4>Múltipla escolha</h4>
+        <p>Correta: B.</p>
+        <p>A: Pode multiplicar subclasses para combinações independentes.</p>
+        <p>B: Separa e permite substituir a responsabilidade variável.</p>
+        <p>C: Duplica comportamento comum e dificulta manutenção.</p>
+        <p>D: Nome não representa relacionamento ou custo de mudança.</p>
+        <p>mc-why-yes: ligar a escolha ao caso e à definição, com a razão da alternativa correta acima.</p>
+        <p>mc-why-not: descartar todas as demais pelas razões específicas acima; não aceitar apenas “está errada”.</p>
+        <h4>Transferência</h4>
+        <p>design-transfer: Quando há relação de subtipagem com substituibilidade: a especialização deve cumprir pré/pós-condições do contrato base. A string final não demonstra isso sozinha.</p>
         <h4>Checkpoint</h4>
-        <p><strong>#</strong> Campo — Essência</p>
-        <p><strong>1</strong> <code>checkpoint-pick</code> — Explicar a regra central com suas palavras e dar um limite ou contraexemplo.</p>
+        <p>checkpoint-pick: usar dados do exemplo: Com mensagem teste e codificador simples, ambos produzem [LOG] teste. Trocar apenas o codificador composto para maiúsculas produz [LOG] TESTE nesse caminho; a subclasse simples permanece [LOG] teste. Explicar a regra: Herança define uma especialização que deve respeitar o contrato do tipo base; composição guarda uma dependência e delega parte do trabalho. No lab, a subclasse usa super.encode; o wrapper composto recebe um codificador selecionável. Reutilização de texto não basta para decidir uma relação de subtipagem.</p>
+        <p>checkpoint-limit: O exemplo é deliberadamente pequeno. Composição também tem custo de indireção e configuração; herança não é proibida nem automaticamente inferior.</p>
+        <h4>Critérios de correção</h4>
+        <p>Resposta completa liga regra, dados e conclusão e respeita os limites. Resposta parcial identifica o resultado mas não explica o mecanismo ou omite condição relevante. Revisar se contradiz a definição ou extrapola a simulação para uma garantia geral.</p>
       </div>
     </details>
-<nav class="chapter-bottom-navigation"><a href="../04-encapsulamento-mensagem/index.html">← 04</a><a href="../06-tipos-estatico-dinamico/index.html">06 →</a></nav>
-  </main>
-</body>
-</html>
+<details class="theory"><summary>Limites do modelo <span aria-hidden="true">+</span></summary><div class="theory-content"><p>O exemplo é deliberadamente pequeno. Composição também tem custo de indireção e configuração; herança não é proibida nem automaticamente inferior.</p></div></details>
+<nav class="chapter-bottom-navigation" aria-label="Navegação do capítulo"><a href="../04-encapsulamento-mensagem/index.html">← 04</a><span>05</span><a href="../06-tipos-estatico-dinamico/index.html">06 →</a></nav>
+</main></body></html>

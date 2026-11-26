@@ -1,50 +1,49 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Indução forte · Playground</title>
-<link rel="stylesheet" href="../../styles.css">
-<script src="model.js" defer></script><script src="app.js" defer></script><script src="../../practice.js" defer></script>
-</head><body>
-<main data-chapter-id="07-inducao-forte" data-practice-mc="mc-ch07">
-<header class="page-header"><a class="brand" href="../../index.html">playground / discreta</a><span class="lesson-tag">CAP 07</span></header>
-<nav class="chapter-navigation"><a href="../06-inducao-simples/index.html">←</a> <span>Indução forte</span> <a href="../08-grafos-definicoes/index.html">→</a></nav>
-<section class="intro chapter-intro"><h1>Indução forte</h1></section>
-<p class="chapter-objective"><strong>Objetivo:</strong> Usar vários casos anteriores na hipótese indutiva</p>
-
-    <section class="practice" aria-labelledby="worked-title"><div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2><span class="practice-tag">NO PAPEL</span></div><section class="practice-worked"><p>Se P(0)..P(k) permitem provar P(k+1), a propriedade vale para todos os naturais pela base adequada.</p></section><textarea class="practice-field" data-practice-field="worked-observation" rows="2" placeholder="Qual regra você aplicou?"></textarea></section>
-<section class="practice" aria-labelledby="pretest-title"><div class="practice-heading"><h2 id="pretest-title">Pré-teste</h2><span class="practice-tag">ANTES</span></div><div class="practice-stack"><textarea class="practice-field" data-practice-field="pretest-1" rows="2" placeholder="O que você já sabe sobre o tema?"></textarea><textarea class="practice-field" data-practice-field="pretest-example" rows="2" placeholder="Dê um exemplo ou contraexemplo curto."></textarea></div></section>
-<section class="practice" aria-labelledby="predict-title"><div class="practice-heading"><h2 id="predict-title">Previsão</h2><span class="practice-tag">ANTES DO LAB</span></div><textarea class="practice-field" data-practice-field="predict-1" rows="2" placeholder="Faça uma previsão antes de abrir o lab."></textarea></section>
-<section class="lab mini-lab" aria-labelledby="mini-lab-title"><header class="mini-lab-header"><p class="eyebrow">LABORATÓRIO</p><h2 id="mini-lab-title">Explore o modelo</h2><p>Leia o caso apresentado e confira o resultado do modelo.</p></header><div id="lab-host"></div></section>
-
-    <section class="practice" aria-labelledby="compare-title"><div class="practice-heading"><h2 id="compare-title">Comparar</h2><span class="practice-tag">ANALISAR</span></div><div class="compare-grid"><textarea class="practice-field" data-practice-field="compare-case" rows="3" placeholder="Hipótese ampliada: Qual vantagem da indução forte sobre a simples?"></textarea><textarea class="practice-field" data-practice-field="compare-limit" rows="3" placeholder="Pode-se usar a simples para provar o mesmo teorema?"></textarea></div></section>
-    <section class="practice" aria-labelledby="mc-title"><div class="practice-heading"><h2 id="mc-title">Múltipla escolha</h2><span class="practice-tag">JUSTIFICAR</span></div><p class="practice-prompt">Qual afirmação está alinhada ao lab?</p><ul class="choice-list" role="radiogroup"><li><label><input type="radio" name="mc-ch01" value="a"> A) O resultado depende apenas da intuição e não da definição.</label></li><li><label><input type="radio" name="mc-ch01" value="b"> B) A forte permite aproveitar qualquer caso anterior, não apenas k.</label></li><li><label><input type="radio" name="mc-ch01" value="c"> C) Os casos de base cobrem os índices que o passo não alcança.</label></li><li><label><input type="radio" name="mc-ch01" value="d"> D) A conclusão vale sem verificar o domínio ou as condições.</label></li></ul><textarea class="practice-field" data-practice-field="mc-why-yes" rows="2" placeholder="Por que a alternativa correta é a melhor?"></textarea><textarea class="practice-field" data-practice-field="mc-why-not" rows="3" placeholder="Por que pelo menos uma alternativa errada não serve?"></textarea><details class="model-answer"><summary>Ver resposta <span>+</span></summary><p class="theory-content"><strong>C.</strong> A forte permite aproveitar qualquer caso anterior, não apenas k.</p></details></section>
-    <section class="practice" aria-labelledby="checkpoint-title">
-      <div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2><span class="practice-tag">DEPOIS</span></div><div class="practice-stack"><textarea class="practice-field" data-practice-field="checkpoint-1" rows="2" placeholder="Explique a regra central com suas palavras."></textarea><textarea class="practice-field" data-practice-field="checkpoint-counter" rows="2" placeholder="Dê um contraexemplo ou limite da regra."></textarea></div></section>
-
-    <aside class="observation" aria-label="Dica"><span class="observation-mark" aria-hidden="true">↳</span><div><p class="eyebrow">OBSERVE</p><p>Observe a regra antes de decorar o resultado: o lab é a evidência que separa hipótese de conclusão.</p></div></aside>
-    <details class="theory"><summary>Só um tiquinho de teoria <span aria-hidden="true">+</span></summary><div class="theory-content"><p>Confira a definição antes de uma exceção ou atalho; abstrações só são úteis quando preservam os casos válidos.</p></div></details>
-                                                                                                                                                                                            <details class="chapter-gabarito">
+<title>Indução forte · Playground</title><link rel="stylesheet" href="../../styles.css"><script src="../../../_shared/practice.js" defer></script><script src="../../../_shared/lab-kit.js" defer></script><script src="../../../_shared/lab-components.js" defer></script><script src="../../lib/discrete.js" defer></script><script src="../../lib/explore.js" defer></script><script src="model.js" defer></script><script src="app.js" defer></script></head>
+<body><main data-book-slug="math_disc" data-chapter-id="07-inducao-forte" data-practice-mc="mc-ch07">
+<header class="page-header"><a class="brand" href="../../index.html">playground / matemática discreta</a><span class="lesson-tag">FASE 0 · CAP 07</span></header>
+<nav class="chapter-navigation" aria-label="Navegação do capítulo"><a href="../06-inducao-simples/index.html">← 06</a><span>07</span><a href="../08-grafos-definicoes/index.html">08 →</a></nav>
+<section class="intro chapter-intro"><p class="eyebrow">FERRAMENTAS MENTAIS</p><h1>Indução forte</h1></section>
+<p class="chapter-objective"><strong>Objetivo:</strong> Usar casos anteriores e quatro bases numa prova por indução forte.</p>
+<p class="lesson-prerequisites">Pré-requisitos: leitura de entradas e resultados simples; os termos usados no experimento são definidos nesta página. A sequência recomendada vem do capítulo anterior.</p>
+<section class="practice" aria-labelledby="pretest-title"><div class="practice-heading"><h2 id="pretest-title">Antes de começar</h2></div><label class="lesson-question">Por que verificar só a base 12 não basta para o passo n→n+4 atingir todos os valores?<textarea class="practice-field" data-practice-field="pretest-1" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="context-title"><div class="practice-heading"><h2 id="context-title">Conceitos para o experimento</h2></div><p>Na indução forte, a hipótese permite usar todos os casos anteriores até k. Vamos provar: todo valor inteiro n≥12 pode ser pago com selos de 4 e 5. Para n≥16, reduzimos o problema a n−4, que já está no intervalo da hipótese.</p></section>
+<section class="practice" aria-labelledby="worked-title"><div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2></div><div class="practice-worked"><p>Bases: 12=4+4+4; 13=4+4+5; 14=4+5+5; 15=5+5+5. Para 16, usamos 12 e acrescentamos 4. Para 20, usamos 16, que usa 12.</p></div><label class="lesson-question">Identifique no exemplo a regra que liga a entrada ao resultado. Explique uma etapa, sem apenas repetir a saída.<textarea class="practice-field" data-practice-field="worked-observation" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="predict-title"><div class="practice-heading"><h2 id="predict-title">Previsão — antes do laboratório</h2></div><label class="lesson-question">Use 19 e 20. Quais casos anteriores serão usados primeiro?<textarea class="practice-field" data-practice-field="predict-1" rows="3"></textarea></label></section>
+<section class="lab" id="lab-host" aria-label="Laboratório interativo"></section>
+<section class="practice" aria-labelledby="compare-title"><div class="practice-heading"><h2 id="compare-title">Compare com sua previsão</h2></div><label class="lesson-question">Tente 8. O aviso fora da afirmação prova que 8 é impossível?<textarea class="practice-field" data-practice-field="compare-case" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="mc-title"><div class="practice-heading"><h2 id="mc-title">Escolha e justifique</h2></div><p class="practice-prompt">No passo para n≥16, por que a hipótese pode ser usada em n−4?</p><ul class="choice-list"><li><label><input type="radio" name="mc-ch07" value="a"> A) Porque n−4 é sempre igual a 12.</label></li><li><label><input type="radio" name="mc-ch07" value="b"> B) Porque já supusemos a conclusão para n.</label></li><li><label><input type="radio" name="mc-ch07" value="c"> C) Porque 12≤n−4&lt;n.</label></li><li><label><input type="radio" name="mc-ch07" value="d"> D) Porque experimentar 100 casos prova tudo.</label></li></ul><label class="lesson-question">Explique por que a alternativa escolhida responde ao caso.<textarea class="practice-field" data-practice-field="mc-why-yes" rows="3"></textarea></label><label class="lesson-question">Descarte cada uma das outras alternativas com uma razão específica.<textarea class="practice-field" data-practice-field="mc-why-not" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="design-title"><div class="practice-heading"><h2 id="design-title">Transfira para outro contexto</h2></div><label class="lesson-question">Explique por que precisamos de quatro bases consecutivas ao reduzir n para n−4.<textarea class="practice-field" data-practice-field="design-transfer" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="checkpoint-title"><div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2></div><label class="lesson-question">Retome o exemplo trabalhado e explique a regra central usando seus dados.<textarea class="practice-field" data-practice-field="checkpoint-1" rows="3"></textarea></label><label class="lesson-question">Que conclusão o laboratório não permite tirar? Dê um limite concreto.<textarea class="practice-field" data-practice-field="checkpoint-limit" rows="3"></textarea></label></section>
+    <details class="chapter-gabarito">
       <summary>Gabarito <span aria-hidden="true">+</span></summary>
       <div class="gabarito-content">
         <h4>Pré-teste</h4>
-        <p><strong>#</strong> Campo — Essência</p>
-        <p><strong>1</strong> <code>pretest-1</code> — Separe base forte, hipótese forte e passo a provar.</p>
-        <p><strong>2</strong> <code>pretest-example</code> — O estudante deve dar um exemplo ou contraexemplo ligado à definição.</p>
-        <h4>Exemplo trabalhado (`worked-observation`)</h4>
-        <p>Leia o exemplo e marque a regra aplicada; não copie o resultado sem explicar o mecanismo.</p>
-        <h4>Previsão (`predict-1`)</h4>
-        <p>Antes do lab, aceitar uma previsão que indique a regra central: Qual vantagem da indução forte sobre a simples?</p>
+        <p>pretest-1: Porque somar 4 preserva o resto módulo 4. É preciso iniciar as quatro classes: 12,13,14,15.</p>
+        <h4>Exemplo trabalhado</h4>
+        <p>worked-observation: Bases: 12=4+4+4; 13=4+4+5; 14=4+5+5; 15=5+5+5. Para 16, usamos 12 e acrescentamos 4. Para 20, usamos 16, que usa 12. Exigir explicação do mecanismo: Na indução forte, a hipótese permite usar todos os casos anteriores até k. Vamos provar: todo valor inteiro n≥12 pode ser pago com selos de 4 e 5. Para n≥16, reduzimos o problema a n−4, que já está no intervalo da hipótese.</p>
+        <h4>Previsão</h4>
+        <p>predict-1: 19 depende de 15; 20 depende de 16, que depende de 12. 19=4+5+5+5; 20=5 selos de 4. Aceitar hipótese inicial diferente se explicitada antes da execução; após observar, exigir correção fundamentada.</p>
         <h4>Comparar</h4>
-        <p><strong>Campo</strong> Essência</p>
-        <p><strong><code>compare-case</code></strong> Hipótese ampliada: Qual vantagem da indução forte sobre a simples?</p>
-        <p><strong><code>compare-limit</code></strong> Pode-se usar a simples para provar o mesmo teorema?: Indução forte é mais uma ferramenta que uma garantia automática.</p>
-        <h4>MC (`mc-ch01`)</h4>
-        <p><strong>Correta: C</strong> — A forte permite aproveitar qualquer caso anterior, não apenas k.</p>
-        <p>Distratores: A confunde intuição com definição; C ignora condições; D elimina o domínio ou a forma da regra.</p>
+        <p>compare-case: Não. 8=4+4 é possível; o modelo de prova só cobre o intervalo n≥12. Fora do teorema não significa falso.</p>
+        <h4>Múltipla escolha</h4>
+        <p>Correta: C.</p>
+        <p>A: Só ocorre quando n=16.</p>
+        <p>B: Isso seria circular.</p>
+        <p>C: É um caso anterior dentro do intervalo garantido.</p>
+        <p>D: Uma amostra finita não prova o enunciado infinito.</p>
+        <p>mc-why-yes: ligar a escolha ao caso e à definição, com a razão da alternativa correta acima.</p>
+        <p>mc-why-not: descartar todas as demais pelas razões específicas acima; não aceitar apenas “está errada”.</p>
+        <h4>Transferência</h4>
+        <p>design-transfer: Cada redução mantém a classe módulo 4; as bases 12–15 garantem que todas as classes terminam num caso conhecido.</p>
         <h4>Checkpoint</h4>
-        <p><strong>#</strong> Campo — Essência</p>
-        <p><strong>1</strong> <code>checkpoint-1</code> — Explicar a regra central com linguagem própria.</p>
-        <p><strong>2</strong> <code>checkpoint-counter</code> — Dar um limite ou contraexemplo coerente.</p>
+        <p>checkpoint-1: usar dados do exemplo: Bases: 12=4+4+4; 13=4+4+5; 14=4+5+5; 15=5+5+5. Para 16, usamos 12 e acrescentamos 4. Para 20, usamos 16, que usa 12. Explicar a regra: Na indução forte, a hipótese permite usar todos os casos anteriores até k. Vamos provar: todo valor inteiro n≥12 pode ser pago com selos de 4 e 5. Para n≥16, reduzimos o problema a n−4, que já está no intervalo da hipótese.</p>
+        <p>checkpoint-limit: Indução forte e simples têm o mesmo poder de prova nos naturais. A forte facilita dependências em casos anteriores não necessariamente imediatos.</p>
+        <h4>Critérios de correção</h4>
+        <p>Resposta completa liga regra, dados e conclusão e respeita os limites. Resposta parcial identifica o resultado mas não explica o mecanismo ou omite condição relevante. Revisar se contradiz a definição ou extrapola a simulação para uma garantia geral.</p>
       </div>
     </details>
-<nav class="chapter-bottom-navigation"><a href="../06-inducao-simples/index.html">←</a> <a href="../08-grafos-definicoes/index.html">→</a></nav>
+<details class="theory"><summary>Limites do modelo <span aria-hidden="true">+</span></summary><div class="theory-content"><p>Indução forte e simples têm o mesmo poder de prova nos naturais. A forte facilita dependências em casos anteriores não necessariamente imediatos.</p></div></details>
+<nav class="chapter-bottom-navigation" aria-label="Navegação do capítulo"><a href="../06-inducao-simples/index.html">← 06</a><span>07</span><a href="../08-grafos-definicoes/index.html">08 →</a></nav>
 </main></body></html>

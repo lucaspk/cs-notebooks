@@ -14,3 +14,7 @@ describe('cap 06 tipos', () => {
     assert.match(r.result, /10:00\+2h/);
   });
 });
+it('number conversion satisfies type contract but not time semantics',()=>{
+ assert.ok(scenario('static','not-a-time',2).ok);
+ assert.ok(!scenario('static','10:00',Infinity).ok);
+});

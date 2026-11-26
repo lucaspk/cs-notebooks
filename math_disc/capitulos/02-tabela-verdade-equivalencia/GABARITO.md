@@ -1,36 +1,47 @@
-# Gabarito — cap. 02 (02-tabela-verdade-equivalencia)
+# Gabarito — Tabela-verdade
 
 ## Pré-teste
 
-| # | Campo | Essência |
-| --- | --- | --- |
-| 1 | `pretest-1` | Chegar à equivalência exige comparar todas as atribuições. |
-| 2 | `pretest-example` | O estudante deve dar um exemplo ou contraexemplo ligado à definição. |
+pretest-1: Sim, se são todas as quatro combinações e as expressões só dependem dessas duas proposições.
 
-## Exemplo trabalhado (`worked-observation`)
+## Exemplo trabalhado
 
-Leia o exemplo e marque a regra aplicada; não copie o resultado sem explicar o mecanismo.
+worked-observation: p=F, q=V: p→q=V e q→p=F. Essa única linha refuta a equivalência com a recíproca. Já ¬p∨q é V nessa linha. Exigir explicação do mecanismo: Uma tabela-verdade enumera todas as combinações dos valores das proposições. Duas expressões são equivalentes quando coincidem em todas as linhas. A recíproca de p→q é q→p; a contrapositiva é ¬q→¬p. ¬ nega o valor e ∨ é OR inclusivo.
 
-## Previsão (`predict-1`)
+## Previsão
 
-Antes do lab, aceitar uma previsão que indique a regra central: Quando duas expressões deixam de ser equivalentes?
+predict-1: Zero: a contrapositiva é equivalente em todas as quatro linhas. Aceitar hipótese inicial diferente se explicitada antes da execução; após observar, exigir correção fundamentada.
 
 ## Comparar
 
-| Campo | Essência |
-| --- | --- |
-| `compare-case` | Concordância linha a linha: Quando duas expressões deixam de ser equivalentes? |
-| `compare-limit` | Lei de De Morgan vale apenas neste caso?: Valores nas linhas são evidência, não memória de nomes de leis. |
+compare-case: Divergem em p=F,q=V e p=V,q=F. Coincidem quando p e q são iguais.
 
-## MC (`mc-ch01`)
+## Múltipla escolha
 
-**Correta: C** — Equivalência exige o mesmo valor em todas as linhas da tabela.
+Correta: A.
 
-Distratores: A confunde intuição com definição; C ignora condições; D elimina o domínio ou a forma da regra.
+A: Equivalência exige igualdade em todas as linhas.
+
+B: Uma coincidência não cobre os outros casos.
+
+C: Sintaxe não determina igualdade de valores.
+
+D: Operador igual não garante operandos ou resultados iguais.
+
+mc-why-yes: ligar a escolha ao caso e à definição, com a razão da alternativa correta acima.
+
+mc-why-not: descartar todas as demais pelas razões específicas acima; não aceitar apenas “está errada”.
+
+## Transferência
+
+design-transfer: Não: um retângulo não quadrado fornece quatro lados sem ser quadrado. A forma p→q não autoriza q→p.
 
 ## Checkpoint
 
-| # | Campo | Essência |
-| --- | --- |
-| 1 | `checkpoint-1` | Explicar a regra central com linguagem própria. |
-| 2 | `checkpoint-counter` | Dar um limite ou contraexemplo coerente. |
+checkpoint-1: usar dados do exemplo: p=F, q=V: p→q=V e q→p=F. Essa única linha refuta a equivalência com a recíproca. Já ¬p∨q é V nessa linha. Explicar a regra: Uma tabela-verdade enumera todas as combinações dos valores das proposições. Duas expressões são equivalentes quando coincidem em todas as linhas. A recíproca de p→q é q→p; a contrapositiva é ¬q→¬p. ¬ nega o valor e ∨ é OR inclusivo.
+
+checkpoint-limit: As quatro linhas esgotam duas proposições booleanas; exemplos de objetos reais só refutam ou sustentam instâncias, não substituem a tabela da forma.
+
+## Critérios de correção
+
+Resposta completa liga regra, dados e conclusão e respeita os limites. Resposta parcial identifica o resultado mas não explica o mecanismo ou omite condição relevante. Revisar se contradiz a definição ou extrapola a simulação para uma garantia geral.

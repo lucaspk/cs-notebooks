@@ -1,1 +1,9 @@
-'use strict';document.getElementById('lab-host').innerHTML='<div class="mini-lab-fields"><label>Testes unitários<input id=u type=number min=0 value=5></label><label>Testes de integração<input id=i type=number min=0 value=3></label><label>Testes de ponta a ponta<input id=e type=number min=0 value=20></label></div> <pre id=out role=status aria-live=polite></pre>';const $=id=>document.getElementById(id);const R=()=>$('out').textContent=JSON.stringify(VvLab.advice($('u').value,$('i').value,$('e').value));['u','i','e'].forEach(id=>$(id).oninput=R);R();
+'use strict';
+PlaygroundComponents.mount('#lab-host', {
+ id:'explore', title:"Composição da suíte", description:"Custo ilustrativo por teste: unitário 1, integração 5, ponta a ponta 20. Não é uma meta universal.",
+ fields:[{"id": "u", "label": "Unitários", "type": "number", "value": 5, "min": 0, "step": 1}, {"id": "i", "label": "Integração", "type": "number", "value": 3, "min": 0, "step": 1}, {"id": "e", "label": "Ponta a ponta", "type": "number", "value": 20, "min": 0, "step": 1}],
+ evaluate: s => {
+ const r=VerificationExplore.counts(s.u,s.i,s.e);
+ return r.total?'Total: '+r.total+'; proporções U/I/E: '+r.percentages.join('% / ')+'%. Custo relativo: '+r.cost+'.':'Suíte vazia: nenhuma cobertura demonstrada.';
+}
+});

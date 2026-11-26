@@ -1,36 +1,47 @@
-# Gabarito — cap. 02 (02-piramide-testes)
+# Gabarito — Pirâmide de testes
 
 ## Pré-teste
 
-| # | Campo | Essência |
-| --- | --- | --- |
-| 1 | `pretest-1` | Escolha o nível pelo risco e pela fronteira real da falha. |
-| 2 | `pretest-example` | O estudante deve dar um exemplo ou contraexemplo ligado à definição. |
+pretest-1: Não. Não cobre necessariamente banco, configuração, rede e integração da interface com a regra.
 
-## Exemplo trabalhado (`worked-observation`)
+## Exemplo trabalhado
 
-Leia o exemplo e marque a regra aplicada; não copie o resultado sem explicar o mecanismo.
+worked-observation: Suíte com 5 unitários, 3 de integração e 20 ponta a ponta: no modelo, custo=5·1+3·5+20·20=420 unidades. O peso 20 é ilustrativo, não uma medição do seu projeto. Exigir explicação do mecanismo: Um teste unitário exercita uma unidade com dependências controladas; integração verifica colaboração entre componentes; ponta a ponta atravessa um fluxo amplo. A pirâmide sugere concentrar verificações rápidas na base e usar fluxos amplos para riscos que exigem integração real.
 
-## Previsão (`predict-1`)
+## Previsão
 
-Antes do lab, aceitar uma previsão que indique a regra central: Por que não replicar tudo em testes de ponta a ponta?
+predict-1: Total passa de 28 para 10; custo de 420 para 60. Isso não prova que a cobertura de riscos permaneceu igual. Aceitar hipótese inicial diferente se explicitada antes da execução; após observar, exigir correção fundamentada.
 
 ## Comparar
 
-| Campo | Essência |
-| --- | --- |
-| `compare-case` | Camadas: Por que não replicar tudo em testes de ponta a ponta? |
-| `compare-limit` | Unitário encontra o mesmo tipo de falha que e2e?: Cobrir tudo na UI aumenta custo e fragilidade. |
+compare-case: Custos relativos: 75 e 420. A primeira concentra verificações na base; quantidade sozinha não mede qualidade das asserções nem cobertura dos riscos.
 
-## MC (`mc-ch01`)
+## Múltipla escolha
 
-**Correta: C** — A pirâmide otimiza feedback: muitos testes rápidos na base, menos lentos no topo.
+Correta: C.
 
-Distratores: A confunde intuição com definição; C ignora condições; D elimina o domínio ou a forma da regra.
+A: Repetição manual custa tempo e dificulta regressões.
+
+B: Fluxos amplos são caros para muitas combinações de regra pura.
+
+C: Concentra combinações locais sem abandonar a verificação da integração.
+
+D: Níveis diferem em dependências, custo e localização de falhas.
+
+mc-why-yes: ligar a escolha ao caso e à definição, com a razão da alternativa correta acima.
+
+mc-why-not: descartar todas as demais pelas razões específicas acima; não aceitar apenas “está errada”.
+
+## Transferência
+
+design-transfer: Mapear riscos e asserções removidos para testes menores ou fluxos amplos mantidos; medir a suíte real e verificar que cenários essenciais continuam cobertos.
 
 ## Checkpoint
 
-| # | Campo | Essência |
-| --- | --- |
-| 1 | `checkpoint-1` | Explicar a regra central com linguagem própria. |
-| 2 | `checkpoint-counter` | Dar um limite ou contraexemplo coerente. |
+checkpoint-1: usar dados do exemplo: Suíte com 5 unitários, 3 de integração e 20 ponta a ponta: no modelo, custo=5·1+3·5+20·20=420 unidades. O peso 20 é ilustrativo, não uma medição do seu projeto. Explicar a regra: Um teste unitário exercita uma unidade com dependências controladas; integração verifica colaboração entre componentes; ponta a ponta atravessa um fluxo amplo. A pirâmide sugere concentrar verificações rápidas na base e usar fluxos amplos para riscos que exigem integração real.
+
+checkpoint-limit: Os custos e percentuais são um cenário de decisão. Não existe proporção universal, e uma suíte vazia não é barata “com cobertura”: ela não oferece essa evidência.
+
+## Critérios de correção
+
+Resposta completa liga regra, dados e conclusão e respeita os limites. Resposta parcial identifica o resultado mas não explica o mecanismo ou omite condição relevante. Revisar se contradiz a definição ou extrapola a simulação para uma garantia geral.

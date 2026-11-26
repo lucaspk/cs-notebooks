@@ -1,85 +1,53 @@
 <!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mutação vs valor · Playground</title>
-  <link rel="stylesheet" href="../../styles.css">
-  <script src="model.js" defer></script>
-  <script src="app.js" defer></script>
-  <script src="../../practice.js" defer></script>
-</head>
-<body>
-  <main data-chapter-id="02-mutacao-vs-valor" data-practice-mc="mc-ch02">
-    <header class="page-header">
-      <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">p.</span> playground <span class="brand-divider">/</span> paradigmas</a>
-      <span class="lesson-tag">CAPÍTULO 02</span>
-    </header>
-    <nav class="chapter-navigation">
-      <a href="../01-quatro-leituras-mesmo-problema/index.html">← 01</a>
-      <span>02 · Mutação vs valor</span>
-      <a href="../03-funcoes-primeira-classe/index.html">03 →</a>
-    </nav>
-    <section class="intro chapter-intro"><p class="eyebrow">CAPÍTULO 02</p><h1>Mutação<br><span>vs valor</span></h1></section>
-    <p class="chapter-objective"><strong>Objetivo:</strong> prever quando alterar <em>A</em> muda <em>B</em> por referência compartilhada — e quando uma cópia isola o efeito.</p>
-    <section class="practice">
-      <h2>Pré-teste</h2>
-      <textarea class="practice-field" data-practice-field="pretest-alias" rows="2" placeholder="Duas variáveis, um objeto?"></textarea>
-      <textarea class="practice-field" data-practice-field="pretest-copy" rows="2" placeholder="Cópia rasa vs profunda (intuição)"></textarea>
-    </section>
-    <section class="practice"><h2>Previsão</h2>
-      <p>Modo mutação, delta 5: o que muda em B sem tocar B?</p>
-      <textarea class="practice-field" data-practice-field="predict-b" rows="2"></textarea>
-    </section>
-    <section class="lab compact-lab">
-      <h2>Laboratório</h2>
-      <p id="lab-error" class="lab-error" hidden></p>
-      <label><input type="radio" name="mode" value="mutate" checked> Mutação compartilhada</label>
-      <label><input type="radio" name="mode" value="copy"> Novo valor (cópia)</label>
-      <label>Delta <input id="delta" type="number" value="5"></label>
-      <p>Cart A: <code id="cart-a">—</code></p>
-      <p>Cart B: <code id="cart-b">—</code></p>
-      <p id="surprise">—</p>
-    </section>
-    <section class="practice">
-      <h2>Comparar</h2>
-      <textarea class="practice-field" data-practice-field="compare-fp" rows="3"></textarea>
-      <h2>MC</h2>
-      <ul class="choice-list">
-        <li><label><input type="radio" name="mc-ch02" value="a"> A) B tem bug próprio.</label></li>
-        <li><label><input type="radio" name="mc-ch02" value="b"> B) JavaScript não tem referência.</label></li>
-        <li><label><input type="radio" name="mc-ch02" value="c"> C) Mesmo array em A e B.</label></li>
-        <li><label><input type="radio" name="mc-ch02" value="d"> D) Total é primitivo imutável então B nunca muda.</label></li>
-      </ul>
-      <textarea class="practice-field" data-practice-field="mc-why-yes" rows="2"></textarea>
-      <textarea class="practice-field" data-practice-field="mc-why-not" rows="2"></textarea>
-      <details class="model-answer"><summary>Resposta +</summary><p><strong>C.</strong></p></details>
-    </section>
-    <section class="practice"><h2>Checkpoint</h2>
-      <textarea class="practice-field" data-practice-field="checkpoint-value" rows="2"></textarea>
-      <textarea class="practice-field" data-practice-field="checkpoint-risk" rows="2"></textarea>
-    </section>
-                                                                                                                                                                                                                                <details class="chapter-gabarito">
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mutação vs valor · Playground</title><link rel="stylesheet" href="../../styles.css"><script src="../../../_shared/practice.js" defer></script><script src="../../../_shared/lab-kit.js" defer></script><script src="../../../_shared/lab-components.js" defer></script><script src="model.js" defer></script><script src="app.js" defer></script></head>
+<body><main data-book-slug="paradigms" data-chapter-id="02-mutacao-vs-valor" data-practice-mc="mc-ch02">
+<header class="page-header"><a class="brand" href="../../index.html">playground / paradigmas</a><span class="lesson-tag">FASE 0 · CAP 02</span></header>
+<nav class="chapter-navigation" aria-label="Navegação do capítulo"><a href="../01-quatro-leituras-mesmo-problema/index.html">← 01</a><span>02</span><a href="../03-funcoes-primeira-classe/index.html">03 →</a></nav>
+<section class="intro chapter-intro"><p class="eyebrow">FERRAMENTAS MENTAIS</p><h1>Mutação vs valor</h1></section>
+<p class="chapter-objective"><strong>Objetivo:</strong> Rastrear aliasing de um array interno após uma cópia rasa.</p>
+<p class="lesson-prerequisites">Pré-requisitos: leitura de entradas e resultados simples; os termos usados no experimento são definidos nesta página. A sequência recomendada vem do capítulo anterior.</p>
+<section class="practice" aria-labelledby="pretest-title"><div class="practice-heading"><h2 id="pretest-title">Antes de começar</h2></div><label class="lesson-question">Duas variáveis com nomes diferentes garantem objetos independentes?<textarea class="practice-field" data-practice-field="pretest-alias" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="context-title"><div class="practice-heading"><h2 id="context-title">Conceitos para o experimento</h2></div><p>Referência compartilhada significa que dois caminhos alcançam o mesmo objeto. Uma cópia rasa duplica o objeto externo, mas pode manter arrays internos compartilhados. Criar um novo array de valores primitivos separa esse estado; copiar apenas o total numérico já produz outro valor.</p></section>
+<section class="practice" aria-labelledby="worked-title"><div class="practice-heading"><h2 id="worked-title">Exemplo trabalhado</h2></div><div class="practice-worked"><p>A começa com total 10 e itens [10]. Em mutação com delta 5, A vira total 15 e itens [10,5]; B mantém total 10, mas enxerga itens [10,5] pelo array compartilhado. No modo cópia, B mantém [10].</p></div><label class="lesson-question">Identifique no exemplo a regra que liga a entrada ao resultado. Explique uma etapa, sem apenas repetir a saída.<textarea class="practice-field" data-practice-field="worked-observation" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="predict-title"><div class="practice-heading"><h2 id="predict-title">Previsão — antes do laboratório</h2></div><label class="lesson-question">Use mutação com delta 5. Quais partes de B mudam?<textarea class="practice-field" data-practice-field="predict-b" rows="3"></textarea></label></section>
+<section class="lab compact-lab" aria-labelledby="lab-title"><h2 id="lab-title">O que a cópia compartilha?</h2><p id="lab-error" role="status" hidden></p>
+<label><input type="radio" name="mode" value="mutate" checked>Mutação compartilhada</label>
+<label><input type="radio" name="mode" value="copy">Novo valor (cópia)</label>
+<label>Delta<input id="delta" type="number" value="5"></label>
+<div role="status" aria-live="polite"><p>Cart A: <code id="cart-a"></code></p><p>Cart B: <code id="cart-b"></code></p><p id="surprise"></p></div></section>
+<section class="practice" aria-labelledby="compare-title"><div class="practice-heading"><h2 id="compare-title">Compare com sua previsão</h2></div><label class="lesson-question">Compare o modo cópia com o modo mutação. Por que o total de B não acompanha A?<textarea class="practice-field" data-practice-field="compare-fp" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="mc-title"><div class="practice-heading"><h2 id="mc-title">Escolha e justifique</h2></div><p class="practice-prompt">Após A.items.push(5), B.items muda sem chamada em B. Qual causa explica isso?</p><ul class="choice-list"><li><label><input type="radio" name="mc-ch02" value="a"> A) Ambos referenciam o mesmo array.</label></li><li><label><input type="radio" name="mc-ch02" value="b"> B) Todos os números são compartilhados por referência.</label></li><li><label><input type="radio" name="mc-ch02" value="c"> C) B.total necessariamente passa a 15.</label></li><li><label><input type="radio" name="mc-ch02" value="d"> D) Um nome diferente impede aliasing.</label></li></ul><label class="lesson-question">Explique por que a alternativa escolhida responde ao caso.<textarea class="practice-field" data-practice-field="mc-why-yes" rows="3"></textarea></label><label class="lesson-question">Descarte cada uma das outras alternativas com uma razão específica.<textarea class="practice-field" data-practice-field="mc-why-not" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="design-title"><div class="practice-heading"><h2 id="design-title">Transfira para outro contexto</h2></div><label class="lesson-question">Uma cópia com [...items] contém objetos em vez de números. Alterar items[0].preco estaria isolado?<textarea class="practice-field" data-practice-field="design-transfer" rows="3"></textarea></label></section>
+<section class="practice" aria-labelledby="checkpoint-title"><div class="practice-heading"><h2 id="checkpoint-title">Checkpoint</h2></div><label class="lesson-question">Retome o exemplo trabalhado e explique a regra central usando seus dados.<textarea class="practice-field" data-practice-field="checkpoint-value" rows="3"></textarea></label><label class="lesson-question">Que conclusão o laboratório não permite tirar? Dê um limite concreto.<textarea class="practice-field" data-practice-field="checkpoint-limit" rows="3"></textarea></label></section>
+    <details class="chapter-gabarito">
       <summary>Gabarito <span aria-hidden="true">+</span></summary>
       <div class="gabarito-content">
         <h4>Pré-teste</h4>
-        <p><strong>#</strong> Campo — Essência</p>
-        <p><strong>1</strong> <code>pretest-alias</code> — Duas variáveis podem apontar para o mesmo objeto/array.</p>
-        <p><strong>2</strong> <code>pretest-copy</code> — Cópia rasa ainda pode compartilhar arrays internos se não clonar.</p>
-        <h4>Previsão (`predict-b`)</h4>
-        <p>Modo mutação + delta 5: o array de B ganha o mesmo item que A — <strong>surpresa por aliasing</strong> (total numérico de B pode ficar desatualizado se for cópia rasa).</p>
-        <h4>Comparar (`compare-fp`)</h4>
-        <p>Imutabilidade (novo valor) evita efeito colateral oculto; mutação é mais rápida mas exige disciplina.</p>
-        <h4>MC (`mc-ch02`)</h4>
-        <p><strong>Correta: C</strong> — referência compartilhada faz B ver a mutação em A.</p>
+        <p>pretest-alias: Não. Podem conter referências ao mesmo objeto ou compartilhar um objeto interno.</p>
+        <h4>Exemplo trabalhado</h4>
+        <p>worked-observation: A começa com total 10 e itens [10]. Em mutação com delta 5, A vira total 15 e itens [10,5]; B mantém total 10, mas enxerga itens [10,5] pelo array compartilhado. No modo cópia, B mantém [10]. Exigir explicação do mecanismo: Referência compartilhada significa que dois caminhos alcançam o mesmo objeto. Uma cópia rasa duplica o objeto externo, mas pode manter arrays internos compartilhados. Criar um novo array de valores primitivos separa esse estado; copiar apenas o total numérico já produz outro valor.</p>
+        <h4>Previsão</h4>
+        <p>predict-b: Os itens passam a [10,5]; o total continua 10. O total é um valor copiado, o array é compartilhado. Aceitar hipótese inicial diferente se explicitada antes da execução; após observar, exigir correção fundamentada.</p>
+        <h4>Comparar</h4>
+        <p>compare-fp: B recebeu o número 10 por valor. A atribuição posterior a A.total não altera B.total; no modo cópia o array também fica independente.</p>
+        <h4>Múltipla escolha</h4>
+        <p>Correta: A.</p>
+        <p>A: Há dois caminhos para o mesmo array mutável.</p>
+        <p>B: O número do total foi copiado como valor.</p>
+        <p>C: Total e itens possuem relações diferentes de compartilhamento.</p>
+        <p>D: Nomes não determinam identidade do objeto.</p>
+        <p>mc-why-yes: ligar a escolha ao caso e à definição, com a razão da alternativa correta acima.</p>
+        <p>mc-why-not: descartar todas as demais pelas razões específicas acima; não aceitar apenas “está errada”.</p>
+        <h4>Transferência</h4>
+        <p>design-transfer: Não necessariamente. O array foi copiado, mas seus elementos objeto ainda podem ser compartilhados. Exigir cópia adequada ou objetos imutáveis.</p>
         <h4>Checkpoint</h4>
-        <p><strong>#</strong> Campo — Essência</p>
-        <p><strong>1</strong> <code>checkpoint-value</code> — Valor novo vs lugar mutado no heap.</p>
-        <p><strong>2</strong> <code>checkpoint-risk</code> — Paradigma funcional puxa cópia/transformação; imperativo assume mutação local.</p>
+        <p>checkpoint-value: usar dados do exemplo: A começa com total 10 e itens [10]. Em mutação com delta 5, A vira total 15 e itens [10,5]; B mantém total 10, mas enxerga itens [10,5] pelo array compartilhado. No modo cópia, B mantém [10]. Explicar a regra: Referência compartilhada significa que dois caminhos alcançam o mesmo objeto. Uma cópia rasa duplica o objeto externo, mas pode manter arrays internos compartilhados. Criar um novo array de valores primitivos separa esse estado; copiar apenas o total numérico já produz outro valor.</p>
+        <p>checkpoint-limit: Novo array de números basta neste cenário; não é uma cópia profunda universal. Imutabilidade exige disciplina em todos os caminhos de alteração.</p>
+        <h4>Critérios de correção</h4>
+        <p>Resposta completa liga regra, dados e conclusão e respeita os limites. Resposta parcial identifica o resultado mas não explica o mecanismo ou omite condição relevante. Revisar se contradiz a definição ou extrapola a simulação para uma garantia geral.</p>
       </div>
     </details>
-<details class="theory"><summary>Teoria +</summary><p>Imperativo assume estado mutável; estilo funcional prefere valores novos. Ambos aparecem nos labs do repo.</p></details>
-    <nav class="chapter-bottom-navigation"><a href="../01-quatro-leituras-mesmo-problema/index.html">← 01</a><a href="../03-funcoes-primeira-classe/index.html">03 →</a></nav>
-  </main>
-</body>
-</html>
+<details class="theory"><summary>Limites do modelo <span aria-hidden="true">+</span></summary><div class="theory-content"><p>Novo array de números basta neste cenário; não é uma cópia profunda universal. Imutabilidade exige disciplina em todos os caminhos de alteração.</p></div></details>
+<nav class="chapter-bottom-navigation" aria-label="Navegação do capítulo"><a href="../01-quatro-leituras-mesmo-problema/index.html">← 01</a><span>02</span><a href="../03-funcoes-primeira-classe/index.html">03 →</a></nav>
+</main></body></html>

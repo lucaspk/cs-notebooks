@@ -1,36 +1,47 @@
-# Gabarito — cap. 01 (01-falha-reproduzivel)
+# Gabarito — Falha reproduzível
 
 ## Pré-teste
 
-| # | Campo | Essência |
-| --- | --- | --- |
-| 1 | `pretest-1` | Guarde dados mínimos, versão e resultado observado. |
-| 2 | `pretest-example` | O estudante deve dar um exemplo ou contraexemplo ligado à definição. |
+pretest-1: Pode mostrar o sintoma, mas faltam entrada, passos, expectativa e ambiente para repetir o caso.
 
-## Exemplo trabalhado (`worked-observation`)
+## Exemplo trabalhado
 
-Leia o exemplo e marque a regra aplicada; não copie o resultado sem explicar o mecanismo.
+worked-observation: Relato: app 2.1, timezone UTC−3; enviar data 01/05 às 00:00; esperado 01/05, observado 30/04. Os passos e o ambiente delimitam uma hipótese de conversão de data que outra pessoa consegue testar. Exigir explicação do mecanismo: Um relato reproduzível permite repetir a falha em condições conhecidas. Separe sintoma, passos em ordem, resultado esperado, resultado observado e ambiente (versão, configuração e dados). Presença de campos não garante qualidade: “não funciona” é um sintoma pouco específico.
 
-## Previsão (`predict-1`)
+## Previsão
 
-Antes do lab, aceitar uma previsão que indique a regra central: Que dados tornam o incidente reproduzível?
+predict-1: A cobertura passa de 2 para 3 de 5; não prova reprodução nem qualidade. É preciso executar os passos com dados e ambiente descritos. Aceitar hipótese inicial diferente se explicitada antes da execução; após observar, exigir correção fundamentada.
 
 ## Comparar
 
-| Campo | Essência |
-| --- | --- |
-| `compare-case` | Evidência mínima: Que dados tornam o incidente reproduzível? |
-| `compare-limit` | Ambiente, configuração e sequência são parte do caso?: Reprodução reduz hipóteses; não prova automaticamente a causa. |
+compare-case: Timezone, versão e data de entrada podem ser fixados; a comparação isola a conversão em vez de misturar ambientes desconhecidos.
 
-## MC (`mc-ch01`)
+## Múltipla escolha
 
-**Correta: B** — Uma falha reproduzível inclui entrada, ambiente e passos em ordem.
+Correta: B.
 
-Distratores: A confunde intuição com definição; C ignora condições; D elimina o domínio ou a forma da regra.
+A: Tamanho não assegura precisão.
+
+B: Repetição independente nas condições descritas é evidência verificável.
+
+C: A afirmação precisa ser testada.
+
+D: Sem entrada e ambiente pode não ser repetível.
+
+mc-why-yes: ligar a escolha ao caso e à definição, com a razão da alternativa correta acima.
+
+mc-why-not: descartar todas as demais pelas razões específicas acima; não aceitar apenas “está errada”.
+
+## Transferência
+
+design-transfer: Exigir sintoma, entrada 10 e 5, sequência concreta, esperado 15, observado 14 e ambiente identificável; aceitar contextos diferentes se reproduzíveis.
 
 ## Checkpoint
 
-| # | Campo | Essência |
-| --- | --- |
-| 1 | `checkpoint-1` | Explicar a regra central com linguagem própria. |
-| 2 | `checkpoint-counter` | Dar um limite ou contraexemplo coerente. |
+checkpoint-1: usar dados do exemplo: Relato: app 2.1, timezone UTC−3; enviar data 01/05 às 00:00; esperado 01/05, observado 30/04. Os passos e o ambiente delimitam uma hipótese de conversão de data que outra pessoa consegue testar. Explicar a regra: Um relato reproduzível permite repetir a falha em condições conhecidas. Separe sintoma, passos em ordem, resultado esperado, resultado observado e ambiente (versão, configuração e dados). Presença de campos não garante qualidade: “não funciona” é um sintoma pouco específico.
+
+checkpoint-limit: Checklist mede completude declarada. Intermitência exige registrar frequência, horários e condições; não se deve inventar passos determinísticos para uma falha ainda incerta.
+
+## Critérios de correção
+
+Resposta completa liga regra, dados e conclusão e respeita os limites. Resposta parcial identifica o resultado mas não explica o mecanismo ou omite condição relevante. Revisar se contradiz a definição ou extrapola a simulação para uma garantia geral.
