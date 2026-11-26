@@ -1,0 +1,26 @@
+(function(root){
+'use strict';
+const G=typeof module!=='undefined'&&module.exports?require('./graphs.js'):root.DsaGraphs;
+function sourceId(s,n){if(!Number.isInteger(s)||s<0||s>=n)throw Error('Origem fora de 0..n−1.');}
+function weighted(n,text){const g=G.graph(n,text,true);if(g.edges.some(e=>!Number.isInteger(e[2])||Math.abs(e[2])>1000000))throw Error('Use pesos inteiros entre −1000000 e 1000000.');return g;}
+function bipartite(n,text){const g=G.graph(n,text,false);if(g.edges.some(e=>e[2]!==1))throw Error('Use peso 1 neste laboratório.');const color=Array(n).fill(null),parent=Array(n).fill(null),trace=[];let witness=[];
+ for(let root=0;root<n;root++)if(color[root]===null){const q=[root];color[root]=0;trace.push(['Colorir',root,0,'nova raiz']);for(let h=0;h<q.length;h++){const u=q[h];for(const {to:v} of g.adj[u]){if(color[v]===null){color[v]=1-color[u];parent[v]=u;q.push(v);trace.push(['Colorir',v,color[v],'pai '+u]);}else if(color[v]===color[u]){const a=[],b=[];for(let x=u;x!==null;x=parent[x])a.push(x);const positions=new Map(a.map((id,i)=>[id,i]));let x=v;while(!positions.has(x)){b.push(x);x=parent[x];}witness=a.slice(0,positions.get(x)+1).concat(b.reverse(),u);trace.push(['Conflito',u,v,witness.join(' → ')]);return {ok:false,color,parent,witness,trace};}}}}
+ return {ok:true,color,parent,witness,trace};}
+function kahn(g){const indegree=Array(g.n).fill(0),queue=[],order=[],trace=[];for(const [u,v] of g.edges)indegree[v]++;const initial=indegree.slice();for(let u=0;u<g.n;u++)if(indegree[u]===0)queue.push(u);
+ for(let h=0;h<queue.length;h++){const u=queue[h];order.push(u);trace.push(['Retirar',u,'ordem '+order.join(', '),'fila '+(queue.slice(h+1).join(', ')||'∅')]);for(const {to:v} of g.adj[u]){indegree[v]--;trace.push(['Remover dependência',u,v,'grau '+indegree[v]]);if(indegree[v]===0){queue.push(v);trace.push(['Liberar',v,0,'fila '+queue.slice(h+1).join(', ')]);}}}
+ const blocked=[];for(let u=0;u<g.n;u++)if(indegree[u]>0)blocked.push(u);return {ok:order.length===g.n,order,blocked,initial,indegree,trace};}
+function topological(n,text){return kahn(G.graph(n,text,true));}
+function dag(n,text,source=0){const g=weighted(n,text);sourceId(source,n);const t=kahn(g);if(!t.ok)throw Error('Há ciclo: caminhos em DAG exigem grafo acíclico inteiro.');const distance=Array(n).fill(null),parent=Array(n).fill(null),trace=[];distance[source]=0;
+ for(const u of t.order){trace.push(['Processar',u,distance[u]===null?'∅':distance[u],'ordem topológica']);if(distance[u]===null)continue;for(const {to:v,weight:w} of g.adj[u]){const candidate=distance[u]+w,changed=distance[v]===null||candidate<distance[v];if(changed){distance[v]=candidate;parent[v]=u;}trace.push(['Relaxar',u+' → '+v,candidate,changed?'atualizou':'manteve']);}}
+ return {distance,parent,order:t.order,trace};}
+function dijkstra(n,text,source=0){const g=weighted(n,text);sourceId(source,n);if(g.edges.some(e=>e[2]<0))throw Error('Dijkstra exige todos os pesos não negativos.');const distance=Array(n).fill(null),parent=Array(n).fill(null),settled=Array(n).fill(false),order=[],trace=[];distance[source]=0;let selections=0;
+ for(let k=0;k<n;k++){let u=-1;for(let v=0;v<n;v++){selections++;if(!settled[v]&&distance[v]!==null&&(u===-1||distance[v]<distance[u]))u=v;}if(u===-1)break;settled[u]=true;order.push(u);trace.push(['Fixar',u,distance[u],'mínimo provisório']);for(const {to:v,weight:w} of g.adj[u]){if(settled[v])continue;const candidate=distance[u]+w,changed=distance[v]===null||candidate<distance[v];if(changed){distance[v]=candidate;parent[v]=u;}trace.push(['Relaxar',u+' → '+v,candidate,changed?'atualizou':'manteve']);}}
+ return {distance,parent,settled,order,trace,selections};}
+function bellmanFord(n,text,source=0){const g=weighted(n,text);sourceId(source,n);let distance=Array(n).fill(null),parent=Array(n).fill(null);distance[source]=0;const trace=[],rounds=[distance.slice()];
+ for(let round=1;round<n;round++){const next=distance.slice(),parents=parent.slice();let changed=false;for(const [u,v,w] of g.edges){if(distance[u]===null)continue;const candidate=distance[u]+w;if(next[v]===null||candidate<next[v]){next[v]=candidate;parents[v]=u;changed=true;trace.push(['Rodada '+round,u+' → '+v,candidate,'atualizou']);}}
+ distance=next;parent=parents;rounds.push(distance.slice());trace.push(['Fim rodada',round,distance.map(x=>x===null?'∅':x).join(', '),changed?'mudou':'estável']);if(!changed)break;}
+ const affected=Array(n).fill(false),queue=[];for(const [u,v,w] of g.edges)if(distance[u]!==null&&(distance[v]===null||distance[u]+w<distance[v])){if(!affected[v]){affected[v]=true;queue.push(v);}trace.push(['Melhoria extra',u+' → '+v,distance[u]+w,'ciclo negativo alcançável']);}
+ for(let h=0;h<queue.length;h++)for(const {to:v} of g.adj[queue[h]])if(!affected[v]){affected[v]=true;queue.push(v);}
+ const result=distance.map((d,v)=>affected[v]?-Infinity:d);return {distance:result,provisional:distance,parent:parent.map((p,v)=>affected[v]?null:p),affected,negativeCycle:queue.length>0,rounds,trace};}
+const api={bipartite,topological,dag,dijkstra,bellmanFord};root.DsaRoutes=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
+})(typeof window!=='undefined'?window:globalThis);

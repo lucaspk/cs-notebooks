@@ -1,0 +1,11 @@
+<section class="practice" aria-labelledby="mc-title">
+  <div class="practice-heading"><h2 id="mc-title">{{question}}</h2></div>
+  <div class="choice-list">
+    <label><input type="radio" name="mc-ch{{number}}" value="a"> {{option_a}}</label>
+    <label><input type="radio" name="mc-ch{{number}}" value="b"> {{option_b}}</label>
+    <label><input type="radio" name="mc-ch{{number}}" value="c"> {{option_c}}</label>
+  </div>
+  <label>Por que sua escolha explica o resultado?<textarea class="practice-field" data-practice-field="mc-justify" rows="3"></textarea></label>
+  <label>Por que a alternativa mais plausível falha?<textarea class="practice-field" data-practice-field="mc-reject" rows="3"></textarea></label>
+  <!-- Critérios e resposta: escrever em GABARITO.md; manutenção insere o collapse final. -->
+</section>

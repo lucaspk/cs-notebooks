@@ -48,11 +48,11 @@ Base sólida como rocha: prática guiada por experimento, não enciclopédia. A 
 
 | Área | O que você deve conseguir fazer (evidência) | Livro / slug |
 | --- | --- | --- |
-| **Estruturas de dados e algoritmos** | Escolher estrutura e complexidade; **grafos** (representação, busca, caminhos, árvores geradoras, ordenação topológica, fluxo intro); prever custo e trade-offs | `dsa` (planejado) |
+| **Estruturas de dados e algoritmos** | Escolher estrutura e complexidade; **grafos** (representação, busca, caminhos, árvores geradoras, ordenação topológica, fluxo intro); prever custo e trade-offs | [`dsa`](dsa/) (59/59 publicados; estruturas, ordenação e grafos concluídos) |
 | **Matemática discreta e lógica** | Lógica, conjuntos, relações, indução; grafos como objeto matemático (vocabulário) — algoritmos de grafo ficam em `dsa` | [`math_disc`](math_disc/) |
 | **Teoria da computação** | Saber o que é decidível; reduzir problemas; intuição P/NP sem dogma | `th_cs` (planejado) |
-| **Arquitetura de computadores** | Explicar cache miss, pipeline e memória virtual em cenários concretos | `arch_cpu` (planejado) |
-| **Sistemas operacionais** | Processo vs thread, escalonamento, FS, syscalls, por que I/O bloqueia | `os_kern` (planejado) |
+| **Arquitetura de computadores** | Explicar CPU/pipeline, registradores, cache, RAM, HDD/SSD e hierarquia de memória/armazenamento; suporte à memória virtual e virtualização | `arch_cpu` (planejado) |
+| **Sistemas operacionais** | Processos/threads, escalonamento, gerenciamento de RAM, paginação/swap, arquivos, drivers/I/O, proteção, boot/loader, VMs e contêineres/Docker | `os_kern` (planejado) |
 | **Compiladores** | Seguir token → AST → IR; ligar erro de sintaxe a fase do compilador | `compilers` (planejado) |
 | **Paradigmas de linguagens** | Escolher estilo (imperativo, FP, OO, concorrente) por expressividade e risco | [`paradigms`](paradigms/) |
 
@@ -65,6 +65,7 @@ Base sólida como rocha: prática guiada por experimento, não enciclopédia. A 
 | **Bancos de dados** | Consultas, índices, planos, isolamento, WAL, consistência local | `db_sys` (planejado) |
 | **Sistemas distribuídos** | Falha parcial, réplicas, ordenação, semântica de entrega | `dist_sys` (planejado) |
 | **Microserviços e fronteiras** | Onde dividir; acoplamento temporal; dados não são “detalhe de infra” | `dist_ops` ou capítulos em `dist_sys` |
+| **Cloud computing** | Escolher serviços, regiões/zonas, rede/armazenamento e IAM; justificar elasticidade, serverless, infraestrutura como código, recuperação e custos | `dist_ops` — Fase 5 ([escopo](LIVROS.md#cloud-computing--fase-5-em-dist_ops)) |
 | **Observability** | Sintoma → sinal (log/métrica/trace); SLO vs causa raiz | `dist_ops` |
 | **Resiliência** | Timeout, retry, idempotência, circuit breaker — com custo explícito | `dist_res` |
 | **Consistência e consenso** | Linearizável vs eventual; quorum; eleição de líder (intuição operacional) | `dist_cons` |
@@ -119,6 +120,10 @@ Não é trilha única obrigatória — é a sequência que **menos quebra workin
 - `soft_eng` + `vv_eng` ∥ qualquer fase (leitura transversal)
 
 **`dsa` e teoria dos grafos:** um único livro `dsa` cobre o bloco **algorítmico** de grafos (não só “mais um capítulo de árvore”). Escopo previsto no [LIVROS.md](LIVROS.md#escopo-dsa-inclui-teoria-dos-grafos). Em `math_disc` ficam definições e argumentos discretos; **busca, caminhos, árvores geradoras, ordenação topológica, fluxos intro** ficam em `dsa`.
+
+**Fase 2 ampliada:** representação de dados, lógica digital/CPU, chamadas, boot/linking/loader, memória/armazenamento e persistência estão detalhados em [LIVROS.md](LIVROS.md#fase-2--fundamentos-de-execução-a-explicitar). [Virtualização e contêineres](LIVROS.md#virtualização-contêineres-e-operação) começam em Arquitetura/SO, incluindo Docker/Compose local; redes de contêineres ficam em `comp_net` e operação/orquestração em `dist_ops`.
+
+**Seção final de `dsa`:** coding patterns para entrevistas, com reconhecimento de padrões, invariantes, análise de custo, contraexemplos e problemas mistos. O [escopo e a proposta de execução da Fase 1](LIVROS.md#seção-final-de-dsa-coding-patterns-para-interview-prep) incluem programação dinâmica, backtracking, greedy e padrões de sequências, árvores e grafos.
 
 ---
 
