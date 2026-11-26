@@ -50,6 +50,7 @@ Qualquer novo capítulo deve indicar fase, pré-requisitos e a ligação com o p
 
 | Quando (UTC) | Quem | Resumo |
 | --- | --- | --- |
+| 2026-11-26 | Codex | Geração futura: scaffold completo com draft protegido, componentes de lab com layout, validação estática em finalize, metadados consistentes e quatro referências no template. 114 testes Node verdes (incluindo geração dos quatro tipos, eventos dos componentes e casos inválidos), maintain-all verde. Sem testes reais de navegador por solicitação do usuário. plan.md e guias atualizados; sem migração em massa. |
 | 2026-11-25 | Codex | Revisão estrutural dos 61 labs: 15 mini-labs com layout compartilhado, rótulos e contexto de entradas fixas; compact-lab nos paradigmas 02–08; margens de métricas/logs/tabelas compartilhadas. maintain-all e 107 testes verdes, sintaxe dos apps verificada. plan.md atualizado com entregas e pendências visuais/file/Pages; inspeção visual não realizada. |
 | 2026-11-25 | Codex | Ajustado layout de vv_eng/01-falha-reproduzivel: cartões de evidência, hierarquia e espaçamento, resultado legível e grade responsiva. 9 testes verdes (livro + lab-kit); finalize-chapter e refresh-workboard executados. Inspeção visual no navegador não realizada. |
 | 2026-11-25 | Codex | Concluídas fases 2–5 do plan.md: CSS compartilhado, lab-kit (pilotos vv_eng/01 e comp_net/07), partials de autoria e gerador único; política lib documentada. maintain-all verde, 107 testes verdes; livro temporário gerado e removido. Chrome encerrou no smoke file://; inspeção visual e Pages pendentes. Sem enriquecimento pedagógico. |
@@ -66,7 +67,7 @@ Qualquer novo capítulo deve indicar fase, pré-requisitos e a ligação com o p
 <!-- workboard:auto:start -->
 ## Publicação (gerado automaticamente)
 
-_Atualizado: 2026-11-25 18:02:02 UTC · comando: `node _tools/refresh-workboard.mjs`_
+_Atualizado: 2026-11-26 04:16:19 UTC · comando: `node _tools/refresh-workboard.mjs`_
 
 | Livro | Publicados | No roteiro | Próximo(s) slug | Gabarito OK | Observação |
 | --- | --- | --- | --- | --- | --- |

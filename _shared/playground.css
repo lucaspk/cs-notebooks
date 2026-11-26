@@ -238,3 +238,18 @@ a.chapter-link:hover{background:#f0f3e9;border-color:#bcc8b8}
 @media(max-width:620px){.mini-lab-header,.compact-lab{padding:20px}.mini-lab #lab-host{padding:20px}.mini-lab-fields{grid-template-columns:1fr}.mini-lab #out{padding:16px}.lab>.lab-metrics,.lab>.mac-table,.lab>.op-log,.lab>ul:not(.net-step-list){margin:16px;max-width:calc(100% - 32px)}}
 
 .mini-lab-case{margin:0 0 16px;max-width:65ch;color:var(--muted);font-size:12px;line-height:1.7}
+
+/* Componentes para novos capítulos: apresentação incluída na API. */
+.component-body{padding:24px 28px}
+.component-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:16px}
+.component-field{display:flex;flex-direction:column;gap:8px;min-width:0;font-size:12px;font-weight:600}
+.component-field:has(input[type=checkbox]){flex-direction:row;align-items:center;padding:16px;border:1px solid var(--line);border-radius:9px}
+.component-field input,.component-field select{width:100%;min-width:0;min-height:40px;padding:9px 12px;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:8px}
+.component-field input[type=checkbox]{width:18px;min-height:18px;accent-color:var(--green)}
+.component-result{margin-top:20px;padding:18px;background:#eef1e9;border-radius:10px;font-size:14px;line-height:1.7;overflow-wrap:anywhere}
+.component-result .eyebrow{display:block;margin-bottom:8px}
+.component-table{overflow-x:auto}
+.component-table table{border-collapse:collapse;width:100%;font-size:12px}
+.component-table caption{text-align:left;margin-bottom:10px}
+.component-table th,.component-table td{padding:10px;text-align:left;border-bottom:1px solid var(--line)}
+@media(max-width:620px){.component-body{padding:20px}.component-fields{grid-template-columns:1fr}}

@@ -2,7 +2,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 export function chapterPublished(root, slug) {
-  return fs.existsSync(path.join(root, 'capitulos', slug, 'index.html'));
+  const dir = path.join(root, 'capitulos', slug);
+  const spec = path.join(dir, 'chapter.json');
+  if (fs.existsSync(spec) && JSON.parse(fs.readFileSync(spec, 'utf8')).status !== 'ready') return false;
+  return fs.existsSync(path.join(dir, 'index.html'));
 }
 
 export function renderChapterListItem(root, [num, slug, eyebrow, title, blurb]) {

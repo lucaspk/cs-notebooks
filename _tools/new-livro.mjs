@@ -71,4 +71,4 @@ try {
 }
 
 console.log(`\nLivro criado: ${dest}/`);
-console.log('Agente: README + MAPEAMENTO + cap. 01 + GABARITO.md → finalize-chapter.');
+console.log('Agente: README + MAPEAMENTO → scaffold-chapter → curar conteúdo/modelo/gabarito → status ready → finalize-chapter.');

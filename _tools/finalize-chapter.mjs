@@ -7,6 +7,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { maintainBook, syncChapterDir } from './gabarito-lib.mjs';
 import fs from 'node:fs';
+import { validateChapter } from './validate-chapter.mjs';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const [book, slug] = process.argv.slice(2);
@@ -22,6 +23,8 @@ if (!fs.existsSync(gab) || fs.statSync(gab).size < 120) {
   process.exit(1);
 }
 
+const issues = validateChapter(chapterDir);
+if (issues.length) { console.error(issues.join('\n')); process.exit(1); }
 syncChapterDir(chapterDir);
 maintainBook(book, { repo: repoRoot, strict: true });
 console.log(`Finalizado: ${book}/${slug}`);

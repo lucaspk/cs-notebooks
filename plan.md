@@ -1,6 +1,6 @@
 # Plano — deduplicação shared (`_shared/`, `lab-kit`, partials)
 
-**Status:** Infra das fases 1–5 implementada em 2026-11-25; revisão estrutural de layout dos 61 capítulos concluída. 107 testes verdes e manutenção dos cinco livros verde. Aceite visual no navegador e Pages ainda pendente. Sem PR/push nesta sessão.
+**Status:** Infra das fases 1–5 e revisão estrutural dos 61 capítulos concluídas. Em 2026-11-26: scaffold completo, componentes de laboratório, validação estática, consistência de metadados e quatro referências implementados. Testes reais de navegador excluídos por solicitação do usuário. Sem PR/push nesta sessão.
 **Público:** agente que mantém a infraestrutura
 **Contexto:** análise 80/20 de duplicação em ~60 capítulos e 5 livros — ver conversa que originou este arquivo.
 
@@ -285,5 +285,23 @@ Revisão de código e estrutura dos 61 capítulos publicados, autorizada pelo us
 - [ ] Smoke no GitHub Pages após publicação.
 - [ ] Commit/PR/push, quando solicitado.
 - Migração dos scripts practice.js e wiring de todos os capítulos é gradual; só cinco pilotos de persistência e dois de lab-kit foram migrados. Não é requisito migrar todo o acervo para concluir a infraestrutura.
-- Snippets manuais foram entregues; scaffold executável permanece opcional e não foi implementado.
+- Snippets manuais e scaffold executável entregues; veja atualização de 2026-11-26.
 - Labs com entradas fixas continuam exemplos demonstrativos. Transformá-los em experimentos mais ricos é débito pedagógico independente desta correção de layout.
+
+
+## Geração futura — entrega 2026-11-26
+- [x] Scaffold completo: HTML, chapter.json, gabarito, modelo, teste e app com quatro tipos de lab.
+- [x] Proteção contra sobrescrita; draft bloqueia publicação; conteúdo e domínio exigem revisão antes de status ready.
+- [x] Componentes com layout: campos rotulados, seleções, resultados, tabela com caption e simulação por passos.
+- [x] Validação estática integrada a finalize-chapter: IDs, rótulos, recursos/navegação locais, placeholders em HTML e gabarito, radios e status.
+- [x] Índices rejeitam números/slugs duplicados no mapa e metadados inválidos, duplicados ou divergentes.
+- [x] Quatro referências completas em _template-livro/lab-examples, copiadas para livros novos.
+- [x] Testes Node para geração dos quatro tipos, recusa de sobrescrita, bloqueio de draft, validação, metadados e escape dos componentes.
+
+### Decisões e limites atuais
+Testes reais de navegador estão fora do escopo por solicitação explícita do usuário em 2026-11-26. As pendências históricas de smoke acima não são tarefas de automação a executar nesta entrega.
+O scaffold gera conteúdo pedagógico de rascunho, não inventa um capítulo pronto sobre um tema arbitrário. A publicação exige conteúdo curado e adaptação do modelo de referência.
+Validação estrita roda no capítulo passado a finalize-chapter. maintain-all continua verificando o acervo com as regras anteriores para não bloquear toda manutenção por rótulos legados; capítulos antigos podem precisar de correção ao serem finalizados individualmente.
+Migração de todo o acervo para componentes segue gradual. Não houve reescrita dos capítulos publicados nesta entrega.
+
+Validação final desta entrega: 114 testes Node verdes; maintain-all e git diff --check verdes.
